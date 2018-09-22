@@ -1,0 +1,33 @@
+- Hỗ trợ tra cứu cho người mua phụ tùng
+	+ Với người mua phụ tùng là thợ sửa ô tô: nhập số VIN thì ra thông tin ô tô, nhập mã phụ tùng thì ra phụ tùng.
+	+ Với người mua phụ tùng là khách vãng lai: đối với khách hàng này thì số VIN là cần thiết vì họ chỉ là người sở hữu ô tô, không phải là thợ sửa ô tô nên có thể sẽ không biết được mã của phụ tùng.
+	
+		* Chú thích: 
+			. Số VIN là số mà mỗi một xe ô tô sẽ có
+			. Mỗi một số VIN sẽ có thể có 15, 16, 17... ký tự (mới ước lượng những con số đã biết) và mỗi một số VIN sẽ có quy định riêng về cách mã hóa như sau:
+				++ Số VIN sẽ cung cấp thông tin về: + Quốc gia sản xuất xe (Ký tự đầu tiên của số VIN)
+													+ Nơi sản xuất của xe (hay nói cách khác là khu vực - ví dụ: South Africa, Korea (South)...) (2 ký tự đầu)
+													+ Nhà sản xuất xe (Ký tự đầu tiên + ký tự thứ 2 của số VIN hoặc ký tự đầu tiên + ký tự thứ 2 + ký tự thứ 3)
+													+ Thông tin đặc tính cấu tạo bộ phận xe (Thân xe, động cơ, kiểu dáng...) : chiếm từ ký tự thứ 4 -> 8
+													+ Xác minh số VIN là thật hay giả (ký tự thứ 9)
+													+ Năm sản xuất (ký tự thứ 10)
+													+ Nhà máy lắp ráp ô tô (ký tự thứ 11)
+													+ Số serial của xe hay là mẫu xe thứ n được sản xuất (ký tự 12 -> 17)
+				++ Mô tả số VIN ở trên đang áp dụng cho số VIN với 17 ký tự (đây là mẫu số VIN mới nhất hiện nay)
+				++ Số VIN mỗi thời kỳ, hãng xe sẽ khác về cách mã hóa nên việc quy chuẩn cũng sẽ khác nhau, phía anh Quý đang tìm hiểu thêm về số VIN này rồi sẽ gửi lại Team các loại quy chuẩn áp dụng cho hệ thống.
+				Cho nên trước mắt chưa cần đưa số VIN vào hệ thống mà chỉ đưa mã phụ tùng vào hệ thống hỗ trợ cho người dùng là thợ sửa ô tô thôi.
+
+				
+- Hỗ trợ người mua phụ tùng lập báo giá trên Website
+	+ Người mua phụ tùng cho thể lập một báo giá, mỗi một báo giá sẽ có một hoặc nhiều mã phụ tùng.
+	+ Báo giá này sẽ được lưu lại trong hệ thống.
+	+ Quản trị hệ thống sẽ dựa trên các thông tin trong báo giá này để tìm kiếm các mã phụ tùng tương ứng có mức giá thấp nhất sau đó tổng hợp lại và gửi ngược lại cho người mua phụ tùng.
+	
+- Hỗ trợ người mua phụ tùng kiểm tra vận đơn: tức là người mua có thể xem được trạng thái đơn hàng của mình như thế nào, ví dụ đặt hàng thành công -> được chuyển tới bộ phận chuyển phát
+- > đã nhận hàng -> Đã thanh toán ... (tương tự hệ thống của Lazada và Shopee, mình đang tự mô tả theo ý hiểu của mấy anh em trao đổi)
+	+ Khi người mua đặt đơn một phụ tùng, hệ thống thực hiện tạo đơn hàng lưu lại trên hệ thống với trạng thái (ví dụ: đang tạo đơn hàng).
+	+ Quản trị viên liên hệ với bộ phận chuyển đơn hàng để chuyển hàng tới người mua đồng thời cập nhật trạng thái đơn hàng (ví dụ: đã gửi cho bộ phận chuyển hàng).
+	+ Người mua nhận được hàng, bộ phận chuyển phát thông báo lại quản trị viên, quản trị viên thực hiện cập nhật trạng thái đơn hàng (ví dụ: đã giao hàng/đã thanh toán).
+	
+- Hỗ trợ thanh toán trực tuyến qua tài khoản ngân hàng hoặc trả bằng tiền mặt sau khi nhận hàng.
+	
