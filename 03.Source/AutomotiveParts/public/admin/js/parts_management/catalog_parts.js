@@ -48,7 +48,11 @@ $(document).ready(function () {
                     });
                 } else if (result.system_error) {
                     $('#modal_add_update_catalog_parts #message_error').html(result.message_error);
-                    $('#modal_add_update_catalog_parts #alert_error').addClass('d-block');
+                    $('#modal_add_update_catalog_parts #alert_error').slideDown();
+                    $("#modal_add_update_catalog_parts #alert_error").fadeTo(2000, 500).slideUp(500, function(){
+                        $("#modal_add_update_catalog_parts #alert_error").slideUp(500);
+                        $('#modal_add_update_catalog_parts #message_error').html('');
+                    });
                 } else if (!result.error) {
                     $('#modal_add_update_catalog_parts').modal('hide');
                     setTimeout(function () {
@@ -64,7 +68,11 @@ $(document).ready(function () {
             },
             error: function (error) {
                 $('#modal_add_update_catalog_parts #message_error').html('Có lỗi xảy, vui lòng liên hệ với quản trị hệ thống! ' + error.responseJSON.message);
-                $('#modal_add_update_catalog_parts #alert_error').addClass('d-block');
+                $('#modal_add_update_catalog_parts #alert_error').slideDown();
+                $("#modal_add_update_catalog_parts #alert_error").fadeTo(2000, 500).slideUp(500, function(){
+                    $("#modal_add_update_catalog_parts #alert_error").slideUp(500);
+                    $('#modal_add_update_catalog_parts #message_error').html('');
+                });
             }
         });
     });

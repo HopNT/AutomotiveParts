@@ -14,7 +14,32 @@ class Car extends BaseModel {
 
     protected $primaryKey = 'car_id';
 
-    protected $fillable = [];
+    protected $fillable = [
+        'car_brand_id',
+        'catalog_car_id',
+        'car_manufacturer_id',
+        'nation_id',
+        'factory_id',
+        'year_manufacture_id',
+        'motion_system_id',
+        'name',
+        'number_of_doors',
+        'description',
+        'status',
+        'parts[]'
+    ];
+
+    public $rules = [
+        'car_brand_id' => 'required',
+        'catalog_car_id' => 'required',
+        'name' => 'required|max:255'
+    ];
+
+    public $attributes = [
+        'car_brand_id' => 'Hãng xe',
+        'catalog_car_id' => 'Dòng xe',
+        'name' => 'Tên xe'
+    ];
 
     public function catalogCar() {
         return $this->belongsTo(CatalogCar::class, 'catalog_car_id');

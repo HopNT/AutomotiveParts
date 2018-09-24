@@ -8,6 +8,7 @@
 namespace App\Http\Common\Repository\Implement;
 
 use App\Http\Common\Entities\Parts;
+use App\Http\Common\Enum\GlobalEnum;
 use App\Http\Common\Repository\PartsRepository;
 use Illuminate\Support\Facades\DB;
 
@@ -30,4 +31,15 @@ class PartsRepositoryImpl extends GenericRepositoryImpl implements PartsReposito
             ->select('cp.name as catalogPartsName', 'p.*')
             ->get();
     }
+
+    public function searchByText($text)
+    {
+        $listParts = DB::table('tbl_parts')
+            ->where('status', '=', GlobalEnum::STATUS_ACTIVE)
+            ->where('code', 'LIKE', '%'.$text.'%')
+            ->orWhere('name', 'LIKE', '%'.$text.'%')
+            ->get();
+        return $listParts;
+    }
+
 }

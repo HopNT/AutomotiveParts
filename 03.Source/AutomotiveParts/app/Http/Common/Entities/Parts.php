@@ -21,7 +21,6 @@ class Parts extends BaseModel {
     }
 
     public function accessarys() {
-//        return $this->hasMany(Accessary::class, 'parts_id');
         return $this->belongsToMany(Accessary::class, 'tbl_parts_accessary', 'parts_id', 'accessary_id');
     }
 

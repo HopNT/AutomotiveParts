@@ -40,6 +40,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('catalog-car/getById', 'Admin\CatalogCarController@getById')->name('catalog-car-getById');
     Route::get('catalog-car/delete', 'Admin\CatalogCarController@deleteMulti')->name('catalog-car-delete');
     // Car
+    Route::post('car/save', 'Admin\CarController@save')->name('car-save');
 
     // Parts management
     Route::get('parts-management', 'Admin\PartsManagementController@index')->name('parts-management');
@@ -48,6 +49,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('catalog-parts/getById', 'Admin\CatalogPartsController@getById')->name('catalog-parts-getById');
     Route::get('catalog-parts/delete', 'Admin\CatalogPartsController@delete')->name('catalog-parts-delete');
     // Parts
+    Route::get('parts/search-by-text', 'Admin\PartsController@searchByText')->name('parts-search-by-text');
     Route::get('parts/add', 'Admin\PartsController@add')->name('parts-add');
 
     // Nation
@@ -67,6 +69,4 @@ Route::group(['prefix' => 'admin'], function () {
         return trans('datatables.'.$item);
     });
 
-    // Nation management
-    Route::get('nation-management','Admin\NationManagementController@index')->name('nation-management');
 });

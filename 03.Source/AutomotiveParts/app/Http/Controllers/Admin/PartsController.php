@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Common\Enum\GlobalEnum;
 use App\Http\Common\Repository\PartsRepository;
+use Illuminate\Http\Request;
 
 class PartsController extends BackendController
 {
@@ -33,6 +34,26 @@ class PartsController extends BackendController
     public function add()
     {
         return view('admin.parts_management.elements.modal_add_update_parts');
+    }
+
+    public function searchByText(Request $request)
+    {
+        $results = array();
+        $text = $request->get('query');
+        $listParts = $this->partsRepository->searchByText($text);
+        $index = 0;
+        if (!empty($listParts))
+        {
+            foreach ($listParts as $key => $parts)
+            {
+                $results[$index]['id'] = $parts->parts_id;
+                $results[$index]['text'] = $parts->code.' - '.$parts->name;
+                $index++;
+            }
+        }
+        return [
+            'items' => $results
+        ];
     }
 
 }

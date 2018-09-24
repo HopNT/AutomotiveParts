@@ -19,7 +19,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div id="alert_error" class="alert alert-danger d-none" role="alert">
+                <div id="alert_error" class="alert alert-danger collapse" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
                     <strong id="message_error"></strong>

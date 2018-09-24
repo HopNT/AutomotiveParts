@@ -9,8 +9,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/main.css') }}">
-    {{--<link rel="stylesheet" type="text/css" href="{{ asset('admin/css/tagsinput.css') }}">--}}
-    {{--<link rel="stylesheet" type="text/css" href="{{ asset('admin/css/typeahead.tagging.css') }}">--}}
     <!-- Font-icon css-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -32,14 +30,12 @@
 <script src="{{ asset('admin/js/popper.min.js') }}"></script>
 <script src="{{ asset('admin/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('admin/js/plugins/pace.min.js') }}"></script>
-{{--<script src="{{ asset('admin/js/tagsinput.js') }}"></script>--}}
-{{--<script src="{{ asset('admin/js/typeahead.bundle.js') }}"></script>--}}
-{{--<script src="{{ asset('admin/js/typeahead.tagging.js') }}"></script>--}}
-<script src="{{asset('admin/js/plugins/jquery.dataTables.min.js')}} "></script>
-<script src="{{asset('admin/js/plugins/dataTables.bootstrap.min.js')}} "></script>
-<script src="{{asset('admin/js/common/custom_datatables.js')}}"></script>
-<script type="text/javascript" src="{{asset('admin/js/plugins/bootstrap-notify.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('admin/js/plugins/sweetalert.min.js')}}"></script>
+<script src="{{ asset('admin/js/plugins/jquery.dataTables.min.js') }} "></script>
+<script src="{{ asset('admin/js/plugins/dataTables.bootstrap.min.js') }} "></script>
+<script src="{{ asset('admin/js/common/custom_datatables.js') }}"></script>
+<script type="text/javascript" src="{{ asset('admin/js/plugins/bootstrap-notify.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('admin/js/plugins/sweetalert.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('admin/js/plugins/select2.min.js') }}"></script>
 <script src="{{ asset('admin/js/main.js') }}"></script>
 @yield('javascript')
 </body>

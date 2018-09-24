@@ -21,13 +21,13 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div id="alert_error" class="alert alert-danger d-none" role="alert">
+                <div id="alert_error" class="alert alert-danger collapse" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
                     <strong id="message_error"></strong>
                 </div>
                 <form class="form-horizontal" method="POST" id="form-car"
-                      action="{{route('car-brand-save')}}">
+                      action="{{route('car-save')}}">
                     @csrf
                     <input type="hidden" name="car_id">
                     <div class="row">
@@ -171,7 +171,8 @@
                             <div class="form-group row">
                                 <label for="parts" class="control-label col-md-2">{{trans('label.car.parts')}}</label>
                                 <div class="col-md-10">
-                                    <input type="text" class="tags-input" name="parts" id="parts">
+                                    <select class="form-control" id="parts" style="width: 100%" name="parts[]" multiple="multiple">
+                                    </select>
                                 </div>
                             </div>
                         </div>

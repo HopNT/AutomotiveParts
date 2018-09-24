@@ -10,4 +10,6 @@ namespace App\Http\Common\Repository;
 interface PartsRepository
 {
     function getAllByActive($status);
+
+    function searchByText($text);
 }
