@@ -358,7 +358,7 @@ CREATE TABLE `tbl_user` (
 -- Table structure for table `tbl_user_accessary`
 --
 CREATE TABLE `tbl_user_accessary` (
-  `user_parts_id` int(11) NOT NULL,
+  `user_accessary_id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
   `accessary_id` int(11) DEFAULT NULL,
   `garage_price` double DEFAULT NULL,
@@ -367,7 +367,7 @@ CREATE TABLE `tbl_user_accessary` (
   `status` int(1) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`user_parts_id`) USING BTREE,
+  PRIMARY KEY (`user_accessary_id`) USING BTREE,
   KEY `idx_tbl_user_accessary_user_id` (`user_id`) USING BTREE,
   KEY `idx_tbl_user_accessary_accessary_id` (`accessary_id`) USING BTREE,
   CONSTRAINT `fk_tbl_user_accessary_accessary_id` FOREIGN KEY (`accessary_id`) REFERENCES `tbl_accessary` (`accessary_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
