@@ -1,10 +1,6 @@
 $(document).ready(function () {
-    loadTableCarBrand();
 
-    // Reset modal car brand
-    $('#modal_add_update_car_brand').on('hidden.bs.modal', function (e) {
-        $(this).find('form').trigger('reset');
-    })
+    loadTableCarBrand();
 
     // Check all row
     $('body').on('click', '#tbl_car_brand #check_all', function (e) {
@@ -26,7 +22,7 @@ $(document).ready(function () {
 
     // Open modal add new car brand
     $('body').on('click', '#btn_add_new_car_brand', function () {
-        $(this).find('form').trigger('reset');
+        resetCarBrandForm();
         $('#modal_add_update_car_brand #title-add').css('display', 'block');
         $('#modal_add_update_car_brand #title-update').css('display', 'none');
         $('#modal_add_update_car_brand').modal();
@@ -34,9 +30,9 @@ $(document).ready(function () {
 
     // Open modal update car brand
     $('body').on('click', '#btn_update_car_brand', function () {
+        resetCarBrandForm();
         $('#modal_add_update_car_brand #title-add').css('display', 'none');
         $('#modal_add_update_car_brand #title-update').css('display', 'block');
-        // $('#modal_add_update_car_brand').modal();
         let url = $(this).attr('href');
         $.ajax({
             type: 'GET',

@@ -14,4 +14,10 @@ interface CarRepository
      * @return mixed
      */
     function getAllWithActive($status);
+
+    /**
+     * @param $ids
+     * @return mixed
+     */
+    function deleteMulti($ids);
 }

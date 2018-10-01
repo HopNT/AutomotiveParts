@@ -47,7 +47,8 @@ return [
         'torque' => 'Mô men xoắn',
         'life_cycle' => 'Tuổi thọ',
         'weight' => 'Khối lượng',
-        'liquor' => 'Dung dịch sử dụng'
+        'liquor' => 'Dung dịch sử dụng',
+        'accessary' => 'Phụ tùng'
     ],
     'nation' => [
         'management' => 'Quản lý thông tin quốc gia',
@@ -123,6 +124,9 @@ return [
     ],
     'form' => [
         'create' => 'Thêm mới',
-        'update' => 'Cập nhật'
+        'update' => 'Cập nhật',
+        'trash' => 'Gỡ bỏ',
+        'browser' => 'Duyệt',
+        'change' => 'Thay đổi'
     ]
 ];

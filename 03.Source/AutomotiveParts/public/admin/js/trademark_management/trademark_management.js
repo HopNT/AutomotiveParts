@@ -10,14 +10,17 @@ function loadTableTradeMark() {
     });
 }
 
+function resetTrademarkForm() {
+    $('#form-trademark input[name="trademark_id"]').val("");
+    $('#form-trademark input[name="code"]').val("");
+    $('#form-trademark #code_error').html("");
+    $('#form-trademark input[name="name"]').val("");
+    $('#form-trademark textarea[name="description"]').val("");
+}
+
 $(document).ready(function () {
 
     loadTableTradeMark();
-
-    // Reset modal
-    $('#modal_add_update_trademark').on('hidden.bs.modal', function (e) {
-        $(this).find('form').trigger('reset');
-    });
 
     // Check all row
     $('body').on('click', '#tbl_trademark #check_all', function (e) {
@@ -39,6 +42,7 @@ $(document).ready(function () {
 
     // Open modal add new trademark
     $('body').on('click', '#btn_add_new_trademark', function () {
+        resetTrademarkForm();
         $('#modal_add_update_trademark #title-add').css('display', 'block');
         $('#modal_add_update_trademark #title-update').css('display', 'none');
         $('#modal_add_update_trademark').modal();
@@ -46,6 +50,7 @@ $(document).ready(function () {
 
     // Open modal update trademark
     $('body').on('click', '#btn_update_trademark', function () {
+        resetTrademarkForm();
         $('#modal_add_update_trademark #title-add').css('display', 'none');
         $('#modal_add_update_trademark #title-update').css('display', 'block');
         let url = $(this).attr('href');

@@ -10,13 +10,17 @@ function loadTableNation() {
     });
 }
 
+function resetNationForm() {
+    $('#form-nation input[name="nation_id"]').val("");
+    $('#form-nation input[name="code"]').val("");
+    $('#form-nation #code_error').html("");
+    $('#form-nation input[name="name_vi"]').val("");
+    $('#form-nation input[name="name_en"]').val("");
+    $('#form-nation textarea[name="description"]').val("");
+}
+
 $(document).ready(function () {
     loadTableNation();
-
-    // Reset modal
-    $('#modal_add_update_nation').on('hidden.bs.modal', function (e) {
-        $(this).find('form').trigger('reset');
-    });
 
     // Check all row
     $('body').on('click', '#tbl_nation #check_all', function (e) {
@@ -38,6 +42,7 @@ $(document).ready(function () {
 
     // Open modal add new nation
     $('body').on('click', '#btn_add_new_nation', function () {
+        resetNationForm();
         $('#modal_add_update_nation #title-add').css('display', 'block');
         $('#modal_add_update_nation #title-update').css('display', 'none');
         $('#modal_add_update_nation').modal();
@@ -45,6 +50,7 @@ $(document).ready(function () {
 
     // Open modal update nation
     $('body').on('click', '#btn_update_nation', function () {
+        resetNationForm();
         $('#modal_add_update_nation #title-add').css('display', 'none');
         $('#modal_add_update_nation #title-update').css('display', 'block');
         let url = $(this).attr('href');

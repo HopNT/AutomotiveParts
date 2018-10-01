@@ -8,9 +8,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Common\Entities\Parts;
 use App\Http\Common\Enum\GlobalEnum;
 use App\Http\Common\Repository\PartsRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Common\Utils\CommonUtils;
 
 class PartsController extends BackendController
 {
@@ -31,11 +35,6 @@ class PartsController extends BackendController
         return $this->partsRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
     }
 
-    public function add()
-    {
-        return view('admin.parts_management.elements.modal_add_update_parts');
-    }
-
     public function searchByText(Request $request)
     {
         $results = array();
@@ -53,6 +52,101 @@ class PartsController extends BackendController
         }
         return [
             'items' => $results
+        ];
+    }
+
+    public function save(Request $request)
+    {
+        $valid = new Parts();
+        $parts = $request->all();
+        try {
+            if ($request->has('accessary'))
+            {
+                $accessary = $parts['accessary'];
+            }
+            if ($request->hasFile('image_file'))
+            {
+                $file = $request->image_file;
+                unset($parts['image_file']);
+            }
+
+            // Update
+            if (isset($request->parts_id))
+            {
+                if (!empty($file))
+                {
+                    $exists = $this->partsRepository->find($request->parts_id);
+                    if (!empty($exists->photo))
+                    {
+                        CommonUtils::deleteFile($exists->photo);
+                    }
+                    $pathPhoto = CommonUtils::uploadFile($file, 'parts', GlobalEnum::IMAGE);
+                    $parts = array_add($parts, 'photo_name', $file->getClientOriginalName());
+                    $parts = array_add($parts, 'photo', $pathPhoto);
+                }
+                $parts = $this->partsRepository->merge($request->parts_id, $parts);
+                if (!empty($accessary))
+                {
+                    $parts->accessarys()->sync($accessary);
+                }
+                else
+                {
+                    $parts->accessarys()->detach();
+                }
+            }
+            else // Insert
+            {
+                $validator = Validator::make($parts, $valid->rules, [], $valid->attributes);
+                if ($validator->fails()) {
+                    return [
+                        'error' => true,
+                        'errors' => $validator->errors()
+                    ];
+                }
+                $parts = array_add($parts, 'status', GlobalEnum::STATUS_ACTIVE);
+                $parts = $this->partsRepository->persist($parts);
+                if (!empty($accessary))
+                {
+                    $parts->accessarys()->attach($accessary);
+                }
+            }
+        }
+        catch (\Exception $e)
+        {
+            return [
+                'system_error' => true,
+                'message_error' => $e->getMessage()
+            ];
+        }
+
+        // Get List Parts
+        $listParts = $this->partsRepository->getAllByActive(GlobalEnum::STATUS_ACTIVE);
+        $view = view('admin.parts_management.elements.list_data_parts')
+            ->with('listParts', $listParts)->render();
+        return [
+            'error' => false,
+            'html' => $view
+        ];
+    }
+
+    public function getById(Request $request)
+    {
+        $partsId = $request->id;
+        $parts = $this->partsRepository->find($partsId);
+        if (!empty($parts))
+        {
+            $pathPhoto = $parts->photo;
+            if (!empty($pathPhoto))
+            {
+                $contents = Storage::get($pathPhoto);
+                $type = pathinfo($pathPhoto, PATHINFO_EXTENSION);
+                $base64 = 'data:image/'.$type.';base64,'.base64_encode($contents);
+                $parts->photo = $base64;
+            }
+            $parts->accessarys;
+        }
+        return [
+            'data' => $parts
         ];
     }
 

@@ -25,7 +25,13 @@
                     <thead>
                     <tr>
                         {{--                        @if($can_delete_catalog_car)--}}
-                        <th class="text-center"><input type="checkbox" id="check_all"></th>
+                        <th class="text-center">
+                            <div class="animated-checkbox">
+                                <label>
+                                    <input type="checkbox" id="check_all"><span class="label-text"></span>
+                                </label>
+                            </div>
+                        </th>
                         {{--@else--}}
                         {{--<th class="text-center">{{trans('label.common.num_of_row')}}</th>--}}
                         {{--@endif--}}
@@ -40,8 +46,14 @@
                     @foreach($listParts as $key => $parts)
                         <tr>
                             {{--@if($can_delete_catalog_car)--}}
-                            <td class="text-center"><input type="checkbox" class="checkbox"
-                                                           data-id="{{$parts->parts_id}}"></td>
+                            <td class="text-center">
+                                <div class="animated-checkbox">
+                                    <label>
+                                        <input type="checkbox" class="checkbox"
+                                               data-id="{{$parts->parts_id}}"><span class="label-text"></span>
+                                    </label>
+                                </div>
+                            </td>
                             {{--@else--}}
                             {{--<td class="text-center">{{$key + 1}}</td>--}}
                             {{--@endif--}}
@@ -52,7 +64,7 @@
                             <td class="text-center">
                                 {{--                                @if($can_edit_catalog_car)--}}
                                 <button id="btn_update_parts"
-                                        href="#"
+                                        href="{{route('parts-get-by-id', ['id' => $parts->parts_id])}}"
                                         class="btn btn-info btn-sm fa fa-edit"></button>
                                 {{--@endif--}}
                                 {{--                                @if($can_delete_catalog_car)--}}

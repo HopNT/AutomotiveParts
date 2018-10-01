@@ -14,7 +14,36 @@ class Parts extends BaseModel {
 
     protected $primaryKey = 'parts_id';
 
-    protected $fillable = [];
+    protected $fillable = [
+        'catalog_parts_id',
+        'code',
+        'name',
+        'width',
+        'height',
+        'number_of_tooth',
+        'inner_diameter',
+        'outer_diameter',
+        'photo',
+        'photo_name',
+        'torque',
+        'life_cycle',
+        'weight',
+        'liquor',
+        'description',
+        'status',
+        'accessary[]',
+        'image_file'
+    ];
+
+    public $rules = [
+        'catalog_parts_id' => 'required',
+        'code' => 'required|unique:tbl_parts|max:20'
+    ];
+
+    public $attributes = [
+        'catalog_parts_id' => 'Nhóm bộ phận xe',
+        'code' => 'Mã bộ phận xe'
+    ];
 
     public function catalogParts() {
         return $this->belongsTo(CatalogParts::class, 'catalog_parts_id');

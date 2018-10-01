@@ -15,7 +15,7 @@ class Car extends BaseModel {
     protected $primaryKey = 'car_id';
 
     protected $fillable = [
-        'car_brand_id',
+//        'car_brand_id',
         'catalog_car_id',
         'car_manufacturer_id',
         'nation_id',
@@ -30,13 +30,13 @@ class Car extends BaseModel {
     ];
 
     public $rules = [
-        'car_brand_id' => 'required',
+//        'car_brand_id' => 'required|unique:tbl_car_brand',
         'catalog_car_id' => 'required',
         'name' => 'required|max:255'
     ];
 
     public $attributes = [
-        'car_brand_id' => 'Hãng xe',
+//        'car_brand_id' => 'Hãng xe',
         'catalog_car_id' => 'Dòng xe',
         'name' => 'Tên xe'
     ];

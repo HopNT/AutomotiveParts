@@ -45,4 +45,5 @@ $can_view = $user->can_view($router_name);
     <script type="text/javascript" src="{{asset('admin/js/car_management/car_brand.js')}} "></script>
     <script type="text/javascript" src="{{asset('admin/js/car_management/catalog_car.js')}} "></script>
     <script type="text/javascript" src="{{asset('admin/js/car_management/car.js')}} "></script>
+    <script type="text/javascript" src="{{asset('admin/js/common/selector.ajax.js')}}"></script>
 @endsection

@@ -95,4 +95,9 @@ class CatalogPartsController extends BackendController
             'html' => $view
         ];
     }
+
+    public function getAll()
+    {
+        return $this->catalogPartsRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
+    }
 }

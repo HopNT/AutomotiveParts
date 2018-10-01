@@ -34,14 +34,13 @@
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label for="car_brand"
-                                       class="control-label required col-md-4">{{trans('label.car.brand')}}</label>
+                                       class="control-label col-md-4">{{trans('label.car.brand')}}</label>
                                 <div class="col-md-8">
                                     <div id="select-car-brand" >
                                         <select class="form-control" name="car_brand_id" id="car_brand_id">
                                             <option value="">-- {{trans('label.common.choose')}} {{trans('label.catalog_car.brand')}} --</option>
                                         </select>
                                     </div>
-                                    <span class="text-danger" id="car_brand_id_error"></span>
                                 </div>
                             </div>
                         </div>
@@ -171,7 +170,7 @@
                             <div class="form-group row">
                                 <label for="parts" class="control-label col-md-2">{{trans('label.car.parts')}}</label>
                                 <div class="col-md-10">
-                                    <select class="form-control" id="parts" style="width: 100%" name="parts[]" multiple="multiple">
+                                    <select class="form-control" id="parts" style="width: 100%" name="parts[]">
                                     </select>
                                 </div>
                             </div>

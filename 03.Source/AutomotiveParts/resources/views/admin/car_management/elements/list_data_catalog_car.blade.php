@@ -24,7 +24,13 @@ $can_delete_catalog_car = $staff->can_view('catalog-car-delete');
                     <thead>
                     <tr>
                         @if($can_delete_catalog_car)
-                            <th class="text-center"><input type="checkbox" id="check_all"></th>
+                            <th class="text-center">
+                                <div class="animated-checkbox">
+                                    <label>
+                                        <input type="checkbox" id="check_all"><span class="label-text"></span>
+                                    </label>
+                                </div>
+                            </th>
                         @else
                             <th class="text-center">{{trans('label.common.num_of_row')}}</th>
                         @endif
@@ -38,8 +44,14 @@ $can_delete_catalog_car = $staff->can_view('catalog-car-delete');
                     @foreach($listCatalogCar as $key => $catalogCar)
                         <tr>
                             @if($can_delete_catalog_car)
-                                <td class="text-center"><input type="checkbox" class="checkbox"
-                                                               data-id="{{$catalogCar->catalog_car_id}}"></td>
+                                <td class="text-center">
+                                    <div class="animated-checkbox">
+                                        <label>
+                                            <input type="checkbox" class="checkbox"
+                                                   data-id="{{$catalogCar->catalog_car_id}}"><span class="label-text"></span>
+                                        </label>
+                                    </div>
+                                </td>
                             @else
                                 <td class="text-center">{{$key + 1}}</td>
                             @endif

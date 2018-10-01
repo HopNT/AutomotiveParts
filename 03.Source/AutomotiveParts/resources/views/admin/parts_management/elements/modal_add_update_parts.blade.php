@@ -20,13 +20,13 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div id="alert_error" class="alert alert-danger d-none" role="alert">
+                <div id="alert_error" class="alert alert-danger collapse" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
                     <strong id="message_error"></strong>
                 </div>
                 <form class="form-horizontal" method="POST" id="form-parts"
-                      action="#">
+                      action="{{route('parts-save')}}" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="parts_id">
                     <div class="row">
@@ -74,28 +74,11 @@
                                 <label for="width"
                                        class="control-label col-md-4">{{trans('label.parts.width')}}</label>
                                 <div class="col-md-8">
-                                    <input type="number" name="width" class="form-control" placeholder="{{trans('label.common.input')}} {{trans('label.parts.width')}}">
+                                    <input type="number" name="width" class="form-control"
+                                           placeholder="{{trans('label.common.input')}} {{trans('label.parts.width')}}">
                                 </div>
                             </div>
                         </div>
-                        {{--<div class="col-md-6">--}}
-                            {{--<div class="form-group row">--}}
-                                {{--<label for="technique_picture"--}}
-                                       {{--class="control-label col-md-4">{{trans('label.common.technique_picture')}}</label>--}}
-                                {{--<div class="col-md-8">--}}
-                                    {{--<div class="input-group">--}}
-                                        {{--<span class="input-group-btn">--}}
-                                        {{--<span class="btn btn-primary"--}}
-                                              {{--onclick="$(this).parent().find('input[type=file]').click();">{{trans('label.common.choose')}}</span>--}}
-                                            {{--<input name="file"--}}
-                                                   {{--onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());"--}}
-                                                   {{--style="display: none;" type="file" accept="image/*">--}}
-                                        {{--</span>--}}
-                                        {{--<span class="form-control"></span>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
                     </div>
                     <div class="row">
                         <div class="col-md-6">
@@ -135,7 +118,7 @@
                                 <label for="outer_diameter"
                                        class="control-label col-md-4">{{trans('label.parts.outer_diameter')}}</label>
                                 <div class="col-md-8">
-                                    <input type="number" class="form-control" name="number_of_tooth"
+                                    <input type="number" class="form-control" name="outer_diameter"
                                            placeholder="{{trans('label.common.input')}} {{trans('label.parts.outer_diameter')}}">
                                 </div>
                             </div>
@@ -200,17 +183,46 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group row">
+                                <label for="accessary"
+                                       class="control-label col-md-2">{{trans('label.parts.accessary')}}</label>
+                                <div class="col-md-10">
+                                    <select id="accessary" style="width: 100%;" class="form-control" name="accessary[]"
+                                            multiple="multiple"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group row">
                                 <label for="technique_picture"
                                        class="control-label col-md-2">{{trans('label.common.technique_picture')}}</label>
+                                <div class="col-md-10">
+                                    <div class="input-group image-preview">
+                                        <input type="text" class="form-control image-preview-filename" placeholder="{{trans('label.common.choose')}} {{trans('label.common.technique_picture')}}">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-danger image-preview-clear"
+                                                    style="display:none;">
+                                                <span class="fa fa-trash"></span>{{trans('label.form.trash')}}
+                                            </button>
+                                            <div class="btn btn-primary image-preview-input">
+                                                <span class="fa fa-folder-open"></span>
+                                                <span
+                                                    class="image-preview-input-title">{{trans('label.form.browser')}}</span>
+                                                <input type="file" accept="image/*" name="image_file"/>
+                                            </div>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btn_cancel_catalog_parts"><i
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btn_cancel_parts"><i
                         class="fa fa-close"></i>{{trans('label.button.cancel')}}</button>
-                <button type="button" class="btn btn-primary" id="btn_save_catalog_parts"><i
+                <button type="button" class="btn btn-primary" id="btn_save_parts"><i
                         class="fa fa-save"></i>{{trans('label.button.save')}}</button>
             </div>
         </div>

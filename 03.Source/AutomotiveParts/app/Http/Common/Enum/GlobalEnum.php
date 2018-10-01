@@ -19,4 +19,7 @@ class GlobalEnum
 
     const MALE = 1;
     const FEMALE = 0;
+
+    const IMAGE = 'images';
+    const DOC = 'documentations';
 }

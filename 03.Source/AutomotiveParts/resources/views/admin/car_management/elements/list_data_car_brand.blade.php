@@ -24,7 +24,13 @@ $can_delete_car_brand = $staff->can_view('car-brand-delete');
                     <thead>
                     <tr>
                         @if($can_delete_car_brand)
-                            <th class="text-center"><input type="checkbox" id="check_all"></th>
+                            <th class="text-center">
+                                <div class="animated-checkbox">
+                                    <label>
+                                        <input type="checkbox" id="check_all"><span class="label-text"></span>
+                                    </label>
+                                </div>
+                            </th>
                         @else
                             <th class="text-center">{{trans('label.common.num_of_row')}}</th>
                         @endif
@@ -39,8 +45,13 @@ $can_delete_car_brand = $staff->can_view('car-brand-delete');
                     @foreach($listCarBrand as $key => $carBrand)
                         <tr>
                             @if($can_delete_car_brand)
-                                <td class="text-center"><input type="checkbox" class="checkbox"
-                                                               data-id="{{$carBrand->car_brand_id}}"></td>
+                                <td class="text-center">
+                                    <div class="animated-checkbox">
+                                        <label>
+                                            <input type="checkbox" class="checkbox" data-id="{{$carBrand->car_brand_id}}"><span class="label-text"></span>
+                                        </label>
+                                    </div>
+                                </td>
                             @else
                                 <td class="text-center">{{$key + 1}}</td>
                             @endif

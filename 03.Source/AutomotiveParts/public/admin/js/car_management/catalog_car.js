@@ -21,7 +21,8 @@ $(document).ready(function () {
 
     // Open modal add new catalog car
     $('body').on('click', '#btn_add_new_catalog_car', function () {
-        loadCarBrand('form-catalog-car-data');
+        resetCatalogCarForm();
+        loadCarBrand('form-catalog-car-data', 'select-car-brand', 'car_brand_id', 'car_brand_id');
         $('#modal_add_update_catalog_car #title-add').css('display', 'block');
         $('#modal_add_update_catalog_car #title-update').css('display', 'none');
         $('#modal_add_update_catalog_car').modal();
@@ -29,7 +30,8 @@ $(document).ready(function () {
 
     // Open modal update catalog car
     $('body').on('click', '#btn_update_catalog_car', function () {
-        loadCarBrand('form-catalog-car-data');
+        resetCatalogCarForm();
+        loadCarBrand('form-catalog-car-data', 'select-car-brand', 'car_brand_id', 'car_brand_id');
         $('#modal_add_update_catalog_car #title-add').css('display', 'none');
         $('#modal_add_update_catalog_car #title-update').css('display', 'block');
         let url = $(this).attr('href');
@@ -45,11 +47,6 @@ $(document).ready(function () {
                 $('#modal_add_update_catalog_car').modal();
             }
         });
-    });
-
-    // Reset modal
-    $('#modal_add_update_catalog_car').on('hidden.bs.modal', function (e) {
-        $(this).find('form').trigger('reset');
     });
 
     // Save or update catalog car

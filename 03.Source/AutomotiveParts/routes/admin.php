@@ -39,8 +39,11 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('catalog-car/save', 'Admin\CatalogCarController@save')->name('catalog-car-save');
     Route::get('catalog-car/getById', 'Admin\CatalogCarController@getById')->name('catalog-car-getById');
     Route::get('catalog-car/delete', 'Admin\CatalogCarController@deleteMulti')->name('catalog-car-delete');
+    Route::get('catalog-car/getAll', 'Admin\CatalogCarController@getAll')->name('catalog-car-get-all');
     // Car
     Route::post('car/save', 'Admin\CarController@save')->name('car-save');
+    Route::get('car/getById', 'Admin\CarController@getById')->name('car-edit');
+    Route::get('car/delete', 'Admin\CarController@delete')->name('car-delete');
 
     // Parts management
     Route::get('parts-management', 'Admin\PartsManagementController@index')->name('parts-management');
@@ -48,9 +51,11 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('catalog-parts', 'Admin\CatalogPartsController@save')->name('catalog-parts-save');
     Route::get('catalog-parts/getById', 'Admin\CatalogPartsController@getById')->name('catalog-parts-getById');
     Route::get('catalog-parts/delete', 'Admin\CatalogPartsController@delete')->name('catalog-parts-delete');
+    Route::get('catalog-parts/getAll', 'Admin\CatalogPartsController@getAll')->name('catalog-parts-get-all');
     // Parts
-    Route::get('parts/search-by-text', 'Admin\PartsController@searchByText')->name('parts-search-by-text');
-    Route::get('parts/add', 'Admin\PartsController@add')->name('parts-add');
+    Route::get('parts/searchByText', 'Admin\PartsController@searchByText')->name('parts-search-by-text');
+    Route::get('parts/getById', 'Admin\PartsController@getById')->name('parts-get-by-id');
+    Route::post('parts/save', 'Admin\PartsController@save')->name('parts-save');
 
     // Nation
     Route::get('nation-management', 'Admin\NationManagementController@index')->name('nation-management');
@@ -63,6 +68,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('trademark/getById', 'Admin\TradeMarkManagementController@getById')->name('trademark-getById');
     Route::get('trademark/delete', 'Admin\TradeMarkManagementController@delete')->name('trademark-delete');
     Route::post('trademark/save', 'Admin\TradeMarkManagementController@save')->name('trademark-save');
+
+    // Accessary
+    Route::get('accessary/searchByText', 'Admin\AccessaryController@searchByText')->name('accessary-search-by-text');
 
     // Get language for datatables
     Route::get('lang/datatables/{item}', function ($item) {

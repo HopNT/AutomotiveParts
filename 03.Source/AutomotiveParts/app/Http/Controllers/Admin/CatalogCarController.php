@@ -114,4 +114,9 @@ class CatalogCarController extends BackendController
         $catalogCar = $carBrand->catalogCars;
         return $catalogCar;
     }
+
+    public function getAll()
+    {
+        return $this->catalogCarRepository->getAllWithActive(GlobalEnum::STATUS_ACTIVE);
+    }
 }

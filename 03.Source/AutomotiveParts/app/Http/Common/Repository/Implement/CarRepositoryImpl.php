@@ -8,6 +8,7 @@
 namespace App\Http\Common\Repository\Implement;
 
 use App\Http\Common\Entities\Car;
+use App\Http\Common\Enum\GlobalEnum;
 use App\Http\Common\Repository\CarRepository;
 use Illuminate\Support\Facades\DB;
 
@@ -35,5 +36,14 @@ class CarRepositoryImpl extends GenericRepositoryImpl implements CarRepository
             ->where('cb.status', '=', $status)
             ->select('cb.name as carBrandName', 'cc.name as catalogCarName', 'c.*')
             ->get();
+    }
+
+    /**
+     * @param $ids
+     * @return mixed
+     */
+    function deleteMulti($ids)
+    {
+        DB::table('tbl_car')->whereIn('car_id', $ids)->update(['status'=>GlobalEnum::STATUS_INACTIVE, 'updated_at'=>now()]);
     }
 }

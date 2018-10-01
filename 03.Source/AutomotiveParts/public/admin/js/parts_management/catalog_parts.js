@@ -1,11 +1,6 @@
 $(document).ready(function () {
     loadTableCatalogParts();
 
-    // Reset modal
-    $('#modal_add_update_catalog_parts').on('hidden.bs.modal', function (e) {
-        $(this).find('form').trigger('reset');
-    });
-
     // Check all row
     $('body').on('click', '#tbl_catalog_parts #check_all', function (e) {
         if ($(this).is(':checked', true)) {
@@ -26,6 +21,7 @@ $(document).ready(function () {
 
     // Open modal add new catalog parts
     $('body').on('click', '#btn_add_new_catalog_parts', function () {
+        resetCatalogPartsForm();
         $('#modal_add_update_catalog_parts #title-add').css('display', 'block');
         $('#modal_add_update_catalog_parts #title-update').css('display', 'none');
         $('#modal_add_update_catalog_parts').modal();
@@ -79,6 +75,7 @@ $(document).ready(function () {
 
     // Open modal update catalog parts
     $('body').on('click', '#btn_update_catalog_parts', function () {
+        resetCatalogPartsForm();
         $('#modal_add_update_catalog_parts #title-add').css('display', 'none');
         $('#modal_add_update_catalog_parts #title-update').css('display', 'block');
         let url = $(this).attr('href');

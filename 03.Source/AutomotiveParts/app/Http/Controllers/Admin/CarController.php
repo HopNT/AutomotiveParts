@@ -16,7 +16,8 @@ use App\Http\Common\Repository\CatalogCarRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class CarController extends BackendController {
+class CarController extends BackendController
+{
 
     protected $carBrandRepository;
 
@@ -41,11 +42,18 @@ class CarController extends BackendController {
     {
         $valid = new Car();
         $car = $request->all();
+        if ($request->has('parts')) {
+            $parts = $car['parts'];
+        }
 
-        try
-        {
+        try {
             if (isset($request->car_id)) {
-                $this->carRepository->merge($request->car_id, $car);
+                $car = $this->carRepository->merge($request->car_id, $car);
+                if (!empty($parts)) {
+                    $car->parts()->sync($parts);
+                } else {
+                    $car->parts()->detach();
+                }
             } else {
                 $validator = Validator::make($car, $valid->rules, [], $valid->attributes);
                 if ($validator->fails()) {
@@ -56,19 +64,11 @@ class CarController extends BackendController {
                 }
                 $car = array_add($car, 'status', GlobalEnum::STATUS_ACTIVE);
                 $car = $this->carRepository->persist($car);
-
-                if ($request->has('parts'))
-                {
-                    $parts = $car['parts'];
-                    if (!empty($parts))
-                    {
-                        $car->parts->sync($parts);
-                    }
+                if (!empty($parts)) {
+                    $car->parts()->attach($parts);
                 }
             }
-        }
-        catch(\Exception $e)
-        {
+        } catch (\Exception $e) {
             return [
                 'system_error' => true,
                 'message_error' => $e->getMessage()
@@ -77,6 +77,42 @@ class CarController extends BackendController {
 
 
         // Get List CarBrand
+        $listCar = $this->carRepository->getAllWithActive(GlobalEnum::STATUS_ACTIVE);
+        $view = view('admin.car_management.elements.list_data_car')
+            ->with('listCar', $listCar)->render();
+        return [
+            'error' => false,
+            'html' => $view
+        ];
+    }
+
+    public function getById(Request $request)
+    {
+        $carId = $request->id;
+        $car = $this->carRepository->find($carId);
+        if (!empty($car)) {
+            $car->parts->find($carId);
+            $car->catalogCar->carBrand;
+            $car->parts;
+        }
+        return [
+            'data' => $car
+        ];
+    }
+
+    public function delete(Request $request)
+    {
+        try {
+            $ids = $request->ids;
+            $this->carRepository->deleteMulti($ids);
+        } catch (\Exception $e) {
+            return [
+                'error' => true,
+                'message' => $e->getMessage()
+            ];
+        }
+
+        // Get List Car
         $listCar = $this->carRepository->getAllWithActive(GlobalEnum::STATUS_ACTIVE);
         $view = view('admin.car_management.elements.list_data_car')
             ->with('listCar', $listCar)->render();

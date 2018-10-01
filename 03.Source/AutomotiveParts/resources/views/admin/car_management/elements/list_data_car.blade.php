@@ -2,7 +2,7 @@
 //$staff = \Illuminate\Support\Facades\Auth::guard('admin')->user();
 $staff = \Illuminate\Support\Facades\Auth::guard('admin')->user();
 $can_add_car = $staff->can_view('car-save');
-$can_edit_car = $staff->can_view('car-getById');
+$can_edit_car = $staff->can_view('car-edit');
 $can_delete_car = $staff->can_view('car-delete');
 ?>
 <div class="row">
@@ -23,7 +23,13 @@ $can_delete_car = $staff->can_view('car-delete');
                     <thead>
                     <tr>
                         @if($can_delete_car)
-                            <th class="text-center"><input type="checkbox" id="check_all"></th>
+                            <th class="text-center">
+                                <div class="animated-checkbox">
+                                    <label>
+                                        <input type="checkbox" id="check_all"><span class="label-text"></span>
+                                    </label>
+                                </div>
+                            </th>
                         @else
                             <th class="text-center">{{trans('label.common.num_of_row')}}</th>
                         @endif
@@ -39,8 +45,14 @@ $can_delete_car = $staff->can_view('car-delete');
                     @foreach($listCar as $key => $car)
                         <tr>
                             @if($can_delete_car)
-                                <td class="text-center"><input type="checkbox" class="checkbox"
-                                                               data-id="{{$car->car_id}}"></td>
+                                <td class="text-center">
+                                    <div class="animated-checkbox">
+                                        <label>
+                                            <input type="checkbox" class="checkbox"
+                                                   data-id="{{$car->car_id}}"><span class="label-text"></span>
+                                        </label>
+                                    </div>
+                                </td>
                             @else
                                 <td class="text-center">{{$key + 1}}</td>
                             @endif
@@ -51,13 +63,13 @@ $can_delete_car = $staff->can_view('car-delete');
                             <td>{{$car->status ? trans('label.common.status_active') : trans('label.common.status_inactive')}}</td>
                             <td class="text-center">
                                 @if($can_edit_car)
-                                    <button id="btn_update_catalog_car"
-                                            href="#"
+                                    <button id="btn_update_car"
+                                            href="{{route('car-edit', ['id'=>$car->car_id])}}"
                                             class="btn btn-info btn-sm fa fa-edit"></button>
                                 @endif
                                 @if($can_delete_car)
-                                    <button id="btn_delete_catalog_car"
-                                            href="#"
+                                    <button id="btn_delete_car"
+                                            href="{{route('car-delete', ['ids[]'=>$car->car_id])}}"
                                             class="btn btn-danger btn-sm fa fa-trash"></button>
                                 @endif
                             </td>

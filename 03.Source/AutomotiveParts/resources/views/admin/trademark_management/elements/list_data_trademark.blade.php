@@ -30,7 +30,13 @@ $can_delete_trademark = $staff->can_view('trademark-delete');
                     <thead>
                     <tr>
                         @if($can_delete_trademark)
-                            <th class="text-center"><input type="checkbox" id="check_all"></th>
+                            <th class="text-center">
+                                <div class="animated-checkbox">
+                                    <label>
+                                        <input type="checkbox" id="check_all"><span class="label-text"></span>
+                                    </label>
+                                </div>
+                            </th>
                         @else
                             <th class="text-center">{{trans('label.common.num_of_row')}}</th>
                         @endif
@@ -44,8 +50,14 @@ $can_delete_trademark = $staff->can_view('trademark-delete');
                     @foreach($listTradeMark as $key => $tradeMark)
                         <tr>
                             @if($can_delete_trademark)
-                                <td class="text-center"><input type="checkbox" class="checkbox"
-                                                               data-id="{{$tradeMark->trademark_id}}"></td>
+                                <td class="text-center">
+                                    <div class="animated-checkbox">
+                                        <label>
+                                            <input type="checkbox" class="checkbox"
+                                                   data-id="{{$tradeMark->trademark_id}}"><span class="label-text"></span>
+                                        </label>
+                                    </div>
+                                </td>
                             @else
                                 <td class="text-center">{{$key + 1}}</td>
                             @endif
