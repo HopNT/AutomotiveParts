@@ -7,7 +7,7 @@
  */
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Common\Repository\AccessayRepository;
+use App\Http\Common\Repository\AccessaryRepository;
 use Illuminate\Http\Request;
 
 class AccessaryController extends BackendController
@@ -18,7 +18,7 @@ class AccessaryController extends BackendController
      * AccessaryController constructor.
      * @param $accessaryRepository
      */
-    public function __construct(AccessayRepository $accessaryRepository)
+    public function __construct(AccessaryRepository $accessaryRepository)
     {
         $this->accessaryRepository = $accessaryRepository;
     }

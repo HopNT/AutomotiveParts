@@ -9,10 +9,10 @@ namespace App\Http\Common\Repository\Implement;
 
 use App\Http\Common\Entities\Accessary;
 use App\Http\Common\Enum\GlobalEnum;
-use App\Http\Common\Repository\AccessayRepository;
+use App\Http\Common\Repository\AccessaryRepository;
 use Illuminate\Support\Facades\DB;
 
-class AccessaryRepositoryImpl extends GenericRepositoryImpl implements AccessayRepository
+class AccessaryRepositoryImpl extends GenericRepositoryImpl implements AccessaryRepository
 {
     /**
      * @return mixed

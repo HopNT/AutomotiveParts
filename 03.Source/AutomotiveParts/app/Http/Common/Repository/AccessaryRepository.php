@@ -7,7 +7,7 @@
  */
 namespace App\Http\Common\Repository;
 
-interface AccessayRepository
+interface AccessaryRepository
 {
     function searchByText($text);
 }

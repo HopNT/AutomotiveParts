@@ -1,0 +1,13 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: ManhNV
+ * Date: 10/02/2018
+ * Time: 01:23
+ */
+namespace App\Http\Common\Repository;
+
+interface UserRepository
+{
+
+}

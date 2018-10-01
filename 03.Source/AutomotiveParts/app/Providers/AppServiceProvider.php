@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Providers;
-use App\Http\Common\Repository\AccessayRepository;
+use App\Http\Common\Repository\AccessaryRepository;
 use App\Http\Common\Repository\CarBrandRepository;
 use App\Http\Common\Repository\CarRepository;
 use App\Http\Common\Repository\CatalogCarRepository;
@@ -14,9 +14,11 @@ use App\Http\Common\Repository\Implement\CatalogPartsRepositoryImpl;
 use App\Http\Common\Repository\Implement\NationRepositoryImplement;
 use App\Http\Common\Repository\Implement\PartsRepositoryImpl;
 use App\Http\Common\Repository\Implement\TradeMarkRepositoryImpl;
+use App\Http\Common\Repository\Implement\UserRepositoryImpl;
 use App\Http\Common\Repository\NationRepository;
 use App\Http\Common\Repository\PartsRepository;
 use App\Http\Common\Repository\TradeMarkRepository;
+use App\Http\Common\Repository\UserRepository;
 use Illuminate\Support\ServiceProvider;
 class AppServiceProvider extends ServiceProvider
 {
@@ -73,8 +75,13 @@ class AppServiceProvider extends ServiceProvider
         );
 
         $this->app->singleton(
-            AccessayRepository::class,
+            AccessaryRepository::class,
             AccessaryRepositoryImpl::class
+        );
+
+        $this->app->singleton(
+            UserRepository::class,
+            UserRepositoryImpl::class
         );
     }
 }
