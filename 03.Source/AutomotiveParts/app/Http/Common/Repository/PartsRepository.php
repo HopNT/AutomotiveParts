@@ -12,4 +12,6 @@ interface PartsRepository
     function getAllByActive($status);
 
     function searchByText($text);
+
+    function deleteMulti($ids);
 }

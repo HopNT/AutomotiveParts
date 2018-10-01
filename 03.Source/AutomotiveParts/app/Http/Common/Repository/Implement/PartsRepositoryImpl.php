@@ -42,4 +42,8 @@ class PartsRepositoryImpl extends GenericRepositoryImpl implements PartsReposito
         return $listParts;
     }
 
+    public function deleteMulti($ids)
+    {
+        DB::table('tbl_parts')->whereIn('parts_id', $ids)->update(['status'=>GlobalEnum::STATUS_INACTIVE, 'updated_at'=>now()]);
+    }
 }

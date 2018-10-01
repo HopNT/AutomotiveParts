@@ -150,4 +150,28 @@ class PartsController extends BackendController
         ];
     }
 
+    public function delete(Request $request)
+    {
+        try {
+            $ids = $request->ids;
+            $this->partsRepository->deleteMulti($ids);
+        }
+        catch (\Exception $e)
+        {
+            return [
+                'error' => true,
+                'message' => $e->getMessage()
+            ];
+        }
+
+        // Get List parts
+        $listParts = $this->partsRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
+        $view = view('admin.parts_management.elements.list_data_parts')
+            ->with('listParts', $listParts)->render();
+        return [
+            'error' => false,
+            'html' => $view
+        ];
+    }
+
 }

@@ -2,6 +2,24 @@ $(document).ready(function () {
 
     loadTableParts();
 
+    // Check all row
+    $('body').on('click', '#tbl_parts #check_all', function (e) {
+        if ($(this).is(':checked', true)) {
+            $("#tbl_parts .checkbox").prop('checked', true);
+        } else {
+            $("#tbl_parts .checkbox").prop('checked', false);
+        }
+    });
+
+    // Check one row
+    $('body').on('click', '#tbl_parts .checkbox', function () {
+        if ($('#tbl_parts .checkbox:checked').length == $('#tbl_parts .checkbox').length) {
+            $('#tbl_parts #check_all').prop('checked', true);
+        } else {
+            $('#tbl_parts #check_all').prop('checked', false);
+        }
+    });
+
     // Open modal add new parts
     $('body').on('click', '#btn_add_new_parts', function () {
 
@@ -199,6 +217,89 @@ $(document).ready(function () {
             $("#form-parts .image-preview").attr("data-content", $(img)[0].outerHTML).popover("show");
         }
         reader.readAsDataURL(file);
+    });
+
+    // Delete one row parts
+    $('body').on('click', '#btn_delete_parts', function () {
+        let url = $(this).attr('href');
+        swal({
+            title: "Bạn có chắc chắn muốn xóa?",
+            text: "",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Đồng ý!",
+            cancelButtonText: "Hủy bỏ!",
+            closeOnConfirm: true,
+            closeOnCancel: true
+        }, function (isConfirm) {
+            if (isConfirm) {
+                $.ajax({
+                    type: 'GET',
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    url: url,
+                    success: function (rs) {
+                        if (rs.error) {
+                            swal('Có lỗi xảy ra, vui lòng liên hệ với quản trị hệ thống!', rs.message, 'error');
+                        } else {
+                            swal("Xóa thành công!", "", "success");
+                            setTimeout(function () {
+                                $('#parts').html(rs.html);
+                                loadTableParts();
+                            }, 1000);
+                        }
+                    },
+                    error: function (error) {
+                        swal('Có lỗi xảy ra, vui lòng liên hệ với quản trị hệ thống!', error.responseJSON.message, 'error');
+                    }
+                });
+            }
+        });
+    });
+
+    // Delete multi row parts
+    $('body').on('click', '#btn_delete_multi_parts', function () {
+        let idsArr = [];
+        $("#tbl_parts .checkbox:checked").each(function () {
+            idsArr.push($(this).attr('data-id'));
+        });
+
+        if (idsArr.length <= 0) {
+            swal("Vui lòng chọn ít nhất một bản ghi!", "", "error");
+        } else {
+            swal({
+                title: "Bạn có chắc chắn muốn xóa?",
+                text: "",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Đồng ý!",
+                cancelButtonText: "Hủy bỏ!",
+                closeOnConfirm: true,
+                closeOnCancel: true
+            }, function (isConfirm) {
+                if (isConfirm) {
+                    $.ajax({
+                        type: 'GET',
+                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                        url: '/admin/parts/delete',
+                        data: {'ids': idsArr},
+                        success: function (rs) {
+                            if (rs.error) {
+                                swal('Có lỗi xảy ra, vui lòng liên hệ với quản trị hệ thống!', rs.message, 'error');
+                            } else {
+                                swal("Xóa thành công!", "", "success");
+                                setTimeout(function () {
+                                    $('#parts').html(rs.html);
+                                    loadTableParts();
+                                }, 1000);
+                            }
+                        },
+                        error: function (error) {
+                            swal('Có lỗi xảy ra, vui lòng liên hệ với quản trị hệ thống!', error.responseJSON.message, 'error');
+                        }
+                    });
+                }
+            });
+        }
     });
 
 });

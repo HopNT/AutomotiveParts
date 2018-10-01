@@ -56,6 +56,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('parts/searchByText', 'Admin\PartsController@searchByText')->name('parts-search-by-text');
     Route::get('parts/getById', 'Admin\PartsController@getById')->name('parts-get-by-id');
     Route::post('parts/save', 'Admin\PartsController@save')->name('parts-save');
+    Route::get('parts/delete', 'Admin\PartsController@delete')->name('parts-delete');
 
     // Nation
     Route::get('nation-management', 'Admin\NationManagementController@index')->name('nation-management');
