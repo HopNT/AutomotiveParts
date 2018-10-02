@@ -7,6 +7,7 @@
  */
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Common\Enum\GlobalEnum;
 use App\Http\Common\Repository\AccessaryRepository;
 use Illuminate\Http\Request;
 
@@ -40,6 +41,11 @@ class AccessaryController extends BackendController
         return [
             'items' => $result
         ];
+    }
+
+    public function getAll()
+    {
+        return $this->accessaryRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
     }
 
 }

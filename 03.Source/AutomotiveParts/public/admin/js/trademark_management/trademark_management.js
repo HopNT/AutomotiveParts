@@ -73,7 +73,7 @@ $(document).ready(function () {
         $('#code_error').html("");
         let type = $('#form-trademark').attr('method');
         let url = $('#form-trademark').attr('action');
-        let nationId = $('#form-trademark input[name="trademark_id"]').val();
+        let tradeMarkId = $('#form-trademark input[name="trademark_id"]').val();
         $.ajax({
             type: type,
             url: url,
@@ -93,7 +93,7 @@ $(document).ready(function () {
                 } else if (!result.error) {
                     $('#modal_add_update_trademark').modal('hide');
                     setTimeout(function () {
-                        if (nationId != null && nationId != '') {
+                        if (tradeMarkId != null && tradeMarkId != '') {
                             showMessage('Cập nhật thành công', 'success');
                         } else {
                             showMessage('Thêm mới thành công', 'success');

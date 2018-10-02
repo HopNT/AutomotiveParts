@@ -8,6 +8,10 @@
 return [
     'app_name' => 'Automotive Parts',
     'homepage' => 'Trang chủ',
+    'accessary' => [
+        'code' => 'Mã phụ tùng',
+        'name' => 'Tên phụ tùng'
+    ],
     'car' => [
         'management' => 'Quản lý thông tin xe',
         'brand' => 'Hãng xe',
@@ -63,6 +67,10 @@ return [
         'name' => 'Tên thương hiệu'
     ],
     'common' => [
+        'user' => 'Nhà cung cấp',
+        'quantity' => 'Số lượng hiện có',
+        'garage_price' => 'Giá bán garage',
+        'retail_price' => 'Giá bán lẻ',
         'technique_picture' => 'Ảnh kỹ thuật',
         'num_of_row' => '#',
         'description' => 'Mô tả',
@@ -120,7 +128,8 @@ return [
         'edit-role' => 'Cập nhật Quyền',
         'nation-management' => 'Quản lý thông tin quốc gia',
         'trademark-management' => 'Quản lý thông tin thương hiệu',
-        'parts-management'=> 'Quản lý thông tin bộ phận xe'
+        'parts-management'=> 'Quản lý thông tin bộ phận xe',
+        'price-management' => 'Quản lý giá phụ tùng'
     ],
     'form' => [
         'create' => 'Thêm mới',

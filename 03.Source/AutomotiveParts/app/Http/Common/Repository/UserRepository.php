@@ -9,5 +9,11 @@ namespace App\Http\Common\Repository;
 
 interface UserRepository
 {
+    function getAllJoinDataWithUser($userId);
 
+    function getAllJoinDataWithAdmin();
+
+    function getPrice($userAccessaryId);
+
+    function deleteMulti($ids);
 }

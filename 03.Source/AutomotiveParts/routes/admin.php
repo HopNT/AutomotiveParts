@@ -72,6 +72,13 @@ Route::group(['prefix' => 'admin'], function () {
 
     // Accessary
     Route::get('accessary/searchByText', 'Admin\AccessaryController@searchByText')->name('accessary-search-by-text');
+    Route::get('accessary/getAll', 'Admin\AccessaryController@getAll')->name('accessary-get-all');
+
+    // Price accessary management
+    Route::get('price-management', 'Admin\PriceManagementController@index')->name('price-management');
+    Route::post('price-management/save', 'Admin\PriceManagementController@save')->name('price-save');
+    Route::get('price-management/getById', 'Admin\PriceManagementController@getById')->name('price-edit');
+    Route::get('price-management/delete', 'Admin\PriceManagementController@delete')->name('price-delete');
 
     // Get language for datatables
     Route::get('lang/datatables/{item}', function ($item) {
