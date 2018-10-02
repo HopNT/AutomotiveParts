@@ -124,6 +124,7 @@ CREATE TABLE `tbl_parts` (
   `code` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `photo` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `photo_name` VARCHAR(500) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
   `width` double DEFAULT NULL,
   `height` double DEFAULT NULL,
   `number_of_tooth` int(11) DEFAULT NULL,
