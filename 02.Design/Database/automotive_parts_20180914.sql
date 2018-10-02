@@ -438,3 +438,9 @@ ALTER TABLE `tbl_menu`
 --	
 ALTER TABLE `tbl_car_parts`
 	CHANGE COLUMN `car_parts_id` `car_parts_id` INT(11) NOT NULL AUTO_INCREMENT FIRST;
+	
+--
+-- Alter table structure for table `tbl_user_accessary`
+--	
+ALTER TABLE `tbl_user_accessary`
+	CHANGE COLUMN `user_accessary_id` `user_accessary_id` INT(11) NOT NULL AUTO_INCREMENT FIRST;
