@@ -425,3 +425,15 @@ ALTER TABLE `tbl_accessary`
 	DROP COLUMN `parts_id`,
 	DROP INDEX `idx_tbl_accessary_parts_id`,
 	DROP FOREIGN KEY `fk_tbl_accessary_parts_id`;
+	
+--
+-- Alter table structure for table `tbl_menu`
+--	
+ALTER TABLE `tbl_menu`
+	CHANGE COLUMN `parrent_id` `parent_id` INT(11) NULL DEFAULT NULL AFTER `id`;
+
+--
+-- Alter table structure for table `tbl_car_parts`
+--	
+ALTER TABLE `tbl_car_parts`
+	CHANGE COLUMN `car_parts_id` `car_parts_id` INT(11) NOT NULL AUTO_INCREMENT FIRST;
