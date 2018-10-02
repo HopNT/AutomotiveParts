@@ -9,8 +9,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/main.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/bootstrap-imageupload.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/fileinput.min.css') }}" media="all">
     <!-- Font-icon css-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -38,17 +36,6 @@
 <script type="text/javascript" src="{{ asset('admin/js/plugins/bootstrap-notify.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('admin/js/plugins/sweetalert.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('admin/js/plugins/select2.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('admin/js/plugins/bootstrap-imageupload.min.js') }}"></script>
-
-<!-- piexif.min.js is needed for auto orienting image files OR when restoring exif data in resized images and when you wish to resize images before upload. This must be loaded before fileinput.min.js -->
-<script src="{{ asset('admin/js/plugins/piexif.min.js') }}"></script>
-<!-- the main fileinput plugin file -->
-<script src="{{ asset('admin/js/plugins/fileinput.min.js') }}"></script>
-<!-- optionally if you need a theme like font awesome theme you can include it as mentioned below -->
-<script src="{{ asset('admin/js/plugins/fileinput-theme.js') }}"></script>
-<!-- optionally if you need translation for your language then include  locale file as mentioned below -->
-<script src="{{ asset('admin/js/plugins/fileinput-vi.js') }}"></script>
-
 <script src="{{ asset('admin/js/main.js') }}"></script>
 @yield('javascript')
 </body>
