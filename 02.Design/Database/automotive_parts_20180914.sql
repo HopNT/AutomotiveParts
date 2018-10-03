@@ -444,3 +444,35 @@ ALTER TABLE `tbl_car_parts`
 --	
 ALTER TABLE `tbl_user_accessary`
 	CHANGE COLUMN `user_accessary_id` `user_accessary_id` INT(11) NOT NULL AUTO_INCREMENT FIRST;
+	
+--
+-- Table structure for table `tbl_temp_price`
+--
+CREATE TABLE `tbl_temp_price` (
+	`temp_price_id` INT(11) NOT NULL AUTO_INCREMENT,
+	`trademark_id` INT(11) NULL DEFAULT NULL,
+	`nation_id` INT(11) NULL DEFAULT NULL,
+	`user_id` INT(11) NULL DEFAULT NULL,
+	`code` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
+	`name_en` VARCHAR(100) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
+	`name_vi` VARCHAR(100) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
+	`acronym_name` VARCHAR(100) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
+	`unsigned_name` VARCHAR(100) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
+	`photo_top` VARCHAR(500) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
+	`photo_bottom` VARCHAR(500) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
+	`photo_left` VARCHAR(500) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
+	`photo_right` VARCHAR(500) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
+	`photo_inner` VARCHAR(500) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
+	`photo_outer` VARCHAR(500) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
+	`garage_price` DOUBLE NULL DEFAULT NULL,
+	`retail_price` DOUBLE NULL DEFAULT NULL,
+	`quantity` INT(11) NULL DEFAULT NULL,
+	`status` INT(1) NULL DEFAULT NULL,
+	`created_at` DATETIME NULL DEFAULT NULL,
+	`updated_at` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`temp_price_id`)
+)
+COLLATE='utf8_unicode_ci'
+ENGINE=InnoDB
+ROW_FORMAT=COMPACT
+;
