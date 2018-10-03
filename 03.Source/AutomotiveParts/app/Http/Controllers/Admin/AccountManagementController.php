@@ -13,6 +13,8 @@ use App\Http\Common\DAO\MenuDAO;
 use App\Http\Common\DAO\RoleDAO;
 use App\Http\Common\DAO\UserDAO;
 use App\Http\Common\Entities\Role;
+use App\Http\Common\Entities\UserDb;
+use App\Http\Common\Enum\GlobalEnum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -22,9 +24,11 @@ class AccountManagementController extends BackendController
     public function index(){
         $lst_user = (new UserDAO())->getAllUser();
         $lst_role = (new RoleDAO())->getAllRoles();
+        $data_role = (new RoleDAO())->getDataRole(true);
         return view('admin.account_management.account_management')
             ->with('lst_users',$lst_user)
-            ->with('lst_role',$lst_role);
+            ->with('lst_role',$lst_role)
+            ->with('data_role',$data_role);
     }
 
     public function addRole(){
@@ -64,6 +68,9 @@ class AccountManagementController extends BackendController
             ->with('role',new Role());
     }
 
+    /**function edit role and update role
+     * @return type|array
+     */
     public function editRole(){
         $role_id = request()->get('id');
         $role = RoleDAO::find($role_id);
@@ -187,6 +194,109 @@ class AccountManagementController extends BackendController
                 $lst_role = (new RoleDAO())->getAllRoles();
                 $view = view('admin.account_management.elements.list_data_role')
                     ->with('lst_role',$lst_role)->render();
+                return [
+                    'error' => false,
+                    'html' => $view,
+                    'message' => trans('label.common.success')
+                ];
+            }
+            return [
+                'error' => true,
+                'message' => trans('label.common.error')
+            ];
+        }
+
+    }
+
+    /**
+     * function save new role to db
+     * @param Request $request
+     * @return array
+     * @throws \Throwable
+     */
+    public function saveNewUser(Request $request){
+//        dd($request->all());
+        if ($request->isMethod('post')) {
+            $user = new UserDb();
+            $validator = Validator::make($request->all(), $user->rules, $user->messages);
+//            dd($validator->errors());
+            if ($validator->fails()) {
+                return [
+                    'error' => true,
+                    'errors' => $validator->errors()
+                ];
+            }
+            if(isset($request->user_id)){
+                $user = (new UserDAO())->getUserById($request->user_id);
+                if($user){
+                    $user->name = $request->name;
+                    $user->birth_day = $request->birth_day;
+                    $user->gender = $request->gender;
+                    $user->phone_number = $request->phone_number;
+                    $user->role_id = $request->role_id;
+                    $user->fax = $request->fax;
+                    $user->identify_card = $request->identify_card;
+                    $user->driving_license = $request->driving_license;
+                    $user->address = $request->address;
+                    $user->updated_at = date("Y-m-d H:i:s");
+                    $user->save();
+                }
+            }else{
+                //save role
+                $user->fill($request->all());
+                $user->status = GlobalEnum::STATUS_ACTIVE;
+                $user->password = bcrypt('123456');
+                $user->save();
+            }
+
+            //show data
+            $lst_user = (new UserDAO())->getAllUser();
+            $data_role = (new RoleDAO())->getDataRole(true);
+            $view = view('admin.account_management.elements.list_data_user')
+                ->with('lst_users',$lst_user)
+                ->with('data_role',$data_role)
+                ->render();
+            return [
+                'error' => false,
+                'html' => $view,
+                'message' => trans('label.common.success')
+            ];
+        }
+    }
+
+    /**function get User by Id
+     * @return type|array
+     */
+    public function getUser(){
+        $user_id = request()->get('id');
+        $user = UserDAO::find($user_id);
+        if(!$user){
+            return $this->error404();
+        }
+        return [
+            'error'=>false,
+            'data_user' => $user
+        ];
+    }
+
+    /**
+     * function delete user by id
+     * @param Request $request
+     * @return array
+     * @throws \Throwable
+     */
+    public function deleteUser(Request $request){
+        $user_id = $request->id;
+        if($user_id && is_numeric($user_id)){
+            $user = (new UserDAO())->getUserById($user_id);
+            $deletedRows = $user->delete();
+            if($deletedRows){
+                //show data
+                $lst_user = (new UserDAO())->getAllUser();
+                $data_role = (new RoleDAO())->getDataRole(true);
+                $view = view('admin.account_management.elements.list_data_user')
+                    ->with('lst_users',$lst_user)
+                    ->with('data_role',$data_role)->render();
                 return [
                     'error' => false,
                     'html' => $view,

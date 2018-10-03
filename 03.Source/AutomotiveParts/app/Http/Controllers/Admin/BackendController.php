@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Common\Helper\DataHelper;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\View;
 
 class BackendController extends Controller
 {
@@ -22,6 +24,7 @@ class BackendController extends Controller
         }
         return abort(404);
     }
+
 
 
 }

@@ -1,3 +1,14 @@
+<?php
+    $current = \Illuminate\Support\Facades\Route::currentRouteName();
+
+    $arr_icon = [
+        'account-management'=>'fa fa-user',
+        'car-management'=>'fa fa-car',
+        'parts-management'=>'fa fa-car',
+        'nation-management'=>'fa fa-car',
+        'trademark-management'=>'fa fa-car',
+    ];
+?>
 <!-- Sidebar menu-->
 <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
 <aside class="app-sidebar">
@@ -9,26 +20,21 @@
     {{--</div>--}}
     <ul class="app-menu">
 
+        @foreach($leftMenu as $menu)
+            <li><a class="app-menu__item {{$current == $menu->route_name ? 'active' : ''}}" href="{{route($menu->route_name)}}"><i class="app-menu__icon {{$arr_icon[$menu->route_name]}}"></i><span class="app-menu__label">{{$menu->function_name}}</span></a></li>
+        @endforeach
+
         {{-- Trang chủ --}}
-        <li><a class="app-menu__item active" href="index.html"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">{{trans('label.homepage')}}</span></a></li>
+        {{--<li><a class="app-menu__item active" href="index.html"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">{{trans('label.homepage')}}</span></a></li>--}}
 
         {{-- Quản lý thông tin xe --}}
-        <li><a class="app-menu__item" href="{{route('car-management')}}"><i class="app-menu__icon fa fa-car"></i><span class="app-menu__label">{{trans('label.car.management')}}</span></a></li>
+        {{--<li><a class="app-menu__item" href="{{route('car-management')}}"><i class="app-menu__icon fa fa-car"></i><span class="app-menu__label">{{trans('label.car.management')}}</span></a></li>--}}
 
         {{-- Quản lý thông tin quốc gia --}}
-        <li><a class="app-menu__item" href="{{route('nation-management')}}"><i class="app-menu__icon fa fa-car"></i><span class="app-menu__label">{{trans('label.nation.management')}}</span></a></li>
+        {{--<li><a class="app-menu__item" href="{{route('nation-management')}}"><i class="app-menu__icon fa fa-car"></i><span class="app-menu__label">{{trans('label.nation.management')}}</span></a></li>--}}
 
         {{-- Quản lý thông tin thương hiệu --}}
-        <li><a class="app-menu__item" href="{{route('trademark-management')}}"><i class="app-menu__icon fa fa-car"></i><span class="app-menu__label">{{trans('label.trade_mark.management')}}</span></a></li>
-
-        {{-- Quản lý thông tin bộ phận xe --}}
-        <li><a class="app-menu__item" href="{{route('parts-management')}}"><i class="app-menu__icon fa fa-car"></i><span class="app-menu__label">{{trans('label.parts.management')}}</span></a></li>
-
-        {{-- Quản lý giá phụ tùng --}}
-        <li><a class="app-menu__item" href="{{route('price-management')}}"><i class="app-menu__icon fa fa-paypal"></i><span class="app-menu__label">{{trans('label.route.price-management')}}</span></a></li>
-
-        {{-- Quản lý yêu cầu thêm phụ tùng --}}
-        <li><a class="app-menu__item" href="{{route('temp-price-management')}}"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">{{trans('label.route.temp-price-management')}}</span></a></li>
+        {{--<li><a class="app-menu__item" href="{{route('trademark-management')}}"><i class="app-menu__icon fa fa-car"></i><span class="app-menu__label">{{trans('label.trade_mark.management')}}</span></a></li>--}}
 
         {{--<li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Pages</span><i class="treeview-indicator fa fa-angle-right"></i></a>--}}
             {{--<ul class="treeview-menu">--}}

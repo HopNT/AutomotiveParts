@@ -37,7 +37,7 @@ $can_view = $user->can_view($router_name);
     <script type="text/javascript" src="js/plugins/bootstrap-datepicker.min.js"></script>
     <script>
         $('#dob').datepicker({
-            format: "dd/mm/yyyy",
+            format: "yyyy-mm-dd",
             autoclose: true,
             todayHighlight: true
         });

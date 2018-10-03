@@ -8,7 +8,13 @@
             <ul class="dropdown-menu settings-menu dropdown-menu-right">
                 <li><a class="dropdown-item" href="page-user.html"><i class="fa fa-cog fa-lg"></i>Settings</a></li>
                 <li><a class="dropdown-item" href="page-user.html"><i class="fa fa-user fa-lg"></i>Profile</a></li>
-                <li><a class="dropdown-item" href="page-login.html"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
+                <li>
+                    <a class="dropdown-item" href="javascript: void(0)" onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();"><i class="fa fa-sign-out fa-lg"></i>Logout</a>
+                    <form id="logout-form" action="{{ route('admin_logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
+                </li>
             </ul>
         </li>
     </ul>

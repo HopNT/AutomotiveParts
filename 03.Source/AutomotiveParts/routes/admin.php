@@ -10,7 +10,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/','Admin\AccountManagementController@index' )->name('admin_home');
     Route::get('/login', 'AuthAdmin\LoginController@showLoginForm')->name('admin_login');
     Route::post('/login', 'AuthAdmin\LoginController@login')->name('admin_post_login');
-    Route::post('/logout', 'AuthAdmin\LoginController@logout')->name('admin_logout');
+    Route::post('/logout', 'AuthAdmin\LoginController@logoutAdmin')->name('admin_logout');
     Route::get('/reset/{token}', 'AuthAdmin\ResetPasswordController@showResetForm')->name('admin_reset_pw');
     Route::post('/reset/password', 'AuthAdmin\ResetPasswordController@reset')->name('admin_post_reset_pw');
 
@@ -22,10 +22,11 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('account-management', 'Admin\AccountManagementController@index')->name('account-management');
     Route::match(['get', 'post'],'account-management/add-role', 'Admin\AccountManagementController@addRole')->name('add-role');
     Route::match(['get', 'post'],'account-management/edit-role', 'Admin\AccountManagementController@editRole')->name('edit-role');
-    Route::post('save-role', 'Admin\AccountManagementController@saveNewRole')->name('save-role');
-    Route::get('get-role', 'Admin\AccountManagementController@getRole')->name('get-role');
-    Route::get('delete-role', 'Admin\AccountManagementController@deleteRole')->name('delete-role');
-    Route::post('save-user', 'Admin\AccountManagementController@saveNewRole')->name('save-user');
+//    Route::post('account-management/save-role', 'Admin\AccountManagementController@saveNewRole')->name('save-role');
+    Route::get('account-management/delete-role', 'Admin\AccountManagementController@deleteRole')->name('delete-role');
+    Route::get('account-management/edit-user', 'Admin\AccountManagementController@getUser')->name('get-user');
+    Route::post('account-management/save-user', 'Admin\AccountManagementController@saveNewUser')->name('save-user');
+    Route::get('account-management/delete-user', 'Admin\AccountManagementController@deleteUser')->name('delete-user');
 
     // Car management
     Route::get('car-management', 'Admin\CarManagementController@index')->name('car-management');
@@ -95,4 +96,9 @@ Route::group(['prefix' => 'admin'], function () {
         return trans('datatables.'.$item);
     });
 
+    // Nation management
+    Route::get('nation-management','Admin\NationManagementController@index')->name('nation-management');
+
+    //Accessories Management
+    Route::get('accessories-management','Admin\NationManagementController@index')->name('accessories-management');
 });

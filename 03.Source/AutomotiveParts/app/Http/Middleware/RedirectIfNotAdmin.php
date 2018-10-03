@@ -2,12 +2,13 @@
 
 namespace App\Http\Middleware;
 
-use App\Common\Helper\DataHelper;
+use App\Http\Common\Helper\DataHelper;
 use App\Http\Common\DAO\MenuDAO;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
 
 class RedirectIfNotAdmin
 {
@@ -54,6 +55,10 @@ class RedirectIfNotAdmin
                         abort(403, "You not permistion!");
                     }
                 }
+        }
+        if(Auth::guard($guard)->check()){
+            $menu = (new DataHelper())->loadLeftNavData();
+            View::share('leftMenu',$menu);
         }
         return $next($request);
     }

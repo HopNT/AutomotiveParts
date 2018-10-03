@@ -8,8 +8,15 @@ use App\Http\Common\Enum\GlobalEnum;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
+use function redirect;
+use function route;
+use function url;
+use function view;
 
 class LoginController extends Controller
 {
@@ -74,7 +81,9 @@ class LoginController extends Controller
 
         //Only login with user have is_deleted = 0
         $email = $request->get($this->username());
-        $client = UserDb::where([$this->username()=> $email, 'user_type' => GlobalEnum::ADMIN, 'status'=> GlobalEnum::STATUS_ACTIVE])->first();
+        $client = UserDb::where([$this->username()=> $email, 'status'=> GlobalEnum::STATUS_ACTIVE])
+                            ->whereIn('user_type', [GlobalEnum::ADMIN, GlobalEnum::PROVIDER])
+                            ->first();
         if (empty($client)) {
             //return $this->sendFailedLoginResponse($request);
             return view('admin.auth.login')
@@ -183,7 +192,7 @@ class LoginController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function logout(Request $request)
+    public function logoutAdmin(Request $request)
     {
         $this->guard()->logout();
 
