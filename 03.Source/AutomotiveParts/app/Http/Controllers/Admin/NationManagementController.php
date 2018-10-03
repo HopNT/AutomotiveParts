@@ -103,4 +103,9 @@ class NationManagementController extends BackendController{
             'html' => $view
         ];
     }
+
+    public function getAll()
+    {
+        return $this->nationRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
+    }
 }

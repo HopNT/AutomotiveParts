@@ -9,7 +9,7 @@ namespace App\Http\Common\Repository;
 
 interface UserRepository
 {
-    function getAllJoinDataWithUser($userId);
+    function getAllJoinDataWithProductProvider($userId);
 
     function getAllJoinDataWithAdmin();
 

@@ -63,12 +63,14 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('nation/save', 'Admin\NationManagementController@save')->name('nation-save');
     Route::get('nation/getById', 'Admin\NationManagementController@getById')->name('nation-getById');
     Route::get('nation/delete', 'Admin\NationManagementController@delete')->name('nation-delete');
+    Route::get('nation/getAll', 'Admin\NationManagementController@getAll')->name('nation-get-all');
 
     // Trademark
     Route::get('trademark-management', 'Admin\TradeMarkManagementController@index')->name('trademark-management');
     Route::get('trademark/getById', 'Admin\TradeMarkManagementController@getById')->name('trademark-getById');
     Route::get('trademark/delete', 'Admin\TradeMarkManagementController@delete')->name('trademark-delete');
     Route::post('trademark/save', 'Admin\TradeMarkManagementController@save')->name('trademark-save');
+    Route::get('trademark/getAll', 'Admin\TradeMarkManagementController@getAll')->name('trademark-get-all');
 
     // Accessary
     Route::get('accessary/searchByText', 'Admin\AccessaryController@searchByText')->name('accessary-search-by-text');
@@ -76,9 +78,17 @@ Route::group(['prefix' => 'admin'], function () {
 
     // Price accessary management
     Route::get('price-management', 'Admin\PriceManagementController@index')->name('price-management');
-    Route::post('price-management/save', 'Admin\PriceManagementController@save')->name('price-save');
-    Route::get('price-management/getById', 'Admin\PriceManagementController@getById')->name('price-edit');
-    Route::get('price-management/delete', 'Admin\PriceManagementController@delete')->name('price-delete');
+    Route::post('price/save', 'Admin\PriceManagementController@save')->name('price-save');
+    Route::get('price/getById', 'Admin\PriceManagementController@getById')->name('price-edit');
+    Route::get('price/delete', 'Admin\PriceManagementController@delete')->name('price-delete');
+
+    // Temp price management
+    Route::get('temp-price-management', 'Admin\TempPriceManagementController@index')->name('temp-price-management');
+        Route::post('temp-price/save', 'Admin\TempPriceManagementController@save')->name('temp-price-save');
+    Route::get('temp-price/edit', 'Admin\TempPriceManagementController@getById')->name('temp-price-edit');
+    Route::get('temp-price/approve', 'Admin\TempPriceManagementController@approve')->name('temp-price-approve');
+    Route::get('temp-price/reject', 'Admin\TempPriceManagementController@reject')->name('temp-price-reject');
+    Route::get('temp-price/delete', 'Admin\TempPriceManagementController@delete')->name('temp-price-delete');
 
     // Get language for datatables
     Route::get('lang/datatables/{item}', function ($item) {

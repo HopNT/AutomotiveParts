@@ -42,7 +42,7 @@ $can_delete_price = $staff->can_view('price-delete');
                         @else
                             <th class="text-center">{{trans('label.common.num_of_row')}}</th>
                         @endif
-                        @if($staff->role_id == 1)
+                        @if($staff->user_type == 0)
                             <th class="text-center">{{trans('label.common.user')}}</th>
                         @endif
                         <th class="text-center">{{trans('label.accessary.code')}}</th>
@@ -69,7 +69,7 @@ $can_delete_price = $staff->can_view('price-delete');
                             @else
                                 <td class="text-center">{{$key + 1}}</td>
                             @endif
-                            @if($staff->role_id == 1)
+                            @if($staff->user_type == 0)
                                 <td>{{$price->user}}</td>
                             @endif
                             <td>{{$price->code}}</td>

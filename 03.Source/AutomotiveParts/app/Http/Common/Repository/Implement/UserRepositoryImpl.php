@@ -22,7 +22,7 @@ class UserRepositoryImpl extends GenericRepositoryImpl implements UserRepository
         return UserDb::class;
     }
 
-    public function getAllJoinDataWithUser($userId)
+    public function getAllJoinDataWithProductProvider($userId)
     {
         return DB::table('tbl_user_accessary as ua')
             ->join('tbl_user as u', 'ua.user_id', '=', 'u.user_id')

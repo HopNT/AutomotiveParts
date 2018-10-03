@@ -13,6 +13,9 @@ class GlobalEnum
 {
     const STATUS_ACTIVE = 1;
     const STATUS_INACTIVE = 0;
+    const STATUS_APPROVE = 2;
+    const STATUS_REJECT = 3;
+    const STATUS_PENDING = 4;
 
     const ADMIN = 0;
     const USER = 1;

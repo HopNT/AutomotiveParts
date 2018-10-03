@@ -13,10 +13,12 @@ use App\Http\Common\Repository\Implement\CatalogCarRepositoryImpl;
 use App\Http\Common\Repository\Implement\CatalogPartsRepositoryImpl;
 use App\Http\Common\Repository\Implement\NationRepositoryImplement;
 use App\Http\Common\Repository\Implement\PartsRepositoryImpl;
+use App\Http\Common\Repository\Implement\TempPriceRepositoryImpl;
 use App\Http\Common\Repository\Implement\TradeMarkRepositoryImpl;
 use App\Http\Common\Repository\Implement\UserRepositoryImpl;
 use App\Http\Common\Repository\NationRepository;
 use App\Http\Common\Repository\PartsRepository;
+use App\Http\Common\Repository\TempPriceRepository;
 use App\Http\Common\Repository\TradeMarkRepository;
 use App\Http\Common\Repository\UserRepository;
 use Illuminate\Support\ServiceProvider;
@@ -82,6 +84,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(
             UserRepository::class,
             UserRepositoryImpl::class
+        );
+
+        $this->app->singleton(
+            TempPriceRepository::class,
+            TempPriceRepositoryImpl::class
         );
     }
 }

@@ -43,7 +43,7 @@ class PriceManagementController extends BackendController
         }
         if ($userType == GlobalEnum::USER)
         {
-            $listPrice = $this->userRepository->getAllJoinDataWithUser($user->user_id);
+            $listPrice = $this->userRepository->getAllJoinDataWithProductProvider($user->user_id);
         }
         return view('admin.price_management.price_management')
             ->with('listPrice', $listPrice);
@@ -89,7 +89,7 @@ class PriceManagementController extends BackendController
         }
         if ($userType == GlobalEnum::USER)
         {
-            $listPrice = $this->userRepository->getAllJoinDataWithUser($user->user_id);
+            $listPrice = $this->userRepository->getAllJoinDataWithProductProvider($user->user_id);
         }
         $view = view('admin.price_management.elements.list_data_price')
             ->with('listPrice', $listPrice)->render();
@@ -134,7 +134,7 @@ class PriceManagementController extends BackendController
         }
         if ($userType == GlobalEnum::USER)
         {
-            $listPrice = $this->userRepository->getAllJoinDataWithUser($user->user_id);
+            $listPrice = $this->userRepository->getAllJoinDataWithProductProvider($user->user_id);
         }
         $view = view('admin.price_management.elements.list_data_price')
             ->with('listPrice', $listPrice)->render();

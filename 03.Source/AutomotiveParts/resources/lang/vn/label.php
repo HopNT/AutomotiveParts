@@ -10,7 +10,16 @@ return [
     'homepage' => 'Trang chủ',
     'accessary' => [
         'code' => 'Mã phụ tùng',
-        'name' => 'Tên phụ tùng'
+        'name' => 'Tên phụ tùng',
+        'trademark' => 'Thương hiệu',
+        'acronym_name' => 'Tên viết tắt',
+        'unsigned_name' => 'Tên không dấu',
+        'photo_top' => 'Ảnh chụp trên',
+        'photo_bottom' => 'Ảnh chụp dưới',
+        'photo_left' => 'Ảnh chụp trái',
+        'photo_right' => 'Ảnh chụp phải',
+        'photo_inner' => 'Ảnh chụp trong',
+        'photo_outer' => 'Ảnh chụp ngoài'
     ],
     'car' => [
         'management' => 'Quản lý thông tin xe',
@@ -72,6 +81,7 @@ return [
         'garage_price' => 'Giá bán garage',
         'retail_price' => 'Giá bán lẻ',
         'technique_picture' => 'Ảnh kỹ thuật',
+        'nation' => 'Quốc gia',
         'num_of_row' => '#',
         'description' => 'Mô tả',
         'status' => 'Trạng thái',
@@ -80,18 +90,26 @@ return [
         'choose' => 'Chọn',
         'status_active' => 'Sử dụng',
         'status_inactive' => 'Không sử dụng',
+        'status_approve' => 'Đã duyệt',
+        'status_reject' => 'Đã từ chối',
+        'status_pending' => 'Chờ duyệt',
         'success' => 'Thực hiện thành công!',
         'error' => 'Đã có lỗi, vui lòng thử lại.',
         'confirm' => 'Bạn có chắc chắn?',
         'required' => 'Vui lòng nhập thông tin.',
-        'dont_have_permission' => 'Bạn không có quyền thực hiện chức năng này!.'
+        'dont_have_permission' => 'Bạn không có quyền thực hiện chức năng này!.',
+        'created_at' => 'Ngày tạo',
+        'approve_at' => 'Ngày phê duyệt',
+        'reject_at' => 'Ngày từ chối'
     ],
     'button' => [
         'create' => 'Thêm mới',
         'cancel' => 'Hủy',
         'save' => 'Lưu lại',
         'edit' => 'Cập nhật',
-        'delete' => 'Xóa'
+        'delete' => 'Xóa',
+        'approve' => 'Duyệt',
+        'reject' => 'Từ chối'
     ],
     'account' => [
         'role' => 'Quyền',
@@ -129,11 +147,13 @@ return [
         'nation-management' => 'Quản lý thông tin quốc gia',
         'trademark-management' => 'Quản lý thông tin thương hiệu',
         'parts-management'=> 'Quản lý thông tin bộ phận xe',
-        'price-management' => 'Quản lý giá phụ tùng'
+        'price-management' => 'Quản lý giá phụ tùng',
+        'temp-price-management' => 'Quản lý yêu cầu thêm phụ tùng'
     ],
     'form' => [
         'create' => 'Thêm mới',
         'update' => 'Cập nhật',
+        'approve' => 'Phê duyệt',
         'trash' => 'Gỡ bỏ',
         'browser' => 'Duyệt',
         'change' => 'Thay đổi'

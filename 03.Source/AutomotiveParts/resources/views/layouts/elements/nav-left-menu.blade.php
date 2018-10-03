@@ -27,6 +27,9 @@
         {{-- Quản lý giá phụ tùng --}}
         <li><a class="app-menu__item" href="{{route('price-management')}}"><i class="app-menu__icon fa fa-paypal"></i><span class="app-menu__label">{{trans('label.route.price-management')}}</span></a></li>
 
+        {{-- Quản lý yêu cầu thêm phụ tùng --}}
+        <li><a class="app-menu__item" href="{{route('temp-price-management')}}"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">{{trans('label.route.temp-price-management')}}</span></a></li>
+
         {{--<li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Pages</span><i class="treeview-indicator fa fa-angle-right"></i></a>--}}
             {{--<ul class="treeview-menu">--}}
                 {{--<li><a class="treeview-item" href="blank-page.html"><i class="icon fa fa-circle-o"></i> Blank Page</a></li>--}}

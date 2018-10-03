@@ -211,7 +211,7 @@ $(document).ready(function () {
                     $.ajax({
                         type: 'GET',
                         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                        url: '/admin/price-management/delete',
+                        url: '/admin/price/delete',
                         data: {'ids': idsArr},
                         success: function (rs) {
                             if (rs.error) {

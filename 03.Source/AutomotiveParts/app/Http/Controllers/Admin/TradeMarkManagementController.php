@@ -104,4 +104,9 @@ class TradeMarkManagementController extends BackendController
         ];
     }
 
+    public function getAll()
+    {
+        return $this->tradeMarkRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
+    }
+
 }

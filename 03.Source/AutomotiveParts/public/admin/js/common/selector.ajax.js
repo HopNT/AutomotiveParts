@@ -71,3 +71,37 @@ function loadCatalogParts(form, divSelectId, selectName, selectId) {
         }
     });
 }
+
+// Load All Trademark
+function loadTrademark(form, divSelectId, selectName, selectId) {
+    $.ajax({
+        type: 'GET',
+        url: '/admin/trademark/getAll',
+        success: function (result) {
+            let selectTrademark = '<select class="form-control" name="' + selectName + '" id="' + selectId + '">';
+            selectTrademark += '<option value="">-- Chọn Thương hiệu --</option>';
+            $.each(result, function (i, data) {
+                selectTrademark += '<option value="' + data.trademark_id + '">' + data.name + '</option>';
+            });
+            selectTrademark += '</select>';
+            $('#' + form + " #" + divSelectId).html(selectTrademark);
+        }
+    });
+}
+
+// Load All Nation
+function loadNation(form, divSelectId, selectName, selectId) {
+    $.ajax({
+        type: 'GET',
+        url: '/admin/nation/getAll',
+        success: function (result) {
+            let selectTrademark = '<select class="form-control" name="' + selectName + '" id="' + selectId + '">';
+            selectTrademark += '<option value="">-- Chọn Quốc gia --</option>';
+            $.each(result, function (i, data) {
+                selectTrademark += '<option value="' + data.trademark_id + '">' + data.name_vi + '</option>';
+            });
+            selectTrademark += '</select>';
+            $('#' + form + " #" + divSelectId).html(selectTrademark);
+        }
+    });
+}
