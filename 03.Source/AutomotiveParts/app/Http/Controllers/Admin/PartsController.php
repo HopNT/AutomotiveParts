@@ -73,9 +73,9 @@ class PartsController extends BackendController
             // Update
             if (isset($request->parts_id))
             {
+                $exists = $this->partsRepository->find($request->parts_id);
                 if (!empty($file))
                 {
-                    $exists = $this->partsRepository->find($request->parts_id);
                     if (!empty($exists->photo))
                     {
                         CommonUtils::deleteFile($exists->photo);
@@ -84,6 +84,16 @@ class PartsController extends BackendController
                     $parts = array_add($parts, 'photo_name', $file->getClientOriginalName());
                     $parts = array_add($parts, 'photo', $pathPhoto);
                 }
+                else
+                {
+                    if (!empty($exists->photo))
+                    {
+                        CommonUtils::deleteFile($exists->photo);
+                    }
+                    $parts = array_add($parts, 'photo_name', null);
+                    $parts = array_add($parts, 'photo', null);
+                }
+
                 $parts = $this->partsRepository->merge($request->parts_id, $parts);
                 if (!empty($accessary))
                 {
@@ -102,6 +112,12 @@ class PartsController extends BackendController
                         'error' => true,
                         'errors' => $validator->errors()
                     ];
+                }
+                if (!empty($file))
+                {
+                    $pathPhoto = CommonUtils::uploadFile($file, 'parts', GlobalEnum::IMAGE);
+                    $parts = array_add($parts, 'photo_name', $file->getClientOriginalName());
+                    $parts = array_add($parts, 'photo', $pathPhoto);
                 }
                 $parts = array_add($parts, 'status', GlobalEnum::STATUS_ACTIVE);
                 $parts = $this->partsRepository->persist($parts);

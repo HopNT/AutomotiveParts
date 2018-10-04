@@ -41,7 +41,7 @@ class PriceManagementController extends BackendController
         {
             $listPrice = $this->userRepository->getAllJoinDataWithAdmin();
         }
-        if ($userType == GlobalEnum::USER)
+        if ($userType == GlobalEnum::PROVIDER)
         {
             $listPrice = $this->userRepository->getAllJoinDataWithProductProvider($user->user_id);
         }
@@ -87,7 +87,7 @@ class PriceManagementController extends BackendController
         {
             $listPrice = $this->userRepository->getAllJoinDataWithAdmin();
         }
-        if ($userType == GlobalEnum::USER)
+        if ($userType == GlobalEnum::PROVIDER)
         {
             $listPrice = $this->userRepository->getAllJoinDataWithProductProvider($user->user_id);
         }
@@ -132,7 +132,7 @@ class PriceManagementController extends BackendController
         {
             $listPrice = $this->userRepository->getAllJoinDataWithAdmin();
         }
-        if ($userType == GlobalEnum::USER)
+        if ($userType == GlobalEnum::PROVIDER)
         {
             $listPrice = $this->userRepository->getAllJoinDataWithProductProvider($user->user_id);
         }

@@ -95,13 +95,13 @@ function loadNation(form, divSelectId, selectName, selectId) {
         type: 'GET',
         url: '/admin/nation/getAll',
         success: function (result) {
-            let selectTrademark = '<select class="form-control" name="' + selectName + '" id="' + selectId + '">';
-            selectTrademark += '<option value="">-- Chọn Quốc gia --</option>';
+            let selectNation = '<select class="form-control" name="' + selectName + '" id="' + selectId + '">';
+            selectNation += '<option value="">-- Chọn Quốc gia --</option>';
             $.each(result, function (i, data) {
-                selectTrademark += '<option value="' + data.trademark_id + '">' + data.name_vi + '</option>';
+                selectNation += '<option value="' + data.nation_id + '">' + data.name_vi + '</option>';
             });
-            selectTrademark += '</select>';
-            $('#' + form + " #" + divSelectId).html(selectTrademark);
+            selectNation += '</select>';
+            $('#' + form + " #" + divSelectId).html(selectNation);
         }
     });
 }

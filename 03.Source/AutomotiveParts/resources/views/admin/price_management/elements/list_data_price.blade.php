@@ -74,8 +74,8 @@ $can_delete_price = $staff->can_view('price-delete');
                             @endif
                             <td>{{$price->code}}</td>
                             <td>{{$price->name_vi}}</td>
-                            <td class="text-right">{{$price->garage_price}}</td>
-                            <td class="text-right">{{$price->retail_price}}</td>
+                            <td class="text-right">{{$price->garage_price ? number_format($price->garage_price) : ''}}</td>
+                            <td class="text-right">{{$price->garage_price ? number_format($price->retail_price) : ''}}</td>
                             <td class="text-right">{{$price->quantity}}</td>
                             <td class="text-center">
                                 @if($can_edit_price)

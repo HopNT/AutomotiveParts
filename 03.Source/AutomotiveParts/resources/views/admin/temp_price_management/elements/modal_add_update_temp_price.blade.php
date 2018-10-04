@@ -36,7 +36,7 @@ $userType = $staff->user_type;
                     <strong id="message_error"></strong>
                 </div>
                 <form class="form-horizontal" method="POST" id="form-temp-price"
-                      action="{{--{{route('price-save')}}--}}">
+                      action="{{route('temp-price-save')}}">
                     @csrf
                     <input type="hidden" name="temp_price_id">
                     <div class="row">

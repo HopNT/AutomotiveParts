@@ -18,7 +18,8 @@ class GlobalEnum
     const STATUS_PENDING = 4;
 
     const ADMIN = 0;
-    const USER = 1;
+    const PROVIDER = 1;
+    const CLIENT = 2;
 
     const MALE = 1;
     const FEMALE = 0;

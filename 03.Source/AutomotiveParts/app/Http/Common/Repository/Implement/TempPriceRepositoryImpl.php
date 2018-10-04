@@ -41,4 +41,11 @@ class TempPriceRepositoryImpl extends GenericRepositoryImpl implements TempPrice
             ->select('u.name as user', 't.*')
             ->get();
     }
+
+    function deleteMulti($ids)
+    {
+        DB::table('tbl_temp_price')
+            ->whereIn('temp_price_id', $ids)
+            ->delete();
+    }
 }

@@ -84,7 +84,7 @@ Route::group(['prefix' => 'admin'], function () {
 
     // Temp price management
     Route::get('temp-price-management', 'Admin\TempPriceManagementController@index')->name('temp-price-management');
-        Route::post('temp-price/save', 'Admin\TempPriceManagementController@save')->name('temp-price-save');
+    Route::post('temp-price/save', 'Admin\TempPriceManagementController@save')->name('temp-price-save');
     Route::get('temp-price/edit', 'Admin\TempPriceManagementController@getById')->name('temp-price-edit');
     Route::get('temp-price/approve', 'Admin\TempPriceManagementController@approve')->name('temp-price-approve');
     Route::get('temp-price/reject', 'Admin\TempPriceManagementController@reject')->name('temp-price-reject');
