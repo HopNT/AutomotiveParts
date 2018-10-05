@@ -40,6 +40,24 @@ $userType = $staff->user_type;
                     @csrf
                     <input type="hidden" name="temp_price_id">
                     <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group row">
+                                <label for="type"
+                                       class="control-label col-md-2">{{trans('label.accessary.type')}}</label>
+                                <div class="col-md-10">
+                                    <select class="form-control" name="type" id="type">
+                                        <option value="">
+                                            -- {{trans('label.common.choose')}} {{trans('label.accessary.type')}}
+                                            --
+                                        </option>
+                                        <option value="0">{{trans('label.accessary.oem')}}</option>
+                                        <option value="1">{{trans('label.accessary.options')}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label for="trademark"
@@ -175,15 +193,18 @@ $userType = $staff->user_type;
                                        class="control-label col-md-2">{{trans('label.accessary.photo_top')}}</label>
                                 <div class="col-md-10">
                                     <div class="input-group" id="photo_top_image_preview">
-                                        <input type="text" class="form-control" id="photo_top_image_preview_filename" placeholder="{{trans('label.common.choose')}} {{trans('label.accessary.photo_top')}}">
+                                        <input type="text" class="form-control" id="photo_top_image_preview_filename"
+                                               placeholder="{{trans('label.common.choose')}} {{trans('label.accessary.photo_top')}}">
                                         <span class="input-group-btn">
-                                            <button type="button" class="btn btn-danger" id="photo_top_image_preview_clear"
+                                            <button type="button" class="btn btn-danger"
+                                                    id="photo_top_image_preview_clear"
                                                     style="display:none;">
                                                 <span class="fa fa-trash"></span>{{trans('label.form.trash')}}
                                             </button>
                                             <div class="btn btn-primary image-preview-input">
                                                 <span class="fa fa-folder-open"></span>
-                                                <span id="photo_top_image_preview_input_title">{{trans('label.form.browser')}}</span>
+                                                <span
+                                                    id="photo_top_image_preview_input_title">{{trans('label.form.browser')}}</span>
                                                 <input type="file" accept="image/*" name="photo_top"/>
                                             </div>
                                         </span>
@@ -199,15 +220,18 @@ $userType = $staff->user_type;
                                        class="control-label col-md-2">{{trans('label.accessary.photo_bottom')}}</label>
                                 <div class="col-md-10">
                                     <div class="input-group" id="photo_bottom_image_preview">
-                                        <input type="text" class="form-control" id="photo_bottom_image_preview_filename" placeholder="{{trans('label.common.choose')}} {{trans('label.accessary.photo_bottom')}}">
+                                        <input type="text" class="form-control" id="photo_bottom_image_preview_filename"
+                                               placeholder="{{trans('label.common.choose')}} {{trans('label.accessary.photo_bottom')}}">
                                         <span class="input-group-btn">
-                                            <button type="button" class="btn btn-danger" id="photo_bottom_image_preview_clear"
+                                            <button type="button" class="btn btn-danger"
+                                                    id="photo_bottom_image_preview_clear"
                                                     style="display:none;">
                                                 <span class="fa fa-trash"></span>{{trans('label.form.trash')}}
                                             </button>
                                             <div class="btn btn-primary image-preview-input">
                                                 <span class="fa fa-folder-open"></span>
-                                                <span id="photo_bottom_image_preview_input_title">{{trans('label.form.browser')}}</span>
+                                                <span
+                                                    id="photo_bottom_image_preview_input_title">{{trans('label.form.browser')}}</span>
                                                 <input type="file" accept="image/*" name="photo_bottom"/>
                                             </div>
                                         </span>
@@ -223,15 +247,18 @@ $userType = $staff->user_type;
                                        class="control-label col-md-2">{{trans('label.accessary.photo_left')}}</label>
                                 <div class="col-md-10">
                                     <div class="input-group" id="photo_left_image_preview">
-                                        <input type="text" class="form-control" id="photo_left_image_preview_filename" placeholder="{{trans('label.common.choose')}} {{trans('label.accessary.photo_left')}}">
+                                        <input type="text" class="form-control" id="photo_left_image_preview_filename"
+                                               placeholder="{{trans('label.common.choose')}} {{trans('label.accessary.photo_left')}}">
                                         <span class="input-group-btn">
-                                            <button type="button" class="btn btn-danger" id="photo_left_image_preview_clear"
+                                            <button type="button" class="btn btn-danger"
+                                                    id="photo_left_image_preview_clear"
                                                     style="display:none;">
                                                 <span class="fa fa-trash"></span>{{trans('label.form.trash')}}
                                             </button>
                                             <div class="btn btn-primary image-preview-input">
                                                 <span class="fa fa-folder-open"></span>
-                                                <span id="photo_left_image_preview_input_title">{{trans('label.form.browser')}}</span>
+                                                <span
+                                                    id="photo_left_image_preview_input_title">{{trans('label.form.browser')}}</span>
                                                 <input type="file" accept="image/*" name="photo_left"/>
                                             </div>
                                         </span>
@@ -247,15 +274,18 @@ $userType = $staff->user_type;
                                        class="control-label col-md-2">{{trans('label.accessary.photo_right')}}</label>
                                 <div class="col-md-10">
                                     <div class="input-group" id="photo_right_image_preview">
-                                        <input type="text" class="form-control" id="photo_right_image_preview_filename" placeholder="{{trans('label.common.choose')}} {{trans('label.accessary.photo_right')}}">
+                                        <input type="text" class="form-control" id="photo_right_image_preview_filename"
+                                               placeholder="{{trans('label.common.choose')}} {{trans('label.accessary.photo_right')}}">
                                         <span class="input-group-btn">
-                                            <button type="button" class="btn btn-danger" id="photo_right_image_preview_clear"
+                                            <button type="button" class="btn btn-danger"
+                                                    id="photo_right_image_preview_clear"
                                                     style="display:none;">
                                                 <span class="fa fa-trash"></span>{{trans('label.form.trash')}}
                                             </button>
                                             <div class="btn btn-primary image-preview-input">
                                                 <span class="fa fa-folder-open"></span>
-                                                <span id="photo_right_image_preview_input_title">{{trans('label.form.browser')}}</span>
+                                                <span
+                                                    id="photo_right_image_preview_input_title">{{trans('label.form.browser')}}</span>
                                                 <input type="file" accept="image/*" name="photo_right"/>
                                             </div>
                                         </span>
@@ -271,15 +301,18 @@ $userType = $staff->user_type;
                                        class="control-label col-md-2">{{trans('label.accessary.photo_inner')}}</label>
                                 <div class="col-md-10">
                                     <div class="input-group" id="photo_inner_image_preview">
-                                        <input type="text" class="form-control" id="photo_inner_image_preview_filename" placeholder="{{trans('label.common.choose')}} {{trans('label.accessary.photo_inner')}}">
+                                        <input type="text" class="form-control" id="photo_inner_image_preview_filename"
+                                               placeholder="{{trans('label.common.choose')}} {{trans('label.accessary.photo_inner')}}">
                                         <span class="input-group-btn">
-                                            <button type="button" class="btn btn-danger" id="photo_inner_image_preview_clear"
+                                            <button type="button" class="btn btn-danger"
+                                                    id="photo_inner_image_preview_clear"
                                                     style="display:none;">
                                                 <span class="fa fa-trash"></span>{{trans('label.form.trash')}}
                                             </button>
                                             <div class="btn btn-primary image-preview-input">
                                                 <span class="fa fa-folder-open"></span>
-                                                <span id="photo_inner_image_preview_input_title">{{trans('label.form.browser')}}</span>
+                                                <span
+                                                    id="photo_inner_image_preview_input_title">{{trans('label.form.browser')}}</span>
                                                 <input type="file" accept="image/*" name="photo_inner"/>
                                             </div>
                                         </span>
@@ -295,15 +328,18 @@ $userType = $staff->user_type;
                                        class="control-label col-md-2">{{trans('label.accessary.photo_outer')}}</label>
                                 <div class="col-md-10">
                                     <div class="input-group" id="photo_outer_image_preview">
-                                        <input type="text" class="form-control" id="photo_outer_image_preview_filename" placeholder="{{trans('label.common.choose')}} {{trans('label.accessary.photo_outer')}}">
+                                        <input type="text" class="form-control" id="photo_outer_image_preview_filename"
+                                               placeholder="{{trans('label.common.choose')}} {{trans('label.accessary.photo_outer')}}">
                                         <span class="input-group-btn">
-                                            <button type="button" class="btn btn-danger" id="photo_outer_image_preview_clear"
+                                            <button type="button" class="btn btn-danger"
+                                                    id="photo_outer_image_preview_clear"
                                                     style="display:none;">
                                                 <span class="fa fa-trash"></span>{{trans('label.form.trash')}}
                                             </button>
                                             <div class="btn btn-primary image-preview-input">
                                                 <span class="fa fa-folder-open"></span>
-                                                <span id="photo_outer_image_preview_input_title">{{trans('label.form.browser')}}</span>
+                                                <span
+                                                    id="photo_outer_image_preview_input_title">{{trans('label.form.browser')}}</span>
                                                 <input type="file" accept="image/*" name="photo_outer"/>
                                             </div>
                                         </span>

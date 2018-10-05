@@ -45,6 +45,7 @@ $(document).ready(function () {
                 $('#form-temp-price input[name="temp_price_id"]').val(result.data.temp_price_id);
                 $('#form-temp-price select[name="trademark_id"]').val(result.data.trademark_id);
                 $('#form-temp-price select[name="nation_id"]').val(result.data.nation_id);
+                $('#form-temp-price select[name="type"]').val(result.data.type);
                 $('#form-temp-price input[name="code"]').val(result.data.code);
                 $('#form-temp-price input[name="name_vi"]').val(result.data.name_vi);
                 $('#form-temp-price input[name="name_en"]').val(result.data.name_en);
@@ -275,6 +276,170 @@ $(document).ready(function () {
         }
     });
 
+    // Approve temp price
+    $('body').on('click', '#btn_approve_temp_price', function () {
+        let url = $(this).attr('href');
+        swal({
+            title: "Bạn có chắc chắn muốn duyệt không?",
+            text: "",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Đồng ý!",
+            cancelButtonText: "Hủy bỏ!",
+            closeOnConfirm: true,
+            closeOnCancel: true
+        }, function (isConfirm) {
+            if (isConfirm) {
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    success: function (result) {
+                        if (result.error) {
+                            swal('Có lỗi xảy ra, vui lòng liên hệ với quản trị hệ thống!', result.message, 'error');
+                        } else {
+                            swal("Phê duyệt thành công!", "", "success");
+                            setTimeout(function () {
+                                $('#temp_price').html(result.html);
+                                loadTableTempPrice();
+                            }, 1000);
+                        }
+                    },
+                    error: function (error) {
+                        swal('Có lỗi xảy ra, vui lòng liên hệ với quản trị hệ thống!', error.responseJSON.message, 'error');
+                    }
+                });
+            }
+        });
+    });
+
+    // Approve multi temp price
+    $('body').on('click', '#btn_approve_multi_temp_price', function () {
+        let idsArr = [];
+        $("#tbl_temp_price .checkbox:checked").each(function () {
+            idsArr.push($(this).attr('data-id'));
+        });
+
+        if (idsArr.length <= 0) {
+            swal("Vui lòng chọn ít nhất một bản ghi!", "", "error");
+        } else {
+            swal({
+                title: "Bạn có chắc chắn muốn duyệt không?",
+                text: "",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Đồng ý!",
+                cancelButtonText: "Hủy bỏ!",
+                closeOnConfirm: true,
+                closeOnCancel: true
+            }, function (isConfirm) {
+                if (isConfirm) {
+                    $.ajax({
+                        type: 'GET',
+                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                        url: '/admin/temp-price/approve',
+                        data: {'ids': idsArr},
+                        success: function (rs) {
+                            if (rs.error) {
+                                swal('Có lỗi xảy ra, vui lòng liên hệ với quản trị hệ thống!', rs.message, 'error');
+                            } else {
+                                swal("Phê duyệt thành công!", "", "success");
+                                setTimeout(function () {
+                                    $('#temp_price').html(rs.html);
+                                    loadTableTempPrice();
+                                }, 1000);
+                            }
+                        },
+                        error: function (error) {
+                            swal('Có lỗi xảy ra, vui lòng liên hệ với quản trị hệ thống!', error.responseJSON.message, 'error');
+                        }
+                    });
+                }
+            });
+        }
+    });
+
+    // Reject temp price
+    $('body').on('click', '#btn_reject_temp_price', function () {
+        let url = $(this).attr('href');
+        swal({
+            title: "Bạn có chắc chắn muốn từ chối không?",
+            text: "",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Đồng ý!",
+            cancelButtonText: "Hủy bỏ!",
+            closeOnConfirm: true,
+            closeOnCancel: true
+        }, function (isConfirm) {
+            if (isConfirm) {
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    success: function (result) {
+                        if (result.error) {
+                            swal('Có lỗi xảy ra, vui lòng liên hệ với quản trị hệ thống!', result.message, 'error');
+                        } else {
+                            swal("Từ chối thành công!", "", "success");
+                            setTimeout(function () {
+                                $('#temp_price').html(result.html);
+                                loadTableTempPrice();
+                            }, 1000);
+                        }
+                    },
+                    error: function (error) {
+                        swal('Có lỗi xảy ra, vui lòng liên hệ với quản trị hệ thống!', error.responseJSON.message, 'error');
+                    }
+                });
+            }
+        });
+    });
+
+    // Reject multi temp price
+    $('body').on('click', '#btn_reject_multi_temp_price', function () {
+        let idsArr = [];
+        $("#tbl_temp_price .checkbox:checked").each(function () {
+            idsArr.push($(this).attr('data-id'));
+        });
+
+        if (idsArr.length <= 0) {
+            swal("Vui lòng chọn ít nhất một bản ghi!", "", "error");
+        } else {
+            swal({
+                title: "Bạn có chắc chắn muốn từ chối không?",
+                text: "",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Đồng ý!",
+                cancelButtonText: "Hủy bỏ!",
+                closeOnConfirm: true,
+                closeOnCancel: true
+            }, function (isConfirm) {
+                if (isConfirm) {
+                    $.ajax({
+                        type: 'GET',
+                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                        url: '/admin/temp-price/reject',
+                        data: {'ids': idsArr},
+                        success: function (rs) {
+                            if (rs.error) {
+                                swal('Có lỗi xảy ra, vui lòng liên hệ với quản trị hệ thống!', rs.message, 'error');
+                            } else {
+                                swal("Từ chối thành công!", "", "success");
+                                setTimeout(function () {
+                                    $('#temp_price').html(rs.html);
+                                    loadTableTempPrice();
+                                }, 1000);
+                            }
+                        },
+                        error: function (error) {
+                            swal('Có lỗi xảy ra, vui lòng liên hệ với quản trị hệ thống!', error.responseJSON.message, 'error');
+                        }
+                    });
+                }
+            });
+        }
+    });
+
     onloadPhoto('form-temp-price', 'photo_top');
     onloadPhoto('form-temp-price', 'photo_bottom');
     onloadPhoto('form-temp-price', 'photo_left');
@@ -294,6 +459,7 @@ function resetTempPriceForm() {
     $('#form-temp-price #temp_price_id').val("");
     $('#form-temp-price #trademark_id').val("");
     $('#form-temp-price #nation_id').val("");
+    $('#form-temp-price #type').val("");
     $('#form-temp-price #code').val("");
     $('#form-temp-price #name_vi').val("");
     $('#form-temp-price #name_en').val("");

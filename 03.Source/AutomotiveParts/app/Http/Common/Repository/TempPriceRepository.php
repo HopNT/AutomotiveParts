@@ -14,4 +14,8 @@ interface TempPriceRepository
     function getAllByProductProvider($userId);
 
     function deleteMulti($ids);
+
+    function approve($ids);
+
+    function reject($ids);
 }

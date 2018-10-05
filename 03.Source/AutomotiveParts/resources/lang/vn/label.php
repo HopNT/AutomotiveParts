@@ -9,6 +9,9 @@ return [
     'app_name' => 'Automotive Parts',
     'homepage' => 'Trang chủ',
     'accessary' => [
+        'type' => 'Loại phụ tùng',
+        'oem' => 'Phụ tùng OEM',
+        'options' => 'Phụ tùng thay thế ngoài',
         'code' => 'Mã phụ tùng',
         'name' => 'Tên phụ tùng',
         'trademark' => 'Thương hiệu',

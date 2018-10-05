@@ -92,14 +92,14 @@ $can_reject_temp_price = $staff->can_view('temp-price-reject');
                             <td class="text-right">{{$tempPrice->garage_price ? number_format($tempPrice->garage_price) : ''}}</td>
                             <td class="text-right">{{$tempPrice->garage_price ? number_format($tempPrice->retail_price) : ''}}</td>
                             <td class="text-right">{{$tempPrice->quantity}}</td>
-                            <td>{{ \Carbon\Carbon::parse($tempPrice->created_at)->format('d/m/Y H:m:s') }}</td>
+                            <td>{{ date('d/m/Y H:i:s', strtotime($tempPrice->created_at)) }}</td>
                             @if($tempPrice->status == 2)
-                                <td>{{ \Carbon\Carbon::parse($tempPrice->updated_at)->format('d/m/Y H:m:s') }}</td>
+                                <td>{{ date('d/m/Y H:i:s', strtotime($tempPrice->updated_at)) }}</td>
                             @else
                                 <td></td>
                             @endif
                             @if($tempPrice->status == 3)
-                                <td>{{ \Carbon\Carbon::parse($tempPrice->updated_at)->format('d/m/Y H:m:s') }}</td>
+                                <td>{{ date('d/m/Y H:i:s', strtotime($tempPrice->updated_at)) }}</td>
                             @else
                                 <td></td>
                             @endif
@@ -125,7 +125,7 @@ $can_reject_temp_price = $staff->can_view('temp-price-reject');
                                 @endif
                                 @if($userType == 0 && $can_approve_temp_price)
                                     <button id="btn_approve_temp_price"
-                                            href="{{route('temp-price-edit', ['ids[]' => $tempPrice->temp_price_id])}}"
+                                            href="{{route('temp-price-approve', ['ids[]' => $tempPrice->temp_price_id])}}"
                                             class="btn btn-info btn-sm fa fa-check"></button>
                                 @endif
                                 @if($userType == 0 && $can_reject_temp_price)

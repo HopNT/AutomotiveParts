@@ -7,6 +7,7 @@
  */
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Common\Entities\Accessary;
 use App\Http\Common\Entities\TempPrice;
 use App\Http\Common\Enum\GlobalEnum;
 use App\Http\Common\Repository\AccessaryRepository;
@@ -306,6 +307,8 @@ class TempPriceManagementController extends BackendController
                     $tempPrice = array_add($tempPrice, 'photo_outer', $pathPhotoOuter);
                     $tempPrice = array_add($tempPrice, 'photo_outer_name', $request->photo_outer->getClientOriginalName());
                 }
+                $tempPrice = array_add($tempPrice, 'created_at', date('Y-m-d H:i:s'));
+                $tempPrice = array_add($tempPrice, 'updated_at', date('Y-m-d H:i:s'));
                 $tempPrice = array_add($tempPrice, 'status', GlobalEnum::STATUS_PENDING);
                 $tempPrice = array_add($tempPrice, 'user_id', $user->user_id);
                 $this->tempPriceRepository->persist($tempPrice);
@@ -341,12 +344,93 @@ class TempPriceManagementController extends BackendController
 
     public function approve(Request $request)
     {
-
+        $ids = $request->ids;
+        foreach ($ids as $key => $id) {
+            $attach = false;
+            $temp = $this->tempPriceRepository->find($id);
+            $temp->status = GlobalEnum::STATUS_APPROVE;
+            $temp->updated_at = now();
+            $this->tempPriceRepository->merge($id, $temp->toArray());
+            $accessary = $this->accessaryRepository->findByCode($temp->code);
+            if (empty($accessary->all()) || $temp->code != $accessary->all()[0]->code) {
+                $accessary = new Accessary();
+                $accessary->trademark_id = $temp->trademark_id;
+                $accessary->nation_id = $temp->nation_id;
+                $accessary->type = $temp->type;
+                $accessary->code = $temp->code;
+                $accessary->name_en = $temp->name_en;
+                $accessary->name_vi = $temp->name_vi;
+                $accessary->acronym_name = $temp->acronym_name;
+                $accessary->unsigned_name = $temp->unsigned_name;
+                $accessary->photo_top = $temp->photo_top;
+                $accessary->photo_top_name = $temp->photo_top_name;
+                $accessary->photo_bottom = $temp->photo_bottom;
+                $accessary->photo_bottom_name = $temp->photo_bottom_name;
+                $accessary->photo_left = $temp->photo_left;
+                $accessary->photo_left_name = $temp->photo_left_name;
+                $accessary->photo_right = $temp->photo_right;
+                $accessary->photo_right_name = $temp->photo_right_name;
+                $accessary->photo_inner = $temp->photo_inner;
+                $accessary->photo_inner_name = $temp->photo_inner_name;
+                $accessary->photo_outer = $temp->photo_outer;
+                $accessary->photo_outer_name = $temp->photo_outer_name;
+                $accessary->status = GlobalEnum::STATUS_ACTIVE;
+                $accessary->created_at = now();
+                $accessary->updated_at = now();
+                $accessary = $this->accessaryRepository->persist($accessary->toArray());
+                $attach = true;
+            }
+            $user = $this->userRepository->find($temp->user_id);
+            if (!empty($user) && (!empty($temp->garage_price) || !empty($temp->retail_price) || !empty($temp->quantity)) ) {
+                if ($attach) {
+                    $user->accessarys()->attach($accessary->accessary_id, ['garage_price' => $temp->garage_price, 'retail_price' => $temp->retail_price, 'quantity' => $temp->quantity, 'status' => GlobalEnum::STATUS_ACTIVE, 'created_at' => now(), 'updated_at' => now()]);
+                } else {
+                    $user->accessarys()->attach($accessary->all()[0]->accessary_id, ['garage_price' => $temp->garage_price, 'retail_price' => $temp->retail_price, 'quantity' => $temp->quantity, 'status' => GlobalEnum::STATUS_ACTIVE, 'created_at' => now(), 'updated_at' => now()]);
+                }
+            }
+        }
+        // Get List temp price
+        $user = Auth::guard('admin')->user();
+        $userType = $user->user_type;
+        $listTempPrice = null;
+        if ($userType == GlobalEnum::ADMIN)
+        {
+            $listTempPrice = $this->tempPriceRepository->getAllByAdmin();
+        }
+        if ($userType == GlobalEnum::PROVIDER)
+        {
+            $listTempPrice = $this->tempPriceRepository->getAllByProductProvider($user->user_id);
+        }
+        $view = view('admin.temp_price_management.elements.list_data_temp_price')
+            ->with('listTempPrice', $listTempPrice)->render();
+        return [
+            'error' => false,
+            'html' => $view
+        ];
     }
 
     public function reject(Request $request)
     {
-
+        $ids = $request->ids;
+        $this->tempPriceRepository->reject($ids);
+        // Get List temp price
+        $user = Auth::guard('admin')->user();
+        $userType = $user->user_type;
+        $listTempPrice = null;
+        if ($userType == GlobalEnum::ADMIN)
+        {
+            $listTempPrice = $this->tempPriceRepository->getAllByAdmin();
+        }
+        if ($userType == GlobalEnum::PROVIDER)
+        {
+            $listTempPrice = $this->tempPriceRepository->getAllByProductProvider($user->user_id);
+        }
+        $view = view('admin.temp_price_management.elements.list_data_temp_price')
+            ->with('listTempPrice', $listTempPrice)->render();
+        return [
+            'error' => false,
+            'html' => $view
+        ];
     }
 
     public function delete(Request $request)

@@ -34,4 +34,12 @@ class AccessaryRepositoryImpl extends GenericRepositoryImpl implements Accessary
             ->get();
         return $listAccessary;
     }
+
+    public function findByCode($code)
+    {
+        return DB::table('tbl_accessary')
+            ->where('code', '=', $code)
+            ->where('status', '=', GlobalEnum::STATUS_ACTIVE)
+            ->get();
+    }
 }

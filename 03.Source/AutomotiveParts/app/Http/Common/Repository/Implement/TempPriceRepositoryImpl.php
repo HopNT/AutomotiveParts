@@ -22,7 +22,7 @@ class TempPriceRepositoryImpl extends GenericRepositoryImpl implements TempPrice
         return TempPrice::class;
     }
 
-    function getAllByAdmin()
+    public function getAllByAdmin()
     {
         return DB::table('tbl_temp_price as t')
             ->join('tbl_user as u', 't.user_id', '=', 'u.user_id')
@@ -32,7 +32,7 @@ class TempPriceRepositoryImpl extends GenericRepositoryImpl implements TempPrice
             ->get();
     }
 
-    function getAllByProductProvider($userId)
+    public function getAllByProductProvider($userId)
     {
         return DB::table('tbl_temp_price as t')
             ->join('tbl_user as u', 't.user_id', '=', 'u.user_id')
@@ -42,10 +42,24 @@ class TempPriceRepositoryImpl extends GenericRepositoryImpl implements TempPrice
             ->get();
     }
 
-    function deleteMulti($ids)
+    public function deleteMulti($ids)
     {
         DB::table('tbl_temp_price')
             ->whereIn('temp_price_id', $ids)
             ->delete();
+    }
+
+    public function approve($ids)
+    {
+        DB::table('tbl_temp_price')
+            ->whereIn('temp_price_id', $ids)
+            ->update(['status' => GlobalEnum::STATUS_APPROVE, 'updated_at' => now()]);
+    }
+
+    function reject($ids)
+    {
+        DB::table('tbl_temp_price')
+            ->whereIn('temp_price_id', $ids)
+            ->update(['status' => GlobalEnum::STATUS_REJECT, 'updated_at' => now()]);
     }
 }

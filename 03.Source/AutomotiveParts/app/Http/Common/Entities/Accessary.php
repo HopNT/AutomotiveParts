@@ -14,7 +14,29 @@ class Accessary extends BaseModel {
 
     protected $primaryKey = 'accessary_id';
 
-    protected $fillable = [];
+    protected $fillable = [
+        'trademark_id',
+        'nation_id',
+        'type',
+        'code',
+        'name_en',
+        'name_vi',
+        'acronym_name',
+        'unsigned_name',
+        'photo_top',
+        'photo_top_name',
+        'photo_bottom',
+        'photo_bottom_name',
+        'photo_left',
+        'photo_left_name',
+        'photo_right',
+        'photo_right_name',
+        'photo_inner',
+        'photo_inner_name',
+        'photo_outer',
+        'photo_outer_name',
+        'status'
+    ];
 
     public function catalogAccessary() {
         return $this->belongsTo(CatalogAccessary::class, 'catalog_accessary_id');

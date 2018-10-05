@@ -10,4 +10,6 @@ namespace App\Http\Common\Repository;
 interface AccessaryRepository
 {
     function searchByText($text);
+
+    function findByCode($code);
 }

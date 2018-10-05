@@ -15,6 +15,7 @@ class TempPrice extends BaseModel
         'trademark_id',
         'nation_id',
         'user_id',
+        'type',
         'code',
         'name_en',
         'name_vi',
