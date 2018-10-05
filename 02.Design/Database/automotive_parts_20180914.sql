@@ -495,3 +495,17 @@ ALTER TABLE `tbl_temp_price`
 	ADD COLUMN `comment` INT(11) NULL DEFAULT NULL AFTER `quantity`,
 	CHANGE COLUMN `status` `status` TEXT NULL DEFAULT NULL AFTER `comment`;
 
+ALTER TABLE `tbl_temp_price`
+	ADD COLUMN `type` INT(1) NULL DEFAULT NULL AFTER `user_id`;
+
+ALTER TABLE `tbl_accessary`
+	ADD COLUMN `type` INT(1) NULL DEFAULT NULL AFTER `nation_id`;
+
+ALTER TABLE `tbl_accessary`
+	ADD COLUMN `photo_top_name` VARCHAR(500) NULL DEFAULT NULL AFTER `photo_top`,
+	ADD COLUMN `photo_bottom_name` VARCHAR(500) NULL DEFAULT NULL AFTER `photo_bottom`,
+	ADD COLUMN `photo_left_name` VARCHAR(500) NULL DEFAULT NULL AFTER `photo_left`,
+	ADD COLUMN `photo_right_name` VARCHAR(500) NULL DEFAULT NULL AFTER `photo_right`,
+	ADD COLUMN `photo_inner_name` VARCHAR(500) NULL DEFAULT NULL AFTER `photo_inner`,
+	ADD COLUMN `photo_outer_name` VARCHAR(500) NULL DEFAULT NULL AFTER `photo_outer`;
+
