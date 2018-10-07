@@ -85,7 +85,9 @@ $can_reject_temp_price = $staff->can_view('temp-price-reject');
                                 <td class="text-center">{{$key + 1}}</td>
                             @endif
                             @if($userType == 0)
-                                <td><a href="#" id="link_approve_temp_price">{{$tempPrice->user}}</a></td>
+                                <td>
+                                    <button id="btn_update_temp_price" class="btn btn-link" href="{{route('temp-price-edit', ['id' => $tempPrice->temp_price_id])}}">{{$tempPrice->user}}</button>
+                                </td>
                             @endif
                             <td>{{$tempPrice->code}}</td>
                             <td>{{$tempPrice->name_vi}}</td>

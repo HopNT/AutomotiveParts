@@ -72,9 +72,10 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('trademark/save', 'Admin\TradeMarkManagementController@save')->name('trademark-save');
     Route::get('trademark/getAll', 'Admin\TradeMarkManagementController@getAll')->name('trademark-get-all');
 
-    // Accessary
-    Route::get('accessary/searchByText', 'Admin\AccessaryController@searchByText')->name('accessary-search-by-text');
-    Route::get('accessary/getAll', 'Admin\AccessaryController@getAll')->name('accessary-get-all');
+    // Accessary management
+    Route::get('accessary-management', 'Admin\AccessaryManagementController@index')->name('accessary-management');
+    Route::get('accessary/searchByText', 'Admin\AccessaryManagementController@searchByText')->name('accessary-search-by-text');
+    Route::get('accessary/getAll', 'Admin\AccessaryManagementController@getAll')->name('accessary-get-all');
 
     // Price accessary management
     Route::get('price-management', 'Admin\PriceManagementController@index')->name('price-management');

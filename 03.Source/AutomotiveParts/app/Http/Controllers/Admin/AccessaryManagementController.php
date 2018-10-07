@@ -11,17 +11,22 @@ use App\Http\Common\Enum\GlobalEnum;
 use App\Http\Common\Repository\AccessaryRepository;
 use Illuminate\Http\Request;
 
-class AccessaryController extends BackendController
+class AccessaryManagementController extends BackendController
 {
     protected $accessaryRepository;
 
     /**
-     * AccessaryController constructor.
+     * AccessaryManagementController constructor.
      * @param $accessaryRepository
      */
     public function __construct(AccessaryRepository $accessaryRepository)
     {
         $this->accessaryRepository = $accessaryRepository;
+    }
+
+    public function index()
+    {
+
     }
 
     public function searchByText(Request $request)

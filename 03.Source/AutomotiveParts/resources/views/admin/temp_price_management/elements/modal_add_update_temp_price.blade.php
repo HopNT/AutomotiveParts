@@ -22,7 +22,7 @@ $userType = $staff->user_type;
                     <h5 class="modal-title" style="display: none;" id="title-update"><i
                             class="fa fa-edit"></i>&nbsp;&nbsp;{{trans('label.form.update')}}</h5>
                 @else
-                    <h5 class="modal-title" id="title-add"><i
+                    <h5 class="modal-title" id="title-approve"><i
                             class="fa fa-check"></i>&nbsp;&nbsp;{{trans('label.form.approve')}}</h5>
                 @endif
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -61,7 +61,7 @@ $userType = $staff->user_type;
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label for="trademark"
-                                       class="control-label col-md-4">{{trans('label.accessary.trademark')}}</label>
+                                       class="control-label col-md-4">{{trans('accessary_management')}}</label>
                                 <div class="col-md-8">
                                     <div id="select-trademark">
                                         <select class="form-control" name="trademark_id" id="trademark_id">
@@ -271,7 +271,7 @@ $userType = $staff->user_type;
                         <div class="col-md-12">
                             <div class="form-group row">
                                 <label for="photo_right"
-                                       class="control-label col-md-2">{{trans('label.accessary.photo_right')}}</label>
+                                       class="control-label col-md-2">{{trans('accessary_management')}}</label>
                                 <div class="col-md-10">
                                     <div class="input-group" id="photo_right_image_preview">
                                         <input type="text" class="form-control" id="photo_right_image_preview_filename"
@@ -360,9 +360,9 @@ $userType = $staff->user_type;
                 @if($userType == 0)
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btn_close_temp_price"><i
                             class="fa fa-close"></i>{{trans('label.button.cancel')}}</button>
-                    <button type="button" class="btn btn-danger" id="btn_reject_temp_price"><i
+                    <button type="button" class="btn btn-danger" id="btn_modal_reject_temp_price"><i
                             class="fa fa-ban"></i>{{trans('label.button.reject')}}</button>
-                    <button type="button" class="btn btn-primary" id="btn_approve_temp_price"><i
+                    <button type="button" class="btn btn-primary" id="btn_modal_approve_temp_price"><i
                             class="fa fa-check"></i>{{trans('label.button.approve')}}</button>
                 @endif
             </div>
