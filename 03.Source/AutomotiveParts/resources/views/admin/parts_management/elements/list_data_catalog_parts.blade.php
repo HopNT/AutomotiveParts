@@ -52,7 +52,7 @@ $can_delete_catalog_parts = $staff->can_view('catalog-parts-delete');
                                 <td class="text-center">
                                     <div class="animated-checkbox">
                                         <label>
-                                            <input type="checkbox" class="checkbox"
+                                            <input type="checkbox" class="checkbox" @if($catalogParts->status == 0) disabled @endif
                                                    data-id="{{$catalogParts->catalog_parts_id}}"><span class="label-text"></span>
                                         </label>
                                     </div>
@@ -61,7 +61,7 @@ $can_delete_catalog_parts = $staff->can_view('catalog-parts-delete');
                                 <td class="text-center">{{$key + 1}}</td>
                             @endif
                             <td>{{$catalogParts->name}}</td>
-                            <td>{{$catalogParts->status ? trans('label.common.status_active') : trans('label.common.status_inactive')}}</td>
+                            <td>{{$catalogParts->status == 1 ? trans('label.common.status_active') : trans('label.common.status_inactive')}}</td>
                             <td class="text-center">
                                 @if($can_edit_catalog_parts)
                                     <button id="btn_update_catalog_parts"
@@ -71,7 +71,7 @@ $can_delete_catalog_parts = $staff->can_view('catalog-parts-delete');
                                 @if($can_delete_catalog_parts)
                                     <button id="btn_delete_catalog_parts"
                                             href="{{route('catalog-parts-delete', ['ids[]' => $catalogParts->catalog_parts_id])}}"
-                                            class="btn btn-danger btn-sm fa fa-trash"></button>
+                                            class="btn btn-danger btn-sm fa fa-trash" @if($catalogParts->status == 0) disabled @endif></button>
                                 @endif
                             </td>
                         </tr>

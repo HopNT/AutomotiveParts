@@ -10,6 +10,7 @@ return [
     'homepage' => 'Trang chủ',
     'accessary' => [
         'type' => 'Loại phụ tùng',
+        'genuine' => 'Phụ tùng chính hãng',
         'oem' => 'Phụ tùng OEM',
         'options' => 'Phụ tùng thay thế ngoài',
         'code' => 'Mã phụ tùng',
@@ -22,7 +23,9 @@ return [
         'photo_left' => 'Ảnh chụp trái',
         'photo_right' => 'Ảnh chụp phải',
         'photo_inner' => 'Ảnh chụp trong',
-        'photo_outer' => 'Ảnh chụp ngoài'
+        'photo_outer' => 'Ảnh chụp ngoài',
+        'accessary_link' => 'Phụ tùng liên kết',
+        'prioritize' => 'Ưu tiên'
     ],
     'car' => [
         'management' => 'Quản lý thông tin xe',
@@ -47,6 +50,7 @@ return [
         'name' => 'Tên dòng xe'
     ],
     'catalog_parts' => [
+        'parent_id' => 'Nhóm cha',
         'name' => 'Tên nhóm bộ phận xe'
     ],
     'parts' => [
@@ -79,6 +83,7 @@ return [
         'name' => 'Tên thương hiệu'
     ],
     'common' => [
+        'icon' => 'Icon',
         'user' => 'Nhà cung cấp',
         'quantity' => 'Số lượng hiện có',
         'garage_price' => 'Giá bán garage',
@@ -151,7 +156,8 @@ return [
         'trademark-management' => 'Quản lý thông tin thương hiệu',
         'parts-management'=> 'Quản lý thông tin bộ phận xe',
         'price-management' => 'Quản lý giá phụ tùng',
-        'temp-price-management' => 'Quản lý yêu cầu thêm phụ tùng'
+        'temp-price-management' => 'Quản lý yêu cầu thêm phụ tùng',
+        'accessary-management' => 'Quản lý thông tin phụ tùng'
     ],
     'form' => [
         'create' => 'Thêm mới',

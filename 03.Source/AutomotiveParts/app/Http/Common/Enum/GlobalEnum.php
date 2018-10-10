@@ -25,5 +25,6 @@ class GlobalEnum
     const FEMALE = 0;
 
     const IMAGE = 'images';
+    const ICON = 'icon';
     const DOC = 'documentations';
 }

@@ -33,6 +33,7 @@ $(document).ready(function () {
         resetCarBrandForm();
         $('#modal_add_update_car_brand #title-add').css('display', 'none');
         $('#modal_add_update_car_brand #title-update').css('display', 'block');
+        $('#modal_add_update_car_brand input[name="code_brand"]').prop('disabled', true);
         let url = $(this).attr('href');
         $.ajax({
             type: 'GET',
@@ -45,6 +46,10 @@ $(document).ready(function () {
                 $('#nation_id').val(carBrand['nation_id']);
                 $("#form-car-brand input[name='name']").val(carBrand['name']);
                 $("#description").val(carBrand['description']);
+                if (carBrand.status == 0) {
+                    $('#form-car-brand #status').css('display', '');
+                    $('#form-car-brand select[name="status"]').val(carBrand.status);
+                }
                 $('#modal_add_update_car_brand').modal();
             }
         });
@@ -82,8 +87,12 @@ $(document).ready(function () {
                         } else {
                             showMessage('Thêm mới thành công', 'success');
                         }
-                        $('#car_brand').html(result.html);
+                        $('#car_brand').html(result.carBrand);
+                        $('#catalog_car').html(result.catalogCar);
+                        $('#car').html(result.car);
                         loadTableCarBrand();
+                        loadTableCatalogCar();
+                        loadTableCar();
                     }, 1000);
                 }
             },
@@ -122,8 +131,12 @@ $(document).ready(function () {
                         } else {
                             swal("Xóa thành công!", "", "success");
                             setTimeout(function () {
-                                $('#car_brand').html(rs.html);
+                                $('#car_brand').html(rs.carBrand);
+                                $('#catalog_car').html(rs.catalogCar);
+                                $('#car').html(rs.car);
                                 loadTableCarBrand();
+                                loadTableCatalogCar();
+                                loadTableCar();
                             }, 1000);
                         }
                     },
@@ -168,8 +181,12 @@ $(document).ready(function () {
                             } else {
                                 swal("Xóa thành công!", "", "success");
                                 setTimeout(function () {
-                                    $('#car_brand').html(rs.html);
+                                    $('#car_brand').html(rs.carBrand);
+                                    $('#catalog_car').html(rs.catalogCar);
+                                    $('#car').html(rs.car);
                                     loadTableCarBrand();
+                                    loadTableCatalogCar();
+                                    loadTableCar();
                                 }, 1000);
                             }
                         },

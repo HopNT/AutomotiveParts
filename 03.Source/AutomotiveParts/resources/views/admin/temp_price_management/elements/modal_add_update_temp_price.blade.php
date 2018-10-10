@@ -61,7 +61,7 @@ $userType = $staff->user_type;
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label for="trademark"
-                                       class="control-label col-md-4">{{trans('accessary_management')}}</label>
+                                       class="control-label col-md-4">{{trans('label.accessary.trademark')}}</label>
                                 <div class="col-md-8">
                                     <div id="select-trademark">
                                         <select class="form-control" name="trademark_id" id="trademark_id">
@@ -96,7 +96,7 @@ $userType = $staff->user_type;
                                 <label for="code"
                                        class="control-label required col-md-4">{{trans('label.accessary.code')}}</label>
                                 <div class="col-md-8">
-                                    <input class="form-control" name="code" id="code"
+                                    <input class="form-control" name="code" id="code" maxlength="20"
                                            placeholder="{{trans('label.common.input')}} {{trans('label.accessary.code')}}">
                                     <span class="text-danger" id="code_error"></span>
                                 </div>
@@ -107,7 +107,7 @@ $userType = $staff->user_type;
                                 <label for="name_vi"
                                        class="control-label required col-md-4">{{trans('label.nation.name_vi')}}</label>
                                 <div class="col-md-8">
-                                    <input class="form-control" name="name_vi" id="name_vi"
+                                    <input class="form-control" name="name_vi" id="name_vi" maxlength="100"
                                            placeholder="{{trans('label.common.input')}} {{trans('label.nation.name_vi')}}">
                                     <span class="text-danger" id="name_vi_error"></span>
                                 </div>
@@ -120,7 +120,7 @@ $userType = $staff->user_type;
                                 <label for="name_en"
                                        class="control-label col-md-4">{{trans('label.nation.name_en')}}</label>
                                 <div class="col-md-8">
-                                    <input class="form-control" name="name_en" id="name_en"
+                                    <input class="form-control" name="name_en" id="name_en" maxlength="100"
                                            placeholder="{{trans('label.common.input')}} {{trans('label.nation.name_en')}}">
                                 </div>
                             </div>
@@ -130,7 +130,7 @@ $userType = $staff->user_type;
                                 <label for="acronym_name"
                                        class="control-label col-md-4">{{trans('label.accessary.acronym_name')}}</label>
                                 <div class="col-md-8">
-                                    <input class="form-control" name="acronym_name" id="acronym_name"
+                                    <input class="form-control" name="acronym_name" id="acronym_name" maxlength="100"
                                            placeholder="{{trans('label.common.input')}} {{trans('label.accessary.acronym_name')}}">
                                 </div>
                             </div>
@@ -142,7 +142,7 @@ $userType = $staff->user_type;
                                 <label for="unsigned_name"
                                        class="control-label col-md-4">{{trans('label.accessary.unsigned_name')}}</label>
                                 <div class="col-md-8">
-                                    <input class="form-control" name="unsigned_name" id="unsigned_name"
+                                    <input class="form-control" name="unsigned_name" id="unsigned_name" maxlength="100"
                                            placeholder="{{trans('label.common.input')}} {{trans('label.accessary.unsigned_name')}}">
                                 </div>
                             </div>
@@ -152,7 +152,7 @@ $userType = $staff->user_type;
                                 <label for="quantity"
                                        class="control-label col-md-4">{{trans('label.common.quantity')}}</label>
                                 <div class="col-md-8">
-                                    <input class="form-control" type="number" name="quantity"
+                                    <input class="form-control" type="text" name="quantity" maxlength="11"
                                            placeholder="{{trans('label.common.input')}} {{trans('label.common.quantity')}}">
                                 </div>
                             </div>
@@ -164,7 +164,7 @@ $userType = $staff->user_type;
                                 <label for="garage_price"
                                        class="control-label col-md-4">{{trans('label.common.garage_price')}}</label>
                                 <div class="col-md-8 input-group">
-                                    <input class="form-control" type="number" name="garage_price"
+                                    <input class="form-control" type="text" name="garage_price" maxlength="15"
                                            placeholder="{{trans('label.common.input')}} {{trans('label.common.garage_price')}}">
                                     <div class="input-group-append">
                                         <span class="input-group-text" id="basic-addon2">VND</span>
@@ -177,7 +177,7 @@ $userType = $staff->user_type;
                                 <label for="retail_price"
                                        class="control-label col-md-4">{{trans('label.common.retail_price')}}</label>
                                 <div class="col-md-8 input-group">
-                                    <input class="form-control" type="number" name="retail_price"
+                                    <input class="form-control" type="text" name="retail_price" maxlength="15"
                                            placeholder="{{trans('label.common.input')}} {{trans('label.common.retail_price')}}">
                                     <div class="input-group-append">
                                         <span class="input-group-text" id="basic-addon2">VND</span>
@@ -271,7 +271,7 @@ $userType = $staff->user_type;
                         <div class="col-md-12">
                             <div class="form-group row">
                                 <label for="photo_right"
-                                       class="control-label col-md-2">{{trans('accessary_management')}}</label>
+                                       class="control-label col-md-2">{{trans('label.accessary.photo_right')}}</label>
                                 <div class="col-md-10">
                                     <div class="input-group" id="photo_right_image_preview">
                                         <input type="text" class="form-control" id="photo_right_image_preview_filename"

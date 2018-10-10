@@ -47,7 +47,7 @@
                         <label for="name"
                                class="control-label required col-md-3">{{trans('label.catalog_car.name')}}</label>
                         <div class="col-md-9">
-                            <input type="text" class="form-control" name="name"
+                            <input type="text" class="form-control" name="name" maxlength="255"
                                    placeholder="{{trans('label.catalog_car.name')}}">
                             <span class="text-danger" id="name_error"></span>
                         </div>
@@ -59,6 +59,15 @@
                             <textarea id="description" class="form-control" rows="4"
                                       placeholder="{{trans('label.common.input')}} {{trans('label.common.description')}}"
                                       name="description"></textarea>
+                        </div>
+                    </div>
+                    <div id="status" class="form-group row">
+                        <label class="control-label col-md-3">{{trans('label.common.status')}}</label>
+                        <div class="col-md-9">
+                            <select class="form-control" name="status">
+                                <option value="0">{{trans('label.common.status_inactive')}}</option>
+                                <option value="1">{{trans('label.common.status_active')}}</option>
+                            </select>
                         </div>
                     </div>
                 </form>

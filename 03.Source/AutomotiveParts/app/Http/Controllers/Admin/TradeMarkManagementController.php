@@ -28,7 +28,7 @@ class TradeMarkManagementController extends BackendController
 
     public function index()
     {
-        $listTradeMark = $this->tradeMarkRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
+        $listTradeMark = $this->tradeMarkRepository->getAll();
         return view('admin.trademark_management.trademark_management')
             -> with('listTradeMark', $listTradeMark);
     }
@@ -71,7 +71,7 @@ class TradeMarkManagementController extends BackendController
         }
 
         // Get List nation
-        $listTradeMark = $this->tradeMarkRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
+        $listTradeMark = $this->tradeMarkRepository->getAll();
         $view = view('admin.trademark_management.elements.list_data_trademark')
             ->with('listTradeMark', $listTradeMark)->render();
         return [
@@ -95,7 +95,7 @@ class TradeMarkManagementController extends BackendController
         }
 
         // Get List trademark
-        $listTradeMark = $this->tradeMarkRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
+        $listTradeMark = $this->tradeMarkRepository->getAll();
         $view = view('admin.trademark_management.elements.list_data_trademark')
             ->with('listTradeMark', $listTradeMark)->render();
         return [

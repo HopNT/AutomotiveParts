@@ -58,7 +58,7 @@ class PriceManagementController extends BackendController
             // Update
             if (isset($request->user_accessary_id))
             {
-                $user->accessarys()->sync([$price['accessary_id'] => ['garage_price' => $price['garage_price'], 'retail_price' => $price['retail_price'], 'quantity' => $price['quantity'], 'updated_at' => now()]], false);
+                $user->accessarys()->sync([$price['accessary_id'] => ['garage_price' => $price['garage_price'], 'retail_price' => $price['retail_price'], 'quantity' => $price['quantity'], 'status' => $price['status'], 'updated_at' => now()]], false);
             }
             else // Insert
             {
@@ -74,6 +74,7 @@ class PriceManagementController extends BackendController
         }
         catch (\Exception $e)
         {
+            dd($e->getMessage());
             return [
                 'system_error' => true,
                 'message_error' => $e->getMessage()

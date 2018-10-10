@@ -16,6 +16,8 @@ function resetTrademarkForm() {
     $('#form-trademark #code_error').html("");
     $('#form-trademark input[name="name"]').val("");
     $('#form-trademark textarea[name="description"]').val("");
+    $('#form-trademark #status').css('display', 'none');
+    $('#form-trademark select[name="status"]').val("");
 }
 
 $(document).ready(function () {
@@ -63,6 +65,10 @@ $(document).ready(function () {
                 $("#form-trademark input[name='code']").val(trademark['code']);
                 $("#form-trademark input[name='name']").val(trademark['name']);
                 $("#form-trademark textarea[name='description']").val(trademark['description']);
+                if (trademark.status == 0) {
+                    $('#form-trademark #status').css('display', '');
+                    $('#form-trademark select[name="status"]').val(trademark.status);
+                }
                 $('#modal_add_update_trademark').modal();
             }
         });

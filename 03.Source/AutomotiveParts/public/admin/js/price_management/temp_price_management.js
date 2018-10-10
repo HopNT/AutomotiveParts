@@ -1,6 +1,18 @@
 $(document).ready(function () {
     loadTableTempPrice();
 
+    $('body').on('input', '#form-temp-price input[name="garage_price"]', function (e) {
+        e.target.value = e.target.value.replace(/[^0-9]/g,'');
+    });
+
+    $('body').on('input', '#form-temp-price input[name="retail_price"]', function (e) {
+        e.target.value = e.target.value.replace(/[^0-9]/g,'');
+    });
+
+    $('body').on('input', '#form-temp-price input[name="quantity"]', function (e) {
+        e.target.value = e.target.value.replace(/[^0-9]/g,'');
+    });
+
     // Check all row
     $('body').on('click', '#tbl_temp_price #check_all', function (e) {
         if ($(this).is(':checked', true)) {

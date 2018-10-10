@@ -17,6 +17,8 @@ function resetNationForm() {
     $('#form-nation input[name="name_vi"]').val("");
     $('#form-nation input[name="name_en"]').val("");
     $('#form-nation textarea[name="description"]').val("");
+    $('#form-nation #status').css('display', 'none');
+    $('#form-nation select[name="status"]').val("");
 }
 
 $(document).ready(function () {
@@ -64,6 +66,10 @@ $(document).ready(function () {
                 $("#form-nation input[name='name_vi']").val(nation['name_vi']);
                 $("#form-nation input[name='name_en']").val(nation['name_en']);
                 $("#form-nation textarea[name='description']").val(nation['description']);
+                if (nation.status == 0) {
+                    $('#form-nation #status').css('display', '');
+                    $('#form-nation select[name="status"]').val(nation.status);
+                }
                 $('#modal_add_update_nation').modal();
             }
         });

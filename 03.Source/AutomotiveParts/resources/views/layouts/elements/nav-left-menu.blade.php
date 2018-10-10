@@ -12,6 +12,9 @@
         {{-- Trang chủ --}}
         <li><a class="app-menu__item active" href="index.html"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">{{trans('label.homepage')}}</span></a></li>
 
+        {{-- Quản lý thông tin phụ tùng --}}
+        <li><a class="app-menu__item" href="{{route('accessary-management')}}"><i class="app-menu__icon fa fa-accessible-icon"></i><span class="app-menu__label">{{trans('label.route.accessary-management')}}</span></a></li>
+
         {{-- Quản lý thông tin xe --}}
         <li><a class="app-menu__item" href="{{route('car-management')}}"><i class="app-menu__icon fa fa-car"></i><span class="app-menu__label">{{trans('label.car.management')}}</span></a></li>
 

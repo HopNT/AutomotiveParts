@@ -50,6 +50,7 @@ $can_delete_price = $staff->can_view('price-delete');
                         <th class="text-center">{{trans('label.common.garage_price')}}</th>
                         <th class="text-center">{{trans('label.common.retail_price')}}</th>
                         <th class="text-center">{{trans('label.common.quantity')}}</th>
+                        <th class="text-center">{{trans('label.common.status')}}</th>
                         <th class="text-center">{{trans('label.common.action')}}</th>
                     </tr>
                     </thead>
@@ -75,8 +76,9 @@ $can_delete_price = $staff->can_view('price-delete');
                             <td>{{$price->code}}</td>
                             <td>{{$price->name_vi}}</td>
                             <td class="text-right">{{$price->garage_price ? number_format($price->garage_price) : ''}}</td>
-                            <td class="text-right">{{$price->garage_price ? number_format($price->retail_price) : ''}}</td>
+                            <td class="text-right">{{$price->retail_price ? number_format($price->retail_price) : ''}}</td>
                             <td class="text-right">{{$price->quantity}}</td>
+                            <td>{{$price->status == 1 ? trans('label.common.status_active') : trans('label.common.status_inactive')}}</td>
                             <td class="text-center">
                                 @if($can_edit_price)
                                     <button id="btn_update_price"

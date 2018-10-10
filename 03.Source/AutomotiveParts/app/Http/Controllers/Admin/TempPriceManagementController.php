@@ -118,6 +118,13 @@ class TempPriceManagementController extends BackendController
         $valid = new TempPrice();
         $tempPrice = $request->all();
         try {
+            $validator = Validator::make($tempPrice, $valid->rules, [], $valid->attributes);
+            if ($validator->fails()) {
+                return [
+                    'error' => true,
+                    'errors' => $validator->errors()
+                ];
+            }
             // Update
             if (isset($request->temp_price_id))
             {
@@ -258,13 +265,6 @@ class TempPriceManagementController extends BackendController
             }
             else // Insert
             {
-                $validator = Validator::make($tempPrice, $valid->rules, [], $valid->attributes);
-                if ($validator->fails()) {
-                    return [
-                        'error' => true,
-                        'errors' => $validator->errors()
-                    ];
-                }
                 if ($request->hasFile('photo_top'))
                 {
                     $pathPhotoTop = CommonUtils::uploadFile($request->photo_top, 'accessary', GlobalEnum::IMAGE);
@@ -307,8 +307,6 @@ class TempPriceManagementController extends BackendController
                     $tempPrice = array_add($tempPrice, 'photo_outer', $pathPhotoOuter);
                     $tempPrice = array_add($tempPrice, 'photo_outer_name', $request->photo_outer->getClientOriginalName());
                 }
-                $tempPrice = array_add($tempPrice, 'created_at', date('Y-m-d H:i:s'));
-                $tempPrice = array_add($tempPrice, 'updated_at', date('Y-m-d H:i:s'));
                 $tempPrice = array_add($tempPrice, 'status', GlobalEnum::STATUS_PENDING);
                 $tempPrice = array_add($tempPrice, 'user_id', $user->user_id);
                 $this->tempPriceRepository->persist($tempPrice);

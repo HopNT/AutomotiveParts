@@ -56,7 +56,7 @@ $can_delete_parts = $staff->can_view('parts-delete');
                                 <td class="text-center">
                                     <div class="animated-checkbox">
                                         <label>
-                                            <input type="checkbox" class="checkbox"
+                                            <input type="checkbox" class="checkbox" @if($parts->status == 0) disabled @endif
                                                    data-id="{{$parts->parts_id}}"><span class="label-text"></span>
                                         </label>
                                     </div>
@@ -67,7 +67,7 @@ $can_delete_parts = $staff->can_view('parts-delete');
                             <td>{{$parts->catalogPartsName}}</td>
                             <td>{{$parts->code}}</td>
                             <td>{{$parts->name}}</td>
-                            <td>{{$parts->status ? trans('label.common.status_active') : trans('label.common.status_inactive')}}</td>
+                            <td>{{$parts->status == 1 ? trans('label.common.status_active') : trans('label.common.status_inactive')}}</td>
                             <td class="text-center">
                                 @if($can_edit_parts)
                                     <button id="btn_update_parts"
@@ -75,7 +75,7 @@ $can_delete_parts = $staff->can_view('parts-delete');
                                             class="btn btn-info btn-sm fa fa-edit"></button>
                                 @endif
                                 @if($can_delete_parts)
-                                    <button id="btn_delete_parts"
+                                    <button id="btn_delete_parts" @if($parts->status == 0) disabled @endif
                                             href="{{route('parts-delete', ['ids[]' => $parts->parts_id])}}"
                                             class="btn btn-danger btn-sm fa fa-trash"></button>
                                 @endif

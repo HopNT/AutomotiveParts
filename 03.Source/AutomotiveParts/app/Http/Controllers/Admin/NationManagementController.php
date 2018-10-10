@@ -28,7 +28,7 @@ class NationManagementController extends BackendController{
 
     public function index()
     {
-        $listNation = $this->nationRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
+        $listNation = $this->nationRepository->getAll();
         return view('admin.nation_management.nation_management')
             ->with('listNation', $listNation);
     }
@@ -71,7 +71,7 @@ class NationManagementController extends BackendController{
         }
 
         // Get List nation
-        $listNation = $this->nationRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
+        $listNation = $this->nationRepository->getAll();
         $view = view('admin.nation_management.elements.list_data_nation')
             ->with('listNation', $listNation)->render();
         return [
@@ -95,7 +95,7 @@ class NationManagementController extends BackendController{
         }
 
         // Get List nation
-        $listNation = $this->nationRepository->getAll()->where('status', GlobalEnum::STATUS_ACTIVE);
+        $listNation = $this->nationRepository->getAll();
         $view = view('admin.nation_management.elements.list_data_nation')
             ->with('listNation', $listNation)->render();
         return [

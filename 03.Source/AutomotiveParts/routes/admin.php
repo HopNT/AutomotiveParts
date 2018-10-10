@@ -48,10 +48,11 @@ Route::group(['prefix' => 'admin'], function () {
     // Parts management
     Route::get('parts-management', 'Admin\PartsManagementController@index')->name('parts-management');
     // Catalog parts
-    Route::post('catalog-parts', 'Admin\CatalogPartsController@save')->name('catalog-parts-save');
+    Route::post('catalog-parts/save', 'Admin\CatalogPartsController@save')->name('catalog-parts-save');
     Route::get('catalog-parts/getById', 'Admin\CatalogPartsController@getById')->name('catalog-parts-getById');
     Route::get('catalog-parts/delete', 'Admin\CatalogPartsController@delete')->name('catalog-parts-delete');
     Route::get('catalog-parts/getAll', 'Admin\CatalogPartsController@getAll')->name('catalog-parts-get-all');
+    Route::get('catalog-parts/searchByText', 'Admin\CatalogPartsController@searchByText')->name('catalog-parts-search-by-text');
     // Parts
     Route::get('parts/searchByText', 'Admin\PartsController@searchByText')->name('parts-search-by-text');
     Route::get('parts/getById', 'Admin\PartsController@getById')->name('parts-get-by-id');
@@ -75,7 +76,11 @@ Route::group(['prefix' => 'admin'], function () {
     // Accessary management
     Route::get('accessary-management', 'Admin\AccessaryManagementController@index')->name('accessary-management');
     Route::get('accessary/searchByText', 'Admin\AccessaryManagementController@searchByText')->name('accessary-search-by-text');
+    Route::get('accessary/searchByTextLimited', 'Admin\AccessaryManagementController@searchByTextLimited')->name('accessary-search-by-text-limited');
     Route::get('accessary/getAll', 'Admin\AccessaryManagementController@getAll')->name('accessary-get-all');
+    Route::get('accessary/getById', 'Admin\AccessaryManagementController@getById')->name('accessary-edit');
+    Route::post('accessary/save', 'Admin\AccessaryManagementController@save')->name('accessary-save');
+    Route::get('accessary/delete', 'Admin\AccessaryManagementController@delete')->name('accessary-delete');
 
     // Price accessary management
     Route::get('price-management', 'Admin\PriceManagementController@index')->name('price-management');

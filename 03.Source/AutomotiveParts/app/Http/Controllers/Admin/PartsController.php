@@ -73,6 +73,14 @@ class PartsController extends BackendController
             // Update
             if (isset($request->parts_id))
             {
+                $validator = Validator::make($parts, $valid->rules_update, [], $valid->attributes);
+                if ($validator->fails()) {
+                    return [
+                        'error' => true,
+                        'errors' => $validator->errors()
+                    ];
+                }
+
                 $exists = $this->partsRepository->find($request->parts_id);
                 if (!empty($file))
                 {
@@ -84,15 +92,15 @@ class PartsController extends BackendController
                     $parts = array_add($parts, 'photo_name', $file->getClientOriginalName());
                     $parts = array_add($parts, 'photo', $pathPhoto);
                 }
-                else
-                {
-                    if (!empty($exists->photo))
-                    {
-                        CommonUtils::deleteFile($exists->photo);
-                    }
-                    $parts = array_add($parts, 'photo_name', null);
-                    $parts = array_add($parts, 'photo', null);
-                }
+//                else
+//                {
+//                    if (!empty($exists->photo))
+//                    {
+//                        CommonUtils::deleteFile($exists->photo);
+//                    }
+//                    $parts = array_add($parts, 'photo_name', null);
+//                    $parts = array_add($parts, 'photo', null);
+//                }
 
                 $parts = $this->partsRepository->merge($request->parts_id, $parts);
                 if (!empty($accessary))
@@ -181,7 +189,7 @@ class PartsController extends BackendController
         }
 
         // Get List parts
-        $listParts = $this->partsRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
+        $listParts = $this->partsRepository->getAllByActive(GlobalEnum::STATUS_ACTIVE);
         $view = view('admin.parts_management.elements.list_data_parts')
             ->with('listParts', $listParts)->render();
         return [

@@ -35,7 +35,19 @@ class Accessary extends BaseModel {
         'photo_inner_name',
         'photo_outer',
         'photo_outer_name',
+        'description',
+        'prioritize',
         'status'
+    ];
+
+    public $rules = [
+        'code' => 'required|unique:tbl_accessary',
+        'name_vi' => 'required|max:100'
+    ];
+
+    public $attributes = [
+        'code' => 'Mã phụ tùng',
+        'name_vi' => 'Tên tiếng Việt'
     ];
 
     public function catalogAccessary() {
@@ -56,5 +68,9 @@ class Accessary extends BaseModel {
 
     public function userDbs() {
         return $this->belongsToMany(UserDb::class, 'tbl_user_accessary', 'accessary_id', 'user_id');
+    }
+
+    public function accessaryLinks() {
+        return $this->hasMany(AccessaryLink::class, 'accessary_id');
     }
 }

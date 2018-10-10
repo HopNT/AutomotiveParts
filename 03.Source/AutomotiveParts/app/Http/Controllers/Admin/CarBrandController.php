@@ -11,6 +11,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Common\Entities\CarBrand;
 use App\Http\Common\Enum\GlobalEnum;
 use App\Http\Common\Repository\CarBrandRepository;
+use App\Http\Common\Repository\CarRepository;
+use App\Http\Common\Repository\CatalogCarRepository;
 use App\Http\Common\Repository\NationRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -22,14 +24,20 @@ class CarBrandController extends BackendController
 
     protected $carBrandRepository;
 
+    protected $catalogCarRepository;
+
+    protected $carRepository;
+
     /**
      * CarBrandController constructor.
      * @param CarBrandRepository $carBrandRepository
      * @param NationRepository $nationRepository
      */
-    public function __construct(CarBrandRepository $carBrandRepository, NationRepository $nationRepository)
+    public function __construct(CarBrandRepository $carBrandRepository, CatalogCarRepository $catalogCarRepository, CarRepository $carRepository, NationRepository $nationRepository)
     {
         $this->carBrandRepository = $carBrandRepository;
+        $this->catalogCarRepository = $catalogCarRepository;
+        $this->carRepository = $carRepository;
         $this->nationRepository = $nationRepository;
     }
 
@@ -45,6 +53,13 @@ class CarBrandController extends BackendController
         try
         {
             if (isset($request->car_brand_id)) {
+                $validator = Validator::make($request->all(), $valid->rules_update, [], $valid->attributes);
+                if ($validator->fails()) {
+                    return [
+                        'error' => true,
+                        'errors' => $validator->errors()
+                    ];
+                }
                 $this->carBrandRepository->merge($request->car_brand_id, $carBrand);
             } else {
                 $validator = Validator::make($request->all(), $valid->rules, [], $valid->attributes);
@@ -69,13 +84,21 @@ class CarBrandController extends BackendController
 
         // Get List CarBrand
         $listCarBrand = $this->carBrandRepository->getAllWitActive(GlobalEnum::STATUS_ACTIVE);
+        $listCatalogCar = $this->catalogCarRepository->getAllWithActive(GlobalEnum::STATUS_ACTIVE);
+        $listCar = $this->carRepository->getAllWithActive(GlobalEnum::STATUS_ACTIVE);
         $listNation = $this->nationRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
-        $view = view('admin.car_management.elements.list_data_car_brand')
+        $viewCarBrand = view('admin.car_management.elements.list_data_car_brand')
             ->with('listCarBrand', $listCarBrand)
             ->with('listNation', $listNation)->render();
+        $viewCatalogCar = view('admin.car_management.elements.list_data_catalog_car')
+            ->with('listCatalogCar', $listCatalogCar)->render();
+        $viewCar = view('admin.car_management.elements.list_data_car')
+            ->with('listCar', $listCar)->render();
         return [
             'error' => false,
-            'html' => $view
+            'carBrand' => $viewCarBrand,
+            'catalogCar' => $viewCatalogCar,
+            'car' => $viewCar
         ];
     }
 
@@ -103,13 +126,21 @@ class CarBrandController extends BackendController
 
         // Get List CarBrand
         $listCarBrand = $this->carBrandRepository->getAllWitActive(GlobalEnum::STATUS_ACTIVE);
+        $listCatalogCar = $this->catalogCarRepository->getAllWithActive(GlobalEnum::STATUS_ACTIVE);
+        $listCar = $this->carRepository->getAllWithActive(GlobalEnum::STATUS_ACTIVE);
         $listNation = $this->nationRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
-        $view = view('admin.car_management.elements.list_data_car_brand')
+        $viewCarBrand = view('admin.car_management.elements.list_data_car_brand')
             ->with('listCarBrand', $listCarBrand)
             ->with('listNation', $listNation)->render();
+        $viewCatalogCar = view('admin.car_management.elements.list_data_catalog_car')
+            ->with('listCatalogCar', $listCatalogCar)->render();
+        $viewCar = view('admin.car_management.elements.list_data_car')
+            ->with('listCar', $listCar)->render();
         return [
             'error' => false,
-            'html' => $view
+            'carBrand' => $viewCarBrand,
+            'catalogCar' => $viewCatalogCar,
+            'car' => $viewCar
         ];
     }
 

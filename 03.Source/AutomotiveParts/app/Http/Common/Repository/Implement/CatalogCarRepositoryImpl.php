@@ -30,7 +30,6 @@ class CatalogCarRepositoryImpl extends GenericRepositoryImpl implements CatalogC
     {
         return DB::table('tbl_catalog_car as cc')
             ->leftJoin('tbl_car_brand as cb', 'cc.car_brand_id', '=', 'cb.car_brand_id')
-            ->where('cc.status', '=', $status)
             ->where('cb.status', '=', $status)
             ->select('cb.name as carBrandName', 'cc.*')
             ->get();

@@ -40,6 +40,11 @@ class Parts extends BaseModel {
         'code' => 'required|unique:tbl_parts|max:20'
     ];
 
+    public $rules_update = [
+        'catalog_parts_id' => 'required',
+//        'code' => 'required|unique:tbl_parts|max:20'
+    ];
+
     public $attributes = [
         'catalog_parts_id' => 'Nhóm bộ phận xe',
         'code' => 'Mã bộ phận xe'
