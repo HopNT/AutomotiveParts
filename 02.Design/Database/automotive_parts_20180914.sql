@@ -509,3 +509,51 @@ ALTER TABLE `tbl_accessary`
 	ADD COLUMN `photo_inner_name` VARCHAR(500) NULL DEFAULT NULL AFTER `photo_inner`,
 	ADD COLUMN `photo_outer_name` VARCHAR(500) NULL DEFAULT NULL AFTER `photo_outer`;
 
+ALTER TABLE `tbl_accessary`
+	DROP COLUMN `accessary_link_id`,
+	DROP INDEX `idx_tbl_accessary_accessary_link_id`,
+	DROP FOREIGN KEY `fk_tbl_accessary_accessary_link_id`;
+
+ALTER TABLE `tbl_accessary_link`
+	ADD COLUMN `accessary_value` INT(11) NOT NULL AFTER `accessary_id`,
+	ADD CONSTRAINT `fk_tbl_accessary_link_accessary_id` FOREIGN KEY (`accessary_id`) REFERENCES `tbl_accessary` (`accessary_id`) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+ALTER TABLE `tbl_accessary`
+	ADD COLUMN `description` TEXT NULL DEFAULT NULL AFTER `photo_outer_name`;
+
+ALTER TABLE `tbl_temp_price`
+	ADD COLUMN `description` TEXT NULL DEFAULT NULL AFTER `photo_outer_name`;
+
+ALTER TABLE `automotive_parts`.`tbl_catalog_parts` 
+ADD COLUMN `parent_id` INT(11) NULL DEFAULT NULL AFTER `catalog_parts_id`,
+ADD INDEX `idx_tbl_catalog_parts_parent_id` (`parent_id` ASC);
+ALTER TABLE `automotive_parts`.`tbl_catalog_parts` 
+ADD CONSTRAINT `fk_tbl_catalog_parts_parent_id`
+  FOREIGN KEY (`parent_id`)
+  REFERENCES `automotive_parts`.`tbl_catalog_parts` (`catalog_parts_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+ALTER TABLE `automotive_parts`.`tbl_accessary` 
+ADD COLUMN `prioritize` INT(1) NULL AFTER `description`;
+
+ALTER TABLE `tbl_user_accessary`
+	CHANGE COLUMN `garage_price` `garage_price` DECIMAL(15) NULL DEFAULT NULL AFTER `accessary_id`,
+	CHANGE COLUMN `retail_price` `retail_price` DECIMAL(15) NULL DEFAULT NULL AFTER `garage_price`;
+	
+ALTER TABLE `tbl_temp_price`
+	CHANGE COLUMN `garage_price` `garage_price` DECIMAL(15) NULL DEFAULT NULL AFTER `description`,
+	CHANGE COLUMN `retail_price` `retail_price` DECIMAL(15) NULL DEFAULT NULL AFTER `garage_price`;
+
+ALTER TABLE `tbl_catalog_parts`
+	ADD COLUMN `icon` VARCHAR(500) NULL DEFAULT NULL AFTER `parent_id`;
+
+ALTER TABLE `tbl_catalog_parts`
+	ADD COLUMN `icon_name` VARCHAR(500) NULL DEFAULT NULL AFTER `icon`;
+
+ALTER TABLE `tbl_parts`
+	CHANGE COLUMN `width` `width` DECIMAL(10,2) NULL DEFAULT NULL AFTER `photo_name`,
+	CHANGE COLUMN `height` `height` DECIMAL(10,2) NULL DEFAULT NULL AFTER `width`,
+	CHANGE COLUMN `inner_diameter` `inner_diameter` DECIMAL(10,2) NULL DEFAULT NULL AFTER `number_of_tooth`,
+	CHANGE COLUMN `outer_diameter` `outer_diameter` DECIMAL(10,2) NULL DEFAULT NULL AFTER `inner_diameter`,
+	CHANGE COLUMN `weight` `weight` DECIMAL(10,2) NULL DEFAULT NULL AFTER `life_cycle`;
