@@ -69,16 +69,6 @@ class AccessaryManagementController extends BackendController
                     $accessary = array_add($accessary, 'photo_top', $pathPhotoTop);
                     $accessary = array_add($accessary, 'photo_top_name', $request->photo_top->getClientOriginalName());
                 }
-                else
-                {
-                    if (!empty($exists->photo_top))
-                    {
-                        CommonUtils::deleteFile($exists->photo_top);
-                    }
-                    unset($accessary['photo_top']);
-                    $accessary = array_add($accessary, 'photo_top', null);
-                    $accessary = array_add($accessary, 'photo_top_name', null);
-                }
 
                 if ($request->hasFile('photo_bottom'))
                 {
@@ -90,16 +80,6 @@ class AccessaryManagementController extends BackendController
                     unset($accessary['photo_bottom']);
                     $accessary = array_add($accessary, 'photo_bottom', $pathPhotoBottom);
                     $accessary = array_add($accessary, 'photo_bottom_name', $request->photo_bottom->getClientOriginalName());
-                }
-                else
-                {
-                    if (!empty($exists->photo_bottom))
-                    {
-                        CommonUtils::deleteFile($exists->photo_bottom);
-                    }
-                    unset($accessary['photo_bottom']);
-                    $accessary = array_add($accessary, 'photo_bottom', null);
-                    $accessary = array_add($accessary, 'photo_bottom_name', null);
                 }
 
                 if ($request->hasFile('photo_left'))
@@ -113,16 +93,6 @@ class AccessaryManagementController extends BackendController
                     $accessary = array_add($accessary, 'photo_left', $pathPhotoLeft);
                     $accessary = array_add($accessary, 'photo_left_name', $request->photo_left->getClientOriginalName());
                 }
-                else
-                {
-                    if (!empty($exists->photo_left))
-                    {
-                        CommonUtils::deleteFile($exists->photo_left);
-                    }
-                    unset($accessary['photo_left']);
-                    $accessary = array_add($accessary, 'photo_left', null);
-                    $accessary = array_add($accessary, 'photo_left_name', null);
-                }
 
                 if ($request->hasFile('photo_right'))
                 {
@@ -134,16 +104,6 @@ class AccessaryManagementController extends BackendController
                     unset($accessary['photo_right']);
                     $accessary = array_add($accessary, 'photo_right', $pathPhotoRight);
                     $accessary = array_add($accessary, 'photo_right_name', $request->photo_right->getClientOriginalName());
-                }
-                else
-                {
-                    if (!empty($exists->photo_right))
-                    {
-                        CommonUtils::deleteFile($exists->photo_right);
-                    }
-                    unset($accessary['photo_right']);
-                    $accessary = array_add($accessary, 'photo_right', null);
-                    $accessary = array_add($accessary, 'photo_right_name', null);
                 }
 
                 if ($request->hasFile('photo_inner'))
@@ -157,16 +117,6 @@ class AccessaryManagementController extends BackendController
                     $accessary = array_add($accessary, 'photo_inner', $pathPhotoInner);
                     $accessary = array_add($accessary, 'photo_inner_name', $request->photo_inner->getClientOriginalName());
                 }
-                else
-                {
-                    if (!empty($exists->photo_inner))
-                    {
-                        CommonUtils::deleteFile($exists->photo_inner);
-                    }
-                    unset($accessary['photo_inner']);
-                    $accessary = array_add($accessary, 'photo_inner', null);
-                    $accessary = array_add($accessary, 'photo_inner_name', null);
-                }
 
                 if ($request->hasFile('photo_outer'))
                 {
@@ -178,16 +128,6 @@ class AccessaryManagementController extends BackendController
                     unset($accessary['photo_outer']);
                     $accessary = array_add($accessary, 'photo_outer', $pathPhotoOuter);
                     $accessary = array_add($accessary, 'photo_outer_name', $request->photo_outer->getClientOriginalName());
-                }
-                else
-                {
-                    if (!empty($exists->photo_outer))
-                    {
-                        CommonUtils::deleteFile($exists->photo_outer);
-                    }
-                    unset($accessary['photo_outer']);
-                    $accessary = array_add($accessary, 'photo_outer', null);
-                    $accessary = array_add($accessary, 'photo_outer_name', null);
                 }
 
                 $this->accessaryRepository->merge($request->accessary_id, $accessary);

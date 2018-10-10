@@ -140,16 +140,6 @@ class TempPriceManagementController extends BackendController
                     $tempPrice = array_add($tempPrice, 'photo_top', $pathPhotoTop);
                     $tempPrice = array_add($tempPrice, 'photo_top_name', $request->photo_top->getClientOriginalName());
                 }
-                else
-                {
-                    if (!empty($exists->photo_top))
-                    {
-                        CommonUtils::deleteFile($exists->photo_top);
-                    }
-                    unset($tempPrice['photo_top']);
-                    $tempPrice = array_add($tempPrice, 'photo_top', null);
-                    $tempPrice = array_add($tempPrice, 'photo_top_name', null);
-                }
 
                 if ($request->hasFile('photo_bottom'))
                 {
@@ -161,16 +151,6 @@ class TempPriceManagementController extends BackendController
                     unset($tempPrice['photo_bottom']);
                     $tempPrice = array_add($tempPrice, 'photo_bottom', $pathPhotoBottom);
                     $tempPrice = array_add($tempPrice, 'photo_bottom_name', $request->photo_bottom->getClientOriginalName());
-                }
-                else
-                {
-                    if (!empty($exists->photo_bottom))
-                    {
-                        CommonUtils::deleteFile($exists->photo_bottom);
-                    }
-                    unset($tempPrice['photo_bottom']);
-                    $tempPrice = array_add($tempPrice, 'photo_bottom', null);
-                    $tempPrice = array_add($tempPrice, 'photo_bottom_name', null);
                 }
 
                 if ($request->hasFile('photo_left'))
@@ -184,16 +164,6 @@ class TempPriceManagementController extends BackendController
                     $tempPrice = array_add($tempPrice, 'photo_left', $pathPhotoLeft);
                     $tempPrice = array_add($tempPrice, 'photo_left_name', $request->photo_left->getClientOriginalName());
                 }
-                else
-                {
-                    if (!empty($exists->photo_left))
-                    {
-                        CommonUtils::deleteFile($exists->photo_left);
-                    }
-                    unset($tempPrice['photo_left']);
-                    $tempPrice = array_add($tempPrice, 'photo_left', null);
-                    $tempPrice = array_add($tempPrice, 'photo_left_name', null);
-                }
 
                 if ($request->hasFile('photo_right'))
                 {
@@ -205,16 +175,6 @@ class TempPriceManagementController extends BackendController
                     unset($tempPrice['photo_right']);
                     $tempPrice = array_add($tempPrice, 'photo_right', $pathPhotoRight);
                     $tempPrice = array_add($tempPrice, 'photo_right_name', $request->photo_right->getClientOriginalName());
-                }
-                else
-                {
-                    if (!empty($exists->photo_right))
-                    {
-                        CommonUtils::deleteFile($exists->photo_right);
-                    }
-                    unset($tempPrice['photo_right']);
-                    $tempPrice = array_add($tempPrice, 'photo_right', null);
-                    $tempPrice = array_add($tempPrice, 'photo_right_name', null);
                 }
 
                 if ($request->hasFile('photo_inner'))
@@ -228,16 +188,6 @@ class TempPriceManagementController extends BackendController
                     $tempPrice = array_add($tempPrice, 'photo_inner', $pathPhotoInner);
                     $tempPrice = array_add($tempPrice, 'photo_inner_name', $request->photo_inner->getClientOriginalName());
                 }
-                else
-                {
-                    if (!empty($exists->photo_inner))
-                    {
-                        CommonUtils::deleteFile($exists->photo_inner);
-                    }
-                    unset($tempPrice['photo_inner']);
-                    $tempPrice = array_add($tempPrice, 'photo_inner', null);
-                    $tempPrice = array_add($tempPrice, 'photo_inner_name', null);
-                }
 
                 if ($request->hasFile('photo_outer'))
                 {
@@ -249,16 +199,6 @@ class TempPriceManagementController extends BackendController
                     unset($tempPrice['photo_outer']);
                     $tempPrice = array_add($tempPrice, 'photo_outer', $pathPhotoOuter);
                     $tempPrice = array_add($tempPrice, 'photo_outer_name', $request->photo_outer->getClientOriginalName());
-                }
-                else
-                {
-                    if (!empty($exists->photo_outer))
-                    {
-                        CommonUtils::deleteFile($exists->photo_outer);
-                    }
-                    unset($tempPrice['photo_outer']);
-                    $tempPrice = array_add($tempPrice, 'photo_outer', null);
-                    $tempPrice = array_add($tempPrice, 'photo_outer_name', null);
                 }
 
                 $this->tempPriceRepository->merge($request->temp_price_id, $tempPrice);

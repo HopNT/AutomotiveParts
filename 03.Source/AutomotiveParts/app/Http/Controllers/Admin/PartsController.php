@@ -92,15 +92,6 @@ class PartsController extends BackendController
                     $parts = array_add($parts, 'photo_name', $file->getClientOriginalName());
                     $parts = array_add($parts, 'photo', $pathPhoto);
                 }
-//                else
-//                {
-//                    if (!empty($exists->photo))
-//                    {
-//                        CommonUtils::deleteFile($exists->photo);
-//                    }
-//                    $parts = array_add($parts, 'photo_name', null);
-//                    $parts = array_add($parts, 'photo', null);
-//                }
 
                 $parts = $this->partsRepository->merge($request->parts_id, $parts);
                 if (!empty($accessary))
