@@ -557,3 +557,7 @@ ALTER TABLE `tbl_parts`
 	CHANGE COLUMN `inner_diameter` `inner_diameter` DECIMAL(10,2) NULL DEFAULT NULL AFTER `number_of_tooth`,
 	CHANGE COLUMN `outer_diameter` `outer_diameter` DECIMAL(10,2) NULL DEFAULT NULL AFTER `inner_diameter`,
 	CHANGE COLUMN `weight` `weight` DECIMAL(10,2) NULL DEFAULT NULL AFTER `life_cycle`;
+
+ALTER TABLE `tbl_temp_price`
+	CHANGE COLUMN `comment` `comment` TEXT NULL DEFAULT NULL AFTER `quantity`,
+	CHANGE COLUMN `status` `status` INT NULL DEFAULT NULL COLLATE 'utf8_unicode_ci' AFTER `comment`;
