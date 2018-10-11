@@ -335,7 +335,6 @@
                                 <label for="description"
                                        class="control-label col-md-2">{{trans('label.common.description')}}</label>
                                 <div class="col-md-10">
-                                    {{--<textarea id="description"></textarea>--}}
                                     <input id="description" name="description">
                                 </div>
                             </div>

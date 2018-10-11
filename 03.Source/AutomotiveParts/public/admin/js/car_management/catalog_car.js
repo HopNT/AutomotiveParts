@@ -1,6 +1,10 @@
 $(document).ready(function () {
     loadTableCatalogCar();
 
+    $('.modal').on('hidden.bs.modal', function(){
+        
+    });
+
     // Check all row
     $('body').on('click', '#tbl_catalog_car #check_all', function (e) {
         if ($(this).is(':checked', true)) {

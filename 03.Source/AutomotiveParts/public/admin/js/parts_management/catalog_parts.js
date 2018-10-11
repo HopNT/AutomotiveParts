@@ -1,6 +1,10 @@
 $(document).ready(function () {
     loadTableCatalogParts();
 
+    $('.modal').on('hidden.bs.modal', function(){
+        
+    });
+
     // Check all row
     $('body').on('click', '#tbl_catalog_parts #check_all', function (e) {
         if ($(this).is(':checked', true)) {
@@ -18,30 +22,6 @@ $(document).ready(function () {
             $('#tbl_catalog_parts #check_all').prop('checked', false);
         }
     });
-
-    // $(function () {
-    //     $('#form-catalog-parts select[name="parent_id"]').select2({
-    //         ajax: {
-    //             url: '/admin/catalog-parts/searchByText',
-    //             dataType: 'json',
-    //             data: function (params) {
-    //                 let query = {
-    //                     query: params.term
-    //                 }
-    //                 return query;
-    //             },
-    //             processResults: function (data) {
-    //                 return {
-    //                     results: data.items
-    //                 };
-    //             },
-    //             cache: false
-    //         },
-    //         placeholder: 'Nhập tên nhóm...',
-    //         allowClear: true,
-    //         // multiple: true
-    //     });
-    // });
 
     onloadPhoto('form-catalog-parts', 'photo');
 
@@ -72,56 +52,6 @@ $(document).ready(function () {
         $('#modal_add_update_catalog_parts #title-add').css('display', 'block');
         $('#modal_add_update_catalog_parts #title-update').css('display', 'none');
         $('#modal_add_update_catalog_parts').modal();
-    });
-
-    // Save or update catalog parts
-    $('body').on('click', '#btn_save_catalog_parts', function () {
-        $('#name_error').html("");
-        let type = $('#form-catalog-parts').attr('method');
-        let url = $('#form-catalog-parts').attr('action');
-        let catalogPartsId = $('#form-catalog-parts input[name="catalog_parts_id"]').val();
-        $.ajax({
-            type: type,
-            url: url,
-            data: new FormData($('#form-catalog-parts')[0]),
-            contentType: false,
-            processData: false,
-            success: function (result) {
-                if (result.error) {
-                    $.each(result.errors, function (key, value) {
-                        $("#form-catalog-parts #" + key + "_error").html(value);
-                    });
-                } else if (result.system_error) {
-                    $('#modal_add_update_catalog_parts #message_error').html(result.message_error);
-                    $('#modal_add_update_catalog_parts #alert_error').slideDown();
-                    $("#modal_add_update_catalog_parts #alert_error").fadeTo(2000, 500).slideUp(500, function(){
-                        $("#modal_add_update_catalog_parts #alert_error").slideUp(500);
-                        $('#modal_add_update_catalog_parts #message_error').html('');
-                    });
-                } else if (!result.error) {
-                    $('#modal_add_update_catalog_parts').modal('hide');
-                    setTimeout(function () {
-                        if (catalogPartsId != null && catalogPartsId != '') {
-                            showMessage('Cập nhật thành công', 'success');
-                        } else {
-                            showMessage('Thêm mới thành công', 'success');
-                        }
-                        $('#catalog_parts').html(result.catalogParts);
-                        $('#parts').html(result.parts);
-                        loadTableCatalogParts();
-                        loadTableParts();
-                    }, 1000);
-                }
-            },
-            error: function (error) {
-                $('#modal_add_update_catalog_parts #message_error').html('Có lỗi xảy, vui lòng liên hệ với quản trị hệ thống! ' + error.responseJSON.message);
-                $('#modal_add_update_catalog_parts #alert_error').slideDown();
-                $("#modal_add_update_catalog_parts #alert_error").fadeTo(2000, 500).slideUp(500, function(){
-                    $("#modal_add_update_catalog_parts #alert_error").slideUp(500);
-                    $('#modal_add_update_catalog_parts #message_error').html('');
-                });
-            }
-        });
     });
 
     // Open modal update catalog parts
@@ -181,6 +111,55 @@ $(document).ready(function () {
                     $('#form-catalog-parts select[name="status"]').val(result.data.status);
                 }
                 $('#modal_add_update_catalog_parts').modal();
+            }
+        });
+    });
+
+    // Save or update catalog parts
+    $('body').on('click', '#btn_save_catalog_parts', function () {
+        let type = $('#form-catalog-parts').attr('method');
+        let url = $('#form-catalog-parts').attr('action');
+        let catalogPartsId = $('#form-catalog-parts input[name="catalog_parts_id"]').val();
+        $.ajax({
+            type: type,
+            url: url,
+            data: new FormData($('#form-catalog-parts')[0]),
+            contentType: false,
+            processData: false,
+            success: function (result) {
+                if (result.error) {
+                    $.each(result.errors, function (key, value) {
+                        $("#form-catalog-parts #" + key + "_error").html(value);
+                    });
+                } else if (result.system_error) {
+                    $('#modal_add_update_catalog_parts #message_error').html(result.message_error);
+                    $('#modal_add_update_catalog_parts #alert_error').slideDown();
+                    $("#modal_add_update_catalog_parts #alert_error").fadeTo(2000, 500).slideUp(500, function(){
+                        $("#modal_add_update_catalog_parts #alert_error").slideUp(500);
+                        $('#modal_add_update_catalog_parts #message_error').html('');
+                    });
+                } else if (!result.error) {
+                    $('#modal_add_update_catalog_parts').modal('hide');
+                    setTimeout(function () {
+                        if (catalogPartsId != null && catalogPartsId != '') {
+                            showMessage('Cập nhật thành công', 'success');
+                        } else {
+                            showMessage('Thêm mới thành công', 'success');
+                        }
+                        $('#catalog_parts').html(result.catalogParts);
+                        $('#parts').html(result.parts);
+                        loadTableCatalogParts();
+                        loadTableParts();
+                    }, 1000);
+                }
+            },
+            error: function (error) {
+                $('#modal_add_update_catalog_parts #message_error').html('Có lỗi xảy, vui lòng liên hệ với quản trị hệ thống! ' + error.responseJSON.message);
+                $('#modal_add_update_catalog_parts #alert_error').slideDown();
+                $("#modal_add_update_catalog_parts #alert_error").fadeTo(2000, 500).slideUp(500, function(){
+                    $("#modal_add_update_catalog_parts #alert_error").slideUp(500);
+                    $('#modal_add_update_catalog_parts #message_error').html('');
+                });
             }
         });
     });

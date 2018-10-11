@@ -2,6 +2,10 @@ $(document).ready(function () {
 
     loadTableParts();
 
+    $('.modal').on('hidden.bs.modal', function(){
+        
+    });
+
     // Check all row
     $('body').on('click', '#tbl_parts #check_all', function (e) {
         if ($(this).is(':checked', true)) {
@@ -50,9 +54,7 @@ $(document).ready(function () {
 
     // Open modal add new parts
     $('body').on('click', '#btn_add_new_parts', function () {
-
         resetPartsForm();
-
         let accessary = $('#form-parts #accessary');
         accessary.select2({
             ajax: {
@@ -84,9 +86,7 @@ $(document).ready(function () {
 
     // Open modal update parts
     $('body').on('click', '#btn_update_parts', function () {
-
         resetPartsForm();
-
         $('#form-parts #accessary').select2({
             ajax: {
                 url: '/admin/accessary/searchByText',

@@ -1,6 +1,10 @@
 $(document).ready(function () {
     loadTableTempPrice();
 
+    $('.modal').on('hidden.bs.modal', function(){
+        
+    });
+
     $('body').on('input', '#form-temp-price input[name="garage_price"]', function (e) {
         e.target.value = e.target.value.replace(/[^0-9]/g,'');
     });

@@ -14,18 +14,24 @@ $(document).ready(function () {
     loadTableAccessary();
 
     $('.modal').on('hidden.bs.modal', function(){
-        $(this).find('form')[0].reset();
+        $("#form-accessary").trigger("reset");
     });
 
-    onloadPhoto('form-accessary', 'photo_top');
-    onloadPhoto('form-accessary', 'photo_bottom');
-    onloadPhoto('form-accessary', 'photo_left');
-    onloadPhoto('form-accessary', 'photo_right');
-    onloadPhoto('form-accessary', 'photo_inner');
-    onloadPhoto('form-accessary', 'photo_outer');
+    // onloadPhoto('form-accessary', 'photo_top');
+    // onloadPhoto('form-accessary', 'photo_bottom');
+    // onloadPhoto('form-accessary', 'photo_left');
+    // onloadPhoto('form-accessary', 'photo_right');
+    // onloadPhoto('form-accessary', 'photo_inner');
+    // onloadPhoto('form-accessary', 'photo_outer');
 
     $(function() {
         CKEDITOR.replace('description');
+        onloadPhoto('form-accessary', 'photo_top');
+        onloadPhoto('form-accessary', 'photo_bottom');
+        onloadPhoto('form-accessary', 'photo_left');
+        onloadPhoto('form-accessary', 'photo_right');
+        onloadPhoto('form-accessary', 'photo_inner');
+        onloadPhoto('form-accessary', 'photo_outer');
     });
 
     // Open modal add new acccessary
@@ -93,21 +99,20 @@ $(document).ready(function () {
             type: 'GET',
             url: url,
             success: function (result) {
-                // $("#form-parts input[name='parts_id']").val(result.data.parts_id);
-                // $("#form-parts select[name='catalog_parts_id']").val(result.data.catalog_parts_id);
-                // $("#form-parts input[name='code']").val(result.data.code);
-                // $("#form-parts input[name='name']").val(result.data.name);
-                // $("#form-parts input[name='width']").val(result.data.width);
-                // $("#form-parts input[name='height']").val(result.data.height);
-                // $("#form-parts input[name='number_of_tooth']").val(result.data.number_of_tooth);
-                // $("#form-parts input[name='inner_diameter']").val(result.data.inner_diameter);
-                // $("#form-parts input[name='outer_diameter']").val(result.data.outer_diameter);
-                // $("#form-parts input[name='torque']").val(result.data.torque);
-                // $("#form-parts input[name='life_cycle']").val(result.data.life_cycle);
-                // $("#form-parts input[name='weight']").val(result.data.weight);
-                // $("#form-parts input[name='liquor']").val(result.data.liquor);
-                // $("#form-parts textarea[name='description']").val(result.data.description);
-                //
+                $('#form-accessary input[name="code"]').prop('disabled', true);
+                $('#form-accessary input[name="accessary_id"]').val(result.data.accessary_id);
+                $('#form-accessary select[name="trademark_id"]').val(result.data.trademark_id);
+                $('#form-accessary select[name="nation_id"]').val(result.data.nation_id);
+                $('#form-accessary select[name="type"]').val(result.data.type);
+                $('#form-accessary input[name="code"]').val(result.data.code);
+                $('#form-accessary input[name="name_vi"]').val(result.data.name_vi);
+                $('#form-accessary input[name="name_en"]').val(result.data.name_en);
+                $('#form-accessary input[name="acronym_name"]').val(result.data.acronym_name);
+                $('#form-accessary input[name="unsigned_name"]').val(result.data.unsigned_name);
+                if (result.data.prioritize === 1) {
+                    $('#form-accessary input[name="prioritize"]').prop('checked', true);
+                }
+
                 if (result.list != undefined && result.list.length > 0) {
                     $.each(result.list, function (index, item) {
                         let option = "<option value='" + item.accessary_id + "' selected='selected'>" + (item.code + " - " + item.name_vi) + "</option>";
@@ -117,7 +122,6 @@ $(document).ready(function () {
                 }
 
                 if (result.data.photo_top != undefined && result.data.photo_top != null && result.data.photo_top != '') {
-                    console.log(result.data.photo_top);
                     var img = $('<img/>', {
                         id: 'photo_top',
                         width: 250,
@@ -195,20 +199,22 @@ $(document).ready(function () {
                     $("#form-accessary #photo_outer_image_preview").attr("data-content", $(img)[0].outerHTML).popover("show");
                 }
 
+                CKEDITOR.instances.description.setData(result.data.description);
             }
         });
     });
 
     // Save or update accessary
     $('body').on('click', '#btn_save_accessary', function () {
-        $('#form-accessary #code_error').html("");
-        $('#form-accessary #name_vi_error').html("");
         let type = $('#form-accessary').attr('method');
         let url = $('#form-accessary').attr('action');
         let accessaryId = $('#form-accessary input[name="accessary_id"]').val();
         if ($('#form-accessary input[name="prioritize"]').is(":checked")) {
             $('#form-accessary input[name="prioritize"]').val(1);
+        } else {
+            $('#form-accessary input[name="prioritize"]').val(0);
         }
+
         $('#form-accessary #description').val(CKEDITOR.instances.description.getData());
         $.ajax({
             type: type,
@@ -273,6 +279,7 @@ function resetFormAccessary() {
     $('#form-accessary #code_error').html("");
     $('#form-accessary #name_vi_error').html("");
     $('#form-accessary #accessary_link').html("");
+    $('#form-accessary #prioritize').prop('disabled', false);
 }
 
 function onloadPhoto(form, inputName) {

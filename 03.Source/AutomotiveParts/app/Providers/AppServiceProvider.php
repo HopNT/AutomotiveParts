@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Providers;
+use App\Http\Common\Repository\AccessaryLinkRepository;
 use App\Http\Common\Repository\AccessaryRepository;
 use App\Http\Common\Repository\CarBrandRepository;
 use App\Http\Common\Repository\CarRepository;
 use App\Http\Common\Repository\CatalogCarRepository;
 use App\Http\Common\Repository\CatalogPartsRepository;
+use App\Http\Common\Repository\Implement\AccessaryLinkRepositoryImpl;
 use App\Http\Common\Repository\Implement\AccessaryRepositoryImpl;
 use App\Http\Common\Repository\Implement\CarBrandRepositoryImpl;
 use App\Http\Common\Repository\Implement\CarRepositoryImpl;
@@ -89,6 +91,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(
             TempPriceRepository::class,
             TempPriceRepositoryImpl::class
+        );
+
+        $this->app->singleton(
+            AccessaryLinkRepository::class,
+            AccessaryLinkRepositoryImpl::class
         );
     }
 }

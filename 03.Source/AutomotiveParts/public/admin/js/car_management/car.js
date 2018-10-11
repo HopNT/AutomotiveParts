@@ -2,6 +2,10 @@ $(document).ready(function () {
 
     loadTableCar();
 
+    $('.modal').on('hidden.bs.modal', function(){
+        
+    });
+
     $('body').on('input', '#form-car input[name="number_of_doors"]', function (e) {
         e.target.value = e.target.value.replace(/[^0-9]/g,'');
     });

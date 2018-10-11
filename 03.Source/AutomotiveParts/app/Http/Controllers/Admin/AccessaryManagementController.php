@@ -10,22 +10,27 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Common\Entities\Accessary;
 use App\Http\Common\Enum\GlobalEnum;
+use App\Http\Common\Repository\AccessaryLinkRepository;
 use App\Http\Common\Repository\AccessaryRepository;
 use App\Http\Common\Utils\CommonUtils;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class AccessaryManagementController extends BackendController
 {
     protected $accessaryRepository;
 
+    protected $accessaryLinkRepository;
+
     /**
      * AccessaryManagementController constructor.
      * @param $accessaryRepository
      */
-    public function __construct(AccessaryRepository $accessaryRepository)
+    public function __construct(AccessaryRepository $accessaryRepository, AccessaryLinkRepository $accessaryLinkRepository)
     {
         $this->accessaryRepository = $accessaryRepository;
+        $this->accessaryLinkRepository = $accessaryLinkRepository;
     }
 
     public function index()
@@ -39,6 +44,49 @@ class AccessaryManagementController extends BackendController
     {
         $accessaryList = array();
         $accessary = $this->accessaryRepository->find($request->id);
+        if (!empty($accessary->photo_top))
+        {
+            $contents = Storage::get($accessary->photo_top);
+            $type = pathinfo($accessary->photo_top, PATHINFO_EXTENSION);
+            $base64 = 'data:image/'.$type.';base64,'.base64_encode($contents);
+            $accessary->photo_top = $base64;
+        }
+        if (!empty($accessary->photo_bottom))
+        {
+            $contents = Storage::get($accessary->photo_bottom);
+            $type = pathinfo($accessary->photo_bottom, PATHINFO_EXTENSION);
+            $base64 = 'data:image/'.$type.';base64,'.base64_encode($contents);
+            $accessary->photo_bottom = $base64;
+        }
+        if (!empty($accessary->photo_left))
+        {
+            $contents = Storage::get($accessary->photo_left);
+            $type = pathinfo($accessary->photo_left, PATHINFO_EXTENSION);
+            $base64 = 'data:image/'.$type.';base64,'.base64_encode($contents);
+            $accessary->photo_left = $base64;
+        }
+        if (!empty($accessary->photo_right))
+        {
+            $contents = Storage::get($accessary->photo_right);
+            $type = pathinfo($accessary->photo_right, PATHINFO_EXTENSION);
+            $base64 = 'data:image/'.$type.';base64,'.base64_encode($contents);
+            $accessary->photo_right = $base64;
+        }
+        if (!empty($accessary->photo_inner))
+        {
+            $contents = Storage::get($accessary->photo_inner);
+            $type = pathinfo($accessary->photo_inner, PATHINFO_EXTENSION);
+            $base64 = 'data:image/'.$type.';base64,'.base64_encode($contents);
+            $accessary->photo_inner = $base64;
+        }
+        if (!empty($accessary->photo_outer))
+        {
+            $contents = Storage::get($accessary->photo_outer);
+            $type = pathinfo($accessary->photo_outer, PATHINFO_EXTENSION);
+            $base64 = 'data:image/'.$type.';base64,'.base64_encode($contents);
+            $accessary->photo_outer = $base64;
+        }
+
         foreach ($accessary->accessaryLinks as $key => $item) {
             $accessaryLink = $this->accessaryRepository->find($item->accessary_value);
             $accessaryList[$key] = $accessaryLink->toArray();
@@ -133,15 +181,16 @@ class AccessaryManagementController extends BackendController
                 $this->accessaryRepository->merge($request->accessary_id, $accessary);
 
                 if ($request->has('accessary_link')) {
+                    $this->accessaryLinkRepository->deleteAll($request->accessary_id);
                     foreach ($request->accessary_link as $id) {
                         $accessaryLink = [
                             'accessary_id' => $accessary['accessary_id'],
                             'accessary_value' => $id
                         ];
-                        $accessary->accessaryLinks()->create($accessaryLink);
+                        $this->accessaryLinkRepository->persist($accessaryLink);
                     }
                 } else {
-                    $accessary->accessaryLinks()->delete();
+                    $this->accessaryLinkRepository->deleteAll($request->accessary_id);
                 }
             }
             else // Insert
@@ -204,7 +253,7 @@ class AccessaryManagementController extends BackendController
                             'accessary_id' => $accessary['accessary_id'],
                             'accessary_value' => $id
                         ];
-                        $accessary->accessaryLinks()->create($accessaryLink);
+                        $this->accessaryLinkRepository->persist($accessaryLink);
                     }
                 }
             }

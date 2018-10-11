@@ -2,6 +2,10 @@ $(document).ready(function () {
 
     loadTableCarBrand();
 
+    $('.modal').on('hidden.bs.modal', function(){
+        
+    });
+
     // Check all row
     $('body').on('click', '#tbl_car_brand #check_all', function (e) {
         if ($(this).is(':checked', true)) {
@@ -57,9 +61,6 @@ $(document).ready(function () {
 
     // Save or update car brand
     $('body').on('click', '#btn_save_car_brand', function () {
-        $('#code_brand_error').html("");
-        $('#name_error').html("");
-        $('#message_success').html("");
         let type = $('#form-car-brand').attr('method');
         let url = $('#form-car-brand').attr('action');
         let carBrandId = $('#form-car-brand input[name="car_brand_id"]').val();

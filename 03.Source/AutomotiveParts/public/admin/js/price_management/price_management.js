@@ -18,6 +18,10 @@ $(document).ready(function () {
 
     loadTablePrice();
 
+    $('.modal').on('hidden.bs.modal', function(){
+        
+    });
+
     $('body').on('input', '#form-price input[name="garage_price"]', function (e) {
         e.target.value = e.target.value.replace(/[^0-9]/g,'');
     });
