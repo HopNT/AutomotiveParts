@@ -43,4 +43,10 @@ class AccessaryRepositoryImpl extends GenericRepositoryImpl implements Accessary
             ->get();
     }
 
+    public function deleteMulti($ids) {
+        DB::table('tbl_accessary')
+            ->whereIn('accessary_id', $ids)
+            ->update(['status'=>GlobalEnum::STATUS_INACTIVE, 'updated_at'=>now()]);
+    }
+
 }

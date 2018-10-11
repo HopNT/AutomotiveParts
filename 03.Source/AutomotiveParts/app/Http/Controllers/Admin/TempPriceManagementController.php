@@ -205,6 +205,14 @@ class TempPriceManagementController extends BackendController
             }
             else // Insert
             {
+                $exists = $this->tempPriceRepository->findByCodeAndUserId($request->code, $user->user_id);
+                if (!empty($exists->all())) {
+                    return [
+                        'system_error' => true,
+                        'message_error' => 'Phụ tùng này đã tồn tại, vui lòng kiểm tra lại'
+                    ];
+                }
+
                 if ($request->hasFile('photo_top'))
                 {
                     $pathPhotoTop = CommonUtils::uploadFile($request->photo_top, 'accessary', GlobalEnum::IMAGE);
@@ -312,6 +320,7 @@ class TempPriceManagementController extends BackendController
                 $accessary->photo_inner_name = $temp->photo_inner_name;
                 $accessary->photo_outer = $temp->photo_outer;
                 $accessary->photo_outer_name = $temp->photo_outer_name;
+                $accessary->description = $temp->description;
                 $accessary->status = GlobalEnum::STATUS_ACTIVE;
                 $accessary->created_at = now();
                 $accessary->updated_at = now();

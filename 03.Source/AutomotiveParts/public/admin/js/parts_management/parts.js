@@ -2,10 +2,6 @@ $(document).ready(function () {
 
     loadTableParts();
 
-    $('.modal').on('hidden.bs.modal', function(){
-        
-    });
-
     // Check all row
     $('body').on('click', '#tbl_parts #check_all', function (e) {
         if ($(this).is(':checked', true)) {

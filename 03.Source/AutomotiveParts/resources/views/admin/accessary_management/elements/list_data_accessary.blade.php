@@ -56,7 +56,7 @@ $can_delete_accessary = $staff->can_view('accessary-delete');
                                 <td class="text-center">
                                     <div class="animated-checkbox">
                                         <label>
-                                            <input type="checkbox" class="checkbox"
+                                            <input type="checkbox" class="checkbox" @if($accessary->status === 0) disabled @endif
                                                    data-id="{{$accessary->accessary_id}}"><span
                                                 class="label-text"></span>
                                         </label>
@@ -81,7 +81,7 @@ $can_delete_accessary = $staff->can_view('accessary-delete');
                                             class="btn btn-info btn-sm fa fa-edit"></button>
                                 @endif
                                 @if($can_delete_accessary)
-                                    <button id="btn_delete_accessary"
+                                    <button id="btn_delete_accessary" @if($accessary->status === 0) disabled @endif
                                             href="{{route('accessary-delete', ['ids[]' => $accessary->accessary_id])}}"
                                             class="btn btn-danger btn-sm fa fa-trash"></button>
                                 @endif

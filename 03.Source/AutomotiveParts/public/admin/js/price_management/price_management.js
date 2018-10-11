@@ -18,10 +18,6 @@ $(document).ready(function () {
 
     loadTablePrice();
 
-    $('.modal').on('hidden.bs.modal', function(){
-        
-    });
-
     $('body').on('input', '#form-price input[name="garage_price"]', function (e) {
         e.target.value = e.target.value.replace(/[^0-9]/g,'');
     });
@@ -129,7 +125,6 @@ $(document).ready(function () {
 
     // Save or update price
     $('body').on('click', '#btn_save_price', function () {
-        $('#accessary_id_error').html("");
         let type = $('#form-price').attr('method');
         let url = $('#form-price').attr('action');
         let userAccessaryId = $('#form-price input[name="user_accessary_id"]').val();

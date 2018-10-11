@@ -56,10 +56,17 @@ class TempPriceRepositoryImpl extends GenericRepositoryImpl implements TempPrice
             ->update(['status' => GlobalEnum::STATUS_APPROVE, 'updated_at' => now()]);
     }
 
-    function reject($ids)
+    public function reject($ids)
     {
         DB::table('tbl_temp_price')
             ->whereIn('temp_price_id', $ids)
             ->update(['status' => GlobalEnum::STATUS_REJECT, 'updated_at' => now()]);
+    }
+
+    public function findByCodeAndUserId($code, $userId) {
+        return DB::table('tbl_temp_price')
+            ->where('code', '=', $code)
+            ->where('user_id', '=', $userId)
+            ->get();
     }
 }

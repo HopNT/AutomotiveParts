@@ -1,10 +1,6 @@
 $(document).ready(function () {
     loadTableCatalogParts();
 
-    $('.modal').on('hidden.bs.modal', function(){
-        
-    });
-
     // Check all row
     $('body').on('click', '#tbl_catalog_parts #check_all', function (e) {
         if ($(this).is(':checked', true)) {
@@ -22,8 +18,6 @@ $(document).ready(function () {
             $('#tbl_catalog_parts #check_all').prop('checked', false);
         }
     });
-
-    onloadPhoto('form-catalog-parts', 'photo');
 
     // Open modal add new catalog parts
     $('body').on('click', '#btn_add_new_catalog_parts', function () {

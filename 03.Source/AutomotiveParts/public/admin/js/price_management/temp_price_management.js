@@ -1,10 +1,6 @@
 $(document).ready(function () {
     loadTableTempPrice();
 
-    $('.modal').on('hidden.bs.modal', function(){
-        
-    });
-
     $('body').on('input', '#form-temp-price input[name="garage_price"]', function (e) {
         e.target.value = e.target.value.replace(/[^0-9]/g,'');
     });
@@ -70,7 +66,8 @@ $(document).ready(function () {
                 $('#form-temp-price input[name="quantity"]').val(result.data.quantity);
                 $('#form-temp-price input[name="garage_price"]').val(result.data.garage_price);
                 $('#form-temp-price input[name="retail_price"]').val(result.data.retail_price);
-
+                CKEDITOR.instances.description.setData(result.data.description);
+                
                 if (result.data.photo_top != undefined && result.data.photo_top != null && result.data.photo_top != '') {
                     var img = $('<img/>', {
                         id: 'photo_top',
@@ -154,11 +151,10 @@ $(document).ready(function () {
 
     // Save or update temp price
     $('body').on('click', '#btn_save_temp_price', function () {
-        $('#form-temp-price #code_error').html("");
-        $('#form-temp-price #name_vi_error').html("");
         let type = $('#form-temp-price').attr('method');
         let url = $('#form-temp-price').attr('action');
         let tempPriceId = $('#form-temp-price input[name="temp_price_id"]').val();
+        $('#form-temp-price #description').val(CKEDITOR.instances.description.getData());
         $.ajax({
             type: type,
             url: url,
@@ -524,13 +520,6 @@ $(document).ready(function () {
         });
     });
 
-    onloadPhoto('form-temp-price', 'photo_top');
-    onloadPhoto('form-temp-price', 'photo_bottom');
-    onloadPhoto('form-temp-price', 'photo_left');
-    onloadPhoto('form-temp-price', 'photo_right');
-    onloadPhoto('form-temp-price', 'photo_inner');
-    onloadPhoto('form-temp-price', 'photo_outer');
-
 });
 
 function loadTableTempPrice() {
@@ -560,6 +549,19 @@ function resetTempPriceForm() {
     resetPhoto('form-temp-price', 'photo_outer');
     $('#form-temp-price #code_error').html("");
     $('#form-temp-price #name_vi_error').html("");
+
+    if (CKEDITOR.instances['description']) {
+        CKEDITOR.instances['description'].destroy();    
+    }
+
+    onloadPhoto('form-temp-price', 'photo_top');
+    onloadPhoto('form-temp-price', 'photo_bottom');
+    onloadPhoto('form-temp-price', 'photo_left');
+    onloadPhoto('form-temp-price', 'photo_right');
+    onloadPhoto('form-temp-price', 'photo_inner');
+    onloadPhoto('form-temp-price', 'photo_outer');
+
+    CKEDITOR.replace('description');
 }
 
 function onloadPhoto(form, inputName) {

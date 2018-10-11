@@ -12,4 +12,6 @@ interface AccessaryRepository
     function searchByText($text);
 
     function findByCode($code);
+
+    function deleteMulti($ids);
 }

@@ -36,7 +36,7 @@ $userType = $staff->user_type;
                     <strong id="message_error"></strong>
                 </div>
                 <form class="form-horizontal" method="POST" id="form-temp-price"
-                      action="{{route('temp-price-save')}}">
+                      action="{{route('temp-price-save')}}" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="temp_price_id">
                     <div class="row">
@@ -344,6 +344,17 @@ $userType = $staff->user_type;
                                             </div>
                                         </span>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group row">
+                                <label for="description"
+                                       class="control-label col-md-2">{{trans('label.common.description')}}</label>
+                                <div class="col-md-10">
+                                    <input id="description" name="description">
                                 </div>
                             </div>
                         </div>

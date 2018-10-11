@@ -30,6 +30,8 @@ function resetCatalogPartsForm() {
     $('#form-catalog-parts select[name="status"]').val("");
     $("#form-catalog-parts select[name='parent_id']").empty();
     resetPhoto('form-catalog-parts', 'photo');
+
+    onloadPhoto('form-catalog-parts', 'photo');
 }
 
 function resetPartsForm() {

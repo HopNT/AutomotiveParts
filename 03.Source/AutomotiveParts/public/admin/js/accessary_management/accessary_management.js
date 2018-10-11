@@ -13,25 +13,22 @@ function loadTableAccessary() {
 $(document).ready(function () {
     loadTableAccessary();
 
-    $('.modal').on('hidden.bs.modal', function(){
-        $("#form-accessary").trigger("reset");
+    // Check all row
+    $('body').on('click', '#tbl_accessary #check_all', function (e) {
+        if ($(this).is(':checked', true)) {
+            $("#tbl_accessary .checkbox").prop('checked', true);
+        } else {
+            $("#tbl_accessary .checkbox").prop('checked', false);
+        }
     });
 
-    // onloadPhoto('form-accessary', 'photo_top');
-    // onloadPhoto('form-accessary', 'photo_bottom');
-    // onloadPhoto('form-accessary', 'photo_left');
-    // onloadPhoto('form-accessary', 'photo_right');
-    // onloadPhoto('form-accessary', 'photo_inner');
-    // onloadPhoto('form-accessary', 'photo_outer');
-
-    $(function() {
-        CKEDITOR.replace('description');
-        onloadPhoto('form-accessary', 'photo_top');
-        onloadPhoto('form-accessary', 'photo_bottom');
-        onloadPhoto('form-accessary', 'photo_left');
-        onloadPhoto('form-accessary', 'photo_right');
-        onloadPhoto('form-accessary', 'photo_inner');
-        onloadPhoto('form-accessary', 'photo_outer');
+    // Check one row
+    $('body').on('click', '#tbl_accessary .checkbox', function () {
+        if ($('#tbl_accessary .checkbox:checked').length == $('#tbl_accessary .checkbox').length) {
+            $('#tbl_accessary #check_all').prop('checked', true);
+        } else {
+            $('#tbl_accessary #check_all').prop('checked', false);
+        }
     });
 
     // Open modal add new acccessary
@@ -112,6 +109,11 @@ $(document).ready(function () {
                 if (result.data.prioritize === 1) {
                     $('#form-accessary input[name="prioritize"]').prop('checked', true);
                 }
+                if (result.data.status === 0) {
+                    $('#form-accessary #status').css('display', '');
+                    $('#form-accessary select[name="status"]').val(result.data.status);
+                }
+                CKEDITOR.instances.description.setData(result.data.description);
 
                 if (result.list != undefined && result.list.length > 0) {
                     $.each(result.list, function (index, item) {
@@ -199,7 +201,6 @@ $(document).ready(function () {
                     $("#form-accessary #photo_outer_image_preview").attr("data-content", $(img)[0].outerHTML).popover("show");
                 }
 
-                CKEDITOR.instances.description.setData(result.data.description);
             }
         });
     });
@@ -214,12 +215,15 @@ $(document).ready(function () {
         } else {
             $('#form-accessary input[name="prioritize"]').val(0);
         }
-
         $('#form-accessary #description').val(CKEDITOR.instances.description.getData());
+
+        var formData = new FormData($('#form-accessary')[0]);
+        formData.append('prioritize', $('#form-accessary input[name="prioritize"]').val());
+
         $.ajax({
             type: type,
             url: url,
-            data: new FormData($('#form-accessary')[0]),
+            data: formData,
             contentType: false,
             processData: false,
             success: function (result) {
@@ -258,10 +262,93 @@ $(document).ready(function () {
         });
     });
 
+    // Delete one row parts
+    $('body').on('click', '#btn_delete_accessary', function () {
+        let url = $(this).attr('href');
+        swal({
+            title: "Bạn có chắc chắn muốn xóa?",
+            text: "",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Đồng ý!",
+            cancelButtonText: "Hủy bỏ!",
+            closeOnConfirm: true,
+            closeOnCancel: true
+        }, function (isConfirm) {
+            if (isConfirm) {
+                $.ajax({
+                    type: 'GET',
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    url: url,
+                    success: function (rs) {
+                        if (rs.error) {
+                            swal('Có lỗi xảy ra, vui lòng liên hệ với quản trị hệ thống!', rs.message, 'error');
+                        } else {
+                            swal("Xóa thành công!", "", "success");
+                            setTimeout(function () {
+                                $('#accessary').html(rs.html);
+                                loadTableAccessary();
+                            }, 1000);
+                        }
+                    },
+                    error: function (error) {
+                        swal('Có lỗi xảy ra, vui lòng liên hệ với quản trị hệ thống!', error.responseJSON.message, 'error');
+                    }
+                });
+            }
+        });
+    });
+
+    // Delete multi row parts
+    $('body').on('click', '#btn_delete_multi_accessary', function () {
+        let idsArr = [];
+        $("#tbl_accessary .checkbox:checked").each(function () {
+            idsArr.push($(this).attr('data-id'));
+        });
+
+        if (idsArr.length <= 0) {
+            swal("Vui lòng chọn ít nhất một bản ghi!", "", "error");
+        } else {
+            swal({
+                title: "Bạn có chắc chắn muốn xóa?",
+                text: "",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Đồng ý!",
+                cancelButtonText: "Hủy bỏ!",
+                closeOnConfirm: true,
+                closeOnCancel: true
+            }, function (isConfirm) {
+                if (isConfirm) {
+                    $.ajax({
+                        type: 'GET',
+                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                        url: '/admin/accessary/delete',
+                        data: {'ids': idsArr},
+                        success: function (rs) {
+                            if (rs.error) {
+                                swal('Có lỗi xảy ra, vui lòng liên hệ với quản trị hệ thống!', rs.message, 'error');
+                            } else {
+                                swal("Xóa thành công!", "", "success");
+                                setTimeout(function () {
+                                    $('#accessary').html(rs.html);
+                                    loadTableAccessary();
+                                }, 1000);
+                            }
+                        },
+                        error: function (error) {
+                            swal('Có lỗi xảy ra, vui lòng liên hệ với quản trị hệ thống!', error.responseJSON.message, 'error');
+                        }
+                    });
+                }
+            });
+        }
+    });
+
 });
 
 function resetFormAccessary() {
-    $('#form-accessary #temp_price_id').val("");
+    $('#form-accessary #accessary_id').val("");
     $('#form-accessary #trademark_id').val("");
     $('#form-accessary #nation_id').val("");
     $('#form-accessary #type').val("");
@@ -279,7 +366,21 @@ function resetFormAccessary() {
     $('#form-accessary #code_error').html("");
     $('#form-accessary #name_vi_error').html("");
     $('#form-accessary #accessary_link').html("");
-    $('#form-accessary #prioritize').prop('disabled', false);
+    $('#form-accessary input[name="prioritize"]').prop('checked', false);
+    $('#form-accessary input[name="code"]').prop('disabled', false);
+    $('#form-accessary #status').css('display', 'none');
+    if (CKEDITOR.instances['description']) {
+        CKEDITOR.instances['description'].destroy();    
+    }
+    
+    onloadPhoto('form-accessary', 'photo_top');
+    onloadPhoto('form-accessary', 'photo_bottom');
+    onloadPhoto('form-accessary', 'photo_left');
+    onloadPhoto('form-accessary', 'photo_right');
+    onloadPhoto('form-accessary', 'photo_inner');
+    onloadPhoto('form-accessary', 'photo_outer');
+
+    CKEDITOR.replace('description');
 }
 
 function onloadPhoto(form, inputName) {

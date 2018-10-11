@@ -26,7 +26,7 @@
                     <strong id="message_error"></strong>
                 </div>
                 <form class="form-horizontal" method="POST" id="form-accessary"
-                      action="{{route('accessary-save')}}">
+                      action="{{route('accessary-save')}}" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="accessary_id">
                     <div class="row">
@@ -336,6 +336,20 @@
                                        class="control-label col-md-2">{{trans('label.common.description')}}</label>
                                 <div class="col-md-10">
                                     <input id="description" name="description">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="status" class="row">
+                        <div class="col-md-12">
+                            <div class="form-group row">
+                                <label for="status"
+                                       class="control-label col-md-2">{{trans('label.common.status')}}</label>
+                                <div class="col-md-10">
+                                    <select class="form-control" name="status">
+                                        <option value="0">{{trans('label.common.status_inactive')}}</option>
+                                        <option value="1">{{trans('label.common.status_active')}}</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>

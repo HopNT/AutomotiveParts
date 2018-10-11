@@ -61,7 +61,7 @@ $can_delete_price = $staff->can_view('price-delete');
                                 <td class="text-center">
                                     <div class="animated-checkbox">
                                         <label>
-                                            <input type="checkbox" class="checkbox"
+                                            <input type="checkbox" class="checkbox" @if($price->status === 0) disabled @endif
                                                    data-id="{{$price->user_accessary_id}}"><span
                                                 class="label-text"></span>
                                         </label>
@@ -86,7 +86,7 @@ $can_delete_price = $staff->can_view('price-delete');
                                             class="btn btn-info btn-sm fa fa-edit"></button>
                                 @endif
                                 @if($can_delete_price)
-                                    <button id="btn_delete_price"
+                                    <button id="btn_delete_price" @if($price->status === 0) disabled @endif
                                             href="{{route('price-delete', ['ids[]' => $price->user_accessary_id])}}"
                                             class="btn btn-danger btn-sm fa fa-trash"></button>
                                 @endif

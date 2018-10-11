@@ -53,7 +53,7 @@ $can_delete_nation = $staff->can_view('nation-delete');
                                 <td class="text-center">
                                     <div class="animated-checkbox">
                                         <label>
-                                            <input type="checkbox" class="checkbox"
+                                            <input type="checkbox" class="checkbox" @if($nation->status === 0) disabled @endif
                                                    data-id="{{$nation->nation_id}}"><span class="label-text"></span>
                                         </label>
                                     </div>
@@ -71,7 +71,7 @@ $can_delete_nation = $staff->can_view('nation-delete');
                                             class="btn btn-info btn-sm fa fa-edit"></button>
                                 @endif
                                 @if($can_delete_nation)
-                                    <button id="btn_delete_nation"
+                                    <button id="btn_delete_nation" @if($nation->status === 0) disabled @endif
                                             href="{{route('nation-delete', ['ids[]' => $nation->nation_id])}}"
                                             class="btn btn-danger btn-sm fa fa-trash"></button>
                                 @endif

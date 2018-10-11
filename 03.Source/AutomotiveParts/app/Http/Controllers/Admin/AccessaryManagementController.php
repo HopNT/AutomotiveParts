@@ -35,7 +35,7 @@ class AccessaryManagementController extends BackendController
 
     public function index()
     {
-        $listAccessary = $this->accessaryRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
+        $listAccessary = $this->accessaryRepository->getAll();
         return view('admin.accessary_management.accessary_management')
             ->with('listAccessary', $listAccessary);
     }
@@ -101,6 +101,7 @@ class AccessaryManagementController extends BackendController
     {
         $valid = new Accessary();
         $accessary = $request->all();
+        // dd($accessary);
         try {
             // Update
             if (isset($request->accessary_id))
@@ -267,7 +268,7 @@ class AccessaryManagementController extends BackendController
         }
 
         // Get List accessary
-        $listAccessary = $this->accessaryRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
+        $listAccessary = $this->accessaryRepository->getAll();
         $view = view('admin.accessary_management.elements.list_data_accessary')
             ->with('listAccessary', $listAccessary)->render();
         return [
@@ -278,7 +279,26 @@ class AccessaryManagementController extends BackendController
 
     public function delete(Request $request)
     {
+        try {
+            $ids = $request->ids;
+            $this->accessaryRepository->deleteMulti($ids);
+        }
+        catch (\Exception $e)
+        {
+            return [
+                'error' => true,
+                'message' => $e->getMessage()
+            ];
+        }
 
+        // Get List accessary
+        $listAccessary = $this->accessaryRepository->getAll();
+        $view = view('admin.accessary_management.elements.list_data_accessary')
+            ->with('listAccessary', $listAccessary)->render();
+        return [
+            'error' => false,
+            'html' => $view
+        ];
     }
 
     public function searchByText(Request $request)
