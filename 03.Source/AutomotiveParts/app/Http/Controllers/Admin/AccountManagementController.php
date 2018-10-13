@@ -16,6 +16,7 @@ use App\Http\Common\Entities\Role;
 use App\Http\Common\Entities\UserDb;
 use App\Http\Common\Enum\GlobalEnum;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -234,6 +235,7 @@ class AccountManagementController extends BackendController
                     $user->gender = $request->gender;
                     $user->phone_number = $request->phone_number;
                     $user->role_id = $request->role_id;
+                    $user->user_type = $request->user_type;
                     $user->fax = $request->fax;
                     $user->identify_card = $request->identify_card;
                     $user->driving_license = $request->driving_license;
@@ -310,4 +312,41 @@ class AccountManagementController extends BackendController
         }
 
     }
+
+    public function viewProfile(Request $request){
+        if($request->isMethod('post')){
+            $user = new UserDb();
+            $validator = Validator::make($request->all(), $user->rule_update_profile, $user->messages);
+            if ($validator->fails()) {
+                return [
+                    'error' => true,
+                    'errors' => $validator->errors()
+                ];
+            }
+            if(isset($request->user_id)){
+                $user = (new UserDAO())->getUserById($request->user_id);
+                $user->name = $request->name;
+                $user->birth_day = $request->birth_day;
+                $user->gender = $request->gender;
+                $user->phone_number = $request->phone_number;
+                $user->fax = $request->fax;
+                $user->identify_card = $request->identify_card;
+                $user->driving_license = $request->driving_license;
+                $user->address = $request->address;
+                $user->updated_at = date("Y-m-d H:i:s");
+                $user->save();
+            }
+            return [
+                'error' => false,
+                'message' => trans('label.common.success')
+            ];
+        }
+        $user = Auth::guard('admin')->user();
+        $data_role = (new RoleDAO())->getDataRole(true);
+        return view('admin.auth.view_profile')
+                    ->with('data_role',$data_role)
+                    ->with('user',$user);
+    }
+
+
 }

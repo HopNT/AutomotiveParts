@@ -46,6 +46,49 @@ class UserDb extends Authenticatable {
         return $this->belongsToMany(Accessary::class, 'tbl_user_accessary', 'user_id', 'accessary_id');
     }
 
+    public $rules = [
+        'name'=>'required',
+        'birth_day' => 'required',
+        'gender' =>"required",
+        'email' =>"required|email",
+        'phone_number' =>"required|max:13",
+        'role_id' =>"required",
+        'user_type' => "required"
+    ];
+
+    public $rule_update_profile = [
+        'name'=>'required',
+        'birth_day' => 'required',
+        'gender' =>"required",
+        'email' =>"required|email",
+        'phone_number' =>"required|max:13",
+    ];
+
+    public $rule_update_password = [
+        'password' => array(
+            'required',
+            'min:4',
+            'max:20',
+            'confirmed',
+            'regex:/^[a-zA-Z0-9!$#%]{4,20}/'
+        ),
+        'password_confirmation' => array(
+            'required',
+            'same:password'
+        )
+    ];
+
+    public $messages = [
+        'name.required'=>'Vui lòng nhập thông tin.',
+        'birth_day.required'=>'Vui lòng nhập thông tin.',
+        'gender.required'=>'Vui lòng nhập thông tin.',
+        'email.required'=>'Vui lòng nhập thông tin.',
+        'email.email'=>'Địa chỉ email không hợp lệ.',
+        'phone_number.required'=>'Vui lòng nhập thông tin.',
+        'phone_number.max'=>'SĐT không vượt quá 13 kí tự',
+        'role_id.required'=>'Vui lòng nhập thông tin.',
+        'user_type.required'=>'Vui lòng nhập thông tin.',
+    ];
     /**
      * check permission
      * @param string $route_name

@@ -117,7 +117,8 @@ return [
         'edit' => 'Cập nhật',
         'delete' => 'Xóa',
         'approve' => 'Duyệt',
-        'reject' => 'Từ chối'
+        'reject' => 'Từ chối',
+	'change-pass' => 'Thay đổi mật khẩu'
     ],
     'account' => [
         'role' => 'Quyền',
@@ -145,7 +146,13 @@ return [
         'enter_id_card' => 'Nhập số CMND/Căn cước',
         'enter_fax' => 'Nhập số Fax',
         'enter_phone' => 'Nhập số điện thoại',
-        'enter_email' => 'Nhập địa chỉ email'
+        'enter_email' => 'Nhập địa chỉ email',
+        'enter_old_pass' => 'Nhập mật khẩu cũ',
+        'enter_new_pass' => 'Nhập mật khẩu mới',
+        'confirm_new_pass' => 'Nhập lại mật khẩu',
+        'old_pass' => 'Mật khẩu cũ',
+        'new_pass' => 'Mật khẩu mới',
+        're_new_pass' => 'Nhập lại mật khẩu'
 
     ],
     'route' => [
@@ -158,7 +165,8 @@ return [
         'parts-management'=> 'Quản lý thông tin bộ phận xe',
         'price-management' => 'Quản lý giá phụ tùng',
         'temp-price-management' => 'Quản lý yêu cầu thêm phụ tùng',
-        'accessary-management' => 'Quản lý thông tin phụ tùng'
+        'accessary-management' => 'Quản lý thông tin phụ tùng',
+	'view_profile' => 'Trang thông tin cá nhân'
     ],
     'form' => [
         'create' => 'Thêm mới',

@@ -40,6 +40,18 @@ class RoleDAO extends Role
         return $data;
     }
 
+    public function getDataRole($addDefault = true){
+        $key = __CLASS__ . __FUNCTION__;
+        $minutes = $this::$duration / 60;
+        $value = Cache::remember($key, $minutes, function() use($addDefault) {
+            $data = DB::table($this->table)->pluck('role_name','id')->toArray();
+            if ($addDefault) {
+                $data = array_prepend($data, '--- M?i ch?n ---', '');
+            }
+            return $data;
+        });
+        return $value;
+    }
     /**
      * get role by id
      * @param $id

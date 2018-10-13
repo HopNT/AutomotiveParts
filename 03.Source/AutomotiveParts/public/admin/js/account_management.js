@@ -194,6 +194,42 @@ $( document ).ready(function() {
             }
         });
     });
+
+    $('body').on('click','#btn_change_pass', function () {
+        $('#modal_change_pass').modal();
+    });
+
+    $('body').on('click','#btn_change_password', function () {
+        var url = $('#form_change_password').attr('action');
+        $.ajax({
+            type:'POST',
+            url:url,
+            data: $('#form_change_password').serialize(),
+            success:function(rs){
+                if(rs.error){
+                    $.each(rs.errors, function(key, value){
+                        if(key == "gender"){
+                            $("input[name='"+key+"']").parent().parent().find('.text-danger').html(value);
+                        }else if(key == "role_id"){
+                            $("select[name='"+key+"']").parent().find('.text-danger').html(value);
+                        } else {
+                            $("input[name='"+key+"']").parent().find('.text-danger').html(value);
+                        }
+
+                    });
+                }else{
+                    $('#modal_change_pass').modal('hide');
+                    setTimeout(function(){
+                        showMessage(rs.message,'success');
+                        $('#user').html(rs.html);
+                        loadDataTable();
+                    }, 200);
+                }
+
+            }
+        });
+    });
+
 });
 function loadDataTable() {
     $('#user_table').DataTable();

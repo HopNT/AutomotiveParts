@@ -24,4 +24,13 @@ class UserDAO extends UserDb
             ->where('u.status','=',GlobalEnum::STATUS_ACTIVE)->get();
         return $data;
     }
+
+    /** function get user by id
+     * @param $userid
+     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Query\Builder|null|object
+     */
+    public function getUserById($userid){
+        $data = UserDb::where('user_id','=',$userid)->first();
+        return $data;
+    }
 }

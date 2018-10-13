@@ -13,7 +13,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/logout', 'AuthAdmin\LoginController@logoutAdmin')->name('admin_logout');
     Route::get('/reset/{token}', 'AuthAdmin\ResetPasswordController@showResetForm')->name('admin_reset_pw');
     Route::post('/reset/password', 'AuthAdmin\ResetPasswordController@reset')->name('admin_post_reset_pw');
-
+    Route::match(['get', 'post'],'/view-profile', 'Admin\AccountManagementController@viewProfile')->name('view_profile');
+    Route::post('/change-password', 'AuthAdmin\ResetPasswordController@changePassword')->name('change_password');
 
 
 

@@ -27,4 +27,13 @@ class GlobalEnum
     const IMAGE = 'images';
     const ICON = 'icon';
     const DOC = 'documentations';
+
+	public static function getAllUserType(){
+        return [
+            ''=>'--- Mời chọn ---',
+            self::ADMIN => 'Quản trị viên',
+            self::PROVIDER => 'Nhà cung cấp',
+            self::CLIENT => 'Khách hàng'
+        ];
+    }	
 }
