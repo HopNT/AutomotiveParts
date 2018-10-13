@@ -46,15 +46,15 @@ class RedirectIfNotAdmin
                 $permistions = (new MenuDAO())->getPermistons($role_id);
                 $user->permistions = $permistions;
             }
-                if(!in_array($router_name, $this->excludeMySetting)){
-                    $can_view = $user->can_view($router_name);
-                    if(!$can_view){
-                        if(Request::ajax()){
-                            return response()->json(['error' => 'You not permistion!'], 403);
-                         }
-                        abort(403, "You not permistion!");
-                    }
+            if(!in_array($router_name, $this->excludeMySetting)){
+                $can_view = $user->can_view($router_name);
+                if(!$can_view){
+                    if(Request::ajax()){
+                        return response()->json(['error' => 'You are not permission!'], 403);
+                     }
+                    abort(403, "You are not permission!");
                 }
+            }
         }
         if(Auth::guard($guard)->check()){
             $menu = (new DataHelper())->loadLeftNavData();
