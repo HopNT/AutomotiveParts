@@ -38,6 +38,9 @@
 <script type="text/javascript" src="{{ asset('admin/js/plugins/select2.min.js') }}"></script>
 <script src="https://cdn.ckeditor.com/4.10.1/standard/ckeditor.js"></script>
 <script src="{{ asset('admin/js/main.js') }}"></script>
+<script>
+    var publicPath = '<?=url('/')?>';
+</script>
 @yield('javascript')
 </body>
 </html>

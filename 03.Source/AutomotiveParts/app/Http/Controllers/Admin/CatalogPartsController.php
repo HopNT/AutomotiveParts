@@ -13,6 +13,7 @@ use App\Http\Common\Repository\CatalogPartsRepository;
 use App\Http\Common\Repository\PartsRepository;
 use App\Http\Common\Utils\CommonUtils;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -53,6 +54,7 @@ class CatalogPartsController extends BackendController
 
     public function save(Request $request)
     {
+        $user = Auth::guard('admin')->user();
         $valid = new CatalogParts();
         $catalogParts = $request->all();
         try
@@ -83,7 +85,7 @@ class CatalogPartsController extends BackendController
                     {
                         CommonUtils::deleteFile($exists->icon);
                     }
-                    $pathPhoto = CommonUtils::uploadFile($request->photo, 'catalog_parts', GlobalEnum::ICON);
+                    $pathPhoto = CommonUtils::uploadFile($request->photo, 'catalog_parts/'.$user->user_id, GlobalEnum::ICON);
                     $catalogParts = array_add($catalogParts, 'icon_name', $request->photo->getClientOriginalName());
                     $catalogParts = array_add($catalogParts, 'icon', $pathPhoto);
                 }
@@ -95,7 +97,7 @@ class CatalogPartsController extends BackendController
                 $this->catalogPartsRepository->merge($request->catalog_parts_id, $catalogParts);
             } else {
                 if ($request->hasFile('photo')) {
-                    $pathPhoto = CommonUtils::uploadFile($request->photo, 'catalog_parts', GlobalEnum::ICON);
+                    $pathPhoto = CommonUtils::uploadFile($request->photo, 'catalog_parts/'.$user->user_id, GlobalEnum::ICON);
                     $catalogParts = array_add($catalogParts, 'icon_name', $request->photo->getClientOriginalName());
                     $catalogParts = array_add($catalogParts, 'icon', $pathPhoto);
                 }
@@ -128,13 +130,6 @@ class CatalogPartsController extends BackendController
     public function getById(Request $request)
     {
         $catalogParts = $this->catalogPartsRepository->find($request->id);
-        if (!empty($catalogParts->icon))
-        {
-            $contents = Storage::get($catalogParts->icon);
-            $type = pathinfo($catalogParts->icon, PATHINFO_EXTENSION);
-            $base64 = 'data:image/'.$type.';base64,'.base64_encode($contents);
-            $catalogParts->icon = $base64;
-        }
         $parent = null;
         if (!empty($catalogParts->parent_id)) {
             $parent = $this->catalogPartsRepository->find($catalogParts->parent_id);

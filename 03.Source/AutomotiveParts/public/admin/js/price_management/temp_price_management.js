@@ -77,7 +77,7 @@ $(document).ready(function () {
                     $("#form-temp-price #photo_top_image_preview_input_title").text("Thay đổi");
                     $("#form-temp-price #photo_top_image_preview_clear").show();
                     $("#form-temp-price #photo_top_image_preview_filename").val(result.data.photo_top_name);
-                    img.attr('src', result.data.photo_top);
+                    img.attr('src', publicPath + '/' + result.data.photo_top);
                     $("#form-temp-price #photo_top_image_preview").attr("data-content", $(img)[0].outerHTML).popover("show");
                 }
 
@@ -90,7 +90,7 @@ $(document).ready(function () {
                     $("#form-temp-price #photo_bottom_image_preview_input_title").text("Thay đổi");
                     $("#form-temp-price #photo_bottom_image_preview_clear").show();
                     $("#form-temp-price #photo_bottom_image_preview_filename").val(result.data.photo_bottom_name);
-                    img.attr('src', result.data.photo_bottom);
+                    img.attr('src', publicPath + '/' + result.data.photo_bottom);
                     $("#form-temp-price #photo_bottom_image_preview").attr("data-content", $(img)[0].outerHTML).popover("show");
                 }
 
@@ -103,7 +103,7 @@ $(document).ready(function () {
                     $("#form-temp-price #photo_left_image_preview_input_title").text("Thay đổi");
                     $("#form-temp-price #photo_left_image_preview_clear").show();
                     $("#form-temp-price #photo_left_image_preview_filename").val(result.data.photo_left_name);
-                    img.attr('src', result.data.photo_left);
+                    img.attr('src', publicPath + '/' + result.data.photo_left);
                     $("#form-temp-price #photo_left_image_preview").attr("data-content", $(img)[0].outerHTML).popover("show");
                 }
 
@@ -116,7 +116,7 @@ $(document).ready(function () {
                     $("#form-temp-price #photo_right_image_preview_input_title").text("Thay đổi");
                     $("#form-temp-price #photo_right_image_preview_clear").show();
                     $("#form-temp-price #photo_right_image_preview_filename").val(result.data.photo_right_name);
-                    img.attr('src', result.data.photo_right);
+                    img.attr('src', publicPath + '/' + result.data.photo_right);
                     $("#form-temp-price #photo_right_image_preview").attr("data-content", $(img)[0].outerHTML).popover("show");
                 }
 
@@ -129,7 +129,7 @@ $(document).ready(function () {
                     $("#form-temp-price #photo_inner_image_preview_input_title").text("Thay đổi");
                     $("#form-temp-price #photo_inner_image_preview_clear").show();
                     $("#form-temp-price #photo_inner_image_preview_filename").val(result.data.photo_inner_name);
-                    img.attr('src', result.data.photo_top);
+                    img.attr('src', publicPath + '/' + result.data.photo_top);
                     $("#form-temp-price #photo_inner_image_preview").attr("data-content", $(img)[0].outerHTML).popover("show");
                 }
 
@@ -142,7 +142,7 @@ $(document).ready(function () {
                     $("#form-temp-price #photo_outer_image_preview_input_title").text("Thay đổi");
                     $("#form-temp-price #photo_outer_image_preview_clear").show();
                     $("#form-temp-price #photo_outer_image_preview_filename").val(result.data.photo_outer_name);
-                    img.attr('src', result.data.photo_outer);
+                    img.attr('src', publicPath + '/' + result.data.photo_outer);
                     $("#form-temp-price #photo_outer_image_preview").attr("data-content", $(img)[0].outerHTML).popover("show");
                 }
             }

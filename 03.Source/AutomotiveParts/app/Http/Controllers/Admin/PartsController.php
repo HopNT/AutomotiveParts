@@ -12,6 +12,7 @@ use App\Http\Common\Entities\Parts;
 use App\Http\Common\Enum\GlobalEnum;
 use App\Http\Common\Repository\PartsRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Common\Utils\CommonUtils;
@@ -57,6 +58,7 @@ class PartsController extends BackendController
 
     public function save(Request $request)
     {
+        $user = Auth::guard('admin')->user();
         $valid = new Parts();
         $parts = $request->all();
         try {
@@ -88,7 +90,7 @@ class PartsController extends BackendController
                     {
                         CommonUtils::deleteFile($exists->photo);
                     }
-                    $pathPhoto = CommonUtils::uploadFile($file, 'parts', GlobalEnum::IMAGE);
+                    $pathPhoto = CommonUtils::uploadFile($file, 'parts/'.$user->user_id.'/'.$exists->code, GlobalEnum::IMAGE);
                     $parts = array_add($parts, 'photo_name', $file->getClientOriginalName());
                     $parts = array_add($parts, 'photo', $pathPhoto);
                 }
@@ -114,7 +116,7 @@ class PartsController extends BackendController
                 }
                 if (!empty($file))
                 {
-                    $pathPhoto = CommonUtils::uploadFile($file, 'parts', GlobalEnum::IMAGE);
+                    $pathPhoto = CommonUtils::uploadFile($file, 'parts/'.$user->user_id.'/'.$request->code, GlobalEnum::IMAGE);
                     $parts = array_add($parts, 'photo_name', $file->getClientOriginalName());
                     $parts = array_add($parts, 'photo', $pathPhoto);
                 }
@@ -148,18 +150,6 @@ class PartsController extends BackendController
     {
         $partsId = $request->id;
         $parts = $this->partsRepository->find($partsId);
-        if (!empty($parts))
-        {
-            $pathPhoto = $parts->photo;
-            if (!empty($pathPhoto))
-            {
-                $contents = Storage::get($pathPhoto);
-                $type = pathinfo($pathPhoto, PATHINFO_EXTENSION);
-                $base64 = 'data:image/'.$type.';base64,'.base64_encode($contents);
-                $parts->photo = $base64;
-            }
-            $parts->accessarys;
-        }
         return [
             'data' => $parts
         ];

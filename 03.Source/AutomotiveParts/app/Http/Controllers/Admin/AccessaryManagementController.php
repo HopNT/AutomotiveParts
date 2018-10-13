@@ -14,6 +14,7 @@ use App\Http\Common\Repository\AccessaryLinkRepository;
 use App\Http\Common\Repository\AccessaryRepository;
 use App\Http\Common\Utils\CommonUtils;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -44,49 +45,6 @@ class AccessaryManagementController extends BackendController
     {
         $accessaryList = array();
         $accessary = $this->accessaryRepository->find($request->id);
-        if (!empty($accessary->photo_top))
-        {
-            $contents = Storage::get($accessary->photo_top);
-            $type = pathinfo($accessary->photo_top, PATHINFO_EXTENSION);
-            $base64 = 'data:image/'.$type.';base64,'.base64_encode($contents);
-            $accessary->photo_top = $base64;
-        }
-        if (!empty($accessary->photo_bottom))
-        {
-            $contents = Storage::get($accessary->photo_bottom);
-            $type = pathinfo($accessary->photo_bottom, PATHINFO_EXTENSION);
-            $base64 = 'data:image/'.$type.';base64,'.base64_encode($contents);
-            $accessary->photo_bottom = $base64;
-        }
-        if (!empty($accessary->photo_left))
-        {
-            $contents = Storage::get($accessary->photo_left);
-            $type = pathinfo($accessary->photo_left, PATHINFO_EXTENSION);
-            $base64 = 'data:image/'.$type.';base64,'.base64_encode($contents);
-            $accessary->photo_left = $base64;
-        }
-        if (!empty($accessary->photo_right))
-        {
-            $contents = Storage::get($accessary->photo_right);
-            $type = pathinfo($accessary->photo_right, PATHINFO_EXTENSION);
-            $base64 = 'data:image/'.$type.';base64,'.base64_encode($contents);
-            $accessary->photo_right = $base64;
-        }
-        if (!empty($accessary->photo_inner))
-        {
-            $contents = Storage::get($accessary->photo_inner);
-            $type = pathinfo($accessary->photo_inner, PATHINFO_EXTENSION);
-            $base64 = 'data:image/'.$type.';base64,'.base64_encode($contents);
-            $accessary->photo_inner = $base64;
-        }
-        if (!empty($accessary->photo_outer))
-        {
-            $contents = Storage::get($accessary->photo_outer);
-            $type = pathinfo($accessary->photo_outer, PATHINFO_EXTENSION);
-            $base64 = 'data:image/'.$type.';base64,'.base64_encode($contents);
-            $accessary->photo_outer = $base64;
-        }
-
         foreach ($accessary->accessaryLinks as $key => $item) {
             $accessaryLink = $this->accessaryRepository->find($item->accessary_value);
             $accessaryList[$key] = $accessaryLink->toArray();
@@ -99,11 +57,13 @@ class AccessaryManagementController extends BackendController
 
     public function save(Request $request)
     {
+        $user = Auth::guard('admin')->user();
         $valid = new Accessary();
         $accessary = $request->all();
         // dd($accessary);
         try {
             // Update
+            $time = time();
             if (isset($request->accessary_id))
             {
                 $exists = $this->accessaryRepository->find($request->accessary_id);
@@ -113,7 +73,7 @@ class AccessaryManagementController extends BackendController
                     {
                         CommonUtils::deleteFile($exists->photo_top);
                     }
-                    $pathPhotoTop = CommonUtils::uploadFile($request->photo_top, 'accessary', GlobalEnum::IMAGE);
+                    $pathPhotoTop = CommonUtils::uploadFile($request->photo_top, 'accessary/'.$user->user_id.'/'.$exists->code, GlobalEnum::IMAGE);
                     unset($accessary['photo_top']);
                     $accessary = array_add($accessary, 'photo_top', $pathPhotoTop);
                     $accessary = array_add($accessary, 'photo_top_name', $request->photo_top->getClientOriginalName());
@@ -125,7 +85,7 @@ class AccessaryManagementController extends BackendController
                     {
                         CommonUtils::deleteFile($exists->photo_bottom);
                     }
-                    $pathPhotoBottom = CommonUtils::uploadFile($request->photo_bottom, 'accessary', GlobalEnum::IMAGE);
+                    $pathPhotoBottom = CommonUtils::uploadFile($request->photo_bottom, 'accessary/'.$user->user_id.'/'.$exists->code, GlobalEnum::IMAGE);
                     unset($accessary['photo_bottom']);
                     $accessary = array_add($accessary, 'photo_bottom', $pathPhotoBottom);
                     $accessary = array_add($accessary, 'photo_bottom_name', $request->photo_bottom->getClientOriginalName());
@@ -137,7 +97,7 @@ class AccessaryManagementController extends BackendController
                     {
                         CommonUtils::deleteFile($exists->photo_left);
                     }
-                    $pathPhotoLeft = CommonUtils::uploadFile($request->photo_left, 'accessary', GlobalEnum::IMAGE);
+                    $pathPhotoLeft = CommonUtils::uploadFile($request->photo_left, 'accessary/'.$user->user_id.'/'.$exists->code, GlobalEnum::IMAGE);
                     unset($accessary['photo_left']);
                     $accessary = array_add($accessary, 'photo_left', $pathPhotoLeft);
                     $accessary = array_add($accessary, 'photo_left_name', $request->photo_left->getClientOriginalName());
@@ -149,7 +109,7 @@ class AccessaryManagementController extends BackendController
                     {
                         CommonUtils::deleteFile($exists->photo_right);
                     }
-                    $pathPhotoRight = CommonUtils::uploadFile($request->photo_right, 'accessary', GlobalEnum::IMAGE);
+                    $pathPhotoRight = CommonUtils::uploadFile($request->photo_right, 'accessary/'.$user->user_id.'/'.$exists->code, GlobalEnum::IMAGE);
                     unset($accessary['photo_right']);
                     $accessary = array_add($accessary, 'photo_right', $pathPhotoRight);
                     $accessary = array_add($accessary, 'photo_right_name', $request->photo_right->getClientOriginalName());
@@ -161,7 +121,7 @@ class AccessaryManagementController extends BackendController
                     {
                         CommonUtils::deleteFile($exists->photo_inner);
                     }
-                    $pathPhotoInner = CommonUtils::uploadFile($request->photo_inner, 'accessary', GlobalEnum::IMAGE);
+                    $pathPhotoInner = CommonUtils::uploadFile($request->photo_inner, 'accessary/'.$user->user_id.'/'.$exists->code, GlobalEnum::IMAGE);
                     unset($accessary['photo_inner']);
                     $accessary = array_add($accessary, 'photo_inner', $pathPhotoInner);
                     $accessary = array_add($accessary, 'photo_inner_name', $request->photo_inner->getClientOriginalName());
@@ -173,7 +133,7 @@ class AccessaryManagementController extends BackendController
                     {
                         CommonUtils::deleteFile($exists->photo_outer);
                     }
-                    $pathPhotoOuter = CommonUtils::uploadFile($request->photo_outer, 'accessary', GlobalEnum::IMAGE);
+                    $pathPhotoOuter = CommonUtils::uploadFile($request->photo_outer, 'accessary/'.$user->user_id.'/'.$exists->code, GlobalEnum::IMAGE);
                     unset($accessary['photo_outer']);
                     $accessary = array_add($accessary, 'photo_outer', $pathPhotoOuter);
                     $accessary = array_add($accessary, 'photo_outer_name', $request->photo_outer->getClientOriginalName());
@@ -205,42 +165,42 @@ class AccessaryManagementController extends BackendController
                 }
                 if ($request->hasFile('photo_top'))
                 {
-                    $pathPhotoTop = CommonUtils::uploadFile($request->photo_top, 'accessary', GlobalEnum::IMAGE);
+                    $pathPhotoTop = CommonUtils::uploadFile($request->photo_top, 'accessary/'.$user->user_id.'/'.$request->code, GlobalEnum::IMAGE);
                     unset($accessary['photo_top']);
                     $accessary = array_add($accessary, 'photo_top', $pathPhotoTop);
                     $accessary = array_add($accessary, 'photo_top_name', $request->photo_top->getClientOriginalName());
                 }
                 if ($request->hasFile('photo_bottom'))
                 {
-                    $pathPhotoBottom = CommonUtils::uploadFile($request->photo_bottom, 'accessary', GlobalEnum::IMAGE);
+                    $pathPhotoBottom = CommonUtils::uploadFile($request->photo_bottom, 'accessary/'.$user->user_id.'/'.$request->code, GlobalEnum::IMAGE);
                     unset($accessary['photo_bottom']);
                     $accessary = array_add($accessary, 'photo_bottom', $pathPhotoBottom);
                     $accessary = array_add($accessary, 'photo_bottom_name', $request->photo_bottom->getClientOriginalName());
                 }
                 if ($request->hasFile('photo_left'))
                 {
-                    $pathPhotoLeft = CommonUtils::uploadFile($request->photo_left, 'accessary', GlobalEnum::IMAGE);
+                    $pathPhotoLeft = CommonUtils::uploadFile($request->photo_left, 'accessary/'.$user->user_id.'/'.$request->code, GlobalEnum::IMAGE);
                     unset($accessary['photo_left']);
                     $accessary = array_add($accessary, 'photo_left', $pathPhotoLeft);
                     $accessary = array_add($accessary, 'photo_left_name', $request->photo_left->getClientOriginalName());
                 }
                 if ($request->hasFile('photo_right'))
                 {
-                    $pathPhotoRight = CommonUtils::uploadFile($request->photo_right, 'accessary', GlobalEnum::IMAGE);
+                    $pathPhotoRight = CommonUtils::uploadFile($request->photo_right, 'accessary/'.$user->user_id.'/'.$request->code, GlobalEnum::IMAGE);
                     unset($accessary['photo_right']);
                     $accessary = array_add($accessary, 'photo_right', $pathPhotoRight);
                     $accessary = array_add($accessary, 'photo_right_name', $request->photo_right->getClientOriginalName());
                 }
                 if ($request->hasFile('photo_inner'))
                 {
-                    $pathPhotoInner = CommonUtils::uploadFile($request->photo_inner, 'accessary', GlobalEnum::IMAGE);
+                    $pathPhotoInner = CommonUtils::uploadFile($request->photo_inner, 'accessary/'.$user->user_id.'/'.$request->code, GlobalEnum::IMAGE);
                     unset($accessary['photo_inner']);
                     $accessary = array_add($accessary, 'photo_inner', $pathPhotoInner);
                     $accessary = array_add($accessary, 'photo_inner_name', $request->photo_inner->getClientOriginalName());
                 }
                 if ($request->hasFile('photo_outer'))
                 {
-                    $pathPhotoOuter = CommonUtils::uploadFile($request->photo_outer, 'accessary', GlobalEnum::IMAGE);
+                    $pathPhotoOuter = CommonUtils::uploadFile($request->photo_outer, 'accessary/'.$user->user_id.'/'.$request->code, GlobalEnum::IMAGE);
                     unset($accessary['photo_outer']);
                     $accessary = array_add($accessary, 'photo_outer', $pathPhotoOuter);
                     $accessary = array_add($accessary, 'photo_outer_name', $request->photo_outer->getClientOriginalName());

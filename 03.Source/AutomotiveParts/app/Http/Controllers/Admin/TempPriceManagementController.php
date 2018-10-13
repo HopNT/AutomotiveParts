@@ -62,51 +62,6 @@ class TempPriceManagementController extends BackendController
     {
         $id = $request->id;
         $tempPrice = $this->tempPriceRepository->find($id);
-        if (!empty($tempPrice))
-        {
-            if (!empty($tempPrice->photo_top))
-            {
-                $contents = Storage::get($tempPrice->photo_top);
-                $type = pathinfo($tempPrice->photo_top, PATHINFO_EXTENSION);
-                $base64 = 'data:image/'.$type.';base64,'.base64_encode($contents);
-                $tempPrice->photo_top = $base64;
-            }
-            if (!empty($tempPrice->photo_bottom))
-            {
-                $contents = Storage::get($tempPrice->photo_bottom);
-                $type = pathinfo($tempPrice->photo_bottom, PATHINFO_EXTENSION);
-                $base64 = 'data:image/'.$type.';base64,'.base64_encode($contents);
-                $tempPrice->photo_bottom = $base64;
-            }
-            if (!empty($tempPrice->photo_left))
-            {
-                $contents = Storage::get($tempPrice->photo_left);
-                $type = pathinfo($tempPrice->photo_left, PATHINFO_EXTENSION);
-                $base64 = 'data:image/'.$type.';base64,'.base64_encode($contents);
-                $tempPrice->photo_left = $base64;
-            }
-            if (!empty($tempPrice->photo_right))
-            {
-                $contents = Storage::get($tempPrice->photo_right);
-                $type = pathinfo($tempPrice->photo_right, PATHINFO_EXTENSION);
-                $base64 = 'data:image/'.$type.';base64,'.base64_encode($contents);
-                $tempPrice->photo_right = $base64;
-            }
-            if (!empty($tempPrice->photo_inner))
-            {
-                $contents = Storage::get($tempPrice->photo_inner);
-                $type = pathinfo($tempPrice->photo_inner, PATHINFO_EXTENSION);
-                $base64 = 'data:image/'.$type.';base64,'.base64_encode($contents);
-                $tempPrice->photo_inner = $base64;
-            }
-            if (!empty($tempPrice->photo_outer))
-            {
-                $contents = Storage::get($tempPrice->photo_outer);
-                $type = pathinfo($tempPrice->photo_outer, PATHINFO_EXTENSION);
-                $base64 = 'data:image/'.$type.';base64,'.base64_encode($contents);
-                $tempPrice->photo_outer = $base64;
-            }
-        }
         return [
             'data' => $tempPrice
         ];
@@ -135,7 +90,7 @@ class TempPriceManagementController extends BackendController
                     {
                         CommonUtils::deleteFile($exists->photo_top);
                     }
-                    $pathPhotoTop = CommonUtils::uploadFile($request->photo_top, 'accessary', GlobalEnum::IMAGE);
+                    $pathPhotoTop = CommonUtils::uploadFile($request->photo_top, 'accessary/'.$user->user_id.'/'.$exists->code, GlobalEnum::IMAGE);
                     unset($tempPrice['photo_top']);
                     $tempPrice = array_add($tempPrice, 'photo_top', $pathPhotoTop);
                     $tempPrice = array_add($tempPrice, 'photo_top_name', $request->photo_top->getClientOriginalName());
@@ -147,7 +102,7 @@ class TempPriceManagementController extends BackendController
                     {
                         CommonUtils::deleteFile($exists->photo_bottom);
                     }
-                    $pathPhotoBottom = CommonUtils::uploadFile($request->photo_bottom, 'accessary', GlobalEnum::IMAGE);
+                    $pathPhotoBottom = CommonUtils::uploadFile($request->photo_bottom, 'accessary/'.$user->user_id.'/'.$exists->code, GlobalEnum::IMAGE);
                     unset($tempPrice['photo_bottom']);
                     $tempPrice = array_add($tempPrice, 'photo_bottom', $pathPhotoBottom);
                     $tempPrice = array_add($tempPrice, 'photo_bottom_name', $request->photo_bottom->getClientOriginalName());
@@ -159,7 +114,7 @@ class TempPriceManagementController extends BackendController
                     {
                         CommonUtils::deleteFile($exists->photo_left);
                     }
-                    $pathPhotoLeft = CommonUtils::uploadFile($request->photo_left, 'accessary', GlobalEnum::IMAGE);
+                    $pathPhotoLeft = CommonUtils::uploadFile($request->photo_left, 'accessary/'.$user->user_id.'/'.$exists->code, GlobalEnum::IMAGE);
                     unset($tempPrice['photo_left']);
                     $tempPrice = array_add($tempPrice, 'photo_left', $pathPhotoLeft);
                     $tempPrice = array_add($tempPrice, 'photo_left_name', $request->photo_left->getClientOriginalName());
@@ -171,7 +126,7 @@ class TempPriceManagementController extends BackendController
                     {
                         CommonUtils::deleteFile($exists->photo_right);
                     }
-                    $pathPhotoRight = CommonUtils::uploadFile($request->photo_right, 'accessary', GlobalEnum::IMAGE);
+                    $pathPhotoRight = CommonUtils::uploadFile($request->photo_right, 'accessary/'.$user->user_id.'/'.$exists->code, GlobalEnum::IMAGE);
                     unset($tempPrice['photo_right']);
                     $tempPrice = array_add($tempPrice, 'photo_right', $pathPhotoRight);
                     $tempPrice = array_add($tempPrice, 'photo_right_name', $request->photo_right->getClientOriginalName());
@@ -183,7 +138,7 @@ class TempPriceManagementController extends BackendController
                     {
                         CommonUtils::deleteFile($exists->photo_inner);
                     }
-                    $pathPhotoInner = CommonUtils::uploadFile($request->photo_inner, 'accessary', GlobalEnum::IMAGE);
+                    $pathPhotoInner = CommonUtils::uploadFile($request->photo_inner, 'accessary/'.$user->user_id.'/'.$exists->code, GlobalEnum::IMAGE);
                     unset($tempPrice['photo_inner']);
                     $tempPrice = array_add($tempPrice, 'photo_inner', $pathPhotoInner);
                     $tempPrice = array_add($tempPrice, 'photo_inner_name', $request->photo_inner->getClientOriginalName());
@@ -195,7 +150,7 @@ class TempPriceManagementController extends BackendController
                     {
                         CommonUtils::deleteFile($exists->photo_outer);
                     }
-                    $pathPhotoOuter = CommonUtils::uploadFile($request->photo_outer, 'accessary', GlobalEnum::IMAGE);
+                    $pathPhotoOuter = CommonUtils::uploadFile($request->photo_outer, 'accessary/'.$user->user_id.'/'.$exists->code, GlobalEnum::IMAGE);
                     unset($tempPrice['photo_outer']);
                     $tempPrice = array_add($tempPrice, 'photo_outer', $pathPhotoOuter);
                     $tempPrice = array_add($tempPrice, 'photo_outer_name', $request->photo_outer->getClientOriginalName());
@@ -215,42 +170,42 @@ class TempPriceManagementController extends BackendController
 
                 if ($request->hasFile('photo_top'))
                 {
-                    $pathPhotoTop = CommonUtils::uploadFile($request->photo_top, 'accessary', GlobalEnum::IMAGE);
+                    $pathPhotoTop = CommonUtils::uploadFile($request->photo_top, 'accessary/'.$user->user_id.'/'.$request->code, GlobalEnum::IMAGE);
                     unset($tempPrice['photo_top']);
                     $tempPrice = array_add($tempPrice, 'photo_top', $pathPhotoTop);
                     $tempPrice = array_add($tempPrice, 'photo_top_name', $request->photo_top->getClientOriginalName());
                 }
                 if ($request->hasFile('photo_bottom'))
                 {
-                    $pathPhotoBottom = CommonUtils::uploadFile($request->photo_bottom, 'accessary', GlobalEnum::IMAGE);
+                    $pathPhotoBottom = CommonUtils::uploadFile($request->photo_bottom, 'accessary/'.$user->user_id.'/'.$request->code, GlobalEnum::IMAGE);
                     unset($tempPrice['photo_bottom']);
                     $tempPrice = array_add($tempPrice, 'photo_bottom', $pathPhotoBottom);
                     $tempPrice = array_add($tempPrice, 'photo_bottom_name', $request->photo_bottom->getClientOriginalName());
                 }
                 if ($request->hasFile('photo_left'))
                 {
-                    $pathPhotoLeft = CommonUtils::uploadFile($request->photo_left, 'accessary', GlobalEnum::IMAGE);
+                    $pathPhotoLeft = CommonUtils::uploadFile($request->photo_left, 'accessary/'.$user->user_id.'/'.$request->code, GlobalEnum::IMAGE);
                     unset($tempPrice['photo_left']);
                     $tempPrice = array_add($tempPrice, 'photo_left', $pathPhotoLeft);
                     $tempPrice = array_add($tempPrice, 'photo_left_name', $request->photo_left->getClientOriginalName());
                 }
                 if ($request->hasFile('photo_right'))
                 {
-                    $pathPhotoRight = CommonUtils::uploadFile($request->photo_right, 'accessary', GlobalEnum::IMAGE);
+                    $pathPhotoRight = CommonUtils::uploadFile($request->photo_right, 'accessary/'.$user->user_id.'/'.$request->code, GlobalEnum::IMAGE);
                     unset($tempPrice['photo_right']);
                     $tempPrice = array_add($tempPrice, 'photo_right', $pathPhotoRight);
                     $tempPrice = array_add($tempPrice, 'photo_right_name', $request->photo_right->getClientOriginalName());
                 }
                 if ($request->hasFile('photo_inner'))
                 {
-                    $pathPhotoInner = CommonUtils::uploadFile($request->photo_inner, 'accessary', GlobalEnum::IMAGE);
+                    $pathPhotoInner = CommonUtils::uploadFile($request->photo_inner, 'accessary/'.$user->user_id.'/'.$request->code, GlobalEnum::IMAGE);
                     unset($tempPrice['photo_inner']);
                     $tempPrice = array_add($tempPrice, 'photo_inner', $pathPhotoInner);
                     $tempPrice = array_add($tempPrice, 'photo_inner_name', $request->photo_inner->getClientOriginalName());
                 }
                 if ($request->hasFile('photo_outer'))
                 {
-                    $pathPhotoOuter = CommonUtils::uploadFile($request->photo_outer, 'accessary', GlobalEnum::IMAGE);
+                    $pathPhotoOuter = CommonUtils::uploadFile($request->photo_outer, 'accessary/'.$user->user_id.'/'.$request->code, GlobalEnum::IMAGE);
                     unset($tempPrice['photo_outer']);
                     $tempPrice = array_add($tempPrice, 'photo_outer', $pathPhotoOuter);
                     $tempPrice = array_add($tempPrice, 'photo_outer_name', $request->photo_outer->getClientOriginalName());
