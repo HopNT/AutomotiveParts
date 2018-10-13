@@ -6,6 +6,7 @@
  * Time: 17:12
  */
 namespace App\Http\Common\Utils;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class CommonUtils
@@ -13,8 +14,9 @@ class CommonUtils
     public static function uploadFile($file, $category, $fileType)
     {
         $fileName = $file->getClientOriginalName();
-        $storage = 'public/'.$category.'/'.$fileType;
-        return $file->storeAs($storage, $fileName);
+        $storage = 'admin/images/'.$category;
+        $file->move($storage, $fileName);
+        return $storage.'/'.$fileName;
     }
 
     public static function getUrlFile($path)
@@ -24,7 +26,7 @@ class CommonUtils
 
     public static function deleteFile($path)
     {
-        Storage::delete($path);
+        File::delete($path);
     }
 
 }

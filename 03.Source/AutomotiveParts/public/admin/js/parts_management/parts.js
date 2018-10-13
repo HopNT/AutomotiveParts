@@ -148,7 +148,7 @@ $(document).ready(function () {
                     $("#form-parts .image-preview-input-title").text("Thay đổi");
                     $("#form-parts .image-preview-clear").show();
                     $("#form-parts .image-preview-filename").val(result.data.photo_name);
-                    img.attr('src', result.data.photo);
+                    img.attr('src', publicPath + '/' + result.data.photo);
                     $("#form-parts .image-preview").attr("data-content", $(img)[0].outerHTML).popover("show");
                 }
 
