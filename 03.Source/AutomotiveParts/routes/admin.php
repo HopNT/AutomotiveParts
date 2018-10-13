@@ -99,9 +99,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('temp-price/delete', 'Admin\TempPriceManagementController@delete')->name('temp-price-delete');
 
     // Get language for datatables
-    Route::get('lang/datatables/{item}', function ($item) {
-        return trans('datatables.'.$item);
-    });
+//    Route::get('lang/datatables/{item}', function ($item) {
+//        return trans('datatables.'.$item);
+//    });
 
     // Nation management
     Route::get('nation-management','Admin\NationManagementController@index')->name('nation-management');

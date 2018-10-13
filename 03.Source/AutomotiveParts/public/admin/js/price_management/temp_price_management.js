@@ -179,7 +179,7 @@ $(document).ready(function () {
                         if (tempPriceId != null && tempPriceId != '') {
                             showMessage('Cập nhật thành công', 'success');
                         } else {
-                            showMessage('Thêm mới thành công', 'success');
+                            showMessage('Yêu cầu đã được tiếp nhận, vui lòng đợi quản trị viên phê duyệt', 'success');
                         }
                         $('#temp_price').html(result.html);
                         loadTableTempPrice();

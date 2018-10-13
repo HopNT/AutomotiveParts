@@ -59,6 +59,7 @@ class RedirectIfNotAdmin
         if(Auth::guard($guard)->check()){
             $menu = (new DataHelper())->loadLeftNavData();
             View::share('leftMenu',$menu);
+//            dd($menu);
         }
         return $next($request);
     }
