@@ -14517,6 +14517,8 @@ be a descendant of the grid when it is being dragged.
     -ms-flex: 0 0 auto;
     flex: 0 0 auto;
     margin-right: 15px;
+    width: 40px;
+    height: 40px;
 }
 
 .app-sidebar__user-name {

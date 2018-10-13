@@ -4,24 +4,30 @@
     $arr_icon = [
         'account-management'=>'fa fa-user',
         'car-management'=>'fa fa-car',
-        'parts-management'=>'fa fa-car',
-        'nation-management'=>'fa fa-car',
-        'trademark-management'=>'fa fa-car',
-        'price-management'=>'fa fa-car',
-        'temp-price-management'=>'fa fa-car',
-        'accessary-management'=>'fa fa-car',
+        'parts-management'=>'fa fa-cog',
+        'nation-management'=>'fa fa-globe',
+        'trademark-management'=>'fa fa-trademark',
+        'price-management'=>'fa fa-usd',
+        'temp-price-management'=>'fa fa-check',
+        'accessary-management'=>'fa fa-cogs',
 
     ];
+    $user = \Illuminate\Support\Facades\Auth::guard('admin')->user();
 ?>
 <!-- Sidebar menu-->
 <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
 <aside class="app-sidebar">
-    {{--<div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg" alt="User Image">--}}
-        {{--<div>--}}
-            {{--<p class="app-sidebar__user-name">John Doe</p>--}}
-            {{--<p class="app-sidebar__user-designation">Frontend Developer</p>--}}
-        {{--</div>--}}
-    {{--</div>--}}
+    <div class="app-sidebar__user">
+        @if($user->avatar)
+            <img class="app-sidebar__user-avatar" src="{{asset('admin/images/avatar-icon.png')}}" alt="{{$user->name}}">
+        @else
+            <i class="app-menu__icon fa fa-user-circle-o fa-3x" style="margin-right: 20px"></i>
+        @endif
+        <div>
+            <p class="app-sidebar__user-name">{{$user->name}}</p>
+            <p class="app-sidebar__user-designation">{{$user->roles->role_name}}</p>
+        </div>
+    </div>
     <ul class="app-menu">
 
         @foreach($leftMenu as $menu)
