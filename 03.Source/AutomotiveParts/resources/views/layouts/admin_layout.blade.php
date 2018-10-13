@@ -32,7 +32,7 @@
 <script src="{{ asset('admin/js/plugins/pace.min.js') }}"></script>
 <script src="{{ asset('admin/js/plugins/jquery.dataTables.min.js') }} "></script>
 <script src="{{ asset('admin/js/plugins/dataTables.bootstrap.min.js') }} "></script>
-<script src="{{ asset('admin/js/common/custom_datatables.js') }}"></script>
+{{--<script src="{{ asset('admin/js/common/custom_datatables.js') }}"></script>--}}
 <script type="text/javascript" src="{{ asset('admin/js/plugins/bootstrap-notify.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('admin/js/plugins/sweetalert.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('admin/js/plugins/select2.min.js') }}"></script>
