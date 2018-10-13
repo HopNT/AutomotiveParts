@@ -61,18 +61,16 @@ $can_reject_temp_price = $staff->can_view('temp-price-reject');
                         <th class="text-center">{{trans('label.common.garage_price')}}</th>
                         <th class="text-center">{{trans('label.common.retail_price')}}</th>
                         <th class="text-center">{{trans('label.common.quantity')}}</th>
-
                         <th class="text-center">{{trans('label.common.created_at')}}</th>
                         <th class="text-center">{{trans('label.common.approve_at')}}</th>
                         <th class="text-center">{{trans('label.common.reject_at')}}</th>
                         <th class="text-center">{{trans('label.common.status')}}</th>
-
                         <th class="text-center">{{trans('label.common.action')}}</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($listTempPrice as $key => $tempPrice)
-                        <tr>
+                        <tr style="@if($tempPrice->status == 3) color: red; @elseif($tempPrice->status == 2) color: green; @elseif($tempPrice->status == 4) color: gray; @endif">
                             @if($can_delete_temp_price || $can_approve_temp_price || $can_reject_temp_price)
                                 <td class="text-center">
                                     <div class="animated-checkbox">
@@ -87,21 +85,23 @@ $can_reject_temp_price = $staff->can_view('temp-price-reject');
                                 <td class="text-center">{{$key + 1}}</td>
                             @endif
                             @if($userType == 0)
-                                <td><a href="#" id="btn_approve_temp_price">{{$tempPrice->user}}</a></td>
+                                <td>
+                                    <button id="btn_update_temp_price" class="btn btn-link" href="{{route('temp-price-edit', ['id' => $tempPrice->temp_price_id])}}">{{$tempPrice->user}}</button>
+                                </td>
                             @endif
                             <td>{{$tempPrice->code}}</td>
                             <td>{{$tempPrice->name_vi}}</td>
-                            <td class="text-right">{{$tempPrice->garage_price}}</td>
-                            <td class="text-right">{{$tempPrice->retail_price}}</td>
+                            <td class="text-right">{{$tempPrice->garage_price ? number_format($tempPrice->garage_price) : ''}}</td>
+                            <td class="text-right">{{$tempPrice->garage_price ? number_format($tempPrice->retail_price) : ''}}</td>
                             <td class="text-right">{{$tempPrice->quantity}}</td>
-                            <td>{{$tempPrice->created_at}}</td>
+                            <td>{{ date('d/m/Y H:i:s', strtotime($tempPrice->created_at)) }}</td>
                             @if($tempPrice->status == 2)
-                                <td>{{$tempPrice->updated_at}}</td>
+                                <td>{{ date('d/m/Y H:i:s', strtotime($tempPrice->updated_at)) }}</td>
                             @else
                                 <td></td>
                             @endif
                             @if($tempPrice->status == 3)
-                                <td>{{$tempPrice->updated_at}}</td>
+                                <td>{{ date('d/m/Y H:i:s', strtotime($tempPrice->updated_at)) }}</td>
                             @else
                                 <td></td>
                             @endif
@@ -127,7 +127,7 @@ $can_reject_temp_price = $staff->can_view('temp-price-reject');
                                 @endif
                                 @if($userType == 0 && $can_approve_temp_price)
                                     <button id="btn_approve_temp_price"
-                                            href="{{route('temp-price-edit', ['ids[]' => $tempPrice->temp_price_id])}}"
+                                            href="{{route('temp-price-approve', ['ids[]' => $tempPrice->temp_price_id])}}"
                                             class="btn btn-info btn-sm fa fa-check"></button>
                                 @endif
                                 @if($userType == 0 && $can_reject_temp_price)

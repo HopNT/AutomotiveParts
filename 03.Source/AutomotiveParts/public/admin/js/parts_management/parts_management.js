@@ -26,9 +26,18 @@ function resetCatalogPartsForm() {
     $('#form-catalog-parts input[name="name"]').val("");
     $('#form-catalog-parts #name_error').html("");
     $('#form-catalog-parts textarea[name="description"]').val("");
+    $('#form-catalog-parts #status').css('display', 'none');
+    $('#form-catalog-parts select[name="status"]').val("");
+    $("#form-catalog-parts select[name='parent_id']").empty();
+    resetPhoto('form-catalog-parts', 'photo');
+
+    onloadPhoto('form-catalog-parts', 'photo');
 }
 
 function resetPartsForm() {
+    $('#form-parts #status').css('display', 'none');
+    $('#form-parts select[name="status"]').val("");
+    $('#form-parts input[name="code"]').prop('disabled', false);
     $('#form-parts input[name="parts_id"]').val("");
     $('#form-parts select[name="catalog_parts_id"]').html("");
     $('#form-parts input[name="code"]').val("");
@@ -67,4 +76,82 @@ function resetPartsForm() {
         placement: 'bottom'
     });
 
+}
+
+function onloadPhoto(form, inputName) {
+    var closebtn = $('<button/>', {
+        type: "button",
+        text: 'x',
+        id: 'close_' + inputName + '_preview',
+        style: 'font-size: initial;',
+    });
+    closebtn.attr("class", "close pull-right");
+    $('#' + form + ' #' + inputName + '_image_preview').popover({
+        trigger: 'manual',
+        html: true,
+        title: "<strong>Xem trước</strong>" + $(closebtn)[0].outerHTML,
+        content: "Không có ảnh xem trước",
+        placement: 'bottom'
+    });
+
+    $('body').on('click', '#close_' + inputName + '_preview', function () {
+        $('#' + form + ' #' + inputName + '_image_preview').popover('hide');
+        $('#' + form + ' #' + inputName + '_image_preview').hover(
+            function () {
+                $('#' + form + ' #' + inputName + '_image_preview').popover('show');
+            },
+            function () {
+                $('#' + form + ' #' + inputName + '_image_preview').popover('hide');
+            }
+        )
+    });
+
+    $('body').on('click', '#' + form + ' #' + inputName + '_image_preview_clear', function () {
+        $('#' + form + ' #' + inputName + '_image_preview').attr("data-content", "").popover('hide');
+        $('#' + form + ' #' + inputName + '_image_preview_filename').val("");
+        $('#' + form + ' #' + inputName + '_image_preview_clear').hide();
+        $('#' + form + ' .image-preview-input input[name="' + inputName + '"]').val("");
+        $("#" + form + " #" + inputName + "_image_preview_input_title").text("Duyệt");
+    });
+
+    $('body').on('change', '#' + form + ' .image-preview-input input[name="' + inputName + '"]', function () {
+        var img = $('<img/>', {
+            id: inputName,
+            width: 250,
+            height: 200
+        });
+        var file = this.files[0];
+        var reader = new FileReader();
+        // Set preview image into the popover data-content
+        reader.onload = function (e) {
+            $("#" + form + " #" + inputName + "_image_preview_input_title").text("Thay đổi");
+            $("#" + form + " #" + inputName + "_image_preview_clear").show();
+            $("#" + form + " #" + inputName + "_image_preview_filename").val(file.name);
+            img.attr('src', e.target.result);
+            $("#" + form + " #" + inputName + "_image_preview").attr("data-content", $(img)[0].outerHTML).popover("show");
+        }
+        reader.readAsDataURL(file);
+    });
+}
+
+function resetPhoto(form, inputName) {
+    $('#' + form + ' #' + inputName + '_image_preview').attr("data-content", "").popover('hide');
+    $('#' + form + ' #' + inputName + '_image_preview_filename').val("");
+    $('#' + form + ' #' + inputName + '_image_preview_clear').hide();
+    $('#' + form + ' .image-preview-input input[name="' + inputName + '"]').val("");
+    $("#" + form + " #" + inputName + "_image_preview_input_title").text("Duyệt");
+    var closebtn = $('<button/>', {
+        type: "button",
+        text: 'x',
+        id: 'close_' + inputName + '_preview',
+        style: 'font-size: initial;',
+    });
+    closebtn.attr("class", "close pull-right");
+    $('#' + form + ' #' + inputName + '_image_preview').popover({
+        trigger: 'manual',
+        html: true,
+        title: "<strong>Xem trước</strong>" + $(closebtn)[0].outerHTML,
+        content: "Không có ảnh xem trước",
+        placement: 'bottom'
+    });
 }

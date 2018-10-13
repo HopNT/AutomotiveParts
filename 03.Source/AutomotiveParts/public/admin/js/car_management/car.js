@@ -2,6 +2,14 @@ $(document).ready(function () {
 
     loadTableCar();
 
+    $('.modal').on('hidden.bs.modal', function(){
+        
+    });
+
+    $('body').on('input', '#form-car input[name="number_of_doors"]', function (e) {
+        e.target.value = e.target.value.replace(/[^0-9]/g,'');
+    });
+
     // Check all row
     $('body').on('click', '#tbl_car #check_all', function (e) {
         if ($(this).is(':checked', true)) {
@@ -92,7 +100,7 @@ $(document).ready(function () {
 
                 let catalogCar = car['catalog_car'];
                 $("#form-car select[name='car_brand_id']").val(catalogCar['car_brand_id']);
-                $("#form-car select[name='catalog_car_id']").val(catalogCar['catalog_car_id']);
+                $("#form-car select[name='catalog_car_id']").val(catalogCar.catalog_car_id);
 
                 let parts = car['parts'];
                 if (parts != undefined && parts.length > 0) {
@@ -101,6 +109,11 @@ $(document).ready(function () {
                         $('#form-car #parts').append(option);
                     });
                     $('#form-car #parts').trigger('change');
+                }
+
+                if (car.status == 0) {
+                    $('#form-car #status').css('display', '');
+                    $('#form-car select[name="status"]').val(car.status);
                 }
             }
         })
@@ -183,8 +196,8 @@ $(document).ready(function () {
                         } else {
                             swal("Xóa thành công!", "", "success");
                             setTimeout(function () {
-                                $('#catalog_parts').html(rs.html);
-                                loadTableCatalogParts();
+                                $('#car').html(rs.html);
+                                loadTableCar();
                             }, 1000);
                         }
                     },

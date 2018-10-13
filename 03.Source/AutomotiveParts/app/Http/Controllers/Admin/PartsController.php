@@ -73,9 +73,17 @@ class PartsController extends BackendController
             // Update
             if (isset($request->parts_id))
             {
+                $validator = Validator::make($parts, $valid->rules_update, [], $valid->attributes);
+                if ($validator->fails()) {
+                    return [
+                        'error' => true,
+                        'errors' => $validator->errors()
+                    ];
+                }
+
+                $exists = $this->partsRepository->find($request->parts_id);
                 if (!empty($file))
                 {
-                    $exists = $this->partsRepository->find($request->parts_id);
                     if (!empty($exists->photo))
                     {
                         CommonUtils::deleteFile($exists->photo);
@@ -84,6 +92,7 @@ class PartsController extends BackendController
                     $parts = array_add($parts, 'photo_name', $file->getClientOriginalName());
                     $parts = array_add($parts, 'photo', $pathPhoto);
                 }
+
                 $parts = $this->partsRepository->merge($request->parts_id, $parts);
                 if (!empty($accessary))
                 {
@@ -102,6 +111,12 @@ class PartsController extends BackendController
                         'error' => true,
                         'errors' => $validator->errors()
                     ];
+                }
+                if (!empty($file))
+                {
+                    $pathPhoto = CommonUtils::uploadFile($file, 'parts', GlobalEnum::IMAGE);
+                    $parts = array_add($parts, 'photo_name', $file->getClientOriginalName());
+                    $parts = array_add($parts, 'photo', $pathPhoto);
                 }
                 $parts = array_add($parts, 'status', GlobalEnum::STATUS_ACTIVE);
                 $parts = $this->partsRepository->persist($parts);
@@ -165,7 +180,7 @@ class PartsController extends BackendController
         }
 
         // Get List parts
-        $listParts = $this->partsRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
+        $listParts = $this->partsRepository->getAllByActive(GlobalEnum::STATUS_ACTIVE);
         $view = view('admin.parts_management.elements.list_data_parts')
             ->with('listParts', $listParts)->render();
         return [

@@ -22,21 +22,104 @@ $(document).ready(function () {
     // Open modal add new catalog parts
     $('body').on('click', '#btn_add_new_catalog_parts', function () {
         resetCatalogPartsForm();
+        $('#form-catalog-parts select[name="parent_id"]').select2({
+            ajax: {
+                url: '/admin/catalog-parts/searchByText',
+                dataType: 'json',
+                data: function (params) {
+                    let query = {
+                        query: params.term
+                    }
+                    return query;
+                },
+                processResults: function (data) {
+                    return {
+                        results: data.items
+                    };
+                },
+                cache: false
+            },
+            placeholder: 'Nhập tên nhóm...',
+            allowClear: true,
+            // multiple: true
+        });
         $('#modal_add_update_catalog_parts #title-add').css('display', 'block');
         $('#modal_add_update_catalog_parts #title-update').css('display', 'none');
         $('#modal_add_update_catalog_parts').modal();
     });
 
+    // Open modal update catalog parts
+    $('body').on('click', '#btn_update_catalog_parts', function () {
+        resetCatalogPartsForm();
+        $('#form-catalog-parts select[name="parent_id"]').select2({
+            ajax: {
+                url: '/admin/catalog-parts/searchByText',
+                dataType: 'json',
+                data: function (params) {
+                    let query = {
+                        query: params.term
+                    }
+                    return query;
+                },
+                processResults: function (data) {
+                    return {
+                        results: data.items
+                    };
+                },
+                cache: false
+            },
+            placeholder: 'Nhập tên nhóm...',
+            allowClear: true,
+            // multiple: true
+        });
+        $('#modal_add_update_catalog_parts #title-add').css('display', 'none');
+        $('#modal_add_update_catalog_parts #title-update').css('display', 'block');
+        let url = $(this).attr('href');
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function (result) {
+                let nation = result.data;
+                $("#form-catalog-parts input[name='catalog_parts_id']").val(nation['catalog_parts_id']);
+                $("#form-catalog-parts input[name='name']").val(nation['name']);
+                $("#form-catalog-parts textarea[name='description']").val(nation['description']);
+                if (result.data.icon != undefined && result.data.icon != null && result.data.icon != '') {
+                    var img = $('<img/>', {
+                        id: 'photo',
+                        width: 250,
+                        height: 200
+                    });
+                    $("#form-catalog-parts #photo_image_preview_input_title").text("Thay đổi");
+                    $("#form-catalog-parts #photo_image_preview_clear").show();
+                    $("#form-catalog-parts #photo_image_preview_filename").val(result.data.icon_name);
+                    img.attr('src', result.data.icon);
+                    $("#form-catalog-parts #photo_image_preview").attr("data-content", $(img)[0].outerHTML).popover("show");
+                }
+                if (result.parent != undefined && result.parent != null) {
+                    let option = "<option value='" + result.parent.catalog_parts_id + "' selected='selected'>" + result.parent.name + "</option>";
+                    $('#form-catalog-parts select[name="parent_id"]').append(option);
+                    $('#form-catalog-parts select[name="parent_id"]').trigger('change');
+                }
+                if (result.data.status == 0) {
+                    $('#form-catalog-parts #status').css('display', '');
+                    $('#form-catalog-parts select[name="status"]').val(result.data.status);
+                }
+                $('#modal_add_update_catalog_parts').modal();
+            }
+        });
+    });
+
     // Save or update catalog parts
     $('body').on('click', '#btn_save_catalog_parts', function () {
-        $('#name_error').html("");
         let type = $('#form-catalog-parts').attr('method');
         let url = $('#form-catalog-parts').attr('action');
         let catalogPartsId = $('#form-catalog-parts input[name="catalog_parts_id"]').val();
         $.ajax({
             type: type,
             url: url,
-            data: $('#form-catalog-parts').serialize(),
+            data: new FormData($('#form-catalog-parts')[0]),
+            contentType: false,
+            processData: false,
             success: function (result) {
                 if (result.error) {
                     $.each(result.errors, function (key, value) {
@@ -57,8 +140,10 @@ $(document).ready(function () {
                         } else {
                             showMessage('Thêm mới thành công', 'success');
                         }
-                        $('#catalog_parts').html(result.html);
+                        $('#catalog_parts').html(result.catalogParts);
+                        $('#parts').html(result.parts);
                         loadTableCatalogParts();
+                        loadTableParts();
                     }, 1000);
                 }
             },
@@ -69,25 +154,6 @@ $(document).ready(function () {
                     $("#modal_add_update_catalog_parts #alert_error").slideUp(500);
                     $('#modal_add_update_catalog_parts #message_error').html('');
                 });
-            }
-        });
-    });
-
-    // Open modal update catalog parts
-    $('body').on('click', '#btn_update_catalog_parts', function () {
-        resetCatalogPartsForm();
-        $('#modal_add_update_catalog_parts #title-add').css('display', 'none');
-        $('#modal_add_update_catalog_parts #title-update').css('display', 'block');
-        let url = $(this).attr('href');
-        $.ajax({
-            type: 'GET',
-            url: url,
-            success: function (result) {
-                let nation = result.data;
-                $("#form-catalog-parts input[name='catalog_parts_id']").val(nation['catalog_parts_id']);
-                $("#form-catalog-parts input[name='name']").val(nation['name']);
-                $("#form-catalog-parts textarea[name='description']").val(nation['description']);
-                $('#modal_add_update_catalog_parts').modal();
             }
         });
     });
@@ -116,8 +182,10 @@ $(document).ready(function () {
                         } else {
                             swal("Xóa thành công!", "", "success");
                             setTimeout(function () {
-                                $('#catalog_parts').html(rs.html);
+                                $('#catalog_parts').html(rs.catalogParts);
+                                $('#parts').html(rs.parts);
                                 loadTableCatalogParts();
+                                loadTableParts();
                             }, 1000);
                         }
                     },
@@ -161,8 +229,10 @@ $(document).ready(function () {
                             } else {
                                 swal("Xóa thành công!", "", "success");
                                 setTimeout(function () {
-                                    $('#catalog_parts').html(rs.html);
+                                    $('#catalog_parts').html(rs.catalogParts);
+                                    $('#parts').html(rs.parts);
                                     loadTableCatalogParts();
+                                    loadTableParts();
                                 }, 1000);
                             }
                         },

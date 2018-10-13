@@ -15,6 +15,9 @@ class CatalogParts extends BaseModel {
 
     protected $fillable = [
         'catalog_parts_id',
+        'icon',
+        'icon_name',
+        'parent_id',
         'name',
         'description',
         'status'

@@ -48,7 +48,7 @@ $can_delete_car_brand = $staff->can_view('car-brand-delete');
                                 <td class="text-center">
                                     <div class="animated-checkbox">
                                         <label>
-                                            <input type="checkbox" class="checkbox" data-id="{{$carBrand->car_brand_id}}"><span class="label-text"></span>
+                                            <input type="checkbox" @if($carBrand->status === 0) disabled @endif class="checkbox" data-id="{{$carBrand->car_brand_id}}"><span class="label-text"></span>
                                         </label>
                                     </div>
                                 </td>
@@ -58,7 +58,7 @@ $can_delete_car_brand = $staff->can_view('car-brand-delete');
                             <td class="text-center">{{$carBrand->code_brand}}</td>
                             <td>{{$carBrand->name}}</td>
                             <td>{{$carBrand->name_vi}}</td>
-                            <td>{{$carBrand->status ? trans('label.common.status_active') : trans('label.common.status_inactive')}}</td>
+                            <td>{{$carBrand->status === 1 ? trans('label.common.status_active') : trans('label.common.status_inactive')}}</td>
                             <td class="text-center">
                                 @if($can_edit_car_brand)
                                     <button id="btn_update_car_brand"
@@ -66,7 +66,7 @@ $can_delete_car_brand = $staff->can_view('car-brand-delete');
                                             class="btn btn-info btn-sm fa fa-edit"></button>
                                 @endif
                                 @if($can_delete_car_brand)
-                                    <button id="btn_delete_car_brand"
+                                    <button id="btn_delete_car_brand" @if($carBrand->status === 0) disabled @endif
                                             href="{{route('car-brand-delete', ['ids[]' => $carBrand->car_brand_id])}}"
                                             class="btn btn-danger btn-sm fa fa-trash"></button>
                                 @endif

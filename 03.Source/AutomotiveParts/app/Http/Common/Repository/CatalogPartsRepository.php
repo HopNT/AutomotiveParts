@@ -11,4 +11,6 @@ namespace App\Http\Common\Repository;
 interface CatalogPartsRepository
 {
     function deleteMulti($ids);
+
+    function searchByText($text);
 }

@@ -134,7 +134,7 @@
                                 <label for="name"
                                        class="control-label required col-md-4">{{trans('label.car.name')}}</label>
                                 <div class="col-md-8">
-                                    <input class="form-control" type="text" name="name"
+                                    <input class="form-control" type="text" name="name" maxlength="255"
                                            placeholder="{{trans('label.common.input')}} {{trans('label.car.name')}}">
                                     <span class="text-danger" id="name_error"></span>
                                 </div>
@@ -147,8 +147,19 @@
                                 <label for="number_of_doors"
                                        class="control-label col-md-4">{{trans('label.car.num_of_doors')}}</label>
                                 <div class="col-md-8">
-                                    <input class="form-control" type="number" name="number_of_doors"
+                                    <input class="form-control" type="text" name="number_of_doors" maxlength="2"
                                            placeholder="{{trans('label.common.input')}} {{trans('label.car.num_of_doors')}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="status" class="col-md-6">
+                            <div class="form-group row">
+                                <label class="control-label col-md-4">{{trans('label.common.status')}}</label>
+                                <div class="col-md-8">
+                                    <select class="form-control" name="status">
+                                        <option value="0">{{trans('label.common.status_inactive')}}</option>
+                                        <option value="1">{{trans('label.common.status_active')}}</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>

@@ -1,6 +1,10 @@
 $(document).ready(function () {
     loadTableCatalogCar();
 
+    $('.modal').on('hidden.bs.modal', function(){
+        
+    });
+
     // Check all row
     $('body').on('click', '#tbl_catalog_car #check_all', function (e) {
         if ($(this).is(':checked', true)) {
@@ -44,6 +48,10 @@ $(document).ready(function () {
                 $("#form-catalog-car-data select[name='car_brand_id']").val(catalogCar['car_brand_id']);
                 $("#form-catalog-car-data input[name='name']").val(catalogCar['name']);
                 $("#form-catalog-car-data textarea[name='description']").val(catalogCar['description']);
+                if (catalogCar.status == 0) {
+                    $('#form-catalog-car-data #status').css('display', '');
+                    $('#form-catalog-car-data select[name="status"]').val(catalogCar.status);
+                }
                 $('#modal_add_update_catalog_car').modal();
             }
         });
@@ -80,8 +88,10 @@ $(document).ready(function () {
                         } else {
                             showMessage('Thêm mới thành công', 'success');
                         }
-                        $('#catalog_car').html(result.html);
+                        $('#catalog_car').html(result.catalogCar);
+                        $('#car').html(result.car);
                         loadTableCatalogCar();
+                        loadTableCar();
                     }, 1000);
                 }
 
@@ -121,8 +131,10 @@ $(document).ready(function () {
                         } else {
                             swal("Xóa thành công!", "", "success");
                             setTimeout(function () {
-                                $('#catalog_car').html(rs.html);
+                                $('#catalog_car').html(rs.catalogCar);
+                                $('#car').html(rs.car);
                                 loadTableCatalogCar();
+                                loadTableCar();
                             }, 1000);
                         }
                     },

@@ -30,7 +30,6 @@ class CarBrandRepositoryImpl extends GenericRepositoryImpl implements CarBrandRe
                 $join->on('cb.nation_id', '=', 'n.nation_id');
                 $join->where('n.status', '=', GlobalEnum::STATUS_ACTIVE);
             })
-            ->where('cb.status', '=', $status)
             ->select('cb.car_brand_id', 'cb.code', 'cb.code_brand', 'cb.name', 'cb.status', 'n.name_vi')
             ->get();
     }

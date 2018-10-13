@@ -22,7 +22,7 @@ class AccessaryRepositoryImpl extends GenericRepositoryImpl implements Accessary
         return Accessary::class;
     }
 
-    function searchByText($text)
+    public function searchByText($text)
     {
         $listAccessary = DB::table('tbl_accessary')
             ->where('status', '=', GlobalEnum::STATUS_ACTIVE)
@@ -34,4 +34,19 @@ class AccessaryRepositoryImpl extends GenericRepositoryImpl implements Accessary
             ->get();
         return $listAccessary;
     }
+
+    public function findByCode($code)
+    {
+        return DB::table('tbl_accessary')
+            ->where('code', '=', $code)
+            ->where('status', '=', GlobalEnum::STATUS_ACTIVE)
+            ->get();
+    }
+
+    public function deleteMulti($ids) {
+        DB::table('tbl_accessary')
+            ->whereIn('accessary_id', $ids)
+            ->update(['status'=>GlobalEnum::STATUS_INACTIVE, 'updated_at'=>now()]);
+    }
+
 }

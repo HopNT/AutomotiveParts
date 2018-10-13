@@ -2,29 +2,19 @@
 /**
  * Created by PhpStorm.
  * User: ManhNV
- * Date: 10/02/2018
- * Time: 01:37
+ * Date: 10/07/2018
+ * Time: 23:38
  */
-
-use Illuminate\Support\Facades\Auth;
-
-$staff = Auth::guard('admin')->user();
-$userType = $staff->user_type;
 ?>
-<div class="modal fade" id="modal_add_update_temp_price" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="modal_add_update_accessary" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                @if($userType == 1)
-                    <h5 class="modal-title" style="display: none;" id="title-add"><i
-                            class="fa fa-plus"></i>&nbsp;&nbsp;{{trans('label.form.create')}}</h5>
-                    <h5 class="modal-title" style="display: none;" id="title-update"><i
-                            class="fa fa-edit"></i>&nbsp;&nbsp;{{trans('label.form.update')}}</h5>
-                @else
-                    <h5 class="modal-title" id="title-approve"><i
-                            class="fa fa-check"></i>&nbsp;&nbsp;{{trans('label.form.approve')}}</h5>
-                @endif
+                <h5 class="modal-title" style="display: none;" id="title-add"><i
+                        class="fa fa-plus"></i>&nbsp;&nbsp;{{trans('label.form.create')}}</h5>
+                <h5 class="modal-title" style="display: none;" id="title-update"><i
+                        class="fa fa-edit"></i>&nbsp;&nbsp;{{trans('label.form.update')}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <i aria-hidden="true" class="fa fa-close"></i>
                 </button>
@@ -35,28 +25,10 @@ $userType = $staff->user_type;
                             aria-hidden="true">&times;</span></button>
                     <strong id="message_error"></strong>
                 </div>
-                <form class="form-horizontal" method="POST" id="form-temp-price"
-                      action="{{route('temp-price-save')}}" enctype="multipart/form-data">
+                <form class="form-horizontal" method="POST" id="form-accessary"
+                      action="{{route('accessary-save')}}" enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" name="temp_price_id">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group row">
-                                <label for="type"
-                                       class="control-label col-md-2">{{trans('label.accessary.type')}}</label>
-                                <div class="col-md-10">
-                                    <select class="form-control" name="type" id="type">
-                                        <option value="">
-                                            -- {{trans('label.common.choose')}} {{trans('label.accessary.type')}}
-                                            --
-                                        </option>
-                                        <option value="0">{{trans('label.accessary.oem')}}</option>
-                                        <option value="1">{{trans('label.accessary.options')}}</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <input type="hidden" name="accessary_id">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
@@ -93,6 +65,22 @@ $userType = $staff->user_type;
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
+                                <label for="type"
+                                       class="control-label col-md-4">{{trans('label.accessary.type')}}</label>
+                                <div class="col-md-8">
+                                    <select class="form-control" name="type" id="type">
+                                        <option value="">
+                                            -- {{trans('label.common.choose')}} {{trans('label.accessary.type')}}
+                                            --
+                                        </option>
+                                        <option value="0">{{trans('label.accessary.oem')}}</option>
+                                        <option value="1">{{trans('label.accessary.options')}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
                                 <label for="code"
                                        class="control-label required col-md-4">{{trans('label.accessary.code')}}</label>
                                 <div class="col-md-8">
@@ -102,6 +90,8 @@ $userType = $staff->user_type;
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label for="name_vi"
@@ -113,8 +103,6 @@ $userType = $staff->user_type;
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label for="name_en"
@@ -125,6 +113,8 @@ $userType = $staff->user_type;
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label for="acronym_name"
@@ -135,8 +125,6 @@ $userType = $staff->user_type;
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label for="unsigned_name"
@@ -147,41 +135,16 @@ $userType = $staff->user_type;
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label for="quantity"
-                                       class="control-label col-md-4">{{trans('label.common.quantity')}}</label>
-                                <div class="col-md-8">
-                                    <input class="form-control" type="text" name="quantity" maxlength="11"
-                                           placeholder="{{trans('label.common.input')}} {{trans('label.common.quantity')}}">
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group row">
-                                <label for="garage_price"
-                                       class="control-label col-md-4">{{trans('label.common.garage_price')}}</label>
-                                <div class="col-md-8 input-group">
-                                    <input class="form-control" type="text" name="garage_price" maxlength="15"
-                                           placeholder="{{trans('label.common.input')}} {{trans('label.common.garage_price')}}">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text" id="basic-addon2">VND</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label for="retail_price"
-                                       class="control-label col-md-4">{{trans('label.common.retail_price')}}</label>
-                                <div class="col-md-8 input-group">
-                                    <input class="form-control" type="text" name="retail_price" maxlength="15"
-                                           placeholder="{{trans('label.common.input')}} {{trans('label.common.retail_price')}}">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text" id="basic-addon2">VND</span>
-                                    </div>
+                                <label for="accessary_link"
+                                       class="control-label col-md-2">{{trans('label.accessary.accessary_link')}}</label>
+                                <div class="col-md-10">
+                                    <select class="form-control" id="accessary_link" style="width: 100%"
+                                            name="accessary_link[]">
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -351,6 +314,24 @@ $userType = $staff->user_type;
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group row">
+                                <label for="prioritize"
+                                       class="control-label col-md-2">{{trans('label.accessary.prioritize')}}</label>
+                                <div class="col-md-10">
+                                    <div class="form-control">
+                                        <div class="animated-checkbox">
+                                            <label>
+                                                <input type="checkbox" class="checkbox" name="prioritize"><span
+                                                    class="label-text"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group row">
                                 <label for="description"
                                        class="control-label col-md-2">{{trans('label.common.description')}}</label>
                                 <div class="col-md-10">
@@ -359,23 +340,27 @@ $userType = $staff->user_type;
                             </div>
                         </div>
                     </div>
+                    <div id="status" class="row">
+                        <div class="col-md-12">
+                            <div class="form-group row">
+                                <label for="status"
+                                       class="control-label col-md-2">{{trans('label.common.status')}}</label>
+                                <div class="col-md-10">
+                                    <select class="form-control" name="status">
+                                        <option value="0">{{trans('label.common.status_inactive')}}</option>
+                                        <option value="1">{{trans('label.common.status_active')}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
-                @if($userType == 1)
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btn_cancel_temp_price"><i
-                            class="fa fa-close"></i>{{trans('label.button.cancel')}}</button>
-                    <button type="button" class="btn btn-primary" id="btn_save_temp_price"><i
-                            class="fa fa-save"></i>{{trans('label.button.save')}}</button>
-                @endif
-                @if($userType == 0)
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btn_close_temp_price"><i
-                            class="fa fa-close"></i>{{trans('label.button.cancel')}}</button>
-                    <button type="button" class="btn btn-danger" id="btn_modal_reject_temp_price"><i
-                            class="fa fa-ban"></i>{{trans('label.button.reject')}}</button>
-                    <button type="button" class="btn btn-primary" id="btn_modal_approve_temp_price"><i
-                            class="fa fa-check"></i>{{trans('label.button.approve')}}</button>
-                @endif
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btn_cancel_accessary"><i
+                        class="fa fa-close"></i>{{trans('label.button.cancel')}}</button>
+                <button type="button" class="btn btn-primary" id="btn_save_accessary"><i
+                        class="fa fa-save"></i>{{trans('label.button.save')}}</button>
             </div>
         </div>
     </div>

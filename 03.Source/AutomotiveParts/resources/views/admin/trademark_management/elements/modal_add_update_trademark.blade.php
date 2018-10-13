@@ -31,7 +31,7 @@
                         <label for="code"
                                class="control-label required col-md-3">{{trans('label.trade_mark.code')}}</label>
                         <div class="col-md-9">
-                            <input class="form-control" type="text"
+                            <input class="form-control" type="text" maxlength="20"
                                    placeholder="{{trans('label.common.input')}} {{trans('label.trade_mark.code')}}"
                                    name="code">
                             <span class="text-danger" id="code_error"></span>
@@ -41,7 +41,7 @@
                         <label for="name"
                                class="control-label col-md-3">{{trans('label.trade_mark.name')}}</label>
                         <div class="col-md-9">
-                            <input class="form-control" type="text"
+                            <input class="form-control" type="text" maxlength="255"
                                    placeholder="{{trans('label.common.input')}} {{trans('label.trade_mark.name')}}"
                                    name="name">
                         </div>
@@ -52,6 +52,15 @@
                             <textarea id="description" class="form-control" rows="4"
                                       placeholder="{{trans('label.common.input')}} {{trans('label.common.description')}}"
                                       name="description"></textarea>
+                        </div>
+                    </div>
+                    <div id="status" class="form-group row">
+                        <label class="control-label col-md-3">{{trans('label.common.status')}}</label>
+                        <div class="col-md-9">
+                            <select class="form-control" name="status">
+                                <option value="0">{{trans('label.common.status_inactive')}}</option>
+                                <option value="1">{{trans('label.common.status_active')}}</option>
+                            </select>
                         </div>
                     </div>
                 </form>

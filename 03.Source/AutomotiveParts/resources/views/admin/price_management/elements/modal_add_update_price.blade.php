@@ -41,7 +41,7 @@
                         <label for="garage_price"
                                class="control-label col-md-3">{{trans('label.common.garage_price')}}</label>
                         <div class="col-md-9 input-group">
-                            <input class="form-control" type="number" name="garage_price" placeholder="{{trans('label.common.input')}} {{trans('label.common.garage_price')}}">
+                            <input class="form-control" type="text" name="garage_price" maxlength="15" placeholder="{{trans('label.common.input')}} {{trans('label.common.garage_price')}}">
                             <div class="input-group-append">
                                 <span class="input-group-text" id="basic-addon2">VND</span>
                             </div>
@@ -51,7 +51,7 @@
                         <label for="retail_price"
                                class="control-label col-md-3">{{trans('label.common.retail_price')}}</label>
                         <div class="col-md-9 input-group">
-                            <input class="form-control" type="number" name="retail_price" placeholder="{{trans('label.common.input')}} {{trans('label.common.retail_price')}}">
+                            <input class="form-control" type="text" name="retail_price" maxlength="15" placeholder="{{trans('label.common.input')}} {{trans('label.common.retail_price')}}">
                             <div class="input-group-append">
                                 <span class="input-group-text" id="basic-addon2">VND</span>
                             </div>
@@ -61,7 +61,17 @@
                         <label for="quantity"
                                class="control-label col-md-3">{{trans('label.common.quantity')}}</label>
                         <div class="col-md-9 input-group">
-                            <input class="form-control" type="number" name="quantity" placeholder="{{trans('label.common.input')}} {{trans('label.common.quantity')}}">
+                            <input class="form-control" type="text" name="quantity" maxlength="11" placeholder="{{trans('label.common.input')}} {{trans('label.common.quantity')}}">
+                        </div>
+                    </div>
+                    <div id="status" class="form-group row">
+                        <label for="quantity"
+                               class="control-label col-md-3">{{trans('label.common.status')}}</label>
+                        <div class="col-md-9">
+                            <select class="form-control" name="status">
+                                <option value="0">{{trans('label.common.status_inactive')}}</option>
+                                <option value="1">{{trans('label.common.status_active')}}</option>
+                            </select>
                         </div>
                     </div>
                 </form>

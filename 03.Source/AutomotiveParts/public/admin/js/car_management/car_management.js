@@ -30,6 +30,9 @@ function resetCarBrandForm() {
     $('#form-car-brand #name_error').html("");
     $('#form-car-brand select[name="nation_id"]').val("");
     $('#form-car-brand textarea[name="description"]').val("");
+    $('#form-car-brand #status').css('display', 'none');
+    $('#form-car-brand select[name="status"]').val("");
+    $('#modal_add_update_car_brand input[name="code_brand"]').prop('disabled', false);
 }
 
 function resetCatalogCarForm() {
@@ -39,6 +42,8 @@ function resetCatalogCarForm() {
     $('#form-catalog-car-data input[name="name"]').val("");
     $('#form-catalog-car-data #name_error').html("");
     $('#form-catalog-car-data textarea[name="description"]').val("");
+    $('#form-catalog-car-data #status').css('display', 'none');
+    $('#form-catalog-car-data select[name="status"]').val("");
 }
 
 function resetCarForm() {
@@ -56,4 +61,6 @@ function resetCarForm() {
     $('#form-car #parts').html('');
     $('#form-car #name_error').html("");
     $('#form-car #catalog_car_id_error').html("");
+    $('#form-car #status').css('display', 'none');
+    $('#form-car select[name="status"]').val("");
 }

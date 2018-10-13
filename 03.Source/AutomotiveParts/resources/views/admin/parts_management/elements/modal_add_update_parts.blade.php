@@ -51,7 +51,7 @@
                                 <label for="code"
                                        class="control-label required col-md-4">{{trans('label.parts.code')}}</label>
                                 <div class="col-md-8">
-                                    <input type="text" name="code" class="form-control"
+                                    <input type="text" name="code" class="form-control" maxlength="20"
                                            placeholder="{{trans('label.common.input')}} {{trans('label.parts.code')}}">
                                     <span class="text-danger" id="code_error"></span>
                                 </div>
@@ -64,7 +64,7 @@
                                 <label for="name"
                                        class="control-label col-md-4">{{trans('label.parts.name')}}</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control" name="name"
+                                    <input type="text" class="form-control" name="name" maxlength="255"
                                            placeholder="{{trans('label.common.input')}} {{trans('label.parts.name')}}">
                                 </div>
                             </div>
@@ -74,7 +74,7 @@
                                 <label for="width"
                                        class="control-label col-md-4">{{trans('label.parts.width')}}</label>
                                 <div class="col-md-8">
-                                    <input type="number" name="width" class="form-control"
+                                    <input type="text" name="width" class="form-control" maxlength="12"
                                            placeholder="{{trans('label.common.input')}} {{trans('label.parts.width')}}">
                                 </div>
                             </div>
@@ -86,7 +86,7 @@
                                 <label for="height"
                                        class="control-label col-md-4">{{trans('label.parts.height')}}</label>
                                 <div class="col-md-8">
-                                    <input type="number" class="form-control" name="height"
+                                    <input type="text" class="form-control" name="height" maxlength="12"
                                            placeholder="{{trans('label.common.input')}} {{trans('label.parts.height')}}">
                                 </div>
                             </div>
@@ -96,7 +96,7 @@
                                 <label for="number_of_tooth"
                                        class="control-label col-md-4">{{trans('label.parts.number_of_tooth')}}</label>
                                 <div class="col-md-8">
-                                    <input type="number" class="form-control" name="number_of_tooth"
+                                    <input type="text" class="form-control" name="number_of_tooth" maxlength="10"
                                            placeholder="{{trans('label.common.input')}} {{trans('label.parts.number_of_tooth')}}">
                                 </div>
                             </div>
@@ -108,7 +108,7 @@
                                 <label for="inner_diameter"
                                        class="control-label col-md-4">{{trans('label.parts.inner_diameter')}}</label>
                                 <div class="col-md-8">
-                                    <input type="number" class="form-control" name="inner_diameter"
+                                    <input type="text" class="form-control" name="inner_diameter" maxlength="12"
                                            placeholder="{{trans('label.common.input')}} {{trans('label.parts.inner_diameter')}}">
                                 </div>
                             </div>
@@ -118,7 +118,7 @@
                                 <label for="outer_diameter"
                                        class="control-label col-md-4">{{trans('label.parts.outer_diameter')}}</label>
                                 <div class="col-md-8">
-                                    <input type="number" class="form-control" name="outer_diameter"
+                                    <input type="text" class="form-control" name="outer_diameter" maxlength="12"
                                            placeholder="{{trans('label.common.input')}} {{trans('label.parts.outer_diameter')}}">
                                 </div>
                             </div>
@@ -140,7 +140,7 @@
                                 <label for="life_cycle"
                                        class="control-label col-md-4">{{trans('label.parts.life_cycle')}}</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control" name="life_cycle"
+                                    <input type="text" class="form-control" name="life_cycle" maxlength="10"
                                            placeholder="{{trans('label.common.input')}} {{trans('label.parts.life_cycle')}}">
                                 </div>
                             </div>
@@ -152,7 +152,7 @@
                                 <label for="weight"
                                        class="control-label col-md-4">{{trans('label.parts.weight')}}</label>
                                 <div class="col-md-8">
-                                    <input type="number" class="form-control" name="weight"
+                                    <input type="text" class="form-control" name="weight" maxlength="12"
                                            placeholder="{{trans('label.common.input')}} {{trans('label.parts.weight')}}">
                                 </div>
                             </div>
@@ -162,7 +162,7 @@
                                 <label for="liquor"
                                        class="control-label col-md-4">{{trans('label.parts.liquor')}}</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control" name="liquor"
+                                    <input type="text" class="form-control" name="liquor" maxlength="45"
                                            placeholder="{{trans('label.common.input')}} {{trans('label.parts.liquor')}}">
                                 </div>
                             </div>
@@ -213,6 +213,20 @@
                                             </div>
                                         </span>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="status" class="row">
+                        <div class="col-md-12">
+                            <div class="form-group row">
+                                <label for="status"
+                                       class="control-label col-md-2">{{trans('label.common.status')}}</label>
+                                <div class="col-md-10">
+                                    <select class="form-control" name="status">
+                                        <option value="0">{{trans('label.common.status_inactive')}}</option>
+                                        <option value="1">{{trans('label.common.status_active')}}</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>

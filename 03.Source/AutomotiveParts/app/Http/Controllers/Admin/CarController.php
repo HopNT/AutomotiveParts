@@ -47,6 +47,13 @@ class CarController extends BackendController
         }
 
         try {
+            $validator = Validator::make($car, $valid->rules, [], $valid->attributes);
+            if ($validator->fails()) {
+                return [
+                    'error' => true,
+                    'errors' => $validator->errors()
+                ];
+            }
             if (isset($request->car_id)) {
                 $car = $this->carRepository->merge($request->car_id, $car);
                 if (!empty($parts)) {
@@ -55,13 +62,6 @@ class CarController extends BackendController
                     $car->parts()->detach();
                 }
             } else {
-                $validator = Validator::make($car, $valid->rules, [], $valid->attributes);
-                if ($validator->fails()) {
-                    return [
-                        'error' => true,
-                        'errors' => $validator->errors()
-                    ];
-                }
                 $car = array_add($car, 'status', GlobalEnum::STATUS_ACTIVE);
                 $car = $this->carRepository->persist($car);
                 if (!empty($parts)) {

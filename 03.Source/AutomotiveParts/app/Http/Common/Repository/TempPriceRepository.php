@@ -12,4 +12,12 @@ interface TempPriceRepository
     function getAllByAdmin();
 
     function getAllByProductProvider($userId);
+
+    function deleteMulti($ids);
+
+    function approve($ids);
+
+    function reject($ids);
+
+    function findByCodeAndUserId($code, $userId);
 }

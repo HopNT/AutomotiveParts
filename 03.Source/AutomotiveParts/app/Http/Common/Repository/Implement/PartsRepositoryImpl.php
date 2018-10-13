@@ -22,11 +22,11 @@ class PartsRepositoryImpl extends GenericRepositoryImpl implements PartsReposito
         return Parts::class;
     }
 
-    function getAllByActive($status)
+    public function getAllByActive($status)
     {
         return DB::table('tbl_parts as p')
             ->leftJoin('tbl_catalog_parts as cp', 'p.catalog_parts_id', '=', 'cp.catalog_parts_id')
-            ->where('p.status', '=', $status)
+//            ->where('p.status', '=', $status)
             ->where('cp.status', '=', $status)
             ->select('cp.name as catalogPartsName', 'p.*')
             ->get();

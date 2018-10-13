@@ -30,7 +30,7 @@ class PartsManagementController extends BackendController
 
     public function index()
     {
-        $listCatalogParts = $this->catalogPartsRepository->getAll()->where('status', GlobalEnum::STATUS_ACTIVE);
+        $listCatalogParts = $this->catalogPartsRepository->getAll();
         $listParts = $this->partsRepository->getAllByActive(GlobalEnum::STATUS_ACTIVE);
         return view('admin.parts_management.parts_management')
             ->with('listCatalogParts', $listCatalogParts)

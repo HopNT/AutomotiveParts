@@ -27,11 +27,11 @@ class UserRepositoryImpl extends GenericRepositoryImpl implements UserRepository
         return DB::table('tbl_user_accessary as ua')
             ->join('tbl_user as u', 'ua.user_id', '=', 'u.user_id')
             ->join('tbl_accessary as a', 'ua.accessary_id', '=', 'a.accessary_id')
-            ->where('ua.status', '=', GlobalEnum::STATUS_ACTIVE)
+//            ->where('ua.status', '=', GlobalEnum::STATUS_ACTIVE)
             ->where('u.status', '=', GlobalEnum::STATUS_ACTIVE)
             ->where('a.status', '=', GlobalEnum::STATUS_ACTIVE)
             ->where('u.user_id', '=', $userId)
-            ->select('u.name as user', 'a.*', 'ua.*')
+            ->select('u.name as user', 'a.code', 'a.name_vi', 'ua.*')
             ->get();
     }
 
@@ -40,10 +40,10 @@ class UserRepositoryImpl extends GenericRepositoryImpl implements UserRepository
         return DB::table('tbl_user_accessary as ua')
             ->join('tbl_user as u', 'ua.user_id', '=', 'u.user_id')
             ->join('tbl_accessary as a', 'ua.accessary_id', '=', 'a.accessary_id')
-            ->where('ua.status', '=', GlobalEnum::STATUS_ACTIVE)
+//            ->where('ua.status', '=', GlobalEnum::STATUS_ACTIVE)
             ->where('u.status', '=', GlobalEnum::STATUS_ACTIVE)
             ->where('a.status', '=', GlobalEnum::STATUS_ACTIVE)
-            ->select('u.name as user', 'a.*', 'ua.*')
+            ->select('u.name as user', 'a.code', 'a.name_vi', 'ua.*')
             ->get();
     }
 

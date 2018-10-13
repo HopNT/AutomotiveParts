@@ -20,11 +20,37 @@ $(document).ready(function () {
         }
     });
 
+    $('body').on('input', '#form-parts input[name="width"]', function (e) {
+        e.target.value = e.target.value.replace(/[^0-9.]/g,'');
+    });
+
+    $('body').on('input', '#form-parts input[name="height"]', function (e) {
+        e.target.value = e.target.value.replace(/[^0-9.]/g,'');
+    });
+
+    $('body').on('input', '#form-parts input[name="number_of_tooth"]', function (e) {
+        e.target.value = e.target.value.replace(/[^0-9]/g,'');
+    });
+
+    $('body').on('input', '#form-parts input[name="inner_diameter"]', function (e) {
+        e.target.value = e.target.value.replace(/[^0-9.]/g,'');
+    });
+
+    $('body').on('input', '#form-parts input[name="outer_diameter"]', function (e) {
+        e.target.value = e.target.value.replace(/[^0-9.]/g,'');
+    });
+
+    $('body').on('input', '#form-parts input[name="life_cycle"]', function (e) {
+        e.target.value = e.target.value.replace(/[^0-9]/g,'');
+    });
+
+    $('body').on('input', '#form-parts input[name="weight"]', function (e) {
+        e.target.value = e.target.value.replace(/[^0-9.]/g,'');
+    });
+
     // Open modal add new parts
     $('body').on('click', '#btn_add_new_parts', function () {
-
         resetPartsForm();
-
         let accessary = $('#form-parts #accessary');
         accessary.select2({
             ajax: {
@@ -56,9 +82,7 @@ $(document).ready(function () {
 
     // Open modal update parts
     $('body').on('click', '#btn_update_parts', function () {
-
         resetPartsForm();
-
         $('#form-parts #accessary').select2({
             ajax: {
                 url: '/admin/accessary/searchByText',
@@ -84,6 +108,7 @@ $(document).ready(function () {
         loadCatalogParts('form-parts', 'select-catalog-parts', 'catalog_parts_id', 'catalog_parts_id');
         $('#modal_add_update_parts #title-add').css('display', 'none');
         $('#modal_add_update_parts #title-update').css('display', 'block');
+        $('#modal_add_update_parts input[name="code"]').prop('disabled', true);
         $('#modal_add_update_parts').modal();
         let url = $(this).attr('href');
         $.ajax({
@@ -114,6 +139,7 @@ $(document).ready(function () {
                 }
 
                 if (result.data.photo != undefined && result.data.photo != null && result.data.photo != '') {
+                    console.log(result.data.photo);
                     var img = $('<img/>', {
                         id: 'dynamic',
                         width: 250,
@@ -125,7 +151,13 @@ $(document).ready(function () {
                     img.attr('src', result.data.photo);
                     $("#form-parts .image-preview").attr("data-content", $(img)[0].outerHTML).popover("show");
                 }
+
+                if (result.data.status == 0) {
+                    $('#form-parts #status').css('display', '');
+                    $('#form-parts select[name="status"]').val(result.data.status);
+                }
             }
+
         });
     });
 

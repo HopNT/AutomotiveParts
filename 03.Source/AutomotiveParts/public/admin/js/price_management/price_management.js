@@ -10,11 +10,25 @@ function resetPriceForm() {
     $('#form-price input[name="quantity"]').val("");
     $('#form-price #accessary_id').html("");
     $('#form-price #accessary_id_error').html("");
+    $('#form-price #status').css('display', 'none');
+    $('#form-price select[name="status"]').val("");
 }
 
 $(document).ready(function () {
 
     loadTablePrice();
+
+    $('body').on('input', '#form-price input[name="garage_price"]', function (e) {
+        e.target.value = e.target.value.replace(/[^0-9]/g,'');
+    });
+
+    $('body').on('input', '#form-price input[name="retail_price"]', function (e) {
+        e.target.value = e.target.value.replace(/[^0-9]/g,'');
+    });
+
+    $('body').on('input', '#form-price input[name="quantity"]', function (e) {
+        e.target.value = e.target.value.replace(/[^0-9]/g,'');
+    });
 
     // Check all row
     $('body').on('click', '#tbl_price #check_all', function (e) {
@@ -100,13 +114,17 @@ $(document).ready(function () {
                 $('#form-price input[name="garage_price"]').val(result.data.garage_price);
                 $('#form-price input[name="retail_price"]').val(result.data.retail_price);
                 $('#form-price input[name="quantity"]').val(result.data.quantity);
+
+                if (result.data.status == 0) {
+                    $('#form-price #status').css('display', '');
+                    $('#form-price select[name="status"]').val(result.data.status);
+                }
             }
         })
     });
 
     // Save or update price
     $('body').on('click', '#btn_save_price', function () {
-        $('#accessary_id_error').html("");
         let type = $('#form-price').attr('method');
         let url = $('#form-price').attr('action');
         let userAccessaryId = $('#form-price input[name="user_accessary_id"]').val();

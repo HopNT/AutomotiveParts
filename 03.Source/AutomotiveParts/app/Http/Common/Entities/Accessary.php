@@ -14,7 +14,41 @@ class Accessary extends BaseModel {
 
     protected $primaryKey = 'accessary_id';
 
-    protected $fillable = [];
+    protected $fillable = [
+        'trademark_id',
+        'nation_id',
+        'type',
+        'code',
+        'name_en',
+        'name_vi',
+        'acronym_name',
+        'unsigned_name',
+        'photo_top',
+        'photo_top_name',
+        'photo_bottom',
+        'photo_bottom_name',
+        'photo_left',
+        'photo_left_name',
+        'photo_right',
+        'photo_right_name',
+        'photo_inner',
+        'photo_inner_name',
+        'photo_outer',
+        'photo_outer_name',
+        'description',
+        'prioritize',
+        'status'
+    ];
+
+    public $rules = [
+        'code' => 'required|unique:tbl_accessary',
+        'name_vi' => 'required|max:100'
+    ];
+
+    public $attributes = [
+        'code' => 'Mã phụ tùng',
+        'name_vi' => 'Tên tiếng Việt'
+    ];
 
     public function catalogAccessary() {
         return $this->belongsTo(CatalogAccessary::class, 'catalog_accessary_id');
@@ -34,5 +68,9 @@ class Accessary extends BaseModel {
 
     public function userDbs() {
         return $this->belongsToMany(UserDb::class, 'tbl_user_accessary', 'accessary_id', 'user_id');
+    }
+
+    public function accessaryLinks() {
+        return $this->hasMany(AccessaryLink::class, 'accessary_id');
     }
 }

@@ -27,6 +27,10 @@ class CarBrand extends BaseModel {
         'name' => 'required|max:255'
     ];
 
+    public $rules_update = [
+        'name' => 'required|max:255'
+    ];
+
     public $attributes = [
         'code_brand' => 'Mã hãng xe',
         'name' => 'Tên hãng xe'
