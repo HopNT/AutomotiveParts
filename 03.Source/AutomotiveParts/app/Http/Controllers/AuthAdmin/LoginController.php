@@ -37,7 +37,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin';
+    protected $redirectTo = '/admin/login';
 
     /**
      * Create a new controller instance.
@@ -195,7 +195,6 @@ class LoginController extends Controller
     public function logoutAdmin(Request $request)
     {
         $this->guard()->logout();
-
         $request->session()->invalidate();
         Session::flush();
         return redirect(route('admin_login'));
