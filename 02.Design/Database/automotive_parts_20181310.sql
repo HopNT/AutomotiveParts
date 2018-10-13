@@ -558,3 +558,82 @@ CREATE TABLE `tbl_year_manufacture`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Compact;
 
 SET FOREIGN_KEY_CHECKS = 1;
+
+CREATE TABLE `tbl_customer` (
+	`customer_id` INT(11) NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
+	`email` VARCHAR(100) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
+	`address` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
+	`phone_number` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
+	`note` TEXT NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
+	`created_at` DATETIME NULL DEFAULT NULL,
+	`updated_at` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`customer_id`)
+)
+COLLATE='utf8_unicode_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `tbl_bill` (
+	`bill_id` INT(11) NOT NULL AUTO_INCREMENT,
+	`customer_id` INT(11) NULL DEFAULT NULL,
+	`date_order` DATETIME NULL DEFAULT NULL,
+	`total_price` DECIMAL(15,0) NULL DEFAULT NULL,
+	`note` TEXT NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
+	`status` INT(1) NULL DEFAULT NULL COMMENT '0 - Chờ xác nhận, 2 - Đã thanh toán',
+	`created_at` DATETIME NULL DEFAULT NULL,
+	`updated_at` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`bill_id`),
+	INDEX `idx_fk_tbl_bill_customer_id` (`customer_id`),
+	CONSTRAINT `fk_tbl_bill_customer_id` FOREIGN KEY (`customer_id`) REFERENCES `tbl_customer` (`customer_id`) ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+COLLATE='utf8_unicode_ci'
+ENGINE=InnoDB
+;
+
+
+CREATE TABLE `tbl_bill_details` (
+	`bill_detail_id` INT(11) NOT NULL AUTO_INCREMENT,
+	`bill_id` INT(11) NULL DEFAULT NULL,
+	`accessary_id` INT(11) NULL DEFAULT NULL,
+	`quantity` INT(11) NULL DEFAULT NULL,
+	`price` DECIMAL(15,0) NULL DEFAULT NULL,
+	`created_at` DATETIME NULL DEFAULT NULL,
+	`updated_at` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`bill_detail_id`),
+	INDEX `idx_fk_tbl_bill_details_bill_id` (`bill_id`),
+	CONSTRAINT `fk_tbl_bill_details_bill_id` FOREIGN KEY (`bill_id`) REFERENCES `tbl_bill` (`bill_id`) ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+COLLATE='utf8_unicode_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `tbl_quotation` (
+	`quotation_id` INT(11) NOT NULL AUTO_INCREMENT,
+	`user_id` INT(11) NULL DEFAULT NULL,
+	`total_price` DECIMAL(15,0) NULL DEFAULT NULL,
+	`created_at` DATETIME NULL DEFAULT NULL,
+	`updated_at` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`quotation_id`),
+	INDEX `fk_tbl_quotation_user_id` (`user_id`)
+)
+COLLATE='utf8_unicode_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `tbl_quotation_details` (
+	`quotation_details_id` INT(11) NOT NULL AUTO_INCREMENT,
+	`quotation_id` INT(11) NULL DEFAULT NULL,
+	`code` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
+	`name` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
+	`trademark` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
+	`quantity` INT(11) NULL DEFAULT NULL,
+	`price` DECIMAL(15,0) NULL DEFAULT NULL,
+	`total_price` DECIMAL(15,0) NULL DEFAULT NULL,
+	PRIMARY KEY (`quotation_details_id`),
+	INDEX `fk_tbl_quotation_details_quotation_id` (`quotation_id`),
+	CONSTRAINT `fk_tbl_quotation_details_quotation_id` FOREIGN KEY (`quotation_id`) REFERENCES `tbl_quotation` (`quotation_id`) ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+COLLATE='utf8_unicode_ci'
+ENGINE=InnoDB
+;
