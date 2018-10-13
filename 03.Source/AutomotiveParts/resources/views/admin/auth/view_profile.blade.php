@@ -8,7 +8,7 @@ use App\Http\Common\Enum\GlobalEnum;
         <div class="container">
             <div class="row justify-content-center">
                 <div class="tile" style="width: 100%">
-                    <form class="form-horizontal" method="POST" id="form_add_update_user" action="{{route('view_profile')}}">
+                    <form class="form-horizontal" method="POST" enctype="multipart/form-data" id="form_add_update_user" action="{{route('view_profile')}}">
                         @csrf
                         <input type="hidden" name="user_id" value="{{$user->user_id}}">
                         <div class="row">

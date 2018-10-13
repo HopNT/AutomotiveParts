@@ -115,7 +115,6 @@ $( document ).ready(function() {
                         } else {
                             $("input[name='"+key+"']").parent().find('.text-danger').html(value);
                         }
-
                     });
                 }else{
                     $('#modal_add_update_user').modal('hide');

@@ -336,6 +336,15 @@ class AccountManagementController extends BackendController
             }
             if(isset($request->user_id)){
                 $user = (new UserDAO())->getUserById($request->user_id);
+                $avatar = '';
+                if ($request->hasFile('avatar'))
+                {
+                    if (!empty($request->avatar))
+                    {
+                        CommonUtils::deleteFile($request->avatar);
+                    }
+                    $avatar = CommonUtils::uploadFile($request->avatar, 'user/avatar/'.$user->user_id, GlobalEnum::IMAGE);
+                }
                 $user->name = $request->name;
                 $user->birth_day = $request->birth_day;
                 $user->gender = $request->gender;
@@ -344,6 +353,7 @@ class AccountManagementController extends BackendController
                 $user->identify_card = $request->identify_card;
                 $user->driving_license = $request->driving_license;
                 $user->address = $request->address;
+                $user->avatar = $avatar;
                 $user->updated_at = date("Y-m-d H:i:s");
                 $user->save();
             }
