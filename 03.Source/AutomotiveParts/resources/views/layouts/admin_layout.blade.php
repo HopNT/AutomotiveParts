@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="description" content="Automation Parts">
+    <meta name="description" content="Quản lý phụ tùng">
     <title>{{trans('label.app_name')}}</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

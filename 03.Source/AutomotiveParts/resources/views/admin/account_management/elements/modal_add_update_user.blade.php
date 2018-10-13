@@ -11,7 +11,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" method="POST" id="form_add_update_user" action="{{route('save-user')}}">
+                <form class="form-horizontal" method="POST" id="form_add_update_user" enctype="multipart/form-data" action="{{route('save-user')}}">
                     @csrf
                     <input type="hidden" name="user_id">
                     <div class="row">

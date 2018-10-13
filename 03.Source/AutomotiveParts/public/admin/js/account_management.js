@@ -12,7 +12,10 @@ $( document ).ready(function() {
         $("#form_add_update_user textarea[name='address']").val('');
         $("#form_add_update_user select[name='role_id']").val('');
         $("#form_add_update_user select[name='user_type']").val('');
+        // resetPhoto('modal_add_update_user','avatar');
+        // onloadPhoto('modal_add_update_user','avatar');
         $('#modal_add_update_user').modal();
+
     });
     $('body').on('click','#btn_save_role', function () {
         var url = $('#form_add_update_role').attr('action');
@@ -99,7 +102,9 @@ $( document ).ready(function() {
         $.ajax({
             type:'POST',
             url:url,
-            data: $('#form_add_update_user').serialize(),
+            data: new FormData($('#form_add_update_user')[0]),
+            contentType: false,
+            processData: false,
             success:function(rs){
                 if(rs.error){
                     $.each(rs.errors, function(key, value){
@@ -140,11 +145,12 @@ $( document ).ready(function() {
                                 $("#form_add_update_user input[name='gender'][id='gender_"+v+"']").prop('checked', true);
                             }else if(i=="address"){
                                 $("#form_add_update_user textarea[name='"+i+"']").val(v);
-                            }else if(i=="role_id" || i=="user_type"){
-                                $("#form_add_update_user select[name='"+i+"']").val(v);
-                            }else {
+                            }else if(i=="role_id" || i=="user_type") {
+                                $("#form_add_update_user select[name='" + i + "']").val(v);
+                            } else {
                                 $("#form_add_update_user input[name='"+i+"']").val(v);
                             }
+
                         });
                         $('#dob').datepicker({
                             format: "yyyy-mm-dd",
@@ -230,10 +236,103 @@ $( document ).ready(function() {
         });
     });
 
+
+
+    function onloadPhoto(form, inputName) {
+        var closebtn = $('<button/>', {
+            type: "button",
+            text: 'x',
+            id: 'close_' + inputName + '_preview',
+            style: 'font-size: initial;',
+        });
+        closebtn.attr("class", "close pull-right");
+        $('#' + form + ' #' + inputName + '_image_preview').popover({
+            trigger: 'manual',
+            html: true,
+            title: "<strong>Xem trước</strong>" + $(closebtn)[0].outerHTML,
+            content: "Không có ảnh xem trước",
+            placement: 'bottom'
+        });
+
+        $('body').on('click', '#close_' + inputName + '_preview', function () {
+            $('#' + form + ' #' + inputName + '_image_preview').popover('hide');
+            $('#' + form + ' #' + inputName + '_image_preview').hover(
+                function () {
+                    $('#' + form + ' #' + inputName + '_image_preview').popover('show');
+                },
+                function () {
+                    $('#' + form + ' #' + inputName + '_image_preview').popover('hide');
+                }
+            )
+        });
+
+        $('body').on('click', '#' + form + ' #' + inputName + '_image_preview_clear', function () {
+            $('#' + form + ' #' + inputName + '_image_preview').attr("data-content", "").popover('hide');
+            $('#' + form + ' #' + inputName + '_image_preview_filename').val("");
+            $('#' + form + ' #' + inputName + '_image_preview_clear').hide();
+            $('#' + form + ' .image-preview-input input[name="' + inputName + '"]').val("");
+            $("#" + form + " #" + inputName + "_image_preview_input_title").text("Duyệt");
+        });
+
+        $('body').on('change', '#' + form + ' .image-preview-input input[name="' + inputName + '"]', function () {
+            var img = $('<img/>', {
+                id: inputName,
+                width: 250,
+                height: 200
+            });
+            var file = this.files[0];
+            var reader = new FileReader();
+            // Set preview image into the popover data-content
+            reader.onload = function (e) {
+                $("#" + form + " #" + inputName + "_image_preview_input_title").text("Thay đổi");
+                $("#" + form + " #" + inputName + "_image_preview_clear").show();
+                $("#" + form + " #" + inputName + "_image_preview_filename").val(file.name);
+                img.attr('src', e.target.result);
+                $("#" + form + " #" + inputName + "_image_preview").attr("data-content", $(img)[0].outerHTML).popover("show");
+            }
+            reader.readAsDataURL(file);
+        });
+    }
+
+    function resetPhoto(form, inputName) {
+        $('#' + form + ' #' + inputName + '_image_preview').attr("data-content", "").popover('hide');
+        $('#' + form + ' #' + inputName + '_image_preview_filename').val("");
+        $('#' + form + ' #' + inputName + '_image_preview_clear').hide();
+        $('#' + form + ' .image-preview-input input[name="' + inputName + '"]').val("");
+        $("#" + form + " #" + inputName + "_image_preview_input_title").text("Duyệt");
+        var closebtn = $('<button/>', {
+            type: "button",
+            text: 'x',
+            id: 'close_' + inputName + '_preview',
+            style: 'font-size: initial;',
+        });
+        closebtn.attr("class", "close pull-right");
+        $('#' + form + ' #' + inputName + '_image_preview').popover({
+            trigger: 'manual',
+            html: true,
+            title: "<strong>Xem trước</strong>" + $(closebtn)[0].outerHTML,
+            content: "Không có ảnh xem trước",
+            placement: 'bottom'
+        });
+    }
+    $("#avatar").change(function() {
+        readURL(this);
+    });
 });
 function loadDataTable() {
     $('#user_table').DataTable();
     $('#role_table').DataTable();
     $('[data-toggle="popover"]').popover();
     $('[data-toggle="tooltip"]').tooltip();
+}
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#imagePreview').css('background-image', 'url('+e.target.result +')');
+            $('#imagePreview').hide();
+            $('#imagePreview').fadeIn(650);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
 }

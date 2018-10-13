@@ -140,6 +140,7 @@ return [
         'fax' => 'Fax',
         'role' => 'Quyền',
         'user_type' => 'Loại tài khoản',
+        'avatar'=>'Ảnh đại diện',
         'enter_address' => 'Nhập địa chỉ',
         'enter_dob' => 'Nhập ngày sinh',
         'enter_driving_license' => 'Nhập số GPLX',

@@ -15,8 +15,10 @@ use App\Http\Common\DAO\UserDAO;
 use App\Http\Common\Entities\Role;
 use App\Http\Common\Entities\UserDb;
 use App\Http\Common\Enum\GlobalEnum;
+use App\Http\Common\Utils\CommonUtils;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -244,8 +246,17 @@ class AccountManagementController extends BackendController
                     $user->save();
                 }
             }else{
+                $data = $request->all();
+                if ($request->hasFile('avatar'))
+                {
+                    $pathAvatar = CommonUtils::uploadFile($request->avatar, 'user', GlobalEnum::IMAGE);
+                    unset($data['avatar']);
+                    $data = array_add($data, 'avatar', $pathAvatar);
+                    $data = array_add($data, 'avatar_name', $request->avatar->getClientOriginalName());
+                }
                 //save role
-                $user->fill($request->all());
+                $user->fill($data);
+//                dd($user);
                 $user->status = GlobalEnum::STATUS_ACTIVE;
                 $user->password = bcrypt('123456');
                 $user->save();
