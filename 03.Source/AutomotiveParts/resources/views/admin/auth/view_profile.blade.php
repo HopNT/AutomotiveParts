@@ -19,7 +19,7 @@ use App\Http\Common\Enum\GlobalEnum;
                                         <label for="avatar"><i class="fa fa-pencil fa-lg" style="margin: 10px 0 0 10px"></i></label>
                                     </div>
                                     <div class="avatar-preview">
-                                        <div id="imagePreview" style="background-image: url('/admin/images/avatar-icon.png');">
+                                        <div id="imagePreview" style="background-image: url({{$user->avatar ? url('/').'/'.$user->avatar : '/admin/images/avatar-icon.png' }} );">
                                         </div>
                                     </div>
                                 </div>
@@ -130,7 +130,7 @@ use App\Http\Common\Enum\GlobalEnum;
         .avatar-upload {
             position: relative;
             max-width: 205px;
-            margin: 50px auto;
+            margin: 20px auto;
         }
         .avatar-upload .avatar-edit {
             position: absolute;
@@ -160,8 +160,8 @@ use App\Http\Common\Enum\GlobalEnum;
             border-color: #d6d6d6;
         }
         .avatar-upload .avatar-preview {
-            width: 192px;
-            height: 192px;
+            width: 200px;
+            height: 200px;
             position: relative;
             border-radius: 100%;
             border: 6px solid #F8F8F8;

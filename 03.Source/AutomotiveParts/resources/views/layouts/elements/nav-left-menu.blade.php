@@ -19,7 +19,7 @@
 <aside class="app-sidebar">
     <div class="app-sidebar__user">
         @if($user->avatar)
-            <img class="app-sidebar__user-avatar" src="{{asset('admin/images/avatar-icon.png')}}" alt="{{$user->name}}">
+            <img class="app-sidebar__user-avatar" src="{{asset($user->avatar)}}" alt="{{$user->name}}">
         @else
             <i class="app-menu__icon fa fa-user-circle-o fa-3x" style="margin-right: 20px"></i>
         @endif

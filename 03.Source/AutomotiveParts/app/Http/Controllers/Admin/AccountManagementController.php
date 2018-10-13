@@ -18,6 +18,7 @@ use App\Http\Common\Enum\GlobalEnum;
 use App\Http\Common\Utils\CommonUtils;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -339,9 +340,9 @@ class AccountManagementController extends BackendController
                 $avatar = '';
                 if ($request->hasFile('avatar'))
                 {
-                    if (!empty($request->avatar))
+                    if (!empty($request->avatar) && $user->avatar)
                     {
-                        CommonUtils::deleteFile($request->avatar);
+                        File::delete($user->avatar);
                     }
                     $avatar = CommonUtils::uploadFile($request->avatar, 'user/avatar/'.$user->user_id, GlobalEnum::IMAGE);
                 }
@@ -353,7 +354,9 @@ class AccountManagementController extends BackendController
                 $user->identify_card = $request->identify_card;
                 $user->driving_license = $request->driving_license;
                 $user->address = $request->address;
-                $user->avatar = $avatar;
+                if($avatar){
+                    $user->avatar = $avatar;
+                }
                 $user->updated_at = date("Y-m-d H:i:s");
                 $user->save();
             }
