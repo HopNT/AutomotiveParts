@@ -369,6 +369,7 @@ function resetFormAccessary() {
     $('#form-accessary input[name="prioritize"]').prop('checked', false);
     $('#form-accessary input[name="code"]').prop('disabled', false);
     $('#form-accessary #status').css('display', 'none');
+    $('#form-accessary select[name="status"]').val("");
     if (CKEDITOR.instances['description']) {
         CKEDITOR.instances['description'].destroy();    
     }
