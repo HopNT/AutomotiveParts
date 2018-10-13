@@ -46,6 +46,10 @@ class UserDb extends Authenticatable {
         return $this->belongsToMany(Accessary::class, 'tbl_user_accessary', 'user_id', 'accessary_id');
     }
 
+    public function roles(){
+        return $this->hasOne('App\Http\Common\Entities\Role','id');
+    }
+
     public $rules = [
         'name'=>'required',
         'birth_day' => 'required',
