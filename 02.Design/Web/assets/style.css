@@ -4,6 +4,7 @@ body{
 	background-position: 0 0;
     background-repeat: repeat;
     background-attachment: fixed;
+	font-family: "Roboto",sans-serif;
 }
 
 .bg-orange{
@@ -89,7 +90,7 @@ body{
 }
 .input-search {
     padding: 10px 16px;
-	font-size: 20px;
+	font-size: 16px;
 }
 .search-textarea {
     display: none;
@@ -97,10 +98,10 @@ body{
     resize: none;
     border-radius: 26px 0 0 26px;
     float: left;
-    font-size: 18px;
+    font-size: 16px;
     width: 90%;
     border: 0 !important;
-    padding: 5px 10px;
+    padding: 15px 15px;
     line-height: 1.5em;
 	overflow: hidden;
 }
@@ -211,9 +212,9 @@ a {
 	}
 	.col-md-3 {
 		-webkit-box-flex: 0;
-		-ms-flex: 0 0 25%;
+		/*-ms-flex: 0 0 25%;
 		flex: 0 0 20%;
-		max-width: 20%;
+		max-width: 20%;*/
 	}
 }
 
@@ -508,4 +509,64 @@ a {
 }
 .transport .col img{
 	margin: auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#tab1 #group1, #tab1 #group2, #tab1 #group3, #tab1 #group4,
+#tab2 #group1, #tab2 #group2, #tab2 #group3, #tab2 #group4,
+#tab3 #group1, #tab3 #group2, #tab3 #group3, #tab3 #group4{
+	height: 50px;
+	margin-bottom: 15px;
+}
+#tab1 a,
+#tab2 a,
+#tab3 a{
+	background: url(icon01.png) no-repeat;
+	color: #212529;
+	text-decoration:none;
+}
+#tab1 a:hover,
+#tab2 a:hover,
+#tab3 a:hover {
+    border: 1px solid #990000 !important;
+    color: #990000;
+}
+
+#group1 a{
+	background-position: -15px 0px;
+	padding: 15px 0px 0 70px;
+    display: block;
+	height: 48px;
+	border: 1px solid #eee;
+}
+#group2 a{
+	background-position: -15px -45px;
+	padding: 15px 0px 0 70px;
+    display: block;
+	height: 48px;
+	border: 1px solid #eee;
+}
+#group3 a{
+	background-position: -15px -90px;
+	padding: 15px 0px 0 70px;
+    display: block;
+	height: 48px;
+	border: 1px solid #eee;
+}
+#group4 a{
+	background-position: -15px -135px;
+	padding: 15px 0px 0 70px;
+    display: block;
+	height: 48px;
+	border: 1px solid #eee;
 }
