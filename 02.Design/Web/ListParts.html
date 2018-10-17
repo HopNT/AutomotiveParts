@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="../web/assets/style.css" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+	<link rel="stylesheet" href="../web/assets/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
+    <title>Phụ tùng SkyCorp</title>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-md navbar-orange fixed-top bg-orange">
+        <a class="navbar-brand" href="#" style="color:#fff;">Phụ tùng SkyCorp</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Kênh người bán</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Tải ứng dụng</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Kết nối &nbsp;&nbsp;<i class="fab fa-facebook-square"></i>&nbsp;&nbsp;<i class="fab fa-instagram"></i></a>
+            </li>
+          </ul>
+		  <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="far fa-bell"></i>&nbsp; Thông báo</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="far fa-question-circle"></i>&nbsp; Trợ giúp</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Đăng ký</a>
+            </li>			
+			<li class="nav-item">
+              <a class="nav-link" href="#">Đăng nhập</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+	<section id="content">
+		<div class="container pt-20">
+
+			<div class="row">
+			   <div class="col-sm-12">
+				  <div class="search-tabs">
+					 <!--Nav tabs-->
+					 <div class="intro-search-block mb-10px">
+						<div class="row">
+						   <div class="col-md-12">
+							  <form action="#" class="mb-10px clearfix">
+								 <div class="white-container clearfix">
+									<input name="q" id="parts-search-sm" type="text" value="" spellcheck="false" autofocus="true" class="form-control input-search active" placeholder="Nhập mã phụ tùng">
+									<textarea class="search-textarea" rows="4" spellcheck="false" id="parts-search" placeholder="Nhập danh sách mã phụ tùng"></textarea>
+									<div class="search-trigger-container">
+										<button type="button" class="search-trigger" id="btn-toggle-search">
+											<i id="icon-toggle" data-original-title="Search by list of PartNumbers" data-trigger="hover " data-toggle="tooltip" data-placement="top" data-html="false" class="fa fa-bars" aria-hidden="true"></i>
+										</button>
+									</div>
+								 </div>
+								 <button class="btn btn-success btn-sm" type="submit"><i class="fa fa-search"></i></button>
+							  </form>
+							  <div class="row mb-20px">
+								 <div class="col-sm-8">
+									<div class="example-numbers">Example: <a class="example-number" href="/en/search/all?q=MB573783">MB573783</a>, <a class="example-number" href="/en/search/all?q=MB242119">MB242119</a>, <a class="example-number" href="/en/search/all?q=263304X000">263304X000</a><span class="hidden-xs">, <a class="example-vin" href="/en/search/all?q=W0L0ZCF6841143485">W0L0ZCF6841143485</a>, <a class="example-frame" href="/en/search/all?q=FD3-1200558">FD3-1200558</a></span></div>
+									<!--example-numbers-->
+								 </div>
+								 <!--col-sm - 6-->
+								 <div class="col-sm-4">
+									<div class="text-right">
+									   <div class="informers"><img alt="where is my vin" src="../web/assets/whereismyvin.png" class="hidden"><a data-container="body" data-title="Where is my VIN/Frame ?" data-placement="bottom" data-content="<img alt='where is my vin' class='img-responsive' src='../web/assets/whereismyvin.png' />" data-html="true" data-trigger="click" data-toggle="popover" style="cursor:pointer;" data-original-title="" title="">Where is my VIN / Frame ?                                </a></div>
+									</div>
+									<!--text-right-->
+								 </div>
+								 <!--col-sm-6-->
+							  </div>
+							  <div class="row" style="padding-bottom:20px;">
+								<div class="col-md-5  mb-10px">
+									<input type="text" value="" spellcheck="false" autofocus="true" class="form-control" placeholder="Nhập tên xe" style="border-radius:20px;border: 1px solid #ced4da !important;width:100%;">
+								</div>
+								<div class="col-md-5  mb-10px">
+									<input type="text" value="" spellcheck="false" autofocus="true" class="form-control" placeholder="Nhập năm sản xuất" style="border-radius:20px;border: 1px solid #ced4da !important;width:100%;">
+								</div>
+								<div class="col-md-2 mb-10px">
+									<button class="btn btn-success" type="submit" style="width: 100%; border-radius:30px;font-size:16px;height:38px;">Tìm kiếm</button>
+								</div>
+							  </div>
+							  <!--row-->
+						   </div>
+						   <!--col-sm-5-->
+						</div>
+						<!--row-->
+					 </div>
+					 <!--intro-search - block-->
+				  </div>
+				  <!--search-tabs-->
+			   </div>
+			   <!--col-sm-10-->
+			</div>
+		
+			<div class="row pt-20">
+				<div class="col-md-12">
+					<h3 class="mb-5px">
+					Search result for: 083161008B, 083161008A
+					<img src="../web/assets/marks.png">
+					</h3>
+				</div>
+				<div class="col-md-12">
+					<div class="product-col list clearfix">
+						<div class="row">
+							<div class="col-lg-5 col-md-6 col-xs-6">
+								<div class="image">
+									<a data-alt="Suzuki 083161008B NUT" class="fancybox" rel="g_083161008B" href="../web/assets/083161008B.jpg" title=	"Suzuki 083161008B NUT">
+										<img data-zoom-image="../web/assets/083161008B.jpg" src="../web/assets/083161008B.jpg" alt="Suzuki 083161008B NUT" class="thumbnail img-responsive -ezoom-part">
+									</a>
+
+									<ul class="img-ui list-unstyled list-inline">
+									</ul>                       
+								</div>
+							</div>
+							<div class="col-lg-3 col-md-6 col-xs-6">
+								<div style="padding-bottom: 0px" class="caption">
+									<h4 class="part-col-list-h4">NUT</h4>
+									<h5>Part number: 083161008B </h5>
+									<p class="mb-10px">
+										Availability:
+										<span class="label label-pill label-success">10</span>
+									</p>
+									<p class="mb-10px">Weight, kg: 0.06</p>
+									<p class="mb-10px">Ship In, Days: 1</p>
+									<p class="mb-10px">
+										Make: <a data-container="body" data-title="Suzuki" data-toggle="popover" data-trigger="hover" data-placement="right" data-html="true" data-content="<img src=&quot;../web/assets/suzuki.jpg&quot; alt=&quot;suzuki&quot; align=&quot;left&quot;>
+											<h2>Suzuki Motor Co.</h2>
+												  <p>
+													Suzuki car brand dates back to the factory, which has been engaged in production of textile machinery. In 1937, the owners of the company decided to reorganize and ordered the developing of several prototype cars. Plans to produce cars were ruined due to outbreak of war, but in 1950s, Suzuki has decided to re-engage in the release of vehicles. Thus, in 1951, original motor-assisted bicycles came into the market, and Suzuki Motor Corporation was engaged in their production. 4 years later the first car of this brand rolled off the production line, called Suzulight.
+												  </p>
+												  <p>
+													In 1985 the company opened an office in America, which focused on the production of sports models. Suzuki cars are well recognized among customers in different countries, but they have been especially successful on the U.S. car market.
+												  </p>" class="sr-name withajaxpopover popup-ajax" href="/en/Suzuki-33.html" data-original-title="" title="">Suzuki</a>                       
+									</p>
+								</div>
+							</div>
+							<div class="text-center col-lg-4 col-md-12 col-xs-12">
+								<div class="caption">
+									<div class="hidden-xs make-logo">
+										<img class="make-logo-dim make-logo" src="../web/assets/suzuki.jpg">                        </div>
+									<div class="price">
+										<div class="sr-price"><span class="price-new">0.81<span data-toggle="tooltip" data-original-title="U.S. Dollar">$</span></span></div>
+									</div>
+									<div class="cart-button button-group">
+										<form class="form-vertical cr-form brace-it" style="" action="#" method="post">
+											<input type="hidden" value="" name="YII_CSRF_TOKEN"><input type="hidden" value="13125080" name="product_id" id="product_id">
+											<input size="3" class="form-control" type="text" value="1" name="amount" id="amount">&nbsp;
+											<button class="btn-small btn btn-success" id="yw2" type="submit" name="yt1"><i class="fa fa-shopping-cart cart-black"></i> 
+												<span class="text-uppercase dxs dxs3">Add to cart</span>
+											</button>
+										</form>                        
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12">
+						<div class="product-col list clearfix">
+							<div class="row">
+								<div class="col-lg-5 col-md-6 col-xs-6">
+									<div class="image">
+										<a data-alt="Suzuki 083161008B NUT" class="fancybox" rel="g_083161008B" href="../web/assets/083161008B.jpg" title=	"Suzuki 083161008B NUT">
+											<img data-zoom-image="../web/assets/083161008B.jpg" src="../web/assets/083161008B.jpg" alt="Suzuki 083161008B NUT" class="thumbnail img-responsive -ezoom-part">
+										</a>
+
+										<ul class="img-ui list-unstyled list-inline">
+										</ul>                       
+									</div>
+								</div>
+								<div class="col-lg-3 col-md-6 col-xs-6">
+									<div style="padding-bottom: 0px" class="caption">
+										<h4 class="part-col-list-h4">NUT</h4>
+										<h5>Part number: 083161008B </h5>
+										<p class="mb-10px">
+											Availability:
+											<span class="label label-pill label-success">10</span>
+										</p>
+										<p class="mb-10px">Weight, kg: 0.06</p>
+										<p class="mb-10px">Ship In, Days: 1</p>
+										<p class="mb-10px">
+											Make: <a data-container="body" data-toggle="popover" data-title="Suzuki" data-trigger="hover" data-placement="right" data-html="true" data-content="<img src=&quot;../web/assets/suzuki.jpg&quot; alt=&quot;suzuki&quot; align=&quot;left&quot;>
+												<h2>Suzuki Motor Co.</h2>
+													  <p>
+														Suzuki car brand dates back to the factory, which has been engaged in production of textile machinery. In 1937, the owners of the company decided to reorganize and ordered the developing of several prototype cars. Plans to produce cars were ruined due to outbreak of war, but in 1950s, Suzuki has decided to re-engage in the release of vehicles. Thus, in 1951, original motor-assisted bicycles came into the market, and Suzuki Motor Corporation was engaged in their production. 4 years later the first car of this brand rolled off the production line, called Suzulight.
+													  </p>
+													  <p>
+														In 1985 the company opened an office in America, which focused on the production of sports models. Suzuki cars are well recognized among customers in different countries, but they have been especially successful on the U.S. car market.
+													  </p>" class="sr-name withajaxpopover popup-ajax" href="/en/Suzuki-33.html" data-original-title="" title="">Suzuki</a>                       
+										</p>
+									</div>
+								</div>
+								<div class="text-center col-lg-4 col-md-12 col-xs-12">
+									<div class="caption">
+										<div class="hidden-xs make-logo">
+											<img class="make-logo-dim make-logo" src="../web/assets/suzuki.jpg">                        </div>
+										<div class="price">
+											<div class="sr-price"><span class="price-new">0.81<span data-toggle="tooltip" data-original-title="U.S. Dollar">$</span></span></div>
+										</div>
+										<div class="cart-button button-group">
+											<form class="form-vertical cr-form brace-it" style="" action="#" method="post">
+												<input type="hidden" value="" name="YII_CSRF_TOKEN"><input type="hidden" value="13125080" name="product_id" id="product_id">
+												<input size="3" class="form-control" type="text" value="1" name="amount" id="amount">&nbsp;
+												<button class="btn-small btn btn-success" id="yw2" type="submit" name="yt1"><i class="fa fa-shopping-cart cart-black"></i> 
+													<span class="text-uppercase dxs dxs3">Add to cart</span>
+												</button>
+											</form>                        
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+			</div>
+			<div class="pt-20"></div>
+			<div class="row" style="background-color: #232F3F;">
+				<div class="col-md-6">
+					<div class="row">
+						<div class="col">
+							  <div class="colItem_22AdZ">
+								 <h3 class="title_3IrNd">VỀ CHÚNG TÔI</h3>
+								 <ul>
+									<li class="link_1JECp"><a href="https://www.sendo.vn/huong-dan/ve-sendo/" rel="nofollow">Giới thiệu Sendo.vn</a></li>
+									<li class="link_1JECp"><a href="https://help.sendo.vn/hc/vi/categories/360000719872" rel="nofollow">Giới thiệu SenMall</a></li>
+									<li class="link_1JECp"><a href="https://www.sendo.vn/quy-che-hoat-dong/" rel="nofollow">Quy chế hoạt động</a></li>
+								 </ul>
+							  </div>
+						   </div>
+						   <div class="col">
+							  <div class="colItem_22AdZ">
+								 <h3 class="title_3IrNd">DÀNH CHO NGƯỜI MUA</h3>
+								 <ul>
+									<li class="link_1JECp"><a href="https://help.sendo.vn/hc/vi/categories/115000167331" rel="nofollow">Giải quyết khiếu nại</a></li>
+									<li class="link_1JECp"><a href="https://help.sendo.vn/hc/vi/articles/115001262292-Hướng-dẫn-mua-hàng" rel="nofollow">Hướng dẫn mua hàng</a></li>
+									<li class="link_1JECp"><a href="https://help.sendo.vn/hc/vi/articles/115001260091" rel="nofollow">Chính sách đổi trả</a></li>
+									<li class="link_1JECp"><a href="https://help.sendo.vn/hc/vi/" rel="nofollow">Chăm sóc khách hàng</a></li>
+									<li class="link_1JECp"><a href="https://www.sendo.vn/tien-ich/nap-tien/" rel="nofollow">Nạp tiền điện thoại</a></li>
+								 </ul>
+							  </div>
+						   </div>
+						   <div class="col">
+							  <div class="colItem_22AdZ">
+								 <h3 class="title_3IrNd">DÀNH CHO NGƯỜI BÁN</h3>
+								 <ul>
+									<li class="link_1JECp"><a href="https://ban.sendo.vn/" rel="nofollow">Mở shop trên Sendo</a></li>
+									<li class="link_1JECp"><a href="https://ban.sendo.vn/chinh-sach-nguoi-ban/" rel="nofollow">Quy định đối với người bán</a></li>
+									<li class="link_1JECp"><a href="https://ban.sendo.vn/chinh-sach-nguoi-ban/" rel="nofollow">Chính sách bán hàng</a></li>
+									<li class="link_1JECp"><a href="https://ban.sendo.vn/chinh-sach-nguoi-ban/36-5-quy-dinh-kiem-duyet" rel="nofollow">Hệ thống tiêu chí kiểm duyệt</a></li>
+								 </ul>
+							  </div>
+						   </div>
+					</div>
+					
+				</div>
+			   <div class="col-md-6">
+				  <div class="colItem_22AdZ">
+					 <h3 class="title_3IrNd">Đăng ký nhận bản tin ưu đãi khủng từ sendo</h3>
+					 <div class="subscribeEmailBox_UPegO">
+						<form class="">
+						   <div class="inputEmail_39P_i input-group">
+							  <input placeholder="Email của bạn là" aria-label="Đăng ký nhận bản tin ưu đãi" type="text" class="form-control" value="">
+							  <div class="input-group-append"><button class="btn btn-primary" style="color: #fff; background-color: #e5101d;">Đăng ký</button></div>
+						   </div>
+						   <div class="radioGroup_26tHS position-relative form-group"><label class="customRadio_1irMl"><input name="gender-radio" type="radio" value="nam"><span class="cirle_1mg4L"></span><span class="label_3kp0n">Nam</span></label><label class="customRadio_1irMl"><input name="gender-radio" type="radio" value="nu"><span class="cirle_1mg4L"></span><span class="label_3kp0n">Nữ</span></label></div>
+						</form>
+					 </div>
+				  </div>
+			   </div>
+			</div>
+		</div>
+		<input type="text" id="temp_val" value="1" hidden>
+	</section>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="../web/assets/jquery.fancybox-1.3.4.js"></script>
+	<script>
+		$(document).ready(function(){
+			$('[data-toggle="tooltip"]').tooltip(); 
+			$('[data-toggle="popover"]').popover({
+				container: 'body'
+			});
+			
+			$( "#btn-toggle-search" ).click(function() {
+				var flag = $('#temp_val').val();
+				if(flag==1){
+					$('#parts-search').css('display', 'block');					
+					$('#parts-search-sm').css('display', 'none');
+					$( "#icon-toggle" ).removeClass('fa fa-bars').addClass('fa fa-minus');
+					
+					$('#temp_val').val(0);
+				}
+				else{
+					$('#parts-search').css('display', 'none');
+					$('#parts-search-sm').css('display', 'block');
+					$( "#icon-toggle" ).removeClass('fa fa-minus').addClass('fa fa-bars');
+					$('#temp_val').val(1);
+				}
+			});
+			
+			$("a.fancybox").fancybox();
+		});
+		
+	</script>
+	
+  </body>
+</html>
