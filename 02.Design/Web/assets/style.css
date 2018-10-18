@@ -438,6 +438,15 @@ a {
     padding: 40px 40px 20px;
 	text-align: justify;
 }
+.product-details .tab-content{
+	border: 1px solid #eee;
+    padding: 40px 40px 20px;
+	text-align: justify;
+}
+.detail-product li{
+	border: 1px solid #eee;
+}
+
 .tab-content>.active, .pill-content>.active {
     display: block;
 	opacity: 1 !important;
