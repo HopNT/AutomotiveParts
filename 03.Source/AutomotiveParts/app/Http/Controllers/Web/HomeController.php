@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Web;
 use App\Http\Common\Enum\GlobalEnum;
+use App\Http\Common\Repository\AccessaryRepository;
 use App\Http\Common\Repository\CatalogPartsRepository;
 use App\Http\Common\Repository\PartsRepository;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 class HomeController extends Controller
 {
 
@@ -13,16 +16,19 @@ class HomeController extends Controller
 
     protected $partsRepository;
 
+    protected $accessaryRepository;
+
 //    protected $iHangXeRepository;
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(CatalogPartsRepository $catalogPartsRepository, PartsRepository $partsRepository)
+    public function __construct(CatalogPartsRepository $catalogPartsRepository, PartsRepository $partsRepository, AccessaryRepository $accessaryRepository)
     {
         $this->catalogPartsRepository = $catalogPartsRepository;
         $this->partsRepository = $partsRepository;
+        $this->accessaryRepository = $accessaryRepository;
     }
 
     /**
@@ -32,13 +38,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-//        $listCatalogPartsParent = $this->catalogPartsRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE)
-//            ->where('parent_id', '=', null);
-//        foreach ($listCatalogPartsParent as $catalogPartsParent) {
-//            $catalogPartsParent->child;
-//        }
+        $listCatalogPartsParent = $this->catalogPartsRepository->getAll()
+            ->where('status', '=', GlobalEnum::STATUS_ACTIVE)
+            ->where('parent_id', null);
+        foreach ($listCatalogPartsParent as $catalogPartsParent) {
+            $catalogPartsParent->child;
+        }
 
-        return view('home');
+        $listAccessaryPrioritize = $this->accessaryRepository->getAll()->where('prioritize', '=', GlobalEnum::STATUS_ACTIVE);
+
+        return view('home')->with('listCatalogPartsParent', $listCatalogPartsParent)
+            ->with('listAccessaryPrioritize', $listAccessaryPrioritize);
     }
 
 }

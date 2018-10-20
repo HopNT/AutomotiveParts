@@ -547,10 +547,15 @@ a {
 #tab1 a,
 #tab2 a,
 #tab3 a{
-	background: url('/images/icon01.png') no-repeat;
 	color: #212529;
 	text-decoration:none;
 }
+.catalog-icon{
+    background-size: 30px !important;
+    background-position-x: 10px !important;
+    background-position-y: center !important;
+}
+
 #tab1 a:hover,
 #tab2 a:hover,
 #tab3 a:hover {
@@ -559,28 +564,24 @@ a {
 }
 
 #group1 a{
-	background-position: -15px 0px;
 	padding: 15px 0px 0 70px;
     display: block;
 	height: 48px;
 	border: 1px solid #eee;
 }
 #group2 a{
-	background-position: -15px -45px;
 	padding: 15px 0px 0 70px;
     display: block;
 	height: 48px;
 	border: 1px solid #eee;
 }
 #group3 a{
-	background-position: -15px -90px;
 	padding: 15px 0px 0 70px;
     display: block;
 	height: 48px;
 	border: 1px solid #eee;
 }
 #group4 a{
-	background-position: -15px -135px;
 	padding: 15px 0px 0 70px;
     display: block;
 	height: 48px;

@@ -146,7 +146,6 @@ $(document).ready(function () {
                     $("#form-accessary #photo_bottom_image_preview_clear").show();
                     $("#form-accessary #photo_bottom_image_preview_filename").val(result.data.photo_bottom_name);
                     img.attr('src', publicPath + '/' + result.data.photo_bottom);
-                    alert(publicPath + '/' + result.data.photo_bottom);
                     $("#form-accessary #photo_bottom_image_preview").attr("data-content", $(img)[0].outerHTML).popover("show");
                 }
 
