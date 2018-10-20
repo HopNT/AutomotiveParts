@@ -46,4 +46,8 @@ class Role extends BaseModel
     {
         return $this->belongsToMany(Menu::class, 'tbl_menu_role', 'role_id', 'menu_id');
     }
+
+    public function userDb() {
+        return $this->belongsTo(UserDb::class);
+    }
 }
