@@ -31,6 +31,14 @@ class CatalogParts extends BaseModel {
         'name' => 'Tên nhóm bộ phận xe'
     ];
 
+    public function parent() {
+        return $this->belongsTo('tbl_catalog_parts', 'parent_id');
+    }
+
+    public function child() {
+        return $this->hasMany('tbl_catalog_parts', 'parent_id');
+    }
+
     public function parts() {
         return $this->hasMany(Parts::class, 'catalog_parts_id');
     }
