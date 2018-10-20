@@ -6,8 +6,6 @@ use App\Http\Common\Repository\AccessaryRepository;
 use App\Http\Common\Repository\CatalogPartsRepository;
 use App\Http\Common\Repository\PartsRepository;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -18,7 +16,6 @@ class HomeController extends Controller
 
     protected $accessaryRepository;
 
-//    protected $iHangXeRepository;
     /**
      * Create a new controller instance.
      *
