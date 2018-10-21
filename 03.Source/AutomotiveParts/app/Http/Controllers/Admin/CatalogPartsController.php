@@ -36,7 +36,7 @@ class CatalogPartsController extends BackendController
     public function searchByText(Request $request) {
         $results = array();
         $text = $request->get('query');
-        $listCatalogParts = $this->catalogPartsRepository->searchByText($text);
+        $listCatalogParts = $this->catalogPartsRepository->searchByText($text)->where('parent_id', null);
         $index = 0;
         if (!empty($listCatalogParts))
         {

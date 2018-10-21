@@ -47,7 +47,7 @@ class UserDb extends Authenticatable {
     }
 
     public function roles(){
-        return $this->hasOne('App\Http\Common\Entities\Role','id');
+        return $this->hasOne(Role::class,'id', 'role_id');
     }
 
     public $rules = [

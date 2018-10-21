@@ -24,6 +24,7 @@
             <i class="app-menu__icon fa fa-user-circle-o fa-3x" style="margin-right: 20px"></i>
         @endif
         <div>
+
             <p class="app-sidebar__user-name">{{$user->name}}</p>
             <p class="app-sidebar__user-designation">{{$user->roles->role_name}}</p>
         </div>

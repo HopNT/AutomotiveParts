@@ -32,11 +32,11 @@ class CatalogParts extends BaseModel {
     ];
 
     public function parent() {
-        return $this->belongsTo('tbl_catalog_parts', 'parent_id');
+        return $this->belongsTo(CatalogParts::class, 'parent_id');
     }
 
     public function child() {
-        return $this->hasMany('tbl_catalog_parts', 'parent_id');
+        return $this->hasMany(CatalogParts::class, 'parent_id');
     }
 
     public function parts() {
