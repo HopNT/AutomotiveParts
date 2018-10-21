@@ -12,5 +12,7 @@
 */
 
 Auth::routes();
-Route::get('/', 'Web\HomeController@index')->name('home');
+Route::get('/', 'Web\HomeController@index');
 Route::get('/home', 'Web\HomeController@index')->name('home');
+Route::get('/search', 'Web\SearchController@search')->name('search');
+Route::get('/accessory-detail', 'Web\AccessoryController@viewAccessoryDetail')->name('view-accessory-detail');
