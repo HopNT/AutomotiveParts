@@ -10,25 +10,13 @@
                 <div class="row">
                     <div class="col-lg-5 col-md-6 col-xs-6">
                         <div class="image">
-                            <a class="fancybox" rel="gallery1" href="http://farm2.staticflickr.com/1669/23976340262_a5ca3859f6_b.jpg" title="Twilight Memories (doraartem)">
-                                <img src="http://farm2.staticflickr.com/1669/23976340262_a5ca3859f6_m.jpg" alt="" />
-                            </a>
-                            <a class="fancybox" rel="gallery1" href="http://farm2.staticflickr.com/1459/23610702803_83655c7c56_b.jpg" title="Electrical Power Lines and Pylons disappear over t.. (pautliubomir)">
-                                <img src="http://farm2.staticflickr.com/1459/23610702803_83655c7c56_m.jpg" alt="" />
-                            </a>
-                            <a class="fancybox" rel="gallery1" href="http://farm2.staticflickr.com/1617/24108587812_6c9825d0da_b.jpg" title="Morning Godafoss (Brads5)">
-                                <img src="http://farm2.staticflickr.com/1617/24108587812_6c9825d0da_m.jpg" alt="" />
-                            </a>
-                            <a class="fancybox" rel="gallery1" href="http://farm4.staticflickr.com/3691/10185053775_701272da37_b.jpg" title="Vertical - Special Edition! (cedarsphoto)">
-                                <img src="http://farm4.staticflickr.com/3691/10185053775_701272da37_m.jpg" alt="" />
-                            </a>
-                            <a class="fancybox" rel="gallery1" href="{{asset('/images/083161008B.jpg')}}" title="Suzuki 083161008B NUT">
+                            <a class="fancybox" rel="gallery" href="{{asset('/images/083161008B.jpg')}}" title="Suzuki 083161008B NUT">
                                 <img src="{{asset('/images/083161008B.jpg')}}" alt="Suzuki 083161008B NUT" class="thumbnail img-responsive -ezoom-part">
                             </a>
                             <ul class="img-ui list-unstyled list-inline">
                                 <li>
-                                    <a class="fancybox" rel="gallery1" href="{{asset('/images/083161008B.jpg')}}" title="Suzuki 083161008B NUT">
-                                        <img src="{{asset('/images/083161008B.jpg')}}" alt="Suzuki 083161008B NUT" class="thumbnail img-responsive -ezoom-part">
+                                    <a class="fancybox" rel="gallery" href="{{asset('/images/083161008B.jpg')}}" title="Suzuki 083161008B NUT">
+                                        <img width="65px" src="{{asset('/images/083161008B.jpg')}}" alt="Suzuki 083161008B NUT" class="thumbnail img-responsive -ezoom-part">
                                     </a>
                                 </li>
                             </ul>

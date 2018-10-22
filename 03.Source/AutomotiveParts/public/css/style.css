@@ -704,3 +704,15 @@ div.make-logo {
         padding: 0 120px;
     }
 }
+.img-ui {
+    margin-bottom: 0px;
+    margin-top: 5px;
+}
+.img-ui li {
+    padding-right: 1px;
+}
+.list-inline>li {
+    display: inline-block;
+    /*padding-right: 5px;*/
+    /*padding-left: 5px;*/
+}
