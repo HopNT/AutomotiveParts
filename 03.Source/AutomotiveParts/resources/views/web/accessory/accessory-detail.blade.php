@@ -15,18 +15,21 @@
                             <a href="{{asset('/images/083161008B.jpg')}}" title="Suzuki 083161008B NUT">
                                 <img src="{{asset('/images/083161008B.jpg')}}" alt="Suzuki 083161008B NUT" class="thumbnail img-responsive -ezoom-part">
                             </a>
-                            <ul class="img-ui list-unstyled list-inline">
-                                <li>
-                                    <a class="fancybox" data-fancybox-group="gallery" rel="example_group" href="{{asset('/images/083161008B.jpg')}}" title="Suzuki 083161008B NUT">
-                                        <img width="65px" src="{{asset('/images/083161008B.jpg')}}" alt="Suzuki 083161008B NUT" class="thumbnail img-responsive -ezoom-part">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="fancybox" data-fancybox-group="gallery" rel="example_group" href="{{asset('/images/083161008B.jpg')}}" title="Suzuki 083161008B NUT">
-                                        <img width="65px" src="{{asset('/images/083161008B.jpg')}}" alt="Suzuki 083161008B NUT" class="thumbnail img-responsive -ezoom-part">
-                                    </a>
-                                </li>
-                            </ul>
+                            <a href="{{asset('/images/083161008B.jpg')}}" title="Suzuki 083161008B NUT">
+                                <img width="65px" src="{{asset('/images/083161008B.jpg')}}" alt="Suzuki 083161008B NUT" class="img-ui thumbnail img-responsive -ezoom-part">
+                            </a>
+                            <a href="{{asset('/images/083161008B.jpg')}}" title="Suzuki 083161008B NUT">
+                                <img width="65px" src="{{asset('/images/083161008B.jpg')}}" alt="Suzuki 083161008B NUT" class="img-ui thumbnail img-responsive -ezoom-part">
+                            </a>
+                            <a href="{{asset('/images/083161008B.jpg')}}" title="Suzuki 083161008B NUT">
+                                <img width="65px" src="{{asset('/images/083161008B.jpg')}}" alt="Suzuki 083161008B NUT" class="img-ui thumbnail img-responsive -ezoom-part">
+                            </a>
+                            <a href="{{asset('/images/083161008B.jpg')}}" title="Suzuki 083161008B NUT">
+                                <img width="65px" src="{{asset('/images/083161008B.jpg')}}" alt="Suzuki 083161008B NUT" class="img-ui thumbnail img-responsive -ezoom-part">
+                            </a>
+                            <a href="{{asset('/images/083161008B.jpg')}}" title="Suzuki 083161008B NUT">
+                                <img width="65px" src="{{asset('/images/083161008B.jpg')}}" alt="Suzuki 083161008B NUT" class="img-ui thumbnail img-responsive -ezoom-part">
+                            </a>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 col-xs-6">

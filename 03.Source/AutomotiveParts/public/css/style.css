@@ -601,7 +601,7 @@ a {
     float: left;
 }
 .thumbnail {
-    display: block;
+    display: inline-block;
     padding: 4px;
     margin: 0px;
     line-height: 1.42857143;
@@ -707,6 +707,7 @@ div.make-logo {
 .img-ui {
     margin-bottom: 0px;
     margin-top: 5px;
+    margin-right: 3px;
 }
 .img-ui li {
     padding-right: 1px;
