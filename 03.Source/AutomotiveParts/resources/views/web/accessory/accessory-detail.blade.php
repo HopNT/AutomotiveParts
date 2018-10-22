@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @section('css')
-    <link href="{{ asset('css/jquery.fancybox-1.3.4.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/lightgallery.css') }}" rel="stylesheet">
+    <style>
+    </style>
 @endsection
 @section('content')
     @include('web.element.search')
@@ -9,13 +11,18 @@
             <div class="product-col list clearfix">
                 <div class="row">
                     <div class="col-lg-5 col-md-6 col-xs-6">
-                        <div class="image">
-                            <a class="fancybox" rel="gallery" href="{{asset('/images/083161008B.jpg')}}" title="Suzuki 083161008B NUT">
+                        <div class="image" id="lightgallery" >
+                            <a href="{{asset('/images/083161008B.jpg')}}" title="Suzuki 083161008B NUT">
                                 <img src="{{asset('/images/083161008B.jpg')}}" alt="Suzuki 083161008B NUT" class="thumbnail img-responsive -ezoom-part">
                             </a>
                             <ul class="img-ui list-unstyled list-inline">
                                 <li>
-                                    <a class="fancybox" rel="gallery" href="{{asset('/images/083161008B.jpg')}}" title="Suzuki 083161008B NUT">
+                                    <a class="fancybox" data-fancybox-group="gallery" rel="example_group" href="{{asset('/images/083161008B.jpg')}}" title="Suzuki 083161008B NUT">
+                                        <img width="65px" src="{{asset('/images/083161008B.jpg')}}" alt="Suzuki 083161008B NUT" class="thumbnail img-responsive -ezoom-part">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="fancybox" data-fancybox-group="gallery" rel="example_group" href="{{asset('/images/083161008B.jpg')}}" title="Suzuki 083161008B NUT">
                                         <img width="65px" src="{{asset('/images/083161008B.jpg')}}" alt="Suzuki 083161008B NUT" class="thumbnail img-responsive -ezoom-part">
                                     </a>
                                 </li>
@@ -181,13 +188,16 @@
     </div>
 @endsection
 @section('javascript')
-    <script src="{{asset('/js/jquery.fancybox-1.3.4.js')}}" ></script>
-    <script>
-        $(document).ready(function() {
-            $(".fancybox").fancybox({
-                openEffect	: 'none',
-                closeEffect	: 'none'
-            });
-        });
+    <script src="https://cdn.jsdelivr.net/picturefill/2.3.1/picturefill.min.js"></script>
+    <script src="{{asset('/js/lightgallery.js')}}" ></script>
+    <script src="{{asset('/js/lg-pager.js')}}" ></script>
+    <script src="{{asset('/js/lg-autoplay.js')}}" ></script>
+    <script src="{{asset('/js/lg-fullscreen.js')}}" ></script>
+    <script src="{{asset('/js/lg-zoom.js')}}" ></script>
+    <script src="{{asset('/js/lg-hash.js')}}" ></script>
+    <script src="{{asset('/js/lg-share.js')}}" ></script>
+
+    <script type="text/javascript">
+        lightGallery(document.getElementById('lightgallery'));
     </script>
 @endsection
