@@ -9,11 +9,26 @@
 namespace App\Http\Controllers\Web;
 
 
+use App\Http\Common\Repository\AccessaryLinkRepository;
+use App\Http\Common\Repository\AccessaryRepository;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class AccessoryController extends Controller
 {
-    public function viewAccessoryDetail(){
-        return view('web.accessory.accessory-detail');
+
+    protected $accessaryRepository;
+
+    protected $accessaryLinkRepository;
+
+    /**
+     * AccessoryController constructor.
+     * @param $accessaryRepository
+     */
+    public function __construct(AccessaryRepository $accessaryRepository, AccessaryLinkRepository $accessaryLinkRepository)
+    {
+        $this->accessaryRepository = $accessaryRepository;
+        $this->accessaryLinkRepository = $accessaryLinkRepository;
     }
+
 }
