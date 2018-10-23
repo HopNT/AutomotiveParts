@@ -5,10 +5,10 @@
             <div class="intro-search-block mb-10px">
                 <div class="row">
                     <div class="col-md-12">
-                        <form action="#" class="mb-10px clearfix">
+                        <form action="{{route('search')}}" class="mb-10px clearfix">
                             <div class="white-container clearfix">
-                                <input name="q" id="parts-search-sm" type="text" value="" spellcheck="false" autofocus="true" class="form-control input-search active" placeholder="Nhập mã phụ tùng">
-                                <textarea class="search-textarea" rows="4" spellcheck="false" id="parts-search" placeholder="Nhập danh sách mã phụ tùng"></textarea>
+                                <input name="q1" id="parts-search-sm" type="text" value="" spellcheck="false" autofocus="true" class="form-control input-search active" placeholder="Nhập mã phụ tùng">
+                                <textarea name="q2" class="search-textarea" rows="4" spellcheck="false" id="parts-search" placeholder="Nhập danh sách mã phụ tùng"></textarea>
                                 <div class="search-trigger-container">
                                     <button type="button" class="search-trigger" id="btn-toggle-search">
                                         <i id="icon-toggle" data-original-title="Search by list of PartNumbers" data-trigger="hover " data-toggle="tooltip" data-placement="top" data-html="false" class="fa fa-bars" aria-hidden="true"></i>

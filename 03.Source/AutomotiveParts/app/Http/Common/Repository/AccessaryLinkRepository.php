@@ -11,4 +11,6 @@ interface AccessaryLinkRepository {
 
     function deleteAll($accessaryId);
 
+    function getAccessaryLinks($accessaryId);
+
 }
