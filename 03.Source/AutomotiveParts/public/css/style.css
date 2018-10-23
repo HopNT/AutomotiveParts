@@ -219,9 +219,7 @@ a {
 	}
 	.col-md-3 {
 		-webkit-box-flex: 0;
-		/*-ms-flex: 0 0 25%;
-		flex: 0 0 20%;
-		max-width: 20%;*/
+        display: inline-block;
 	}
 }
 
@@ -245,14 +243,14 @@ a {
     font-size: 0;
     margin-left: 0;
     margin-right: 0;
-    padding: 0 10px;
+    padding: 0;
     width: 100%;
 }
 .shop-your-make .row .col-md-2 {
     display: inline-block;
     float: none !important;
     font-size: 14px;
-    padding: 5px;
+    padding: 0 5px 5px 0;
     vertical-align: top;
 }
 .shop-your-make .item {
@@ -284,7 +282,7 @@ a {
 .shop-your-make .shop-title {
     font-family: "Roboto",sans-serif;
     font-weight: 300;
-    font-size: 22px;
+    font-size: 16px;
     color: #333;
     margin: 0px 0 5px;
 }

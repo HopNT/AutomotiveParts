@@ -2,7 +2,7 @@
 <!--    <h3 class="title">Genuine Parts Online Catalogs</h3>-->
     <div class="row">
         @foreach($listAccessaryPrioritize as $key => $accessaryPrioritize)
-            <div class="col-md-2 col-sm-4 col-xs-6">
+            <div class="col-md-3 col-sm-4 col-xs-6 mb-20px">
                 <div class="item item-effect">
                     <!-- Item image -->
                     <a title="Online Catalog BMW OEM Parts" href="#">

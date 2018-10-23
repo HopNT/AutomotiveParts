@@ -1,4 +1,4 @@
-<div class="top-tabs">
+<div class="top-tabs mb-20px">
     <!-- <h3 class="title mb-20px">About Partsouq</h3> -->
     <ul class="nav nav-tabs row">
         @foreach($listCatalogPartsParent as $key => $catalogPartsParent)
