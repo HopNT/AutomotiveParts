@@ -36,9 +36,12 @@
                                 <label for="car_brand"
                                        class="control-label col-md-4">{{trans('label.car.brand')}}</label>
                                 <div class="col-md-8">
-                                    <div id="select-car-brand" >
+                                    <div id="select-car-brand">
                                         <select class="form-control" name="car_brand_id" id="car_brand_id">
-                                            <option value="">-- {{trans('label.common.choose')}} {{trans('label.catalog_car.brand')}} --</option>
+                                            <option value="">
+                                                -- {{trans('label.common.choose')}} {{trans('label.catalog_car.brand')}}
+                                                --
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -51,7 +54,9 @@
                                 <div class="col-md-8">
                                     <div id="select-catalog-car">
                                         <select id="catalog_car_id" class="form-control" name="catalog_car_id">
-                                            <option value="">-- {{trans('label.common.choose')}} {{trans('label.car.catalog')}} --</option>
+                                            <option value="">
+                                                -- {{trans('label.common.choose')}} {{trans('label.car.catalog')}} --
+                                            </option>
                                         </select>
                                     </div>
                                     <span class="text-danger" id="catalog_car_id_error"></span>
@@ -79,11 +84,14 @@
                                 <label for="nation"
                                        class="control-label col-md-4">{{trans('label.car_brand.nation')}}</label>
                                 <div class="col-md-8">
-                                    <select class="form-control" name="nation_id">
-                                        <option value="">
-                                            -- {{trans('label.common.choose')}} {{trans('label.car_brand.nation')}} --
-                                        </option>
-                                    </select>
+                                    <div id="select-nation">
+                                        <select class="form-control" name="nation_id">
+                                            <option value="">
+                                                -- {{trans('label.common.choose')}} {{trans('label.car_brand.nation')}}
+                                                --
+                                            </option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -106,11 +114,15 @@
                             <div class="form-group row">
                                 <label for="year" class="control-label col-md-4">{{trans('label.car.year')}}</label>
                                 <div class="col-md-8">
-                                    <select class="form-control" name="year_manufacture_id">
-                                        <option value="">-- {{trans('label.common.choose')}} {{trans('label.car.year')}}
-                                            --
-                                        </option>
-                                    </select>
+                                    <div id="select-year-manufacture">
+                                        <select class="form-control" name="year_manufacture_id"
+                                                id="year_manufacture_id">
+                                            <option value="">
+                                                -- {{trans('label.common.choose')}} {{trans('label.car.year')}}
+                                                --
+                                            </option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>

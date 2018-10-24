@@ -20,4 +20,10 @@ interface CarRepository
      * @return mixed
      */
     function deleteMulti($ids);
+
+    /**
+     * @param $code
+     * @return mixed
+     */
+    function getByAccessary($code);
 }

@@ -2,10 +2,6 @@ $(document).ready(function () {
 
     loadTableCar();
 
-    $('.modal').on('hidden.bs.modal', function(){
-        
-    });
-
     $('body').on('input', '#form-car input[name="number_of_doors"]', function (e) {
         e.target.value = e.target.value.replace(/[^0-9]/g,'');
     });
@@ -31,6 +27,9 @@ $(document).ready(function () {
     // Open modal add new car
     $('body').on('click', '#btn_add_new_car', function () {
         resetCarForm();
+        loadCarBrand('form-car', 'select-car-brand', 'car_brand_id', 'car_brand_id');
+        loadYearManufacture('form-car', 'select-year-manufacture', 'year_manufacture_id', 'year_manufacture_id');
+        loadNation('form-car', 'select-nation', 'nation_id', 'nation_id');
         $('#form-car #parts').select2({
             ajax: {
                 url: '/admin/parts/searchByText',
@@ -52,7 +51,6 @@ $(document).ready(function () {
             allowClear: true,
             multiple: true
         });
-        loadCarBrand('form-car', 'select-car-brand', 'car_brand_id', 'car_brand_id');
         $('#modal_add_update_car #title-add').css('display', 'block');
         $('#modal_add_update_car #title-update').css('display', 'none');
         $('#modal_add_update_car').modal();
@@ -61,6 +59,10 @@ $(document).ready(function () {
     // Open modal update car
     $('body').on('click', '#btn_update_car', function () {
         resetCarForm();
+        loadCarBrand('form-car', 'select-car-brand', 'car_brand_id', 'car_brand_id');
+        loadCatalogCar('form-car', 'select-catalog-car', 'catalog_car_id', 'catalog_car_id');
+        loadYearManufacture('form-car', 'select-year-manufacture', 'year_manufacture_id', 'year_manufacture_id');
+        loadNation('form-car', 'select-nation', 'nation_id', 'nation_id');
         $('#form-car #parts').select2({
             ajax: {
                 url: '/admin/parts/searchByText',
@@ -82,11 +84,6 @@ $(document).ready(function () {
             allowClear: true,
             multiple: true
         });
-        loadCarBrand('form-car', 'select-car-brand', 'car_brand_id', 'car_brand_id');
-        loadCatalogCar('form-car', 'select-catalog-car', 'catalog_car_id', 'catalog_car_id');
-        $('#modal_add_update_car #title-add').css('display', 'none');
-        $('#modal_add_update_car #title-update').css('display', 'block');
-        $('#modal_add_update_car').modal();
         let url = $(this).attr('href');
         $.ajax({
             type: 'GET',
@@ -97,6 +94,8 @@ $(document).ready(function () {
                 $('#form-car input[name="name"]').val(car['name']);
                 $('#form-car input[name="number_of_doors"]').val(car['number_of_doors']);
                 $('#form-car textarea[name="description"]').val(car['description']);
+                $('#form-car #year_manufacture_id').val(car.year_manufacture_id);
+                $('#form-car #nation_id').val(car.nation_id);
 
                 let catalogCar = car['catalog_car'];
                 $("#form-car select[name='car_brand_id']").val(catalogCar['car_brand_id']);
@@ -116,7 +115,10 @@ $(document).ready(function () {
                     $('#form-car select[name="status"]').val(car.status);
                 }
             }
-        })
+        });
+        $('#modal_add_update_car #title-add').css('display', 'none');
+        $('#modal_add_update_car #title-update').css('display', 'block');
+        $('#modal_add_update_car').modal();
     });
 
     // Save or update car

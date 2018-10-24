@@ -18,11 +18,13 @@ use App\Http\Common\Repository\Implement\PartsRepositoryImpl;
 use App\Http\Common\Repository\Implement\TempPriceRepositoryImpl;
 use App\Http\Common\Repository\Implement\TradeMarkRepositoryImpl;
 use App\Http\Common\Repository\Implement\UserRepositoryImpl;
+use App\Http\Common\Repository\Implement\YearManufactureRepositoryImpl;
 use App\Http\Common\Repository\NationRepository;
 use App\Http\Common\Repository\PartsRepository;
 use App\Http\Common\Repository\TempPriceRepository;
 use App\Http\Common\Repository\TradeMarkRepository;
 use App\Http\Common\Repository\UserRepository;
+use App\Http\Common\Repository\YearManufactureRepository;
 use Illuminate\Support\ServiceProvider;
 class AppServiceProvider extends ServiceProvider
 {
@@ -96,6 +98,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(
             AccessaryLinkRepository::class,
             AccessaryLinkRepositoryImpl::class
+        );
+
+        $this->app->singleton(
+            YearManufactureRepository::class,
+            YearManufactureRepositoryImpl::class
         );
     }
 }

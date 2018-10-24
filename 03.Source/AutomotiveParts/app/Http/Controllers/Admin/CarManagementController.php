@@ -47,6 +47,14 @@ class CarManagementController extends BackendController
 
     public function index()
     {
+        $listYear = array();
+        for ($i = 1970; $i <= 2019; $i++) {
+            $obj = new \stdClass();
+            $obj->key = $i;
+            $obj->value = $i;
+            array_push($listYear, $obj);
+        }
+//        dd($listYear);
         $listCarBrand = $this->carBrandRepository->getAllWitActive(GlobalEnum::STATUS_ACTIVE);
         $listCatalogCar = $this->catalogCarRepository->getAllWithActive(GlobalEnum::STATUS_ACTIVE);
         $listCar = $this->carRepository->getAllWithActive(GlobalEnum::STATUS_ACTIVE);
@@ -57,7 +65,8 @@ class CarManagementController extends BackendController
             ->with('listCatalogCar', $listCatalogCar)
             ->with('listCar', $listCar)
             ->with('listNation', $listNation)
-            ->with('listParts', $listParts);
+            ->with('listParts', $listParts)
+            ->with('listYear', $listYear);
     }
 
 }

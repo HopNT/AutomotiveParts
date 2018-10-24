@@ -170,6 +170,8 @@ class CatalogPartsController extends BackendController
 
     public function getAll()
     {
-        return $this->catalogPartsRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
+        return $this->catalogPartsRepository->getAll()
+            ->where('parent_id', '<>', '')
+            ->where('status', '=', GlobalEnum::STATUS_ACTIVE);
     }
 }

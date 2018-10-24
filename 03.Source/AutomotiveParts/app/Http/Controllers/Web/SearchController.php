@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Common\Repository\AccessaryLinkRepository;
 use App\Http\Common\Repository\AccessaryRepository;
+use App\Http\Common\Repository\CarRepository;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -20,17 +21,21 @@ class SearchController extends Controller
 
     protected $accessaryLinkRepository;
 
+    protected $carRepository;
+
     /**
      * SearchController constructor.
      * @param $accessaryRepository
      */
-    public function __construct(AccessaryRepository $accessaryRepository, AccessaryLinkRepository $accessaryLinkRepository)
+    public function __construct(AccessaryRepository $accessaryRepository, AccessaryLinkRepository $accessaryLinkRepository, CarRepository $carRepository)
     {
         $this->accessaryRepository = $accessaryRepository;
         $this->accessaryLinkRepository = $accessaryLinkRepository;
+        $this->carRepository = $carRepository;
     }
 
-    public function search(Request $request) {
+    public function search(Request $request)
+    {
         $query = array();
         if (!empty($request->q1)) {
             array_push($query, $request->q1);
@@ -39,28 +44,32 @@ class SearchController extends Controller
         }
 
         $accessary = $this->accessaryRepository->searchByMinCost($query);
-
-        // Get accessary links
-        foreach ($accessary as $key => $item) {
-            $list = array();
-            $accessaryLink = $this->accessaryLinkRepository->getAccessaryLinks($item->accessary_id);
-            foreach ($accessaryLink as $key => $link) {
-                $sub = $this->accessaryRepository->find($link->accessary_value);
-                array_push($list, $sub);
-            }
-            $item->accessaryLinks = $list;
-        }
-
-        $view = null;
         if (count($query) > 1) {
-            $view = 'web.search.search-result';
-            $query = implode(', ',$query);
+            $query = implode(', ', $query);
+            return view('web.search.search-result')
+                ->with('query', $query)
+                ->with('accessary', $accessary);
+
         } else {
-            $view = 'web.accessory.accessory-detail';
+            // Get accessary links
+            foreach ($accessary as $key => $item) {
+                $list = array();
+                $accessaryLink = $this->accessaryLinkRepository->getAccessaryLinks($item->accessary_id);
+                foreach ($accessaryLink as $key => $link) {
+                    $sub = $this->accessaryRepository->find($link->accessary_value);
+                    $subMin = $this->accessaryRepository->searchByMinCost([$sub->code]);
+                    array_push($list, $subMin);
+                }
+                $item->accessaryLinks = $list;
+            }
+
+            // Get car
+            $listCarUse = $this->carRepository->getByAccessary($query);
+
+            return view('web.accessory.accessory-detail')
+                ->with('accessary', $accessary)
+                ->with('listCarUse', $listCarUse);
         }
 
-        return view($view)
-            ->with('query', $query)
-            ->with('accessary', $accessary);
     }
 }

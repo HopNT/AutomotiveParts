@@ -105,3 +105,20 @@ function loadNation(form, divSelectId, selectName, selectId) {
         }
     });
 }
+
+// Load All year manufacture
+function loadYearManufacture(form, divSelectId, selectName, selectId) {
+    $.ajax({
+        type: 'GET',
+        url: '/admin/year-manufacture/getAll',
+        success: function (result) {
+            let selectYearManufacture = '<select class="form-control" name="' + selectName + '" id="' + selectId + '">';
+            selectYearManufacture += '<option value="">-- Chọn Năm sản xuất --</option>';
+            $.each(result, function (i, data) {
+                selectYearManufacture += '<option value="' + data.year_manufacture_id + '">' + data.year + '</option>';
+            });
+            selectYearManufacture += '</select>';
+            $('#' + form + " #" + divSelectId).html(selectYearManufacture);
+        }
+    });
+}

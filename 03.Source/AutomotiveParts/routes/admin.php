@@ -108,4 +108,7 @@ Route::group(['prefix' => 'admin'], function () {
 
     //Accessories Management
     Route::get('accessories-management','Admin\NationManagementController@index')->name('accessories-management');
+
+    // Year manufacture
+    Route::get('year-manufacture/getAll', 'Admin\YearManufactureController@getAll')->name('year-manufacture-get-all');
 });

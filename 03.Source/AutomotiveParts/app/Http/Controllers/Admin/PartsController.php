@@ -150,6 +150,7 @@ class PartsController extends BackendController
     {
         $partsId = $request->id;
         $parts = $this->partsRepository->find($partsId);
+        $parts->accessarys;
         return [
             'data' => $parts
         ];

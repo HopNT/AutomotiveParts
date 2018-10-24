@@ -36,8 +36,8 @@
                             </div>
                             <div class="col-lg-3 col-md-6 col-xs-6">
                                 <div style="padding-bottom: 0px" class="caption">
-                                    <h4 class="part-col-list-h4">{{ $item->name_vi }}</h4>
-                                    <h5>Mã sản phẩm: {{ $item->code }}</h5>
+                                    <h4 class="part-col-list-h4">{{ $item->name_vi ? $item->name_vi : 'N/A' }}</h4>
+                                    <h5>Mã sản phẩm: {{ $item->code ? $item->code : 'N/A' }}</h5>
                                     <p class="mb-10px">
                                         Số lượng hiện có:
                                         <span
