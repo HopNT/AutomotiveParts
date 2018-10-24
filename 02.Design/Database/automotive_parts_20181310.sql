@@ -637,3 +637,57 @@ CREATE TABLE `tbl_quotation_details` (
 COLLATE='utf8_unicode_ci'
 ENGINE=InnoDB
 ;
+
+update tbl_menu set route_name='car-save|car-edit|car-delete|car-brand-get-all|catalog-car-getByCarBrand|parts-search-by-text|catalog-car-get-all|year-manufacture-get-all'
+where id = 7
+
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('1970', '1970', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('1971', '1971', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('1972', '1972', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('1973', '1973', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('1974', '1974', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('1975', '1975', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('1976', '1976', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('1977', '1977', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('1978', '1978', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('1979', '1979', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('1980', '1980', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('1981', '1981', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('1982', '1982', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('1983', '1983', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('1984', '1984', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('1985', '1985', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('1986', '1986', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('1987', '1987', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('1988', '1988', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('1989', '1989', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('1990', '1990', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('1991', '1991', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('1992', '1992', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('1993', '1993', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('1994', '1994', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('1995', '1995', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('1996', '1996', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('1997', '1997', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('1998', '1998', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('1999', '1999', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('2000', '2000', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('2001', '2001', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('2002', '2002', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('2003', '2003', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('2004', '2004', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('2005', '2005', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('2006', '2006', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('2007', '2007', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('2008', '2008', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('2009', '2009', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('2010', '2010', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('2011', '2011', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('2012', '2012', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('2013', '2013', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('2014', '2014', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('2015', '2015', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('2016', '2016', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('2017', '2017', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('2018', '2018', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('2019', '2019', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
