@@ -18,37 +18,37 @@
                                 <a href="{{asset($accessary[0]->photo_top)}}" title="{{$accessary[0]->photo_top_name}}">
                                     <img src="{{asset($accessary[0]->photo_top)}}"
                                          alt="{{$accessary[0]->photo_top_name}}"
-                                         class="thumbnail img-responxsive -ezoom-part">
+                                         class="thumbnail img-responxsive -ezoom-part img-box" >
                                 </a>
                                 <a href="{{asset($accessary[0]->photo_bottom)}}"
                                    title="{{$accessary[0]->photo_bottom_name}}">
-                                    <img width="65px" src="{{asset($accessary[0]->photo_bottom)}}"
+                                    <img src="{{asset($accessary[0]->photo_bottom)}}"
                                          alt="Suzuki 083161008B NUT"
-                                         class="img-ui thumbnail img-responsive -ezoom-part">
+                                         class="img-ui thumbnail img-responsive -ezoom-part img-box-child">
                                 </a>
                                 <a href="{{asset($accessary[0]->photo_right)}}"
                                    title="{{asset($accessary[0]->photo_right_name)}}">
-                                    <img width="65px" src="{{asset($accessary[0]->photo_right)}}"
+                                    <img src="{{asset($accessary[0]->photo_right)}}"
                                          alt="{{asset($accessary[0]->photo_right_name)}}"
-                                         class="img-ui thumbnail img-responsive -ezoom-part">
+                                         class="img-ui thumbnail img-responsive -ezoom-part img-box-child">
                                 </a>
                                 <a href="{{asset($accessary[0]->photo_left)}}"
                                    title="{{asset($accessary[0]->photo_left_name)}}">
-                                    <img width="65px" src="{{asset($accessary[0]->photo_left)}}"
+                                    <img src="{{asset($accessary[0]->photo_left)}}"
                                          alt="{{asset($accessary[0]->photo_left_name)}}"
-                                         class="img-ui thumbnail img-responsive -ezoom-part">
+                                         class="img-ui thumbnail img-responsive -ezoom-part img-box-child">
                                 </a>
                                 <a href="{{asset($accessary[0]->photo_inner)}}"
                                    title="{{asset($accessary[0]->photo_inner_name)}}">
-                                    <img width="65px" src="{{asset($accessary[0]->photo_inner)}}"
+                                    <img src="{{asset($accessary[0]->photo_inner)}}"
                                          alt="{{asset($accessary[0]->photo_inner_name)}}"
-                                         class="img-ui thumbnail img-responsive -ezoom-part">
+                                         class="img-ui thumbnail img-responsive -ezoom-part img-box-child">
                                 </a>
                                 <a href="{{asset($accessary[0]->photo_outer)}}"
                                    title="{{asset($accessary[0]->photo_outer_name)}}">
-                                    <img width="65px" src="{{asset($accessary[0]->photo_outer)}}"
+                                    <img src="{{asset($accessary[0]->photo_outer)}}"
                                          alt="{{asset($accessary[0]->photo_outer_name)}}"
-                                         class="img-ui thumbnail img-responsive -ezoom-part">
+                                         class="img-ui thumbnail img-responsive -ezoom-part img-box-child">
                                 </a>
                             </div>
                         </div>
