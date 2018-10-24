@@ -19,7 +19,7 @@
                         <div class="row">
                             <div class="col-lg-5 col-md-6 col-xs-6">
                                 <div class="image">
-                                    <a alt="{{$item->photo_top_name}}" class="fancybox" href="#">
+                                    <a alt="{{$item->photo_top_name}}" class="fancybox" href="{{route('view-accessory-detail', ['accessary_id' => $item->code])}}">
                                         @if($item->photo_top != null)
                                             <img data-zoom-image="{{ asset($item->photo_top) }}" style="width: 266px;"
                                                  src="{{ asset($item->photo_top) }}" alt="{{$item->photo_top_name}}"

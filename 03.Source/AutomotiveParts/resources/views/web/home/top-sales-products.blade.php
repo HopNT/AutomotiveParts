@@ -6,7 +6,7 @@
                 <div class="item item-effect">
                     <!-- Item image -->
                     <a title="Online Catalog BMW OEM Parts" href="{{route('search', ['q1' => $accessaryPrioritize->code])}}">
-                        <div class="shop-logo"><img src="{{$accessaryPrioritize->photo_top}}" alt="BMW online catalog" class="img-responsive"></div>
+                        <div class="shop-logo"><img src="{{asset($accessaryPrioritize->photo_top)}}" alt="BMW online catalog" class="img-responsive"></div>
                         <div class="shop-title">{{$accessaryPrioritize->name_vi}}</div>
                     </a>
                 </div>

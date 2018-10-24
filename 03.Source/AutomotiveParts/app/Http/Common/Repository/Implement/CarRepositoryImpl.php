@@ -63,4 +63,18 @@ class CarRepositoryImpl extends GenericRepositoryImpl implements CarRepository
             ->selectRaw('distinct c.*, y.year, n.name_vi')
             ->get();
     }
+
+    public function getByAccessaryId($accessaryId)
+    {
+        return DB::table('tbl_car as c')
+            ->leftJoin('tbl_car_parts as cp', 'c.car_id', '=', 'cp.car_id')
+            ->leftJoin('tbl_parts as p', 'cp.parts_id', '=', 'p.parts_id')
+            ->leftJoin('tbl_parts_accessary as pa', 'p.parts_id', '=', 'pa.parts_id')
+            ->leftJoin('tbl_accessary as a', 'pa.accessary_id', '=', 'a.accessary_id')
+            ->leftJoin('tbl_nation as n', 'c.nation_id', '=', 'n.nation_id')
+            ->leftJoin('tbl_year_manufacture as y', 'c.year_manufacture_id', '=', 'y.year_manufacture_id')
+            ->where('a.accessary_id', '=', $accessaryId)
+            ->selectRaw('distinct c.*, y.year, n.name_vi')
+            ->get();
+    }
 }

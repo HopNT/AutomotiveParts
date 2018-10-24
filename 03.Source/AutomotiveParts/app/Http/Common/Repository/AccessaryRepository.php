@@ -17,4 +17,5 @@ interface AccessaryRepository
 
     function searchByMinCost($query);
 
+    function searchMinCostById($accessaryId);
 }

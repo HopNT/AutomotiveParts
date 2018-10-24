@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Common\Repository\AccessaryLinkRepository;
 use App\Http\Common\Repository\AccessaryRepository;
+use App\Http\Common\Repository\CarRepository;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -21,14 +22,43 @@ class AccessoryController extends Controller
 
     protected $accessaryLinkRepository;
 
+    protected $carRepository;
+
     /**
      * AccessoryController constructor.
-     * @param $accessaryRepository
+     * @param AccessaryRepository $accessaryRepository
+     * @param AccessaryLinkRepository $accessaryLinkRepository
+     * @param CarRepository $carRepository
      */
-    public function __construct(AccessaryRepository $accessaryRepository, AccessaryLinkRepository $accessaryLinkRepository)
+    public function __construct(AccessaryRepository $accessaryRepository, AccessaryLinkRepository $accessaryLinkRepository, CarRepository $carRepository)
     {
         $this->accessaryRepository = $accessaryRepository;
         $this->accessaryLinkRepository = $accessaryLinkRepository;
+        $this->carRepository = $carRepository;
+    }
+
+    public function viewAccessoryDetail(Request $request) {
+        $accessaryId = $request->accessary_id;
+        $accessary = $this->accessaryRepository->searchMinCostById($accessaryId);
+
+        // Get accessary links
+        foreach ($accessary as $key => $item) {
+            $list = array();
+            $accessaryLink = $this->accessaryLinkRepository->getAccessaryLinks($item->accessary_id);
+            foreach ($accessaryLink as $key => $link) {
+                $sub = $this->accessaryRepository->find($link->accessary_value);
+                $subMin = $this->accessaryRepository->searchByMinCost([$sub->code]);
+                array_push($list, $subMin);
+            }
+            $item->accessaryLinks = $list;
+        }
+
+        // Get car
+        $listCarUse = $this->carRepository->getByAccessaryId($accessaryId);
+
+        return view('web.accessory.accessory-detail')
+            ->with('accessary', $accessary)
+            ->with('listCarUse', $listCarUse);
     }
 
 }

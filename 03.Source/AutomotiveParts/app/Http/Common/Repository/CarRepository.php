@@ -26,4 +26,10 @@ interface CarRepository
      * @return mixed
      */
     function getByAccessary($code);
+
+    /**
+     * @param $accessaryId
+     * @return mixed
+     */
+    function getByAccessaryId($accessaryId);
 }
