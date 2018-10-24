@@ -61,7 +61,7 @@ class AccessaryRepositoryImpl extends GenericRepositoryImpl implements Accessary
             ->where('ua.status', '=', GlobalEnum::STATUS_ACTIVE)
             ->whereIn('a.code', $query)
             ->groupBy('a.code')
-            ->selectRaw('a.*, n.name_vi as nation_name, n.description as nation_desc, tr.name as trademark_name, tr.description as trademark_desc, u.*, ua.garage_price, min(ua.retail_price) as retail_price_min, ua.quantity')
+            ->selectRaw('a.*, n.name_vi as nation_name, n.description as nation_desc, tr.name as trademark_name, tr.description as trademark_desc, ua.garage_price, min(ua.retail_price) as retail_price_min, ua.quantity')
             ->get();
     }
 }

@@ -5,7 +5,7 @@
             <div class="col-md-3 col-sm-4 col-xs-6 mb-20px">
                 <div class="item item-effect">
                     <!-- Item image -->
-                    <a title="Online Catalog BMW OEM Parts" href="#">
+                    <a title="Online Catalog BMW OEM Parts" href="{{route('search', ['q1' => $accessaryPrioritize->code])}}">
                         <div class="shop-logo"><img src="{{$accessaryPrioritize->photo_top}}" alt="BMW online catalog" class="img-responsive"></div>
                         <div class="shop-title">{{$accessaryPrioritize->name_vi}}</div>
                     </a>

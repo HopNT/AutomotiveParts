@@ -36,15 +36,24 @@ class SearchController extends Controller
 
     public function search(Request $request)
     {
+
+        if (empty($request->q1) && empty($request->q2)) {
+            return redirect('home');
+        }
+
         $query = array();
         if (!empty($request->q1)) {
             array_push($query, $request->q1);
         } else {
-            $query = explode(PHP_EOL, $request->q2);
+            if (strpos($request->q2, ',') !== false) {
+                $query = explode(',', $request->q2);
+            } else if (strpos($request->q2, PHP_EOL) !== false) {
+                $query = explode(PHP_EOL, $request->q2);
+            }
         }
 
         $accessary = $this->accessaryRepository->searchByMinCost($query);
-        if (count($query) > 1) {
+        if (count($accessary) > 1) {
             $query = implode(', ', $query);
             return view('web.search.search-result')
                 ->with('query', $query)
