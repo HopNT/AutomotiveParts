@@ -691,3 +691,6 @@ INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `cr
 INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('2017', '2017', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
 INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('2018', '2018', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
 INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `created_at`, `updated_at`) VALUES ('2019', '2019', NULL, 1, '2018-10-24 11:48:27', '2018-10-24 11:48:27');
+
+ALTER TABLE `tbl_accessary`
+	ADD COLUMN `price` DECIMAL(15,0) NULL DEFAULT NULL AFTER `description`;
