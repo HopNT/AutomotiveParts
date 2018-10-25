@@ -37,6 +37,7 @@ class Accessary extends BaseModel {
         'photo_outer_name',
         'description',
         'prioritize',
+        'price',
         'status'
     ];
 

@@ -139,6 +139,16 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group row">
+                                <label for="price" class="control-label required col-md-2">{{ trans('label.accessary.price') }}</label>
+                                <div class="col-md-10">
+                                    <input type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group row">
                                 <label for="accessary_link"
                                        class="control-label col-md-2">{{trans('label.accessary.accessary_link')}}</label>
                                 <div class="col-md-10">
