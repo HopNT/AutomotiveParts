@@ -25,7 +25,8 @@ return [
         'photo_inner' => 'Ảnh chụp trong',
         'photo_outer' => 'Ảnh chụp ngoài',
         'accessary_link' => 'Phụ tùng liên kết',
-        'prioritize' => 'Ưu tiên'
+        'prioritize' => 'Ưu tiên',
+        'price' => 'Giá bán'
     ],
     'car' => [
         'management' => 'Quản lý thông tin xe',

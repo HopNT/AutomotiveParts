@@ -36,7 +36,6 @@ class SearchController extends Controller
 
     public function search(Request $request)
     {
-
         if (empty($request->q1) && empty($request->q2)) {
             return redirect('home');
         }
@@ -52,7 +51,7 @@ class SearchController extends Controller
             }
         }
 
-        $accessary = $this->accessaryRepository->searchByMinCost($query);
+        $accessary = $this->accessaryRepository->searchByCode($query);
         if (count($accessary) > 1) {
             $query = implode(', ', $query);
             return view('web.search.search-result')
@@ -66,8 +65,7 @@ class SearchController extends Controller
                 $accessaryLink = $this->accessaryLinkRepository->getAccessaryLinks($item->accessary_id);
                 foreach ($accessaryLink as $key => $link) {
                     $sub = $this->accessaryRepository->find($link->accessary_value);
-                    $subMin = $this->accessaryRepository->searchByMinCost([$sub->code]);
-                    array_push($list, $subMin);
+                    array_push($list, $sub);
                 }
                 $item->accessaryLinks = $list;
             }
@@ -75,11 +73,12 @@ class SearchController extends Controller
             // Get car
             $listCarUse = $this->carRepository->getByAccessary($query);
 
+//            dd($accessary);
+
             return view('web.accessory.accessory-detail')
                 ->with('accessary', $accessary)
                 ->with('listCarUse', $listCarUse);
         }
-
     }
 
 }

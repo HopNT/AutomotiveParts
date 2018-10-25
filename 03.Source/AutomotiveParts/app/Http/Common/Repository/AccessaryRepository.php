@@ -15,7 +15,7 @@ interface AccessaryRepository
 
     function deleteMulti($ids);
 
-    function searchByMinCost($query);
+    function searchByCode($query);
 
-    function searchMinCostById($accessaryId);
+    function searchById($accessaryId);
 }

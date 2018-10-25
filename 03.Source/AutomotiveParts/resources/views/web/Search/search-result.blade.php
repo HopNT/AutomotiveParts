@@ -19,7 +19,7 @@
                         <div class="row">
                             <div class="col-lg-5 col-md-6 col-xs-6">
                                 <div class="image">
-                                    <a alt="{{$item->photo_top_name}}" class="fancybox" href="{{route('view-accessory-detail', ['accessary_id' => $item->code])}}">
+                                    <a alt="{{$item->photo_top_name}}" class="fancybox" href="{{route('view-accessory-detail', ['accessary_id' => $item->accessary_id])}}">
                                         @if($item->photo_top != null)
                                             <img data-zoom-image="{{ asset($item->photo_top) }}" style="width: 266px;"
                                                  src="{{ asset($item->photo_top) }}" alt="{{$item->photo_top_name}}"
@@ -36,13 +36,13 @@
                             </div>
                             <div class="col-lg-3 col-md-6 col-xs-6">
                                 <div style="padding-bottom: 0px" class="caption">
-                                    <h4 class="part-col-list-h4">{{ $item->name_vi ? $item->name_vi : 'N/A' }}</h4>
-                                    <h5>Mã sản phẩm: {{ $item->code ? $item->code : 'N/A' }}</h5>
-                                    <p class="mb-10px">
-                                        Số lượng hiện có:
-                                        <span
-                                            class="label label-pill label-success">{{ $item->quantity ? number_format($item->quantity) : 'N/A' }}</span>
-                                    </p>
+                                    <h4 class="part-col-list-h4"><a style="text-decoration: none" href="{{route('view-accessory-detail', ['accessary_id' => $item->accessary_id])}}">{{ $item->name_vi ? $item->name_vi : 'N/A' }}</a></h4>
+                                    <h5><a style="text-decoration: none" href="{{route('view-accessory-detail', ['accessary_id' => $item->accessary_id])}}">Mã sản phẩm: {{ $item->code ? $item->code : 'N/A' }}</a></h5>
+                                    {{--<p class="mb-10px">--}}
+                                        {{--Số lượng hiện có:--}}
+                                        {{--<span--}}
+                                            {{--class="label label-pill label-success">{{ $item->quantity ? number_format($item->quantity) : 'N/A' }}</span>--}}
+                                    {{--</p>--}}
                                     <p class="mb-10px">
                                         Xuất xứ:
                                         <span
@@ -68,7 +68,7 @@
                                     {{--<img class="make-logo-dim make-logo" src="../web/assets/suzuki.jpg">                        --}}
                                     {{--</div>--}}
                                     <div class="price">
-                                        <div class="sr-price"><span class="price-new">{{ $item->retail_price_min ? number_format($item->retail_price_min) : 'N/A' }}
+                                        <div class="sr-price"><span class="price-new">{{ $item->price ? number_format($item->price) : 'N/A' }}
                                                 <span data-toggle="tooltip" data-original-title="U.S. Dollar"> đ</span></span>
                                         </div>
                                     </div>

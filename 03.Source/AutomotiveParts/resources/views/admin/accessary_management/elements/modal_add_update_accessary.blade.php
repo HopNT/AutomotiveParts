@@ -140,8 +140,11 @@
                         <div class="col-md-12">
                             <div class="form-group row">
                                 <label for="price" class="control-label required col-md-2">{{ trans('label.accessary.price') }}</label>
-                                <div class="col-md-10">
-                                    <input type="text">
+                                <div class="col-md-10 input-group">
+                                    <input class="form-control" type="text" name="price" maxlength="15" placeholder="{{trans('label.common.input')}} {{trans('label.accessary.price')}}">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="basic-addon2">VND</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

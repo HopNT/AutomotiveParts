@@ -13,6 +13,10 @@ function loadTableAccessary() {
 $(document).ready(function () {
     loadTableAccessary();
 
+    $('body').on('input', '#form-accessary input[name="price"]', function (e) {
+        e.target.value = e.target.value.replace(/[^0-9]/g,'');
+    });
+
     // Check all row
     $('body').on('click', '#tbl_accessary #check_all', function (e) {
         if ($(this).is(':checked', true)) {
@@ -106,6 +110,7 @@ $(document).ready(function () {
                 $('#form-accessary input[name="name_en"]').val(result.data.name_en);
                 $('#form-accessary input[name="acronym_name"]').val(result.data.acronym_name);
                 $('#form-accessary input[name="unsigned_name"]').val(result.data.unsigned_name);
+                $('#form-accessary input[name="price"]').val(result.data.price);
                 if (result.data.prioritize === 1) {
                     $('#form-accessary input[name="prioritize"]').prop('checked', true);
                 }
@@ -370,6 +375,7 @@ function resetFormAccessary() {
     $('#form-accessary input[name="code"]').prop('disabled', false);
     $('#form-accessary #status').css('display', 'none');
     $('#form-accessary select[name="status"]').val("");
+    $('#form-accessary input[name="price"]').val("");
     if (CKEDITOR.instances['description']) {
         CKEDITOR.instances['description'].destroy();    
     }
