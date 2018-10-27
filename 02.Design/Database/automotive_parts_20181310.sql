@@ -694,3 +694,6 @@ INSERT INTO `tbl_year_manufacture` (`code`, `year`, `description`, `status`, `cr
 
 ALTER TABLE `tbl_accessary`
 	ADD COLUMN `price` DECIMAL(15,0) NULL DEFAULT NULL AFTER `description`;
+	
+DELETE FROM tbl_menu_role WHERE id IN (40,41,44,45);
+DELETE FROM tbl_menu WHERE id IN (17,18);
