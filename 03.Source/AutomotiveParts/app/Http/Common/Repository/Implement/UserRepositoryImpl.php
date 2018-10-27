@@ -22,6 +22,21 @@ class UserRepositoryImpl extends GenericRepositoryImpl implements UserRepository
         return UserDb::class;
     }
 
+    public function searchByText($text) {
+        $listUser = DB::table('tbl_user')
+            ->whereRaw("status = 1 AND user_type = 1 AND (code LIKE ('%".$text."%') OR name LIKE ('%".$text."%') OR phone_number LIKE ('%".$text."%') OR email LIKE ('%".$text."%'))")
+
+//            ->where('status', '=', GlobalEnum::STATUS_ACTIVE)
+//            ->where('user_type', '=', GlobalEnum::PROVIDER)
+////            ->whereRaw('(code LIKE %'.$text.'% OR name LIKE %'.$text.'% OR phone_number LIKE %'.$text.'% OR email LIKE $'.$text.'%)')
+//            ->where('code', 'LIKE', '%'.$text.'%')
+//            ->orWhere('name', 'LIKE', '%'.$text.'%')
+//            ->orWhere('phone_number', 'LIKE', '%'.$text.'%')
+//            ->orWhere('email', 'LIKE', '%'.$text.'%')
+            ->get();
+        return $listUser;
+    }
+
     public function getAllJoinDataWithProductProvider($userId)
     {
         return DB::table('tbl_user_accessary as ua')

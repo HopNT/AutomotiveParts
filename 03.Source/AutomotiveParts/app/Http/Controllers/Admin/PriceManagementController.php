@@ -56,6 +56,13 @@ class PriceManagementController extends BackendController
         $price = $request->all();
         try {
             // Update
+            if ($user->user_type !== GlobalEnum::ADMIN) {
+                $user_id = $request->user_id;
+            } else {
+                $user_id = $user->user_id;
+            }
+
+            $user = $this->userRepository->find($user_id);
             if (isset($request->user_accessary_id))
             {
                 $user->accessarys()->sync([$price['accessary_id'] => ['garage_price' => $price['garage_price'], 'retail_price' => $price['retail_price'], 'quantity' => $price['quantity'], 'status' => $price['status'], 'updated_at' => now()]], false);
@@ -82,6 +89,7 @@ class PriceManagementController extends BackendController
         }
 
         // Get List Price
+        $user = Auth::guard('admin')->user();
         $userType = $user->user_type;
         $listPrice = null;
         if ($userType == GlobalEnum::ADMIN)

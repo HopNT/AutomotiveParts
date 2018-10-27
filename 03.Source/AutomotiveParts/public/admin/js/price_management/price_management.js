@@ -9,6 +9,7 @@ function resetPriceForm() {
     $('#form-price input[name="retail_price"]').val("");
     $('#form-price input[name="quantity"]').val("");
     $('#form-price #accessary_id').html("");
+    $('#form-price #user_id').html("");
     $('#form-price #accessary_id_error').html("");
     $('#form-price #status').css('display', 'none');
     $('#form-price select[name="status"]').val("");
@@ -51,6 +52,25 @@ $(document).ready(function () {
     // Open modal add new price
     $('body').on('click', '#btn_add_new_price', function () {
         resetPriceForm();
+        $('#form-price #user_id').select2({
+            ajax: {
+                url: '/admin/user/searchByText',
+                dataType: 'json',
+                data: function (params) {
+                    let query = {
+                        query: params.term
+                    }
+                    return query;
+                },
+                processResults: function (data) {
+                    return {
+                        results: data.items
+                    };
+                },
+                cache: false
+            },
+            placeholder: 'Nhập tên nhà cung cấp...'
+        });
         $('#form-price #accessary_id').select2({
             ajax: {
                 url: '/admin/accessary/searchByText',

@@ -31,6 +31,14 @@
                     <input type="hidden" name="user_accessary_id">
                     <div class="form-group row">
                         <label for="accessary_id"
+                               class="control-label required col-md-3">Nhà cung cấp</label>
+                        <div class="col-md-9">
+                            <select id="user_id" style="width: 100%;" class="form-control" name="user_id"></select>
+                            {{--<span class="text-danger" id="accessary_id_error"></span>--}}
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="accessary_id"
                                class="control-label required col-md-3">{{trans('label.parts.accessary')}}</label>
                         <div class="col-md-9">
                             <select id="accessary_id" style="width: 100%;" class="form-control" name="accessary_id"></select>

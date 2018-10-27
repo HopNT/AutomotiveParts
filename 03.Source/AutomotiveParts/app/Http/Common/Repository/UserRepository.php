@@ -16,4 +16,6 @@ interface UserRepository
     function getPrice($userAccessaryId);
 
     function deleteMulti($ids);
+
+    function searchByText($text);
 }

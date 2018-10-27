@@ -98,6 +98,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('temp-price/reject', 'Admin\TempPriceManagementController@reject')->name('temp-price-reject');
     Route::get('temp-price/delete', 'Admin\TempPriceManagementController@delete')->name('temp-price-delete');
 
+    Route::get('user/searchByText', 'Admin\UserDBController@searchByText')->name('user-search-by-text');
+
     // Get language for datatables
 //    Route::get('lang/datatables/{item}', function ($item) {
 //        return trans('datatables.'.$item);

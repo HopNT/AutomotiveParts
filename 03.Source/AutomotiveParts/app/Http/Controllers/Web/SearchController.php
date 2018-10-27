@@ -36,20 +36,25 @@ class SearchController extends Controller
 
     public function search(Request $request)
     {
-        if (empty($request->q1) && empty($request->q2)) {
+        if (empty($request->q)) {
             return redirect('home');
         }
 
         $query = array();
-        if (!empty($request->q1)) {
-            array_push($query, $request->q1);
+        if (strpos($request->q, ',') !== false) {
+            $query = explode(',', $request->q);
         } else {
-            if (strpos($request->q2, ',') !== false) {
-                $query = explode(',', $request->q2);
-            } else if (strpos($request->q2, PHP_EOL) !== false) {
-                $query = explode(PHP_EOL, $request->q2);
-            }
+            array_push($query, $request->q);
         }
+//        if (!empty($request->q1)) {
+//            array_push($query, $request->q1);
+//        } else {
+//            if (strpos($request->q2, ',') !== false) {
+//                $query = explode(',', $request->q2);
+//            } else if (strpos($request->q2, PHP_EOL) !== false) {
+//                $query = explode(PHP_EOL, $request->q2);
+//            }
+//        }
 
         $accessary = $this->accessaryRepository->searchByCode($query);
         if (count($accessary) > 1) {
