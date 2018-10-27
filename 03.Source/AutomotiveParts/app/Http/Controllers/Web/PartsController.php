@@ -38,13 +38,6 @@ class PartsController {
         $listParts = $catalogParts->parts;
         $listAccessaryPrioritize = array();
         if ($listParts->count()) {
-//            dd($listParts->pluck('parts_id'));
-//            foreach ($listParts as $parts) {
-//                $listAccessary = $parts->accessarys;
-//                foreach ($listAccessary as $item) {
-//                    array_push($listAccessaryPrioritize, $item);
-//                }
-//            }
             $listAccessaryPrioritize = $this->accessaryRepository->loadByPartsId($listParts->pluck('parts_id'));
         }
         return view('web.accessory.list-accessory')

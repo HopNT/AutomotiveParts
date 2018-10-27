@@ -16,7 +16,6 @@ use App\Http\Common\Repository\UserRepository;
 use App\Http\Common\Utils\CommonUtils;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class TempPriceManagementController extends BackendController

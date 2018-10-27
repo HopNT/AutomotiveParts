@@ -15,7 +15,6 @@ use App\Http\Common\Repository\AccessaryRepository;
 use App\Http\Common\Utils\CommonUtils;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class AccessaryManagementController extends BackendController
@@ -60,10 +59,9 @@ class AccessaryManagementController extends BackendController
         $user = Auth::guard('admin')->user();
         $valid = new Accessary();
         $accessary = $request->all();
-        // dd($accessary);
+
         try {
             // Update
-            $time = time();
             if (isset($request->accessary_id))
             {
                 $exists = $this->accessaryRepository->find($request->accessary_id);

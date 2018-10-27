@@ -11,11 +11,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Common\Entities\Parts;
 use App\Http\Common\Enum\GlobalEnum;
 use App\Http\Common\Repository\PartsRepository;
+use App\Http\Common\Utils\CommonUtils;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Common\Utils\CommonUtils;
 
 class PartsController extends BackendController
 {

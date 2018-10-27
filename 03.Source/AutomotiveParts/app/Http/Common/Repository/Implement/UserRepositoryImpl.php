@@ -25,14 +25,6 @@ class UserRepositoryImpl extends GenericRepositoryImpl implements UserRepository
     public function searchByText($text) {
         $listUser = DB::table('tbl_user')
             ->whereRaw("status = 1 AND user_type = 1 AND (code LIKE ('%".$text."%') OR name LIKE ('%".$text."%') OR phone_number LIKE ('%".$text."%') OR email LIKE ('%".$text."%'))")
-
-//            ->where('status', '=', GlobalEnum::STATUS_ACTIVE)
-//            ->where('user_type', '=', GlobalEnum::PROVIDER)
-////            ->whereRaw('(code LIKE %'.$text.'% OR name LIKE %'.$text.'% OR phone_number LIKE %'.$text.'% OR email LIKE $'.$text.'%)')
-//            ->where('code', 'LIKE', '%'.$text.'%')
-//            ->orWhere('name', 'LIKE', '%'.$text.'%')
-//            ->orWhere('phone_number', 'LIKE', '%'.$text.'%')
-//            ->orWhere('email', 'LIKE', '%'.$text.'%')
             ->get();
         return $listUser;
     }
@@ -42,7 +34,6 @@ class UserRepositoryImpl extends GenericRepositoryImpl implements UserRepository
         return DB::table('tbl_user_accessary as ua')
             ->join('tbl_user as u', 'ua.user_id', '=', 'u.user_id')
             ->join('tbl_accessary as a', 'ua.accessary_id', '=', 'a.accessary_id')
-//            ->where('ua.status', '=', GlobalEnum::STATUS_ACTIVE)
             ->where('u.status', '=', GlobalEnum::STATUS_ACTIVE)
             ->where('a.status', '=', GlobalEnum::STATUS_ACTIVE)
             ->where('u.user_id', '=', $userId)
@@ -55,7 +46,6 @@ class UserRepositoryImpl extends GenericRepositoryImpl implements UserRepository
         return DB::table('tbl_user_accessary as ua')
             ->join('tbl_user as u', 'ua.user_id', '=', 'u.user_id')
             ->join('tbl_accessary as a', 'ua.accessary_id', '=', 'a.accessary_id')
-//            ->where('ua.status', '=', GlobalEnum::STATUS_ACTIVE)
             ->where('u.status', '=', GlobalEnum::STATUS_ACTIVE)
             ->where('a.status', '=', GlobalEnum::STATUS_ACTIVE)
             ->select('u.name as user', 'a.code', 'a.name_vi', 'ua.*')

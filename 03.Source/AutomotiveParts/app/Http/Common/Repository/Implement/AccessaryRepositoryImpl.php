@@ -54,15 +54,8 @@ class AccessaryRepositoryImpl extends GenericRepositoryImpl implements Accessary
         return DB::table('tbl_accessary as a')
             ->leftJoin('tbl_nation as n', 'a.nation_id', '=', 'n.nation_id')
             ->leftJoin('tbl_trademark as tr', 'a.trademark_id', '=', 'tr.trademark_id')
-//            ->leftJoin('tbl_user_accessary as ua', 'a.accessary_id', '=', 'ua.accessary_id')
-//            ->leftJoin('tbl_user as u', 'ua.user_id', '=', 'u.user_id')
-//            ->where('a.status', '=', GlobalEnum::STATUS_ACTIVE)
-//            ->where('u.status', '=', GlobalEnum::STATUS_ACTIVE)
-//            ->where('ua.status', '=', GlobalEnum::STATUS_ACTIVE)
             ->whereIn('a.code', $query)
             ->select('a.*', 'n.name_vi as nation_name', 'tr.name as trademark_name', 'tr.description as trademark_desc')
-//            ->groupBy('a.code')
-//            ->selectRaw('a.*, n.name_vi as nation_name, n.description as nation_desc, tr.name as trademark_name, tr.description as trademark_desc, ua.garage_price, min(ua.retail_price) as retail_price_min, ua.quantity')
             ->get();
     }
 
@@ -71,15 +64,8 @@ class AccessaryRepositoryImpl extends GenericRepositoryImpl implements Accessary
         return DB::table('tbl_accessary as a')
             ->leftJoin('tbl_nation as n', 'a.nation_id', '=', 'n.nation_id')
             ->leftJoin('tbl_trademark as tr', 'a.trademark_id', '=', 'tr.trademark_id')
-//            ->leftJoin('tbl_user_accessary as ua', 'a.accessary_id', '=', 'ua.accessary_id')
-//            ->leftJoin('tbl_user as u', 'ua.user_id', '=', 'u.user_id')
-//            ->where('a.status', '=', GlobalEnum::STATUS_ACTIVE)
-//            ->where('u.status', '=', GlobalEnum::STATUS_ACTIVE)
-//            ->where('ua.status', '=', GlobalEnum::STATUS_ACTIVE)
             ->where('a.accessary_id', '=', $accessaryId)
             ->select('a.*', 'n.name_vi as nation_name', 'tr.name as trademark_name', 'tr.description as trademark_desc')
-//            ->groupBy('a.code')
-//            ->selectRaw('a.*, n.name_vi as nation_name, n.description as nation_desc, tr.name as trademark_name, tr.description as trademark_desc, ua.garage_price, min(ua.retail_price) as retail_price_min, ua.quantity')
             ->get();
     }
 

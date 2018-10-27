@@ -19,7 +19,6 @@ use App\Http\Common\Utils\CommonUtils;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -219,11 +218,10 @@ class AccountManagementController extends BackendController
      * @throws \Throwable
      */
     public function saveNewUser(Request $request){
-//        dd($request->all());
+
         if ($request->isMethod('post')) {
             $user = new UserDb();
             $validator = Validator::make($request->all(), $user->rules, $user->messages);
-//            dd($validator->errors());
             if ($validator->fails()) {
                 return [
                     'error' => true,
@@ -257,7 +255,7 @@ class AccountManagementController extends BackendController
                 }
                 //save role
                 $user->fill($data);
-//                dd($user);
+
                 $user->status = GlobalEnum::STATUS_ACTIVE;
                 $user->password = bcrypt('123456');
                 $user->save();

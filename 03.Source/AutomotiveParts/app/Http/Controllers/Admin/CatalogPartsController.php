@@ -14,7 +14,6 @@ use App\Http\Common\Repository\PartsRepository;
 use App\Http\Common\Utils\CommonUtils;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class CatalogPartsController extends BackendController

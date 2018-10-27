@@ -46,15 +46,6 @@ class SearchController extends Controller
         } else {
             array_push($query, $request->q);
         }
-//        if (!empty($request->q1)) {
-//            array_push($query, $request->q1);
-//        } else {
-//            if (strpos($request->q2, ',') !== false) {
-//                $query = explode(',', $request->q2);
-//            } else if (strpos($request->q2, PHP_EOL) !== false) {
-//                $query = explode(PHP_EOL, $request->q2);
-//            }
-//        }
 
         $accessary = $this->accessaryRepository->searchByCode($query);
         if (count($accessary) > 1) {
@@ -77,8 +68,6 @@ class SearchController extends Controller
 
             // Get car
             $listCarUse = $this->carRepository->getByAccessary($query);
-
-//            dd($accessary);
 
             return view('web.accessory.accessory-detail')
                 ->with('accessary', $accessary)

@@ -38,15 +38,16 @@ class AccessoryController extends Controller
     }
 
     public function viewAccessoryDetail(Request $request) {
+
         $accessaryId = $request->accessary_id;
         $accessary = $this->accessaryRepository->searchById($accessaryId);
+
         // Get accessary links
         foreach ($accessary as $key => $item) {
             $list = array();
             $accessaryLink = $this->accessaryLinkRepository->getAccessaryLinks($item->accessary_id);
             foreach ($accessaryLink as $key => $link) {
                 $sub = $this->accessaryRepository->find($link->accessary_value);
-//                $subMin = $this->accessaryRepository->searchByMinCost([$sub->code]);
                 array_push($list, $sub);
             }
             $item->accessaryLinks = $list;

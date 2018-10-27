@@ -54,7 +54,7 @@ class CarManagementController extends BackendController
             $obj->value = $i;
             array_push($listYear, $obj);
         }
-//        dd($listYear);
+
         $listCarBrand = $this->carBrandRepository->getAllWitActive(GlobalEnum::STATUS_ACTIVE);
         $listCatalogCar = $this->catalogCarRepository->getAllWithActive(GlobalEnum::STATUS_ACTIVE);
         $listCar = $this->carRepository->getAllWithActive(GlobalEnum::STATUS_ACTIVE);
