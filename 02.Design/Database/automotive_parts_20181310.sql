@@ -274,7 +274,7 @@ INSERT INTO `tbl_menu` VALUES (12, 0, 4, 'QL Danh Mục Bộ Phận Xe', NULL, '
 INSERT INTO `tbl_menu` VALUES (13, 12, 1, 'Cập nhật thông tin Nhóm Bộ Phận Xe', NULL, NULL, 0, 0, 'catalog-parts-save|catalog-parts-getById|catalog-parts-delete|catalog-parts-get-all|catalog-parts-search-by-text', NULL, NULL);
 INSERT INTO `tbl_menu` VALUES (14, 12, 2, 'Cập nhật thông tin Bộ Phận Xe', NULL, NULL, 0, 0, 'accessary-search-by-text|parts-save|parts-get-by-id|parts-delete', NULL, NULL);
 INSERT INTO `tbl_menu` VALUES (15, 0, 6, 'QL Danh Mục Giá - Phụ Tùng', NULL, '/admin/price-management', 0, 1, 'price-management', NULL, NULL);
-INSERT INTO `tbl_menu` VALUES (16, 15, 1, 'Cập nhật thông tin Giá - Phụ Tùng', NULL, NULL, 0, 0, 'accessary-get-all|accessary-search-by-text|price-save|price-edit|price-delete', NULL, NULL);
+INSERT INTO `tbl_menu` VALUES (16, 15, 1, 'Cập nhật thông tin Giá - Phụ Tùng', NULL, NULL, 0, 0, 'accessary-get-all|accessary-search-by-text|price-save|price-edit|price-delete|user-search-by-text', NULL, NULL);
 INSERT INTO `tbl_menu` VALUES (17, 0, 7, 'QL Phê Duyệt Phụ Tùng', NULL, '/admin/temp-price-management', 0, 1, 'temp-price-management', NULL, NULL);
 INSERT INTO `tbl_menu` VALUES (18, 17, 1, 'Cập nhật thông tin Phê Duyệt Phụ Tùng', NULL, NULL, 0, 0, 'temp-price-save|temp-price-edit|temp-price-approve|temp-price-reject|temp-price-delete|trademark-get-all|nation-get-all', NULL, NULL);
 INSERT INTO `tbl_menu` VALUES (19, 0, 3, 'QL Danh Mục Phụ Tùng', NULL, '/admin/accessary-management', 0, 1, 'accessary-management', NULL, NULL);
