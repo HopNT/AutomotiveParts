@@ -82,4 +82,16 @@ class AccessaryRepositoryImpl extends GenericRepositoryImpl implements Accessary
 //            ->selectRaw('a.*, n.name_vi as nation_name, n.description as nation_desc, tr.name as trademark_name, tr.description as trademark_desc, ua.garage_price, min(ua.retail_price) as retail_price_min, ua.quantity')
             ->get();
     }
+
+    public function loadByPartsId($arrayPartsId)
+    {
+        return DB::table('tbl_accessary as a')
+            ->leftJoin('tbl_parts_accessary as pa', 'a.accessary_id', '=', 'pa.accessary_id')
+            ->leftJoin('tbl_parts as p', 'pa.parts_id', '=', 'p.parts_id')
+            ->where('a.status', '=', GlobalEnum::STATUS_ACTIVE)
+            ->where('p.status', '=', GlobalEnum::STATUS_ACTIVE)
+            ->distinct()
+            ->select('a.*')
+            ->get();
+    }
 }

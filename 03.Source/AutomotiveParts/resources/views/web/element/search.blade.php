@@ -56,6 +56,6 @@
 </div>
 <script>
     function addComma(txt) {
-        txt.value = txt.value.replace(" ", ",");
+        txt.value = txt.value.replace(/\s/g, ",");
     }
 </script>

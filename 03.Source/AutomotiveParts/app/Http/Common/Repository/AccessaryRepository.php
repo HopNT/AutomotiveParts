@@ -18,4 +18,6 @@ interface AccessaryRepository
     function searchByCode($query);
 
     function searchById($accessaryId);
+
+    function loadByPartsId($arrayPartsId);
 }
