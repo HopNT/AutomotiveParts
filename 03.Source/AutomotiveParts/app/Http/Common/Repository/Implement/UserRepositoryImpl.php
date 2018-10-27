@@ -24,7 +24,7 @@ class UserRepositoryImpl extends GenericRepositoryImpl implements UserRepository
 
     public function searchByText($text) {
         $listUser = DB::table('tbl_user')
-            ->whereRaw("status = 1 AND user_type = 1 AND (code LIKE ('%".$text."%') OR name LIKE ('%".$text."%') OR phone_number LIKE ('%".$text."%') OR email LIKE ('%".$text."%'))")
+            ->whereRaw("status = ".GlobalEnum::STATUS_ACTIVE." AND user_type = ".GlobalEnum::PROVIDER." AND (code LIKE ('%".$text."%') OR name LIKE ('%".$text."%') OR phone_number LIKE ('%".$text."%') OR email LIKE ('%".$text."%'))")
             ->get();
         return $listUser;
     }
