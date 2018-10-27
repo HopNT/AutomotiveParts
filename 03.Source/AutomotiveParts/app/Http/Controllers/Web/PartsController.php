@@ -42,6 +42,7 @@ class PartsController {
             }
         }
         return view('web.accessory.list-accessory')
-            ->with('listAccessaryPrioritize', $listAccessaryPrioritize);
+            ->with('listAccessaryPrioritize', $listAccessaryPrioritize)
+            ->with('title',$catalogParts->name);
     }
 }

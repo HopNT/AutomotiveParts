@@ -10,7 +10,7 @@
             <div class="tab-pane fade @if($key == 0) active show @endif" id="tab{{$key + 1}}">
                 <div class="row">
                     @foreach($catalogPartsParent->child as $key => $c)
-                        <div class="col-md-3" id="group{{$key + 1}}">
+                        <div class="col-sm-6 col-md-3" id="group{{$key + 1}}">
                             <a href="{{ route('list-accessory', ['catalog_parts_id' => $c->catalog_parts_id]) }}" class="catalog-icon" style="background: url('{{asset($c->icon)}}') no-repeat;">{{$c->name}}</a>
                         </div>
                     @endforeach

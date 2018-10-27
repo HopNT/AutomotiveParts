@@ -2,7 +2,7 @@
     <div class="col-sm-12">
         <div class="search-tabs">
             <!--Nav tabs-->
-            <div class="intro-search-block mb-10px">
+            <div class="intro-search-block mb-20px">
                 <div class="row">
                     <div class="col-md-12">
                         <form action="{{route('search')}}" class="mb-10px clearfix">

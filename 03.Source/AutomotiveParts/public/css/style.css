@@ -430,6 +430,7 @@ a {
     -ms-transition: all 0.2s ease-in-out;
     -o-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
+    text-transform: uppercase;
 }
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
     color: #555;
@@ -484,7 +485,7 @@ a {
     border-bottom: 1px solid #eee;
     border-left: 1px solid #eee;
     border-right: 1px solid #eee;
-    padding: 40px 40px 20px;
+    padding: 15px 15px 15px;
 	text-align: justify;
 }
 .product-details .tab-content{
@@ -609,27 +610,27 @@ a {
 }
 
 #group1 a{
-	padding: 15px 0px 0 70px;
+	padding: 15px 10px 0 70px;
     display: block;
-	height: 48px;
+	min-height: 48px;
 	border: 1px solid #eee;
 }
 #group2 a{
-	padding: 15px 0px 0 70px;
+	padding: 15px 10px 0 70px;
     display: block;
-	height: 48px;
+    min-height: 48px;
 	border: 1px solid #eee;
 }
 #group3 a{
-	padding: 15px 0px 0 70px;
+	padding: 15px 10px 0 70px;
     display: block;
-	height: 48px;
+    min-height: 48px;
 	border: 1px solid #eee;
 }
 #group4 a{
-	padding: 15px 0px 0 70px;
+	padding: 15px 10px 0 70px;
     display: block;
-	height: 48px;
+    min-height: 48px;
 	border: 1px solid #eee;
 }
 
@@ -821,4 +822,13 @@ div.make-logo {
     display: inline-block;
     /*padding-right: 5px;*/
     /*padding-left: 5px;*/
+}
+#make-icons {
+    border: 1px solid #eee;
+}
+.row-title{
+    background-color: #666;
+    color: #fff;
+    padding: 10px 0 0 15px !important;
+    text-transform: uppercase;
 }

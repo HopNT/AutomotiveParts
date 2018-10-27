@@ -196,7 +196,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="col-md-12">
-                                        {{ $accessary[0]->description }}
+                                        {!! $accessary[0]->description !!}
                                     </div>
                                 </div>
                             </div>

@@ -7,7 +7,7 @@
                     <div class="colItem_22AdZ">
                         <h3 class="title_3IrNd">VỀ CHÚNG TÔI</h3>
                         <ul>
-                            <li class="link_1JECp"><a href="#" rel="nofollow">Giới thiệu ChoDoBai</a></li>
+                            <li class="link_1JECp"><a href="#" rel="nofollow">Giới thiệu Chodobai.com</a></li>
                             {{--<li class="link_1JECp"><a href="#" rel="nofollow">Giới thiệu Cho=</a></li>--}}
                             <li class="link_1JECp"><a href="#" rel="nofollow">Quy chế hoạt động</a></li>
                         </ul>
@@ -29,7 +29,7 @@
                     <div class="colItem_22AdZ">
                         <h3 class="title_3IrNd">DÀNH CHO NGƯỜI BÁN</h3>
                         <ul>
-                            <li class="link_1JECp"><a href="#" rel="nofollow">Mở shop trên ChoDoBai</a></li>
+                            <li class="link_1JECp"><a href="#" rel="nofollow">Mở shop trên Chodobai.com</a></li>
                             <li class="link_1JECp"><a href="#" rel="nofollow">Quy định đối với người bán</a></li>
                             <li class="link_1JECp"><a href="#" rel="nofollow">Chính sách bán hàng</a></li>
                             <li class="link_1JECp"><a href="#" rel="nofollow">Hệ thống tiêu chí kiểm duyệt</a></li>
@@ -41,7 +41,7 @@
         </div>
         <div class="col-md-6">
             <div class="colItem_22AdZ">
-                <h3 class="title_3IrNd">Đăng ký nhận bản tin ưu đãi khủng từ ChoDoBai</h3>
+                <h3 class="title_3IrNd">Đăng ký nhận bản tin ưu đãi khủng từ Chodobai.com</h3>
                 <div class="subscribeEmailBox_UPegO">
                     <form class="">
                         <div class="inputEmail_39P_i input-group">

@@ -56,7 +56,7 @@ class PartsController extends BackendController
         ];
     }
 
-    public function save(Request $request)
+    public function loadListAccessorysave(Request $request)
     {
         $user = Auth::guard('admin')->user();
         $valid = new Parts();
