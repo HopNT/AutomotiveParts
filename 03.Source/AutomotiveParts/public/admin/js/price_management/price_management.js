@@ -98,6 +98,25 @@ $(document).ready(function () {
     // Open modal update price
     $('body').on('click', '#btn_update_price', function () {
         resetPriceForm();
+        $('#form-price #user_id').select2({
+            ajax: {
+                url: '/admin/user/searchByText',
+                dataType: 'json',
+                data: function (params) {
+                    let query = {
+                        query: params.term
+                    }
+                    return query;
+                },
+                processResults: function (data) {
+                    return {
+                        results: data.items
+                    };
+                },
+                cache: false
+            },
+            placeholder: 'Nhập tên nhà cung cấp...'
+        });
         $('#form-price #accessary_id').select2({
             ajax: {
                 url: '/admin/accessary/searchByText',
@@ -126,6 +145,11 @@ $(document).ready(function () {
             url: url,
             success: function (result) {
                 $('#form-price input[name="user_accessary_id"]').val(result.data.user_accessary_id);
+                if (result.user != undefined && result.user != null) {
+                    let option = "<option value='" + result.user.user_id + "' selected='selected'>" + result.user.name + "</option>";
+                    $('#form-price #user_id').append(option);
+                    $('#form-price #user_id').trigger('change');
+                }
                 if (result.accessary != undefined && result.accessary != null) {
                     let option = "<option value='" + result.accessary.accessary_id + "' selected='selected'>" + (result.accessary.code + " - " + result.accessary.name_vi) + "</option>";
                     $('#form-price #accessary_id').append(option);

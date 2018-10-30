@@ -10,7 +10,7 @@
         'price-management'=>'fa fa-usd',
         'temp-price-management'=>'fa fa-check',
         'accessary-management'=>'fa fa-cogs',
-
+        'quotation-management'=>'fa fa-cogs',
     ];
     $user = \Illuminate\Support\Facades\Auth::guard('admin')->user();
 ?>

@@ -112,8 +112,10 @@ class PriceManagementController extends BackendController
     {
         $userAccessaryId = $request->id;
         $price = $this->userRepository->getPrice($userAccessaryId);
+        $user = $this->userRepository->find($price->all()[0]->user_id);
         $accessary = $this->accessaryRepository->find($price->all()[0]->accessary_id);
         return [
+            'user' => $user,
             'data' => $price->all()[0],
             'accessary' => $accessary
         ];

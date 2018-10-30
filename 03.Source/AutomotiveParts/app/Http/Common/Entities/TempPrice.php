@@ -11,10 +11,12 @@ class TempPrice extends BaseModel
 {
     protected $table = 'tbl_temp_price';
 
+    protected $primaryKey = 'temp_price_id';
+
     protected $fillable = [
+        'quotation_id',
         'trademark_id',
         'nation_id',
-        'user_id',
         'type',
         'code',
         'name_en',
@@ -50,5 +52,7 @@ class TempPrice extends BaseModel
         'name_vi' => 'Tên tiếng Việt'
     ];
 
-    protected $primaryKey = 'temp_price_id';
+    public function quotation() {
+        return $this->belongsTo(Quotation::class, 'quotation_id');
+    }
 }

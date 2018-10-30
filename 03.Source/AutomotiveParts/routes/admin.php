@@ -113,4 +113,8 @@ Route::group(['prefix' => 'admin'], function () {
 
     // Year manufacture
     Route::get('year-manufacture/getAll', 'Admin\YearManufactureController@getAll')->name('year-manufacture-get-all');
+
+    // Quotation management
+    Route::get('quotation-management', 'Admin\QuotationManagementController@index')->name('quotation-management');
+    Route::get('quotation/create', 'Admin\QuotationManagementController@create')->name('quotation-create');
 });

@@ -50,6 +50,10 @@ class UserDb extends Authenticatable {
         return $this->hasOne(Role::class,'id', 'role_id');
     }
 
+    public function quotations() {
+        return $this->hasMany(Quotation::class, 'user_id');
+    }
+
     public $rules = [
         'name'=>'required',
         'birth_day' => 'required',

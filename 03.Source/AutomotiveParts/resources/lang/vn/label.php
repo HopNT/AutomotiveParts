@@ -157,6 +157,13 @@ return [
         're_new_pass' => 'Nhập lại mật khẩu'
 
     ],
+    'user' => [
+        'code' => 'Mã NCC',
+        'name' => 'Tên NCC'
+    ],
+    'quotation' => [
+        'code' => 'Mã báo giá'
+    ],
     'route' => [
         'car-management' => 'Quản lý thông tin xe',
         'account-management' => 'Quản lý tài khoản',
@@ -168,6 +175,8 @@ return [
         'price-management' => 'Quản lý giá phụ tùng',
         'temp-price-management' => 'Quản lý yêu cầu thêm phụ tùng',
         'accessary-management' => 'Quản lý thông tin phụ tùng',
+        'quotation-management' => 'Quản lý báo giá',
+        'quotation-create' => 'Thêm mới báo giá',
 	'view_profile' => 'Trang thông tin cá nhân'
     ],
     'form' => [
