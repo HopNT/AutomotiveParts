@@ -41,7 +41,6 @@ class HomeController extends Controller
         foreach ($listCatalogPartsParent as $catalogPartsParent) {
             $catalogPartsParent->child;
         }
-
         $listAccessaryPrioritize = $this->accessaryRepository->getAll()->where('prioritize', '=', GlobalEnum::STATUS_ACTIVE);
 
         return view('web.home.home')->with('listCatalogPartsParent', $listCatalogPartsParent)

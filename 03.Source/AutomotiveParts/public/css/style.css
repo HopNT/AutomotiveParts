@@ -584,9 +584,7 @@ a {
 
 
 
-#tab1 #group1, #tab1 #group2, #tab1 #group3, #tab1 #group4,
-#tab2 #group1, #tab2 #group2, #tab2 #group3, #tab2 #group4,
-#tab3 #group1, #tab3 #group2, #tab3 #group3, #tab3 #group4{
+#group1, #group2, #group3 #group4{
 	height: 50px;
 	margin-bottom: 15px;
 }

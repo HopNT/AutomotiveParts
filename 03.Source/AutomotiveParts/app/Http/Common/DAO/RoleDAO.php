@@ -46,7 +46,7 @@ class RoleDAO extends Role
         $value = Cache::remember($key, $minutes, function() use($addDefault) {
             $data = DB::table($this->table)->pluck('role_name','id')->toArray();
             if ($addDefault) {
-                $data = array_prepend($data, '--- M?i ch?n ---', '');
+                $data = array_prepend($data, '--- Mời chọn ---', '');
             }
             return $data;
         });

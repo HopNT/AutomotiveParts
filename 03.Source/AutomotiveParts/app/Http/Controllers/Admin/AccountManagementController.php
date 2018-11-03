@@ -238,6 +238,7 @@ class AccountManagementController extends BackendController
                     $user->role_id = $request->role_id;
                     $user->user_type = $request->user_type;
                     $user->fax = $request->fax;
+                    $user->code = $request->code;
                     $user->identify_card = $request->identify_card;
                     $user->driving_license = $request->driving_license;
                     $user->address = $request->address;

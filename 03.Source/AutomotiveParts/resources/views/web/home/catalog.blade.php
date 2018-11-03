@@ -1,8 +1,8 @@
-<div class="top-tabs mb-20px">
+<div id="catalog" class="top-tabs mb-20px">
     <!-- <h3 class="title mb-20px">About Partsouq</h3> -->
     <ul class="nav nav-tabs row">
         @foreach($listCatalogPartsParent as $key => $catalogPartsParent)
-            <li class="col-sm-4"><a href="#tab{{$key + 1}}" data-toggle="tab" class="@if($key == 0)active show @endif">{{$catalogPartsParent->name}}</a></li>
+            <li class="col-sm-4"><a href="#tab{{$key + 1}}" data-toggle="tab" class="@if($key == 0)active show @endif ">{{$catalogPartsParent->name}}</a></li>
         @endforeach
     </ul>
     <div class="tab-content">

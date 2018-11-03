@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-md navbar-orange fixed-top bg-orange">
         <a class="navbar-brand" href="<?= url('/') ?>" style="color:#fff;">
             <img src="<?= asset('images/steering-wheel.png') ?>" >
-            <?= env('APP_NAME') ?>
+            <?= config('app.name') ?>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fas fa-bars" style="color: #fff"></i>

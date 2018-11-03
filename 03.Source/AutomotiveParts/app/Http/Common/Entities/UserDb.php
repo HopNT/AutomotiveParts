@@ -35,7 +35,8 @@ class UserDb extends Authenticatable {
         'created_at',
         'updated_at',
         'remember_token',
-        'role_id'
+        'role_id',
+        'code'
     ];
 
     protected $hidden = [

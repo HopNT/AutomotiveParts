@@ -77,6 +77,13 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group row">
+                                <label class="control-label col-md-3">{{trans('label.account.code')}}</label>
+                                <div class="col-md-9">
+                                    <input class="form-control" type="text" placeholder="{{trans('label.account.enter_code')}}" name="code">
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="control-label col-md-3">{{trans('label.account.fax')}}</label>
                                 <div class="col-md-9">
                                     <input class="form-control" type="text" placeholder="{{trans('label.account.enter_fax')}}" name="fax">
@@ -101,7 +108,7 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3">{{trans('label.account.address')}}</label>
                                 <div class="col-md-9">
-                                    <textarea class="form-control" rows="8" placeholder="{{trans('label.account.enter_address')}}" name="address"></textarea>
+                                    <textarea class="form-control" rows="6" placeholder="{{trans('label.account.enter_address')}}" name="address"></textarea>
                                     <span class="text-danger"></span>
                                 </div>
                             </div>
