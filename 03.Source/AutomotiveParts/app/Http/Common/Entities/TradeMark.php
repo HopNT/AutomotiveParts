@@ -15,7 +15,7 @@ class TradeMark extends BaseModel {
     protected $primaryKey = 'trademark_id';
 
     protected $fillable = [
-        'trademark_id',
+//        'trademark_id',
         'code',
         'name',
         'description',

@@ -15,7 +15,7 @@ class CatalogCar extends BaseModel {
     protected $primaryKey = 'catalog_car_id';
 
     protected $fillable = [
-        'catalog_car_id',
+//        'catalog_car_id',
         'car_brand_id',
         'name',
         'description',

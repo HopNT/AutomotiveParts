@@ -14,7 +14,7 @@ class Quotation extends BaseModel {
     protected $primaryKey = 'quotation_id';
 
     protected $fillable = [
-        'quotation_id',
+//        'quotation_id',
         'user_id',
         'code'
     ];
