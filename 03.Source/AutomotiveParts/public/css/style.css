@@ -584,13 +584,8 @@ a {
 
 
 
-#group1, #group2, #group3 #group4{
-	height: 50px;
-	margin-bottom: 15px;
-}
-#tab1 a,
-#tab2 a,
-#tab3 a{
+.tab-class a,
+.tab-class-child a{
 	color: #212529;
 	text-decoration:none;
 }
@@ -600,9 +595,7 @@ a {
     background-position-y: center !important;
 }
 
-#tab1 a:hover,
-#tab2 a:hover,
-#tab3 a:hover {
+.tab-class-child a:hover {
     border: 1px solid #990000 !important;
     color: #990000;
 }
