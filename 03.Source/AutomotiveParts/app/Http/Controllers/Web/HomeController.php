@@ -38,9 +38,6 @@ class HomeController extends Controller
         $listCatalogPartsParent = $this->catalogPartsRepository->getAll()
             ->where('status', '=', GlobalEnum::STATUS_ACTIVE)
             ->where('parent_id', null);
-        foreach ($listCatalogPartsParent as $catalogPartsParent) {
-            $catalogPartsParent->child;
-        }
         $listAccessaryPrioritize = $this->accessaryRepository->getAll()->where('prioritize', '=', GlobalEnum::STATUS_ACTIVE);
 
         return view('web.home.home')->with('listCatalogPartsParent', $listCatalogPartsParent)
