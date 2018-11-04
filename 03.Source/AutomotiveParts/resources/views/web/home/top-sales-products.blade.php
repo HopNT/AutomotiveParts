@@ -12,7 +12,7 @@
                         <div class="shop-logo"><img src="{{asset($accessaryPrioritize->photo_top)}}" alt="BMW online catalog" class="img-responsive"></div>
                         <div class="shop-title-2">
                             <div class="sp-left">{{$accessaryPrioritize->code}}</div>
-                            <div class="sp-right">{{ $accessaryPrioritize->price ? number_format($accessaryPrioritize->price).'vnd' : 'N/A'}}</div>
+                            <div class="sp-right">{{ $accessaryPrioritize->price !== null  ? number_format($accessaryPrioritize->price).' vnd' : 'N/A'}}</div>
                             <div class="clearfix"></div>
                         </div>
                         <div class="shop-title">

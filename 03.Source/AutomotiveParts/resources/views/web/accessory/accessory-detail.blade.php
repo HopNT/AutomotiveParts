@@ -85,9 +85,9 @@
                                 {{--<div class="hidden-xs make-logo">--}}
                                 {{--<img class="make-logo-dim make-logo" src="{{asset('/images/suzuki.jpg')}}">                        </div>--}}
                                 <div class="price">
-                                    <div class="sr-price"><span class="price-new">{{ $accessary[0]->price ? number_format($accessary[0]->price) : 'N/A' }}
+                                    <div class="sr-price"><span class="price-new">{{ $accessary[0]->price !== null ? number_format($accessary[0]->price) : 'N/A' }}
                                             <span data-toggle="tooltip"
-                                                  data-original-title="U.S. Dollar"> đ</span></span>
+                                                  data-original-title="U.S. Dollar">VND</span></span>
                                     </div>
                                 </div>
                                 <div class="cart-button button-group">
@@ -154,8 +154,7 @@
                                                         {{ $sub->nation_name ? $sub->nation_name : 'N/A' }}
                                                     </td>
                                                     <td class="text-right">
-                                                        {{ $sub->price ? number_format($sub->price) : 'N/A' }}
-                                                        đ
+                                                        {{ $sub->price !== null ? number_format($sub->price).' VND' : 'N/A' }}
                                                     </td>
                                                 </tr>
                                             @endforeach
