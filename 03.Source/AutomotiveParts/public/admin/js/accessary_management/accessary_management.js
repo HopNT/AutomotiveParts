@@ -138,7 +138,7 @@ $(document).ready(function () {
                     $("#form-accessary #photo_top_image_preview_clear").show();
                     $("#form-accessary #photo_top_image_preview_filename").val(result.data.photo_top_name);
                     img.attr('src', publicPath + '/' + result.data.photo_top);
-                    $("#form-accessary #photo_top_image_preview").attr("data-content", $(img)[0].outerHTML).popover("show");
+                    $("#form-accessary #photo_top_image_preview").attr("data-content", $(img)[0].outerHTML).popover("hide");
                 }
 
                 if (result.data.photo_bottom != undefined && result.data.photo_bottom != null && result.data.photo_bottom != '') {
@@ -151,7 +151,7 @@ $(document).ready(function () {
                     $("#form-accessary #photo_bottom_image_preview_clear").show();
                     $("#form-accessary #photo_bottom_image_preview_filename").val(result.data.photo_bottom_name);
                     img.attr('src', publicPath + '/' + result.data.photo_bottom);
-                    $("#form-accessary #photo_bottom_image_preview").attr("data-content", $(img)[0].outerHTML).popover("show");
+                    $("#form-accessary #photo_bottom_image_preview").attr("data-content", $(img)[0].outerHTML).popover("hide");
                 }
 
                 if (result.data.photo_left != undefined && result.data.photo_left != null && result.data.photo_left != '') {
@@ -164,7 +164,7 @@ $(document).ready(function () {
                     $("#form-accessary #photo_left_image_preview_clear").show();
                     $("#form-accessary #photo_left_image_preview_filename").val(result.data.photo_left_name);
                     img.attr('src', publicPath + '/' + result.data.photo_left);
-                    $("#form-accessary #photo_left_image_preview").attr("data-content", $(img)[0].outerHTML).popover("show");
+                    $("#form-accessary #photo_left_image_preview").attr("data-content", $(img)[0].outerHTML).popover("hide");
                 }
 
                 if (result.data.photo_right != undefined && result.data.photo_right != null && result.data.photo_right != '') {
@@ -177,7 +177,7 @@ $(document).ready(function () {
                     $("#form-accessary #photo_right_image_preview_clear").show();
                     $("#form-accessary #photo_right_image_preview_filename").val(result.data.photo_right_name);
                     img.attr('src', publicPath + '/' + result.data.photo_right);
-                    $("#form-accessary #photo_right_image_preview").attr("data-content", $(img)[0].outerHTML).popover("show");
+                    $("#form-accessary #photo_right_image_preview").attr("data-content", $(img)[0].outerHTML).popover("hide");
                 }
 
                 if (result.data.photo_inner != undefined && result.data.photo_inner != null && result.data.photo_inner != '') {
@@ -190,7 +190,7 @@ $(document).ready(function () {
                     $("#form-accessary #photo_inner_image_preview_clear").show();
                     $("#form-accessary #photo_inner_image_preview_filename").val(result.data.photo_inner_name);
                     img.attr('src', publicPath + '/' + result.data.photo_top);
-                    $("#form-accessary #photo_inner_image_preview").attr("data-content", $(img)[0].outerHTML).popover("show");
+                    $("#form-accessary #photo_inner_image_preview").attr("data-content", $(img)[0].outerHTML).popover("hide");
                 }
 
                 if (result.data.photo_outer != undefined && result.data.photo_outer != null && result.data.photo_outer != '') {
@@ -203,7 +203,7 @@ $(document).ready(function () {
                     $("#form-accessary #photo_outer_image_preview_clear").show();
                     $("#form-accessary #photo_outer_image_preview_filename").val(result.data.photo_outer_name);
                     img.attr('src', publicPath + '/' + result.data.photo_outer);
-                    $("#form-accessary #photo_outer_image_preview").attr("data-content", $(img)[0].outerHTML).popover("show");
+                    $("#form-accessary #photo_outer_image_preview").attr("data-content", $(img)[0].outerHTML).popover("hide");
                 }
 
             }
@@ -399,7 +399,7 @@ function onloadPhoto(form, inputName) {
     });
     closebtn.attr("class", "close pull-right");
     $('#' + form + ' #' + inputName + '_image_preview').popover({
-        trigger: 'manual',
+        trigger: 'hover',
         html: true,
         title: "<strong>Xem trước</strong>" + $(closebtn)[0].outerHTML,
         content: "Không có ảnh xem trước",
@@ -440,7 +440,7 @@ function onloadPhoto(form, inputName) {
             $("#" + form + " #" + inputName + "_image_preview_clear").show();
             $("#" + form + " #" + inputName + "_image_preview_filename").val(file.name);
             img.attr('src', e.target.result);
-            $("#" + form + " #" + inputName + "_image_preview").attr("data-content", $(img)[0].outerHTML).popover("show");
+            $("#" + form + " #" + inputName + "_image_preview").attr("data-content", $(img)[0].outerHTML).popover("hide");
         }
         reader.readAsDataURL(file);
     });
@@ -460,7 +460,7 @@ function resetPhoto(form, inputName) {
     });
     closebtn.attr("class", "close pull-right");
     $('#' + form + ' #' + inputName + '_image_preview').popover({
-        trigger: 'manual',
+        trigger: 'hover',
         html: true,
         title: "<strong>Xem trước</strong>" + $(closebtn)[0].outerHTML,
         content: "Không có ảnh xem trước",

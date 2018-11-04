@@ -69,7 +69,7 @@ function resetPartsForm() {
     });
     closebtn.attr("class", "close pull-right");
     $('#form-parts .image-preview').popover({
-        trigger: 'manual',
+        trigger: 'hover',
         html: true,
         title: "<strong>Xem trước</strong>" + $(closebtn)[0].outerHTML,
         content: "Không có ảnh xem trước",
@@ -87,7 +87,7 @@ function onloadPhoto(form, inputName) {
     });
     closebtn.attr("class", "close pull-right");
     $('#' + form + ' #' + inputName + '_image_preview').popover({
-        trigger: 'manual',
+        trigger: 'hover',
         html: true,
         title: "<strong>Xem trước</strong>" + $(closebtn)[0].outerHTML,
         content: "Không có ảnh xem trước",
@@ -128,7 +128,7 @@ function onloadPhoto(form, inputName) {
             $("#" + form + " #" + inputName + "_image_preview_clear").show();
             $("#" + form + " #" + inputName + "_image_preview_filename").val(file.name);
             img.attr('src', e.target.result);
-            $("#" + form + " #" + inputName + "_image_preview").attr("data-content", $(img)[0].outerHTML).popover("show");
+            $("#" + form + " #" + inputName + "_image_preview").attr("data-content", $(img)[0].outerHTML).popover("hide");
         }
         reader.readAsDataURL(file);
     });
@@ -148,7 +148,7 @@ function resetPhoto(form, inputName) {
     });
     closebtn.attr("class", "close pull-right");
     $('#' + form + ' #' + inputName + '_image_preview').popover({
-        trigger: 'manual',
+        trigger: 'hover',
         html: true,
         title: "<strong>Xem trước</strong>" + $(closebtn)[0].outerHTML,
         content: "Không có ảnh xem trước",

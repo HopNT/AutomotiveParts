@@ -93,7 +93,7 @@ $(document).ready(function () {
                     $("#form-catalog-parts #photo_image_preview_clear").show();
                     $("#form-catalog-parts #photo_image_preview_filename").val(result.data.icon_name);
                     img.attr('src', publicPath + '/' + result.data.icon);
-                    $("#form-catalog-parts #photo_image_preview").attr("data-content", $(img)[0].outerHTML).popover("show");
+                    $("#form-catalog-parts #photo_image_preview").attr("data-content", $(img)[0].outerHTML).popover("hide");
                 }
                 if (result.parent != undefined && result.parent != null) {
                     let option = "<option value='" + result.parent.catalog_parts_id + "' selected='selected'>" + result.parent.name + "</option>";

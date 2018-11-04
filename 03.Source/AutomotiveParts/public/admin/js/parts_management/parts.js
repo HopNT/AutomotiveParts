@@ -139,7 +139,6 @@ $(document).ready(function () {
                 }
 
                 if (result.data.photo != undefined && result.data.photo != null && result.data.photo != '') {
-                    console.log(result.data.photo);
                     var img = $('<img/>', {
                         id: 'dynamic',
                         width: 250,
@@ -149,7 +148,7 @@ $(document).ready(function () {
                     $("#form-parts .image-preview-clear").show();
                     $("#form-parts .image-preview-filename").val(result.data.photo_name);
                     img.attr('src', publicPath + '/' + result.data.photo);
-                    $("#form-parts .image-preview").attr("data-content", $(img)[0].outerHTML).popover("show");
+                    $("#form-parts .image-preview").attr("data-content", $(img)[0].outerHTML).popover("hide");
                 }
 
                 if (result.data.status == 0) {
@@ -246,7 +245,7 @@ $(document).ready(function () {
             $("#form-parts .image-preview-clear").show();
             $("#form-parts .image-preview-filename").val(file.name);
             img.attr('src', e.target.result);
-            $("#form-parts .image-preview").attr("data-content", $(img)[0].outerHTML).popover("show");
+            $("#form-parts .image-preview").attr("data-content", $(img)[0].outerHTML).popover("hide");
         }
         reader.readAsDataURL(file);
     });

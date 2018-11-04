@@ -607,30 +607,31 @@ a {
     color: #990000;
 }
 
-#group1 a{
+#group-item a{
 	padding: 15px 10px 0 70px;
+    margin-bottom: 10px;
     display: block;
 	min-height: 48px;
 	border: 1px solid #eee;
 }
-#group2 a{
-	padding: 15px 10px 0 70px;
-    display: block;
-    min-height: 48px;
-	border: 1px solid #eee;
-}
-#group3 a{
-	padding: 15px 10px 0 70px;
-    display: block;
-    min-height: 48px;
-	border: 1px solid #eee;
-}
-#group4 a{
-	padding: 15px 10px 0 70px;
-    display: block;
-    min-height: 48px;
-	border: 1px solid #eee;
-}
+/*#group2 a{*/
+	/*padding: 15px 10px 0 70px;*/
+    /*display: block;*/
+    /*min-height: 48px;*/
+	/*border: 1px solid #eee;*/
+/*}*/
+/*#group3 a{*/
+	/*padding: 15px 10px 0 70px;*/
+    /*display: block;*/
+    /*min-height: 48px;*/
+	/*border: 1px solid #eee;*/
+/*}*/
+/*#group4 a{*/
+	/*padding: 15px 10px 0 70px;*/
+    /*display: block;*/
+    /*min-height: 48px;*/
+	/*border: 1px solid #eee;*/
+/*}*/
 
 
 
