@@ -92,6 +92,15 @@ class PartsController extends BackendController
                     $pathPhoto = CommonUtils::uploadFile($file, 'parts/'.$user->user_id.'/'.$exists->code, GlobalEnum::IMAGE);
                     $parts = array_add($parts, 'photo_name', $file->getClientOriginalName());
                     $parts = array_add($parts, 'photo', $pathPhoto);
+                } else {
+                    if (empty($request->photo_check)) {
+                        if (!empty($exists->photo)) {
+                            CommonUtils::deleteFile($exists->photo);
+                        }
+                        $parts = array_add($parts, 'photo_name', null);
+                        $parts = array_add($parts, 'photo', null);
+                        unset($parts['photo_check']);
+                    }
                 }
 
                 $parts = $this->partsRepository->merge($request->parts_id, $parts);

@@ -167,10 +167,15 @@ $(document).ready(function () {
         let type = $('#form-parts').attr('method');
         let url = $('#form-parts').attr('action');
         let partsId = $('#form-parts input[name="parts_id"]').val();
+
+        var formData = new FormData($('#form-parts')[0]);
+
+        formData.append('photo_check', $("#form-parts .image-preview").attr("data-content"));
+
         $.ajax({
             type: type,
             url: url,
-            data: new FormData($('#form-parts')[0]),
+            data: formData,
             contentType: false,
             processData: false,
             success: function (result) {

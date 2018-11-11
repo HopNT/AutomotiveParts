@@ -61,99 +61,149 @@ class AccessaryManagementController extends BackendController
         $accessary = $request->all();
 
         try {
+
+            unset($accessary['photo_top']);
+            unset($accessary['photo_bottom']);
+            unset($accessary['photo_left']);
+            unset($accessary['photo_right']);
+            unset($accessary['photo_inner']);
+            unset($accessary['photo_outer']);
+
             // Update
-            if (isset($request->accessary_id))
-            {
+            if (isset($request->accessary_id)) {
                 $exists = $this->accessaryRepository->find($request->accessary_id);
-                if ($request->hasFile('photo_top'))
-                {
-                    if (!empty($exists->photo_top))
-                    {
+                if ($request->hasFile('photo_top')) {
+                    if (!empty($exists->photo_top)) {
                         CommonUtils::deleteFile($exists->photo_top);
                     }
                     $pathPhotoTop = CommonUtils::uploadFile($request->photo_top, 'accessary/'.$user->user_id.'/'.$exists->code, GlobalEnum::IMAGE);
-                    unset($accessary['photo_top']);
                     $accessary = array_add($accessary, 'photo_top', $pathPhotoTop);
                     $accessary = array_add($accessary, 'photo_top_name', $request->photo_top->getClientOriginalName());
+                } else {
+                    // If photo_top_check null then remove accessary photo_top
+                    if (empty($request->photo_top_check)) {
+                        if (!empty($exists->photo_top)) {
+                            CommonUtils::deleteFile($exists->photo_top);
+                        }
+                        $accessary = array_add($accessary, 'photo_top', null);
+                        $accessary = array_add($accessary, 'photo_top_name', null);
+                        unset($accessary['photo_top_check']);
+                    }
                 }
 
-                if ($request->hasFile('photo_bottom'))
-                {
-                    if (!empty($exists->photo_bottom))
-                    {
+                if ($request->hasFile('photo_bottom')) {
+                    if (!empty($exists->photo_bottom)) {
                         CommonUtils::deleteFile($exists->photo_bottom);
                     }
                     $pathPhotoBottom = CommonUtils::uploadFile($request->photo_bottom, 'accessary/'.$user->user_id.'/'.$exists->code, GlobalEnum::IMAGE);
-                    unset($accessary['photo_bottom']);
                     $accessary = array_add($accessary, 'photo_bottom', $pathPhotoBottom);
                     $accessary = array_add($accessary, 'photo_bottom_name', $request->photo_bottom->getClientOriginalName());
+                } else {
+                    // If photo_bottom_check null then remove accessary photo_bottom
+                    if (empty($request->photo_bottom_check)) {
+                        if (!empty($exists->photo_bottom)) {
+                            CommonUtils::deleteFile($exists->photo_bottom);
+                        }
+                        $accessary = array_add($accessary, 'photo_bottom', null);
+                        $accessary = array_add($accessary, 'photo_bottom_name', null);
+                        unset($accessary['photo_bottom_check']);
+                    }
                 }
 
-                if ($request->hasFile('photo_left'))
-                {
-                    if (!empty($exists->photo_left))
-                    {
+                if ($request->hasFile('photo_left')) {
+                    if (!empty($exists->photo_left)) {
                         CommonUtils::deleteFile($exists->photo_left);
                     }
                     $pathPhotoLeft = CommonUtils::uploadFile($request->photo_left, 'accessary/'.$user->user_id.'/'.$exists->code, GlobalEnum::IMAGE);
-                    unset($accessary['photo_left']);
                     $accessary = array_add($accessary, 'photo_left', $pathPhotoLeft);
                     $accessary = array_add($accessary, 'photo_left_name', $request->photo_left->getClientOriginalName());
+                } else {
+                    // If photo_left_check null then remove accessary photo_left
+                    if (empty($request->photo_left_check)) {
+                        if (!empty($exists->photo_left)) {
+                            CommonUtils::deleteFile($exists->photo_left);
+                        }
+                        $accessary = array_add($accessary, 'photo_left', null);
+                        $accessary = array_add($accessary, 'photo_left_name', null);
+                        unset($accessary['photo_left_check']);
+                    }
                 }
 
-                if ($request->hasFile('photo_right'))
-                {
-                    if (!empty($exists->photo_right))
-                    {
+                if ($request->hasFile('photo_right')) {
+                    if (!empty($exists->photo_right)) {
                         CommonUtils::deleteFile($exists->photo_right);
                     }
                     $pathPhotoRight = CommonUtils::uploadFile($request->photo_right, 'accessary/'.$user->user_id.'/'.$exists->code, GlobalEnum::IMAGE);
-                    unset($accessary['photo_right']);
                     $accessary = array_add($accessary, 'photo_right', $pathPhotoRight);
                     $accessary = array_add($accessary, 'photo_right_name', $request->photo_right->getClientOriginalName());
+                } else {
+                    // If photo_right_check null then remove accessary photo_right
+                    if (empty($request->photo_right_check)) {
+                        if (!empty($exists->photo_right)) {
+                            CommonUtils::deleteFile($exists->photo_right);
+                        }
+                        $accessary = array_add($accessary, 'photo_right', null);
+                        $accessary = array_add($accessary, 'photo_right_name', null);
+                        unset($accessary->photo_right_check);
+                    }
                 }
 
-                if ($request->hasFile('photo_inner'))
-                {
-                    if (!empty($exists->photo_inner))
-                    {
+                if ($request->hasFile('photo_inner')) {
+                    if (!empty($exists->photo_inner)) {
                         CommonUtils::deleteFile($exists->photo_inner);
                     }
                     $pathPhotoInner = CommonUtils::uploadFile($request->photo_inner, 'accessary/'.$user->user_id.'/'.$exists->code, GlobalEnum::IMAGE);
-                    unset($accessary['photo_inner']);
                     $accessary = array_add($accessary, 'photo_inner', $pathPhotoInner);
                     $accessary = array_add($accessary, 'photo_inner_name', $request->photo_inner->getClientOriginalName());
+                } else {
+                    // If photo_inner_check null then remove accessary photo_inner
+                    if (empty($request->photo_inner_check)) {
+                        if (!empty($exists->photo_inner)) {
+                            CommonUtils::deleteFile($exists->photo_inner);
+                        }
+                        $accessary = array_add($accessary, 'photo_inner', null);
+                        $accessary = array_add($accessary, 'photo_inner_name', null);
+                        unset($accessary['photo_inner_check']);
+                    }
                 }
 
-                if ($request->hasFile('photo_outer'))
-                {
-                    if (!empty($exists->photo_outer))
-                    {
+                if ($request->hasFile('photo_outer')) {
+                    if (!empty($exists->photo_outer)) {
                         CommonUtils::deleteFile($exists->photo_outer);
                     }
                     $pathPhotoOuter = CommonUtils::uploadFile($request->photo_outer, 'accessary/'.$user->user_id.'/'.$exists->code, GlobalEnum::IMAGE);
-                    unset($accessary['photo_outer']);
                     $accessary = array_add($accessary, 'photo_outer', $pathPhotoOuter);
                     $accessary = array_add($accessary, 'photo_outer_name', $request->photo_outer->getClientOriginalName());
+                } else {
+                    // If photo_outer_check null then remove accessary photo_outer
+                    if (empty($request->photo_outer_check)) {
+                        if (!empty($exists->photo_outer)) {
+                            CommonUtils::deleteFile($exists->photo_outer);
+                        }
+                        $accessary = array_add($accessary, 'photo_outer', null);
+                        $accessary = array_add($accessary, 'photo_outer_name', null);
+                        unset($accessary['photo_outer_check']);
+                    }
                 }
 
                 $this->accessaryRepository->merge($request->accessary_id, $accessary);
 
                 if ($request->has('accessary_link')) {
                     $this->accessaryLinkRepository->deleteAll($request->accessary_id);
-                    foreach ($request->accessary_link as $id) {
-                        $accessaryLink = [
-                            'accessary_id' => $accessary['accessary_id'],
-                            'accessary_value' => $id
-                        ];
-                        $this->accessaryLinkRepository->persist($accessaryLink);
+                    foreach ($request->accessary_link as $code) {
+                        $check = $this->accessaryRepository->findByCode($code);
+                        if (count($check)) {
+                            $accessaryLink = [
+                                'accessary_id' => $accessary['accessary_id'],
+                                'accessary_value' => $check[0]->accessary_id
+                            ];
+                            $this->accessaryLinkRepository->persist($accessaryLink);
+                        }
                     }
                 } else {
                     $this->accessaryLinkRepository->deleteAll($request->accessary_id);
                 }
-            }
-            else // Insert
-            {
+            } else {
                 $validator = Validator::make($accessary, $valid->rules, [], $valid->attributes);
                 if ($validator->fails()) {
                     return [
@@ -161,64 +211,60 @@ class AccessaryManagementController extends BackendController
                         'errors' => $validator->errors()
                     ];
                 }
-                if ($request->hasFile('photo_top'))
-                {
+
+                if ($request->hasFile('photo_top')) {
                     $pathPhotoTop = CommonUtils::uploadFile($request->photo_top, 'accessary/'.$user->user_id.'/'.$request->code, GlobalEnum::IMAGE);
-                    unset($accessary['photo_top']);
                     $accessary = array_add($accessary, 'photo_top', $pathPhotoTop);
                     $accessary = array_add($accessary, 'photo_top_name', $request->photo_top->getClientOriginalName());
                 }
-                if ($request->hasFile('photo_bottom'))
-                {
+
+                if ($request->hasFile('photo_bottom')) {
                     $pathPhotoBottom = CommonUtils::uploadFile($request->photo_bottom, 'accessary/'.$user->user_id.'/'.$request->code, GlobalEnum::IMAGE);
-                    unset($accessary['photo_bottom']);
                     $accessary = array_add($accessary, 'photo_bottom', $pathPhotoBottom);
                     $accessary = array_add($accessary, 'photo_bottom_name', $request->photo_bottom->getClientOriginalName());
                 }
-                if ($request->hasFile('photo_left'))
-                {
+
+                if ($request->hasFile('photo_left')) {
                     $pathPhotoLeft = CommonUtils::uploadFile($request->photo_left, 'accessary/'.$user->user_id.'/'.$request->code, GlobalEnum::IMAGE);
-                    unset($accessary['photo_left']);
                     $accessary = array_add($accessary, 'photo_left', $pathPhotoLeft);
                     $accessary = array_add($accessary, 'photo_left_name', $request->photo_left->getClientOriginalName());
                 }
-                if ($request->hasFile('photo_right'))
-                {
+
+                if ($request->hasFile('photo_right')) {
                     $pathPhotoRight = CommonUtils::uploadFile($request->photo_right, 'accessary/'.$user->user_id.'/'.$request->code, GlobalEnum::IMAGE);
-                    unset($accessary['photo_right']);
                     $accessary = array_add($accessary, 'photo_right', $pathPhotoRight);
                     $accessary = array_add($accessary, 'photo_right_name', $request->photo_right->getClientOriginalName());
                 }
-                if ($request->hasFile('photo_inner'))
-                {
+
+                if ($request->hasFile('photo_inner')) {
                     $pathPhotoInner = CommonUtils::uploadFile($request->photo_inner, 'accessary/'.$user->user_id.'/'.$request->code, GlobalEnum::IMAGE);
-                    unset($accessary['photo_inner']);
                     $accessary = array_add($accessary, 'photo_inner', $pathPhotoInner);
                     $accessary = array_add($accessary, 'photo_inner_name', $request->photo_inner->getClientOriginalName());
                 }
-                if ($request->hasFile('photo_outer'))
-                {
+
+                if ($request->hasFile('photo_outer')) {
                     $pathPhotoOuter = CommonUtils::uploadFile($request->photo_outer, 'accessary/'.$user->user_id.'/'.$request->code, GlobalEnum::IMAGE);
-                    unset($accessary['photo_outer']);
                     $accessary = array_add($accessary, 'photo_outer', $pathPhotoOuter);
                     $accessary = array_add($accessary, 'photo_outer_name', $request->photo_outer->getClientOriginalName());
                 }
+
                 $accessary = array_add($accessary, 'status', GlobalEnum::STATUS_ACTIVE);
                 $accessary = $this->accessaryRepository->persist($accessary);
 
                 if ($request->has('accessary_link')) {
-                    foreach ($request->accessary_link as $id) {
-                        $accessaryLink = [
-                            'accessary_id' => $accessary['accessary_id'],
-                            'accessary_value' => $id
-                        ];
-                        $this->accessaryLinkRepository->persist($accessaryLink);
+                    foreach ($request->accessary_link as $code) {
+                        $check = $this->accessaryRepository->findByCode($code);
+                        if (count($check) > 0) {
+                            $accessaryLink = [
+                                'accessary_id' => $accessary['accessary_id'],
+                                'accessary_value' => $check[0]->accessary_id
+                            ];
+                            $this->accessaryLinkRepository->persist($accessaryLink);
+                        }
                     }
                 }
             }
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             return [
                 'system_error' => true,
                 'message_error' => $e->getMessage()

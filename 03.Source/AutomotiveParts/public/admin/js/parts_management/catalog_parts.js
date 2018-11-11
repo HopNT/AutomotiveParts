@@ -114,10 +114,15 @@ $(document).ready(function () {
         let type = $('#form-catalog-parts').attr('method');
         let url = $('#form-catalog-parts').attr('action');
         let catalogPartsId = $('#form-catalog-parts input[name="catalog_parts_id"]').val();
+
+        var formData = new FormData($('#form-catalog-parts')[0]);
+
+        formData.append('photo_image_check', $("#form-catalog-parts #photo_image_preview").attr("data-content"));
+
         $.ajax({
             type: type,
             url: url,
-            data: new FormData($('#form-catalog-parts')[0]),
+            data: formData,
             contentType: false,
             processData: false,
             success: function (result) {
