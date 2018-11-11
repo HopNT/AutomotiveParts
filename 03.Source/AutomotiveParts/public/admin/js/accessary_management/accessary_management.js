@@ -40,26 +40,40 @@ $(document).ready(function () {
         resetFormAccessary();
         loadTrademark('form-accessary', 'select-trademark', 'trademark_id', 'trademark_id');
         loadNation('form-accessary', 'select-nation', 'nation_id', 'nation_id');
-        $('#form-accessary #accessary_link').select2({
-            ajax: {
-                url: '/admin/accessary/searchByTextLimited',
-                dataType: 'json',
-                data: function (params) {
-                    let query = {
-                        query: params.term
-                    }
-                    return query;
-                },
-                processResults: function (data) {
-                    return {
-                        results: data.items
-                    };
-                },
-                cache: false
-            },
-            placeholder: 'Nhập mã phụ tùng/tên phụ tùng...',
-            allowClear: true,
-            multiple: true
+        // $('#form-accessary #accessary_link').select2({
+            // ajax: {
+            //     url: '/admin/accessary/searchByTextLimited',
+            //     dataType: 'json',
+            //     data: function (params) {
+            //         let query = {
+            //             query: params.term
+            //         }
+            //         return query;
+            //     },
+            //     processResults: function (data) {
+            //         return {
+            //             results: data.items
+            //         };
+            //     },
+            //     cache: false
+            // },
+            // placeholder: 'Nhập mã phụ tùng/tên phụ tùng...',
+            // allowClear: true,
+            // multiple: true
+            // tags: true,
+            // tokenSeparators: [',', ',', ' ', '\n', '\t'],
+            // dropdownCss: {display:'none'},
+            // placeholder: 'Nhập mã phụ tùng/tên phụ tùng...',
+            // minimumResultsForSearch: 1,
+            // allowClear: true,
+            // multiple: true
+        // });
+        $('#form-accessary #accessary_link').tagsinput({
+            delimiterRegex: /[ ;,]+/,
+            allowDuplicates: false,
+            onTagExists: function(item, $tag) {
+                $tag.hide().fadeIn();
+            }
         });
         $('#modal_add_update_accessary #title-add').css('display', 'block');
         $('#modal_add_update_accessary #title-update').css('display', 'none');
@@ -71,26 +85,33 @@ $(document).ready(function () {
         resetFormAccessary();
         loadTrademark('form-accessary', 'select-trademark', 'trademark_id', 'trademark_id');
         loadNation('form-accessary', 'select-nation', 'nation_id', 'nation_id');
-        $('#form-accessary #accessary_link').select2({
-            ajax: {
-                url: '/admin/accessary/searchByTextLimited',
-                dataType: 'json',
-                data: function (params) {
-                    let query = {
-                        query: params.term
-                    }
-                    return query;
-                },
-                processResults: function (data) {
-                    return {
-                        results: data.items
-                    };
-                },
-                cache: false
-            },
-            placeholder: 'Nhập mã phụ tùng/tên phụ tùng...',
-            allowClear: true,
-            multiple: true
+        // $('#form-accessary #accessary_link').select2({
+        //     ajax: {
+        //         url: '/admin/accessary/searchByTextLimited',
+        //         dataType: 'json',
+        //         data: function (params) {
+        //             let query = {
+        //                 query: params.term
+        //             }
+        //             return query;
+        //         },
+        //         processResults: function (data) {
+        //             return {
+        //                 results: data.items
+        //             };
+        //         },
+        //         cache: false
+        //     },
+        //     placeholder: 'Nhập mã phụ tùng/tên phụ tùng...',
+        //     allowClear: true,
+        //     multiple: true
+        // });
+        $('#form-accessary #accessary_link').tagsinput({
+            delimiterRegex: /[ ;,]+/,
+            allowDuplicates: false,
+            onTagExists: function(item, $tag) {
+                $tag.hide().fadeIn();
+            }
         });
         $('#modal_add_update_accessary #title-add').css('display', 'none');
         $('#modal_add_update_accessary #title-update').css('display', 'block');
@@ -121,11 +142,17 @@ $(document).ready(function () {
                 CKEDITOR.instances.description.setData(result.data.description);
 
                 if (result.list != undefined && result.list.length > 0) {
+                    // $.each(result.list, function (index, item) {
+                    //     let option = "<option value='" + item.accessary_id + "' selected='selected'>" + (item.code + " - " + item.name_vi) + "</option>";
+                    //     $('#form-accessary #accessary_link').append(option);
+                    // });
+                    // $('#form-accessary #accessary_link').trigger('change');
+                    var codeList = '';
                     $.each(result.list, function (index, item) {
-                        let option = "<option value='" + item.accessary_id + "' selected='selected'>" + (item.code + " - " + item.name_vi) + "</option>";
-                        $('#form-accessary #accessary_link').append(option);
+                        codeList += item.code;
+                        codeList += ',';
                     });
-                    $('#form-accessary #accessary_link').trigger('change');
+                    $('#form-accessary #accessary_link').tagsinput('add', codeList, {preventPost: true});
                 }
 
                 if (result.data.photo_top != undefined && result.data.photo_top != null && result.data.photo_top != '') {
@@ -221,9 +248,22 @@ $(document).ready(function () {
             $('#form-accessary input[name="prioritize"]').val(0);
         }
         $('#form-accessary #description').val(CKEDITOR.instances.description.getData());
+        console.log($("#form-accessary #photo_top_image_preview").attr("data-content"));
 
         var formData = new FormData($('#form-accessary')[0]);
         formData.append('prioritize', $('#form-accessary input[name="prioritize"]').val());
+
+        var accessaryList = $('#form-accessary #accessary_link').tagsinput('items');
+        for (var i = 0; i < accessaryList.length; i++) {
+            formData.append('accessary_link[' + i + ']', accessaryList[i]);
+        }
+
+        formData.append('photo_top_check', $("#form-accessary #photo_top_image_preview").attr("data-content"));
+        formData.append('photo_bottom_check', $("#form-accessary #photo_bottom_image_preview").attr("data-content"));
+        formData.append('photo_left_check', $("#form-accessary #photo_left_image_preview").attr("data-content"));
+        formData.append('photo_right_check', $("#form-accessary #photo_right_image_preview").attr("data-content"));
+        formData.append('photo_inner_check', $("#form-accessary #photo_inner_image_preview").attr("data-content"));
+        formData.append('photo_outer_check', $("#form-accessary #photo_outer_image_preview").attr("data-content"));
 
         $.ajax({
             type: type,
@@ -350,6 +390,10 @@ $(document).ready(function () {
         }
     });
 
+    $('body').on('click', '#btn_view_car', function () {
+        $('#modal_view_used_car').modal();
+    });
+
 });
 
 function resetFormAccessary() {
@@ -368,9 +412,9 @@ function resetFormAccessary() {
     resetPhoto('form-accessary', 'photo_right');
     resetPhoto('form-accessary', 'photo_inner');
     resetPhoto('form-accessary', 'photo_outer');
+    $('#form-accessary #accessary_link').tagsinput('removeAll');
     $('#form-accessary #code_error').html("");
     $('#form-accessary #name_vi_error').html("");
-    $('#form-accessary #accessary_link').html("");
     $('#form-accessary input[name="prioritize"]').prop('checked', false);
     $('#form-accessary input[name="code"]').prop('disabled', false);
     $('#form-accessary #status').css('display', 'none');

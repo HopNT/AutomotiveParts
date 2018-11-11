@@ -87,6 +87,15 @@ class CatalogPartsController extends BackendController
                     $pathPhoto = CommonUtils::uploadFile($request->photo, 'catalog_parts/'.$user->user_id, GlobalEnum::ICON);
                     $catalogParts = array_add($catalogParts, 'icon_name', $request->photo->getClientOriginalName());
                     $catalogParts = array_add($catalogParts, 'icon', $pathPhoto);
+                } else {
+                    if (empty($request->photo_image_check)) {
+                        if (!empty($exists->icon)) {
+                            CommonUtils::deleteFile($exists->icon);
+                        }
+                        $catalogParts = array_add($catalogParts, 'icon_name', null);
+                        $catalogParts = array_add($catalogParts, 'icon', null);
+                        unset($catalogParts['photo_image_check']);
+                    }
                 }
 
                 if (empty($request->parent_id)) {

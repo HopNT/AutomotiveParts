@@ -155,9 +155,8 @@
                                 <label for="accessary_link"
                                        class="control-label col-md-2">{{trans('label.accessary.accessary_link')}}</label>
                                 <div class="col-md-10">
-                                    <select class="form-control" id="accessary_link" style="width: 100%"
-                                            name="accessary_link[]">
-                                    </select>
+                                    {{--<select class="form-control" id="accessary_link" style="width: 100%" name="accessary_link[]"></select>--}}
+                                    <input type="text" class="form-control" id="accessary_link" name="accessary_link[]" style="width: 100%;">
                                 </div>
                             </div>
                         </div>
