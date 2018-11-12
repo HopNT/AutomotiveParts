@@ -50,7 +50,7 @@ class SearchController extends Controller
         $accessary = $this->accessaryRepository->searchByCode($query);
         if (count($accessary) > 1) {
             $query = implode(', ', $query);
-            return view('web.search.search-result')
+            return view('web.Search.search-result')
                 ->with('query', $query)
                 ->with('accessary', $accessary);
 
