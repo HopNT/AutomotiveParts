@@ -40,7 +40,7 @@ $(document).ready(function () {
         resetFormAccessary();
         loadTrademark('form-accessary', 'select-trademark', 'trademark_id', 'trademark_id');
         loadNation('form-accessary', 'select-nation', 'nation_id', 'nation_id');
-        // $('#form-accessary #accessary_link').select2({
+        $('#form-accessary #accessary_link').select2({
             // ajax: {
             //     url: '/admin/accessary/searchByTextLimited',
             //     dataType: 'json',
@@ -60,21 +60,20 @@ $(document).ready(function () {
             // placeholder: 'Nhập mã phụ tùng/tên phụ tùng...',
             // allowClear: true,
             // multiple: true
-            // tags: true,
-            // tokenSeparators: [',', ',', ' ', '\n', '\t'],
-            // dropdownCss: {display:'none'},
-            // placeholder: 'Nhập mã phụ tùng/tên phụ tùng...',
-            // minimumResultsForSearch: 1,
-            // allowClear: true,
-            // multiple: true
-        // });
-        $('#form-accessary #accessary_link').tagsinput({
-            delimiterRegex: /[ ;,]+/,
-            allowDuplicates: false,
-            onTagExists: function(item, $tag) {
-                $tag.hide().fadeIn();
-            }
+            tags: true,
+            tokenSeparators: [',', ' '],
+            placeholder: 'Nhập mã phụ tùng/tên phụ tùng...',
+            allowClear: true,
+            dropdownCss: {display:'none'},
+            multiple: true
         });
+        // $('#form-accessary #accessary_link').tagsinput({
+        //     delimiterRegex: /[ ;,]+/,
+        //     allowDuplicates: false,
+        //     onTagExists: function(item, $tag) {
+        //         $tag.hide().fadeIn();
+        //     }
+        // });
         $('#modal_add_update_accessary #title-add').css('display', 'block');
         $('#modal_add_update_accessary #title-update').css('display', 'none');
         $('#modal_add_update_accessary').modal();
@@ -85,7 +84,7 @@ $(document).ready(function () {
         resetFormAccessary();
         loadTrademark('form-accessary', 'select-trademark', 'trademark_id', 'trademark_id');
         loadNation('form-accessary', 'select-nation', 'nation_id', 'nation_id');
-        // $('#form-accessary #accessary_link').select2({
+        $('#form-accessary #accessary_link').select2({
         //     ajax: {
         //         url: '/admin/accessary/searchByTextLimited',
         //         dataType: 'json',
@@ -105,14 +104,20 @@ $(document).ready(function () {
         //     placeholder: 'Nhập mã phụ tùng/tên phụ tùng...',
         //     allowClear: true,
         //     multiple: true
-        // });
-        $('#form-accessary #accessary_link').tagsinput({
-            delimiterRegex: /[ ;,]+/,
-            allowDuplicates: false,
-            onTagExists: function(item, $tag) {
-                $tag.hide().fadeIn();
-            }
+            tags: true,
+            tokenSeparators: [',', ' '],
+            placeholder: 'Nhập mã phụ tùng/tên phụ tùng...',
+            allowClear: true,
+            dropdownCss: {display:'none'},
+            multiple: true
         });
+        // $('#form-accessary #accessary_link').tagsinput({
+        //     delimiterRegex: /[ ;,]+/,
+        //     allowDuplicates: false,
+        //     onTagExists: function(item, $tag) {
+        //         $tag.hide().fadeIn();
+        //     }
+        // });
         $('#modal_add_update_accessary #title-add').css('display', 'none');
         $('#modal_add_update_accessary #title-update').css('display', 'block');
         $('#modal_add_update_accessary').modal();
@@ -142,17 +147,17 @@ $(document).ready(function () {
                 CKEDITOR.instances.description.setData(result.data.description);
 
                 if (result.list != undefined && result.list.length > 0) {
-                    // $.each(result.list, function (index, item) {
-                    //     let option = "<option value='" + item.accessary_id + "' selected='selected'>" + (item.code + " - " + item.name_vi) + "</option>";
-                    //     $('#form-accessary #accessary_link').append(option);
-                    // });
-                    // $('#form-accessary #accessary_link').trigger('change');
-                    var codeList = '';
                     $.each(result.list, function (index, item) {
-                        codeList += item.code;
-                        codeList += ',';
+                        let option = "<option value='" + item.code + "' selected='selected'>" + item.code + "</option>";
+                        $('#form-accessary #accessary_link').append(option);
                     });
-                    $('#form-accessary #accessary_link').tagsinput('add', codeList, {preventPost: true});
+                    $('#form-accessary #accessary_link').trigger('change');
+                    // var codeList = '';
+                    // $.each(result.list, function (index, item) {
+                    //     codeList += item.code;
+                    //     codeList += ',';
+                    // });
+                    // $('#form-accessary #accessary_link').tagsinput('add', codeList, {preventPost: true});
                 }
 
                 if (result.data.photo_top != undefined && result.data.photo_top != null && result.data.photo_top != '') {
@@ -412,7 +417,7 @@ function resetFormAccessary() {
     resetPhoto('form-accessary', 'photo_right');
     resetPhoto('form-accessary', 'photo_inner');
     resetPhoto('form-accessary', 'photo_outer');
-    $('#form-accessary #accessary_link').tagsinput('removeAll');
+    $('#form-accessary #accessary_link').html("");
     $('#form-accessary #code_error').html("");
     $('#form-accessary #name_vi_error').html("");
     $('#form-accessary input[name="prioritize"]').prop('checked', false);
