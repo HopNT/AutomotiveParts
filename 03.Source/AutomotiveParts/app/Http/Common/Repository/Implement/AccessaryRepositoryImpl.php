@@ -80,4 +80,19 @@ class AccessaryRepositoryImpl extends GenericRepositoryImpl implements Accessary
             ->select('a.*')
             ->get();
     }
+
+    public function findCarUsed($accessaryId) {
+        return DB::table('tbl_car as c')
+            ->leftJoin('tbl_car_parts as cp', 'c.car_id', '=', 'cp.car_id')
+            ->leftJoin('tbl_parts as p', 'cp.parts_id', '=', 'p.parts_id')
+            ->leftJoin('tbl_parts_accessary as pa', 'p.parts_id', '=', 'pa.parts_id')
+            ->leftJoin('tbl_accessary as a', 'pa.accessary_id', '=', 'a.accessary_id')
+            ->leftJoin('tbl_year_manufacture as y', 'c.year_manufacture_id', '=', 'y.year_manufacture_id')
+            ->leftJoin('tbl_catalog_car as cc', 'c.catalog_car_id', '=', 'cc.catalog_car_id')
+            ->leftJoin('tbl_car_brand as cb', 'cc.car_brand_id', '=', 'cb.car_brand_id')
+            ->where('a.accessary_id', '=', $accessaryId)
+            ->select('c.name', 'y.year', 'cc.name as catalogName', 'cb.name as carBrand')
+            ->distinct()
+            ->get();
+    }
 }

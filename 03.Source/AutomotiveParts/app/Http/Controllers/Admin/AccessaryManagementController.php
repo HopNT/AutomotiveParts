@@ -350,4 +350,12 @@ class AccessaryManagementController extends BackendController
         return $this->accessaryRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
     }
 
+    public function getCarUsed(Request $request) {
+        $id = $request->id;
+        $carList = $this->accessaryRepository->findCarUsed($id);
+        return [
+            'data' => $carList
+        ];
+    }
+
 }

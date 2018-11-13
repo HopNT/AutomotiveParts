@@ -83,6 +83,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('accessary/getById', 'Admin\AccessaryManagementController@getById')->name('accessary-edit');
     Route::post('accessary/save', 'Admin\AccessaryManagementController@save')->name('accessary-save');
     Route::get('accessary/delete', 'Admin\AccessaryManagementController@delete')->name('accessary-delete');
+    Route::get('accessary/getCarUsed', 'Admin\AccessaryManagementController@getCarUsed')->name('car-used');
 
     // Price accessary management
     Route::get('price-management', 'Admin\PriceManagementController@index')->name('price-management');

@@ -10,8 +10,22 @@ function loadTableAccessary() {
     });
 }
 
+function loadTableCarUsed() {
+    $('#tbl_car_use').DataTable({
+        // columnDefs: [
+        //     {
+        //         targets: [0, 1, 3, 4, 5],
+        //         orderable: false
+        //     }
+        // ],
+        // order: [2, 'asc']
+        searching: false
+    });
+}
+
 $(document).ready(function () {
     loadTableAccessary();
+    loadTableCarUsed();
 
     $('body').on('input', '#form-accessary input[name="price"]', function (e) {
         e.target.value = e.target.value.replace(/[^0-9]/g,'');
@@ -395,8 +409,29 @@ $(document).ready(function () {
         }
     });
 
+    // View car used
     $('body').on('click', '#btn_view_car', function () {
         $('#modal_view_used_car').modal();
+        let url = $(this).attr('href');
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function (result) {
+                if (result.data) {
+                    let content = '';
+                    $.each(result.data, function (index, item) {
+                        content += '<tr>';
+                        content += '<td class="text-center">' + (index + 1) + '</td>'
+                        content += '<td>' + item.carBrand + '</td>'
+                        content += '<td>' + item.catalogName + '</td>'
+                        content += '<td>' + item.name + '</td>'
+                        content += '<td>' + item.year + '</td>'
+                        content += '</tr>';
+                    });
+                    $('#modal_view_used_car #data').html(content);
+                }
+            }
+        })
     });
 
 });

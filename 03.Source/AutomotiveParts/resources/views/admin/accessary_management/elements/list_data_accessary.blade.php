@@ -76,7 +76,7 @@ $can_delete_accessary = $staff->can_view('accessary-delete');
                             <td>{{$accessary->status ? trans('label.common.status_active') : trans('label.common.status_inactive')}}</td>
                             <td class="text-center">
                                 <button id="btn_view_car"
-                                        href=""
+                                        href="{{route('car-used', ['id' => $accessary->accessary_id])}}"
                                         class="btn btn-info btn-sm fa fa-eye"></button>
                                 @if($can_edit_accessary)
                                     <button id="btn_update_accessary"
@@ -98,4 +98,4 @@ $can_delete_accessary = $staff->can_view('accessary-delete');
     </div>
 </div>
 @include('admin.accessary_management.elements.modal_add_update_accessary')
-{{--@include('admin.accessary_management.elements.modal_view_used_car)--}}
+@include('admin.accessary_management.elements.modal_view_used_car')
