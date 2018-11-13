@@ -25,7 +25,7 @@ function loadTableCarUsed() {
 
 $(document).ready(function () {
     loadTableAccessary();
-    loadTableCarUsed();
+    // loadTableCarUsed();
 
     $('body').on('input', '#form-accessary input[name="price"]', function (e) {
         e.target.value = e.target.value.replace(/[^0-9]/g,'');
@@ -418,7 +418,18 @@ $(document).ready(function () {
             url: url,
             success: function (result) {
                 if (result.data) {
-                    let content = '';
+                    let content = '<table class="table table-responsive-md table-hover table-bordered" style="width: 100%;"' +
+                        '                        id="tbl_car_use">' +
+                        '                    <thead>' +
+                        '                        <tr>' +
+                        '                            <th class="text-center">#</th>' +
+                        '                            <th class="text-center">Tên hãng xe</th>' +
+                        '                            <th class="text-center">Tên dòng xe</th>' +
+                        '                            <th class="text-center">Tên xe</th>' +
+                        '                            <th class="text-center">Năm sản xuất</th>' +
+                        '                        </tr>' +
+                        '                    </thead>' +
+                        '                    <tbody id="data">';
                     $.each(result.data, function (index, item) {
                         content += '<tr>';
                         content += '<td class="text-center">' + (index + 1) + '</td>'
@@ -428,7 +439,9 @@ $(document).ready(function () {
                         content += '<td>' + item.year + '</td>'
                         content += '</tr>';
                     });
+                    content += '</tbody></table>';
                     $('#modal_view_used_car #data').html(content);
+                    loadTableCarUsed();
                 }
             }
         })
