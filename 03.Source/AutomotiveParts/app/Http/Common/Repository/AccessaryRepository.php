@@ -22,4 +22,6 @@ interface AccessaryRepository
     function loadByPartsId($arrayPartsId);
 
     function findCarUsed($accessaryId);
+
+    function searchByCar($carName, $year);
 }

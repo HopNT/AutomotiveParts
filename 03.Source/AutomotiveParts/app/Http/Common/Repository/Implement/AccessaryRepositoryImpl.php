@@ -95,4 +95,30 @@ class AccessaryRepositoryImpl extends GenericRepositoryImpl implements Accessary
             ->distinct()
             ->get();
     }
+
+    public function searchByCar($carName, $year) {
+        $condition = '';
+        if (!empty($carName)) {
+            $condition = $condition.' c.name LIKE ("%'.$carName.'%")';
+        }
+        if (!empty($year)) {
+            if (!empty($condition)) {
+                $condition = $condition.' AND ';
+            }
+            $condition = $condition.' y.code = '.$year;
+        }
+        return DB::table('tbl_accessary as a')
+            ->leftJoin('tbl_parts_accessary as pa', 'a.accessary_id', '=', 'pa.accessary_id')
+            ->leftJoin('tbl_parts as p', 'pa.parts_id', '=', 'p.parts_id')
+            ->leftJoin('tbl_car_parts as cp', 'p.parts_id', '=', 'cp.parts_id')
+            ->leftJoin('tbl_car as c', 'cp.car_id', '=', 'c.car_id')
+            ->leftJoin('tbl_year_manufacture as y', 'c.year_manufacture_id', '=', 'y.year_manufacture_id')
+            ->leftJoin('tbl_nation as n', 'a.nation_id', '=', 'n.nation_id')
+            ->leftJoin('tbl_trademark as tr', 'a.trademark_id', '=', 'tr.trademark_id')
+            ->whereRaw('1 = 1')
+            ->whereRaw($condition)
+            ->select('a.*', 'n.name_vi as nation_name', 'tr.name as trademark_name', 'tr.description as trademark_desc')
+            ->distinct()
+            ->get();
+    }
 }

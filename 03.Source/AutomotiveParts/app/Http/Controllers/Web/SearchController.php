@@ -75,4 +75,15 @@ class SearchController extends Controller
         }
     }
 
+    public function searchByCar(Request $request) {
+        $carName = $request->car_name;
+        $year = $request->year;
+        if (empty($carName) && empty($year)) {
+            return redirect('/home');
+        }
+        $listAccessaryPrioritize = $this->accessaryRepository->searchByCar($carName, $year);
+        return view('web.accessory.list-accessory')
+            ->with('listAccessaryPrioritize', $listAccessaryPrioritize);
+    }
+
 }

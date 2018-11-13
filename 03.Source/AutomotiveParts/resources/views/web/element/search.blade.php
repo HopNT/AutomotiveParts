@@ -31,17 +31,19 @@
                             </div>
                             <!--col-sm-6-->
                         </div>
-                        <div class="row" style="padding-bottom:20px;">
-                            <div class="col-md-5  mb-10px">
-                                <input type="text" value="" spellcheck="false" autofocus="true" class="form-control" placeholder="Nhập tên xe" style="border-radius:20px;border: 1px solid #ced4da !important;width:100%;">
+                        <form action="{{route('search-car')}}" class="mb-10px clearfix">
+                            <div class="row" style="padding-bottom:20px;">
+                                <div class="col-md-5  mb-10px">
+                                    <input type="text" value="" spellcheck="false" autofocus="true" class="form-control" name="car_name" placeholder="Nhập tên xe" style="border-radius:20px;border: 1px solid #ced4da !important;width:100%;">
+                                </div>
+                                <div class="col-md-5  mb-10px">
+                                    <input type="text" value="" spellcheck="false" autofocus="true" class="form-control" name="year" placeholder="Nhập năm sản xuất" style="border-radius:20px;border: 1px solid #ced4da !important;width:100%;">
+                                </div>
+                                <div class="col-md-2 mb-10px">
+                                    <button class="btn btn-success" type="submit" style="width: 100%; border-radius:30px;font-size:16px;height:38px;">Tìm kiếm</button>
+                                </div>
                             </div>
-                            <div class="col-md-5  mb-10px">
-                                <input type="text" value="" spellcheck="false" autofocus="true" class="form-control" placeholder="Nhập năm sản xuất" style="border-radius:20px;border: 1px solid #ced4da !important;width:100%;">
-                            </div>
-                            <div class="col-md-2 mb-10px">
-                                <button class="btn btn-success" type="submit" style="width: 100%; border-radius:30px;font-size:16px;height:38px;">Tìm kiếm</button>
-                            </div>
-                        </div>
+                        </form>
                         <!--row-->
                     </div>
                     <!--col-sm-5-->

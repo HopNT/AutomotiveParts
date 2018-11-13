@@ -15,6 +15,7 @@ Auth::routes();
 Route::get('/', 'Web\HomeController@index');
 Route::get('/home', 'Web\HomeController@index')->name('home');
 Route::get('/search', 'Web\SearchController@search')->name('search');
+Route::get('/search/car', 'Web\SearchController@searchByCar')->name('search-car');
 Route::get('/accessory-detail', 'Web\AccessoryController@viewAccessoryDetail')->name('view-accessory-detail');
 
 Route::get('/parts/list-accessory', 'Web\PartsController@loadListAccessory')->name('list-accessory');
