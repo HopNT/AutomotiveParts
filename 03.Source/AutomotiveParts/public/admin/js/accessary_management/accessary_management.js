@@ -151,10 +151,10 @@ $(document).ready(function () {
                 $('#form-accessary input[name="acronym_name"]').val(result.data.acronym_name);
                 $('#form-accessary input[name="unsigned_name"]').val(result.data.unsigned_name);
                 $('#form-accessary input[name="price"]').val(result.data.price);
-                if (result.data.prioritize === 1) {
+                if (parseInt(result.data.prioritize) === 1) {
                     $('#form-accessary input[name="prioritize"]').prop('checked', true);
                 }
-                if (result.data.status === 0) {
+                if (parseInt(result.data.status) === 0) {
                     $('#form-accessary #status').css('display', '');
                     $('#form-accessary select[name="status"]').val(result.data.status);
                 }

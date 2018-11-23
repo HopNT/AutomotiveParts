@@ -347,6 +347,7 @@ a {
     -ms-transition: all 0.2s ease-in-out;
     -o-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
+    object-fit: cover;
 }
 .shop-your-make .item a:hover img, .shop-your-make .item a:focus img {
     padding: 0 12px;

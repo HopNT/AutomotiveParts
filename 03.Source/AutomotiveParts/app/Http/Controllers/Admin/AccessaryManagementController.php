@@ -60,8 +60,6 @@ class AccessaryManagementController extends BackendController
         $valid = new Accessary();
         $accessary = $request->all();
 
-//        dd($accessary);
-
         try {
 
             unset($accessary['photo_top']);
