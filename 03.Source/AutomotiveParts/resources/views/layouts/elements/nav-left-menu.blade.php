@@ -1,6 +1,8 @@
 <?php
     $current = \Illuminate\Support\Facades\Route::currentRouteName();
-
+    if(in_array($current, ['accessary-create','accessary-edit'])){
+        $current = 'accessary-management';
+    }
     $arr_icon = [
         'account-management'=>'fa fa-user',
         'car-management'=>'fa fa-car',

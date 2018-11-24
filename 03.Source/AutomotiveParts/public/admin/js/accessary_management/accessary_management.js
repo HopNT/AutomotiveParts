@@ -69,6 +69,11 @@ $(document).ready(function () {
 
     // Save or update accessary
     $('body').on('click', '#btn_save_accessary', function () {
+        $("#loading-modal").modal({
+            backdrop: "static", //remove ability to close modal with click
+            keyboard: false, //remove option to close with keyboard
+            show: true //Display loader!
+        });
         let type = $('#form-accessary').attr('method');
         let url = $('#form-accessary').attr('action');
         let accessaryId = $('#form-accessary input[name="accessary_id"]').val();
@@ -113,6 +118,7 @@ $(document).ready(function () {
                         $('#modal_add_update_accessary #message_error').html('');
                     });
                 } else if (!result.error) {
+                    $("#loading-modal").modal("hide");
                     // $('#modal_add_update_accessary').modal('hide');
                     setTimeout(function () {
                         if (accessaryId != null && accessaryId != '') {
@@ -257,6 +263,8 @@ $(document).ready(function () {
             }
         })
     });
+
+
 
 });
 

@@ -25,6 +25,46 @@
 
     @yield('content')
 
+    <!-- Modal loading-->
+    <div class="modal fade" id="loading-modal" tabindex="-1" role="dialog" aria-labelledby="loadMeLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content" style="background-color: inherit; border: none;">
+                <div class="modal-body text-center">
+                    <img src="{{asset('images/loading-car.gif')}}" style="width: 50px;">
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        /** SPINNER CREATION **/
+
+        .loader {
+            position: relative;
+            text-align: center;
+            margin: 15px auto 35px auto;
+            z-index: 9999;
+            display: block;
+            width: 80px;
+            height: 80px;
+            border: 10px solid rgba(0, 0, 0, .3);
+            border-radius: 50%;
+            border-top-color: #000;
+            animation: spin 1s ease-in-out infinite;
+            -webkit-animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @-webkit-keyframes spin {
+            to {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+    </style>
 </main>
 <!-- Essential javascripts for application to work-->
 <script src="{{ asset('admin/js/jquery-3.2.1.min.js') }}"></script>
