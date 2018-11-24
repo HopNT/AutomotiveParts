@@ -514,8 +514,7 @@
                                     <label for="description"
                                            class="control-label col-md-2">{{trans('label.common.description')}}</label>
                                     <div class="col-md-10">
-                                        <input id="description" name="description"
-                                               value="@if($data){{ htmlspecialchars($data->description) }}@endif">
+                                        <textarea id="description" name="description">@if($data){{ $data->description }}@endif</textarea>
                                     </div>
                                 </div>
                             </div>
