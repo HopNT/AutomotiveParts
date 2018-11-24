@@ -8,7 +8,7 @@
             <div class="col-md-3 col-sm-12 col-xs-6 mb-20px">
                 <div class="item item-effect">
                     <!-- Item image -->
-                    <a title="{{$accessaryPrioritize->name_vi}}" href="{{route('view-accessory-detail', ['accessary_id' => $accessaryPrioritize->accessary_id])}}">
+                    <a target="_blank" title="{{$accessaryPrioritize->name_vi}}" href="{{route('view-accessory-detail', ['accessary_id' => $accessaryPrioritize->accessary_id])}}">
                         <div class="shop-logo"><img src="{{asset($accessaryPrioritize->photo_top)}}" alt="BMW online catalog" class="img-responsive"></div>
                         <div class="shop-title-2">
                             <div class="col-md-12 col-sm-12">{{$accessaryPrioritize->code}}</div>
