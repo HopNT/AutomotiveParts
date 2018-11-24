@@ -13,6 +13,7 @@ return [
         'genuine' => 'Phụ tùng chính hãng',
         'oem' => 'Phụ tùng OEM',
         'options' => 'Phụ tùng thay thế ngoài',
+        'main' => 'Phụ tùng chính hãng',
         'code' => 'Mã phụ tùng',
         'name' => 'Tên phụ tùng',
         'trademark' => 'Thương hiệu',
@@ -179,6 +180,8 @@ return [
         'accessary-management' => 'Quản lý thông tin phụ tùng',
         'quotation-management' => 'Quản lý báo giá',
         'quotation-create' => 'Thêm mới báo giá',
+        'accessary-create' => 'Thêm mới thông tin phụ tùng',
+        'accessary-edit' => 'Cập nhật thông tin phụ tùng',
 	'view_profile' => 'Trang thông tin cá nhân'
     ],
     'form' => [

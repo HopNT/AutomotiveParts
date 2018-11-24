@@ -80,6 +80,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('accessary/searchByText', 'Admin\AccessaryManagementController@searchByText')->name('accessary-search-by-text');
     Route::get('accessary/searchByTextLimited', 'Admin\AccessaryManagementController@searchByTextLimited')->name('accessary-search-by-text-limited');
     Route::get('accessary/getAll', 'Admin\AccessaryManagementController@getAll')->name('accessary-get-all');
+    Route::get('accessary/createNew', 'Admin\AccessaryManagementController@createNew')->name('accessary-create');
     Route::get('accessary/getById', 'Admin\AccessaryManagementController@getById')->name('accessary-edit');
     Route::post('accessary/save', 'Admin\AccessaryManagementController@save')->name('accessary-save');
     Route::get('accessary/delete', 'Admin\AccessaryManagementController@delete')->name('accessary-delete');

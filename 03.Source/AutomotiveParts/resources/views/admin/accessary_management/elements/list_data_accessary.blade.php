@@ -19,7 +19,7 @@ $can_delete_accessary = $staff->can_view('accessary-delete');
             <div class="tile-body">
                 <div class="form-group">
                     @if($can_add_accessary)
-                        <button class="btn btn-primary" type="button" id="btn_add_new_accessary"><i
+                        <button onclick="window.location='{{route('accessary-create')}}'" class="btn btn-primary" type="button" id="btn_add_new_accessary"><i
                                 class="fa fa-plus"></i>{{trans('label.button.create')}}</button>
                     @endif
                     @if($can_delete_accessary)
@@ -79,9 +79,9 @@ $can_delete_accessary = $staff->can_view('accessary-delete');
                                         href="{{route('car-used', ['id' => $accessary->accessary_id])}}"
                                         class="btn btn-info btn-sm fa fa-eye"></button>
                                 @if($can_edit_accessary)
-                                    <button id="btn_update_accessary"
+                                    <a id="btn_update_accessary"
                                             href="{{route('accessary-edit', ['id' => $accessary->accessary_id])}}"
-                                            class="btn btn-info btn-sm fa fa-edit"></button>
+                                            class="btn btn-info btn-sm fa fa-edit"></a>
                                 @endif
                                 @if($can_delete_accessary)
                                     <button id="btn_delete_accessary" @if($accessary->status === 0) disabled @endif

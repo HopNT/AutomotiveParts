@@ -12,6 +12,8 @@ use App\Http\Common\Entities\Accessary;
 use App\Http\Common\Enum\GlobalEnum;
 use App\Http\Common\Repository\AccessaryLinkRepository;
 use App\Http\Common\Repository\AccessaryRepository;
+use App\Http\Common\Repository\NationRepository;
+use App\Http\Common\Repository\TradeMarkRepository;
 use App\Http\Common\Utils\CommonUtils;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,14 +25,20 @@ class AccessaryManagementController extends BackendController
 
     protected $accessaryLinkRepository;
 
+    protected $nationRepository;
+
+    protected $tradeMarkRepository;
+
     /**
      * AccessaryManagementController constructor.
      * @param $accessaryRepository
      */
-    public function __construct(AccessaryRepository $accessaryRepository, AccessaryLinkRepository $accessaryLinkRepository)
+    public function __construct(AccessaryRepository $accessaryRepository, AccessaryLinkRepository $accessaryLinkRepository, NationRepository $nationRepository, TradeMarkRepository $tradeMarkRepository)
     {
         $this->accessaryRepository = $accessaryRepository;
         $this->accessaryLinkRepository = $accessaryLinkRepository;
+        $this->nationRepository = $nationRepository;
+        $this->tradeMarkRepository = $tradeMarkRepository;
     }
 
     public function index()
@@ -38,6 +46,18 @@ class AccessaryManagementController extends BackendController
         $listAccessary = $this->accessaryRepository->getAll();
         return view('admin.accessary_management.accessary_management')
             ->with('listAccessary', $listAccessary);
+    }
+
+    public function createNew() {
+        $nationList = $this->nationRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
+        $tradeMarkList = $this->tradeMarkRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
+        $view = view('admin.accessary_management.elements.add_update_accessary')
+            ->with('data', null)
+            ->with('list', null)
+            ->with('nationList', $nationList)
+            ->with('tradeMarkList', $tradeMarkList)
+            ->render();
+        return $view;
     }
 
     public function getById(Request $request)
@@ -48,10 +68,22 @@ class AccessaryManagementController extends BackendController
             $accessaryLink = $this->accessaryRepository->find($item->accessary_value);
             $accessaryList[$key] = $accessaryLink->toArray();
         }
-        return [
-            'data' => $accessary,
-            'list' => $accessaryList
-        ];
+
+        $nationList = $this->nationRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
+        $tradeMarkList = $this->tradeMarkRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
+
+        $view = view('admin.accessary_management.elements.add_update_accessary')
+            ->with('data', $accessary)
+            ->with('list', $accessaryList)
+            ->with('nationList', $nationList)
+            ->with('tradeMarkList', $tradeMarkList)
+            ->render();
+//        return [
+//            'data' => $accessary,
+//            'list' => $accessaryList,
+//            'nationList' => $nationList
+//        ];
+        return $view;
     }
 
     public function save(Request $request)
@@ -273,7 +305,7 @@ class AccessaryManagementController extends BackendController
 
         // Get List accessary
         $listAccessary = $this->accessaryRepository->getAll();
-        $view = view('admin.accessary_management.elements.list_data_accessary')
+        $view = view('admin.accessary_management.accessary_management')
             ->with('listAccessary', $listAccessary)->render();
         return [
             'error' => false,
