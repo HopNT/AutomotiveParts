@@ -36,20 +36,22 @@ class SearchController extends Controller
 
     public function search(Request $request)
     {
-        if (empty($request->q)) {
+        if (empty($request->q) && empty($request->car_name) && empty($request->year)) {
             return redirect('home');
         }
 
-        $query = array();
-        if (strpos($request->q, ',') !== false) {
-            $query = explode(',', $request->q);
-        } else {
-            array_push($query, $request->q);
-        }
+        $query = $request->q;
+        $carName = $request->car_name;
+        $year = $request->year;
+//        if (strpos($request->q, ',') !== false) {
+//            $query = explode(',', $request->q);
+//        } else {
+//            array_push($query, $request->q);
+//        }
 
-        $accessary = $this->accessaryRepository->searchByCode($query);
+        $accessary = $this->accessaryRepository->search($query, $carName, $year);
         if (count($accessary) > 1) {
-            $query = implode(', ', $query);
+//            $query = implode(', ', $query);
             return view('web.Search.search-result')
                 ->with('query', $query)
                 ->with('accessary', $accessary);

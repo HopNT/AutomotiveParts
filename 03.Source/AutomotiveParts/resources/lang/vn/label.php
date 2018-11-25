@@ -27,7 +27,8 @@ return [
         'photo_outer' => 'Ảnh chụp ngoài',
         'accessary_link' => 'Phụ tùng liên kết',
         'prioritize' => 'Ưu tiên',
-        'price' => 'Giá bán'
+        'price' => 'Giá bán',
+        'list_car' => 'Danh sách xe sử dụng'
     ],
     'car' => [
         'management' => 'Quản lý thông tin xe',

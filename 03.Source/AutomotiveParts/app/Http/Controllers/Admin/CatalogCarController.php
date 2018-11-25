@@ -65,8 +65,8 @@ class CatalogCarController extends BackendController
             ];
         }
 
-        $listCatalogCar = $this->catalogCarRepository->getAllWithActive(GlobalEnum::STATUS_ACTIVE);
-        $listCar = $this->carRepository->getAllWithActive(GlobalEnum::STATUS_ACTIVE);
+        $listCatalogCar = $this->catalogCarRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
+        $listCar = $this->carRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
         $viewCatalogCar = view('admin.car_management.elements.list_data_catalog_car')
             ->with('listCatalogCar', $listCatalogCar)->render();
         $viewCar = view('admin.car_management.elements.list_data_car')
@@ -100,8 +100,8 @@ class CatalogCarController extends BackendController
             ];
         }
 
-        $listCatalogCar = $this->catalogCarRepository->getAllWithActive(GlobalEnum::STATUS_ACTIVE);
-        $listCar = $this->carRepository->getAllWithActive(GlobalEnum::STATUS_ACTIVE);
+        $listCatalogCar = $this->catalogCarRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
+        $listCar = $this->carRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
         $viewCatalogCar = view('admin.car_management.elements.list_data_catalog_car')
             ->with('listCatalogCar', $listCatalogCar)->render();
         $viewCar = view('admin.car_management.elements.list_data_car')
@@ -123,6 +123,6 @@ class CatalogCarController extends BackendController
 
     public function getAll()
     {
-        return $this->catalogCarRepository->getAllWithActive(GlobalEnum::STATUS_ACTIVE);
+        return $this->catalogCarRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
     }
 }

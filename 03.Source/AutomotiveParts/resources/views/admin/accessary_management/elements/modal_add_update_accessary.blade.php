@@ -358,7 +358,7 @@
                                 <label for="status"
                                        class="control-label col-md-2">{{trans('label.common.status')}}</label>
                                 <div class="col-md-10">
-                                    <select class="form-control" name="status">
+                                    <select class="form-control" na me="status">
                                         <option value="0">{{trans('label.common.status_inactive')}}</option>
                                         <option value="1">{{trans('label.common.status_active')}}</option>
                                     </select>

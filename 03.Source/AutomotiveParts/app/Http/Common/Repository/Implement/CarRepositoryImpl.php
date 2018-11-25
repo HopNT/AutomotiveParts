@@ -67,14 +67,38 @@ class CarRepositoryImpl extends GenericRepositoryImpl implements CarRepository
     public function getByAccessaryId($accessaryId)
     {
         return DB::table('tbl_car as c')
-            ->leftJoin('tbl_car_parts as cp', 'c.car_id', '=', 'cp.car_id')
-            ->leftJoin('tbl_parts as p', 'cp.parts_id', '=', 'p.parts_id')
-            ->leftJoin('tbl_parts_accessary as pa', 'p.parts_id', '=', 'pa.parts_id')
-            ->leftJoin('tbl_accessary as a', 'pa.accessary_id', '=', 'a.accessary_id')
+            ->leftJoin('tbl_car_link as cl', 'c.car_id', '=', 'cl.car_id')
             ->leftJoin('tbl_nation as n', 'c.nation_id', '=', 'n.nation_id')
             ->leftJoin('tbl_year_manufacture as y', 'c.year_manufacture_id', '=', 'y.year_manufacture_id')
-            ->where('a.accessary_id', '=', $accessaryId)
+            ->where('cl.accessary_id', '=', $accessaryId)
             ->selectRaw('distinct c.*, y.year, n.name_vi')
+            ->get();
+    }
+
+    /**
+     * @param $catalogCarId
+     * @return mixed
+     */
+    public function getByCatalog($catalogCarId)
+    {
+        return DB::table('tbl_car as c')
+            ->leftJoin('tbl_year_manufacture as y', 'c.year_manufacture_id', '=', 'y.year_manufacture_id')
+            ->where('c.catalog_car_id', '=', $catalogCarId)
+            ->select('c.*', 'y.year')
+            ->get();
+    }
+
+    /**
+     * @param $text
+     * @return mixed
+     */
+    public function searchByText($text)
+    {
+        return DB::table('tbl_car as c')
+            ->leftJoin('tbl_year_manufacture as y', 'c.year_manufacture_id', '=', 'y.year_manufacture_id')
+            ->where('c.name', 'LIKE', '%'.$text.'%')
+            ->where('c.status', '=', GlobalEnum::STATUS_ACTIVE)
+            ->select('c.*', 'y.year')
             ->get();
     }
 }

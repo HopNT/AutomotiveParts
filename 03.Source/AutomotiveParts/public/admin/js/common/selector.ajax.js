@@ -55,6 +55,29 @@ function loadCatalogByCarBrand(carBrandId, form, divSelectId, selectName, select
     }
 }
 
+// Load car by catalog car
+function loadCarByCatalog(catalogCarId, form, divSelectId, selectName, selectId) {
+    var selectCar = '<select id="' + selectId + '" class="form-control" name="' + selectName + '">';
+    selectCar += '<option value="">-- Chọn Mẫu xe --</option>';
+    if (catalogCarId != undefined && catalogCarId != null && catalogCarId != "") {
+        $.ajax({
+            type: 'GET',
+            url: '/admin/car/getByCatalog',
+            data: {'id': catalogCarId},
+            success: function (result) {
+                $.each(result, function (i, data) {
+                    selectCar += '<option value="' + data.car_id + '">' + data.name + ' - ' + data.year + '</option>';
+                });
+                selectCar += '</select>';
+                $("#" + form + " #" + divSelectId).html(selectCar);
+            }
+        });
+    } else {
+        selectCar += '</select>';
+        $("#" + form + " #" + divSelectId).html(selectCar);
+    }
+}
+
 // Load Catalog Parts
 function loadCatalogParts(form, divSelectId, selectName, selectId) {
     $.ajax({

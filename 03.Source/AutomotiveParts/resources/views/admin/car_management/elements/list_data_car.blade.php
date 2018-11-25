@@ -36,6 +36,7 @@ $can_delete_car = $staff->can_view('car-delete');
                         <th class="text-center">{{trans('label.car_brand.name')}}</th>
                         <th class="text-center">{{trans('label.catalog_car.name')}}</th>
                         <th class="text-center">{{trans('label.car.name')}}</th>
+                        <th class="text-center">{{trans('label.car.year')}}</th>
                         <th class="text-center">{{trans('label.car.num_of_doors')}}</th>
                         <th class="text-center">{{trans('label.common.status')}}</th>
                         <th class="text-center">{{trans('label.common.action')}}</th>
@@ -48,7 +49,8 @@ $can_delete_car = $staff->can_view('car-delete');
                                 <td class="text-center">
                                     <div class="animated-checkbox">
                                         <label>
-                                            <input type="checkbox" class="checkbox" @if($car->status === 0) disabled @endif
+                                            <input type="checkbox" class="checkbox" @if($car->status === 0) disabled
+                                                   @endif
                                                    data-id="{{$car->car_id}}"><span class="label-text"></span>
                                         </label>
                                     </div>
@@ -56,9 +58,10 @@ $can_delete_car = $staff->can_view('car-delete');
                             @else
                                 <td class="text-center">{{$key + 1}}</td>
                             @endif
-                            <td>{{$car->carBrandName}}</td>
-                            <td>{{$car->catalogCarName}}</td>
+                            <td>{{$car->catalogCar->carBrand->name}}</td>
+                            <td>{{$car->catalogCar->name}}</td>
                             <td>{{$car->name}}</td>
+                            <td class="text-center">{{$car->yearManufacture->year}}</td>
                             <td class="text-right">{{$car->number_of_doors}}</td>
                             <td>{{$car->status ? trans('label.common.status_active') : trans('label.common.status_inactive')}}</td>
                             <td class="text-center">
@@ -69,7 +72,7 @@ $can_delete_car = $staff->can_view('car-delete');
                                 @endif
                                 @if($can_delete_car)
                                     <button id="btn_delete_car" @if($car->status === 0) disabled @endif
-                                            href="{{route('car-delete', ['ids[]'=>$car->car_id])}}"
+                                    href="{{route('car-delete', ['ids[]'=>$car->car_id])}}"
                                             class="btn btn-danger btn-sm fa fa-trash"></button>
                                 @endif
                             </td>

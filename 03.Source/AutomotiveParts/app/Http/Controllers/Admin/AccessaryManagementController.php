@@ -12,7 +12,12 @@ use App\Http\Common\Entities\Accessary;
 use App\Http\Common\Enum\GlobalEnum;
 use App\Http\Common\Repository\AccessaryLinkRepository;
 use App\Http\Common\Repository\AccessaryRepository;
+use App\Http\Common\Repository\CarBrandRepository;
+use App\Http\Common\Repository\CarLinkRepository;
+use App\Http\Common\Repository\CarRepository;
+use App\Http\Common\Repository\CatalogCarRepository;
 use App\Http\Common\Repository\NationRepository;
+use App\Http\Common\Repository\PartsRepository;
 use App\Http\Common\Repository\TradeMarkRepository;
 use App\Http\Common\Utils\CommonUtils;
 use Illuminate\Http\Request;
@@ -29,33 +34,76 @@ class AccessaryManagementController extends BackendController
 
     protected $tradeMarkRepository;
 
+    protected $carBrandRepository;
+
+    protected $partsRepository;
+
+    protected $carRepository;
+
+    protected $catalogCarRepository;
+
+    protected $carLinkRepository;
+
     /**
      * AccessaryManagementController constructor.
      * @param $accessaryRepository
      */
-    public function __construct(AccessaryRepository $accessaryRepository, AccessaryLinkRepository $accessaryLinkRepository, NationRepository $nationRepository, TradeMarkRepository $tradeMarkRepository)
+    public function __construct(AccessaryRepository $accessaryRepository, AccessaryLinkRepository $accessaryLinkRepository,
+                                NationRepository $nationRepository, TradeMarkRepository $tradeMarkRepository,
+                                CarBrandRepository $carBrandRepository, PartsRepository $partsRepository,
+                                CarRepository $carRepository, CatalogCarRepository $catalogCarRepository,
+                                CarLinkRepository $carLinkRepository)
     {
         $this->accessaryRepository = $accessaryRepository;
         $this->accessaryLinkRepository = $accessaryLinkRepository;
         $this->nationRepository = $nationRepository;
         $this->tradeMarkRepository = $tradeMarkRepository;
+        $this->carBrandRepository = $carBrandRepository;
+        $this->partsRepository = $partsRepository;
+        $this->carRepository = $carRepository;
+        $this->catalogCarRepository = $catalogCarRepository;
+        $this->carLinkRepository = $carLinkRepository;
     }
 
     public function index()
     {
         $listAccessary = $this->accessaryRepository->getAll();
+        foreach ($listAccessary as $accessary) {
+            $car = $this->carRepository->find($accessary->car_id);
+            if (!empty($car)) {
+                $catalogCar = $car->catalogCar;
+                $carBrand = $car->catalogCar->carBrand;
+                $accessary->carBrandName = $carBrand->name;
+                $accessary->catalogCarName = $catalogCar->name;
+                $accessary->carName = $car->name;
+                $accessary->year = $car->yearManufacture->year;
+            } else {
+                $accessary->carBrandName = "";
+                $accessary->catalogCarName = "";
+                $accessary->carName = "";
+                $accessary->year = "";
+            }
+        }
+
         return view('admin.accessary_management.accessary_management')
             ->with('listAccessary', $listAccessary);
     }
 
     public function createNew() {
+        $carBrandList = $this->carBrandRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
+        $partsList = $this->partsRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
         $nationList = $this->nationRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
         $tradeMarkList = $this->tradeMarkRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
         $view = view('admin.accessary_management.elements.add_update_accessary')
+            ->with('car', null)
             ->with('data', null)
             ->with('list', null)
-            ->with('nationList', $nationList)
+            ->with('carBrandList', $carBrandList)
+            ->with('partsList', $partsList)
+            ->with('listNation', $nationList)
             ->with('tradeMarkList', $tradeMarkList)
+            ->with('carUsed', null)
+            ->with('partsAccessary', null)
             ->render();
         return $view;
     }
@@ -66,23 +114,43 @@ class AccessaryManagementController extends BackendController
         $accessary = $this->accessaryRepository->find($request->id);
         foreach ($accessary->accessaryLinks as $key => $item) {
             $accessaryLink = $this->accessaryRepository->find($item->accessary_value);
-            $accessaryList[$key] = $accessaryLink->toArray();
+            $accessaryList[$key] = $accessaryLink;
+        }
+
+        $carUsed = array();
+        foreach ($accessary->carLinks as $key => $item) {
+            $temp = $this->carRepository->find($item->car_id);
+            $carUsed[$key] = $temp;
         }
 
         $nationList = $this->nationRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
         $tradeMarkList = $this->tradeMarkRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
+        $car = $this->carRepository->find($accessary->car_id);
+        $carBrandList = $this->carBrandRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
+        $partsList = $this->partsRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
+        $catalogCarList = null;
+        $carList = null;
+        if (!empty($car)) {
+            $catalogCarList = $this->catalogCarRepository->getByCarBrand($car->catalogCar->carBrand->car_brand_id);
+            $carList = $this->carRepository->getByCatalog($car->catalogCar->catalog_car_id);
+        }
+
+        $partsAccessary = $accessary->parts;
 
         $view = view('admin.accessary_management.elements.add_update_accessary')
+            ->with('car', $car)
             ->with('data', $accessary)
             ->with('list', $accessaryList)
-            ->with('nationList', $nationList)
+            ->with('listNation', $nationList)
             ->with('tradeMarkList', $tradeMarkList)
+            ->with('carBrandList', $carBrandList)
+            ->with('partsList', $partsList)
+            ->with('catalogCarList', $catalogCarList)
+            ->with('carList', $carList)
+            ->with('carUsed', $carUsed)
+            ->with('partsAccessary', $partsAccessary)
             ->render();
-//        return [
-//            'data' => $accessary,
-//            'list' => $accessaryList,
-//            'nationList' => $nationList
-//        ];
+
         return $view;
     }
 
@@ -218,7 +286,7 @@ class AccessaryManagementController extends BackendController
                     }
                 }
 
-                $this->accessaryRepository->merge($request->accessary_id, $accessary);
+                $accessary = $this->accessaryRepository->merge($request->accessary_id, $accessary);
 
                 if ($request->has('accessary_link')) {
                     $this->accessaryLinkRepository->deleteAll($request->accessary_id);
@@ -235,6 +303,24 @@ class AccessaryManagementController extends BackendController
                 } else {
                     $this->accessaryLinkRepository->deleteAll($request->accessary_id);
                 }
+
+                $this->carLinkRepository->deleteAll($request->accessary_id);
+                if ($request->has('car_used')) {
+                    foreach ($request->car_used as $item) {
+                        $carLink = [
+                            'accessary_id' => $accessary['accessary_id'],
+                            'car_id' => $item
+                        ];
+                        $this->carLinkRepository->persist($carLink);
+                    }
+                }
+
+                if (!empty($request->parts)) {
+                    $accessary->parts()->sync($request->parts);
+                } else {
+                    $accessary->parts()->detach();
+                }
+
             } else {
                 $validator = Validator::make($accessary, $valid->rules, [], $valid->attributes);
                 if ($validator->fails()) {
@@ -294,6 +380,20 @@ class AccessaryManagementController extends BackendController
                             $this->accessaryLinkRepository->persist($accessaryLink);
                         }
                     }
+                }
+
+                if ($request->has('car_used')) {
+                    foreach ($request->car_used as $item) {
+                        $carLink = [
+                            'accessary_id' => $accessary['accessary_id'],
+                            'car_id' => $item
+                        ];
+                        $this->carLinkRepository->persist($carLink);
+                    }
+                }
+
+                if (!empty($request->parts)) {
+                    $accessary->parts()->attach($request->parts);
                 }
             }
         } catch (\Exception $e) {
@@ -382,9 +482,22 @@ class AccessaryManagementController extends BackendController
 
     public function getCarUsed(Request $request) {
         $id = $request->id;
-        $carList = $this->accessaryRepository->findCarUsed($id);
+        $accessary = $this->accessaryRepository->find($id);
+        $carList = $accessary->carLinks;
+        $carUsedList = array();
+        if (!empty($carList)) {
+            foreach ($carList as $item) {
+                $car = $this->carRepository->find($item->car_id);
+                $catalogCar = $car->catalogCar;
+                $carBrand = $car->catalogCar->carBrand;
+                $car->carBrandName = $carBrand->name;
+                $car->catalogCarName = $catalogCar->name;
+                $car->year = $car->yearManufacture->year;
+                array_push($carUsedList, $car);
+            }
+        }
         return [
-            'data' => $carList
+            'data' => $carUsedList
         ];
     }
 

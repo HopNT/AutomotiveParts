@@ -19,7 +19,8 @@ $can_delete_accessary = $staff->can_view('accessary-delete');
             <div class="tile-body">
                 <div class="form-group">
                     @if($can_add_accessary)
-                        <button onclick="window.location='{{route('accessary-create')}}'" class="btn btn-primary" type="button" id="btn_add_new_accessary"><i
+                        <button onclick="window.location='{{route('accessary-create')}}'" class="btn btn-primary"
+                                type="button" id="btn_add_new_accessary"><i
                                 class="fa fa-plus"></i>{{trans('label.button.create')}}</button>
                     @endif
                     @if($can_delete_accessary)
@@ -42,6 +43,10 @@ $can_delete_accessary = $staff->can_view('accessary-delete');
                         @else
                             <th class="text-center">{{trans('label.common.num_of_row')}}</th>
                         @endif
+                        <th class="text-center">{{trans('label.car.brand')}}</th>
+                        <th class="text-center">{{trans('label.car.catalog')}}</th>
+                        <th class="text-center">{{trans('label.car.grade')}}</th>
+                        <th class="text-center">{{trans('label.car.year')}}</th>
                         <th class="text-center">{{trans('label.accessary.type')}}</th>
                         <th class="text-center">{{trans('label.accessary.code')}}</th>
                         <th class="text-center">{{trans('label.accessary.name')}}</th>
@@ -56,7 +61,8 @@ $can_delete_accessary = $staff->can_view('accessary-delete');
                                 <td class="text-center">
                                     <div class="animated-checkbox">
                                         <label>
-                                            <input type="checkbox" class="checkbox" @if($accessary->status === 0) disabled @endif
+                                            <input type="checkbox" class="checkbox"
+                                                   @if($accessary->status === 0) disabled @endif
                                                    data-id="{{$accessary->accessary_id}}"><span
                                                 class="label-text"></span>
                                         </label>
@@ -65,6 +71,10 @@ $can_delete_accessary = $staff->can_view('accessary-delete');
                             @else
                                 <td class="text-center">{{$key + 1}}</td>
                             @endif
+                            <td>{{$accessary->carBrandName}}</td>
+                            <td>{{$accessary->catalogCarName}}</td>
+                            <td>{{$accessary->carName}}</td>
+                            <td>{{$accessary->year}}</td>
                             <td>
                                 @if($accessary->type !== null and $accessary->type === 0) {{trans('label.accessary.oem')}}
                                 @elseif($accessary->type !== null and $accessary->type === 1) {{trans('label.accessary.options')}}
@@ -80,12 +90,12 @@ $can_delete_accessary = $staff->can_view('accessary-delete');
                                         class="btn btn-info btn-sm fa fa-eye"></button>
                                 @if($can_edit_accessary)
                                     <a id="btn_update_accessary"
-                                            href="{{route('accessary-edit', ['id' => $accessary->accessary_id])}}"
-                                            class="btn btn-info btn-sm fa fa-edit"></a>
+                                       href="{{route('accessary-edit', ['id' => $accessary->accessary_id])}}"
+                                       class="btn btn-info btn-sm fa fa-edit"></a>
                                 @endif
                                 @if($can_delete_accessary)
                                     <button id="btn_delete_accessary" @if($accessary->status === 0) disabled @endif
-                                            href="{{route('accessary-delete', ['ids[]' => $accessary->accessary_id])}}"
+                                    href="{{route('accessary-delete', ['ids[]' => $accessary->accessary_id])}}"
                                             class="btn btn-danger btn-sm fa fa-trash"></button>
                                 @endif
                             </td>

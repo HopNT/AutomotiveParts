@@ -32,4 +32,16 @@ interface CarRepository
      * @return mixed
      */
     function getByAccessaryId($accessaryId);
+
+    /**
+     * @param $catalogCarId
+     * @return mixed
+     */
+    function getByCatalog($catalogCarId);
+
+    /**
+     * @param $text
+     * @return mixed
+     */
+    function searchByText($text);
 }

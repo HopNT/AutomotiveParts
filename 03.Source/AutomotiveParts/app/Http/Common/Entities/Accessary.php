@@ -15,6 +15,8 @@ class Accessary extends BaseModel {
     protected $primaryKey = 'accessary_id';
 
     protected $fillable = [
+        'car_id',
+//        'car_used',
         'trademark_id',
         'nation_id',
         'type',
@@ -74,4 +76,9 @@ class Accessary extends BaseModel {
     public function accessaryLinks() {
         return $this->hasMany(AccessaryLink::class, 'accessary_id');
     }
+
+    public function carLinks() {
+        return $this->hasMany(CarLink::class, 'accessary_id');
+    }
+
 }

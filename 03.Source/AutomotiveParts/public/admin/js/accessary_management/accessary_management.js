@@ -25,7 +25,6 @@ function loadTableCarUsed() {
 
 $(document).ready(function () {
     loadTableAccessary();
-    // loadTableCarUsed();
 
     $('#form-accessary #accessary_link').select2({
         tags: true,
@@ -33,6 +32,50 @@ $(document).ready(function () {
         placeholder: 'Nhập mã phụ tùng/tên phụ tùng...',
         allowClear: true,
         dropdownCss: {display: 'none'},
+        multiple: true
+    });
+
+    $('#form-accessary #car_used').select2({
+        ajax: {
+            url: '/admin/car/searchByText',
+            dataType: 'json',
+            data: function (params) {
+                let query = {
+                    query: params.term
+                }
+                return query;
+            },
+            processResults: function (data) {
+                return {
+                    results: data.items
+                };
+            },
+            cache: false
+        },
+        placeholder: 'Nhập tên xe...',
+        allowClear: true,
+        multiple: true
+    });
+
+    $('#form-accessary #parts').select2({
+        ajax: {
+            url: '/admin/parts/searchByText',
+            dataType: 'json',
+            data: function (params) {
+                let query = {
+                    query: params.term
+                }
+                return query;
+            },
+            processResults: function (data) {
+                return {
+                    results: data.items
+                };
+            },
+            cache: false
+        },
+        placeholder: 'Nhập tên bộ phận xe...',
+        allowClear: true,
         multiple: true
     });
 
@@ -67,13 +110,22 @@ $(document).ready(function () {
         }
     });
 
+    // Onload catalog car by car_brand_id
+    $('body').on('change', '#form-accessary #car_brand_id', function () {
+        let carBrandId = $('#form-accessary #car_brand_id').val();
+        loadCatalogByCarBrand(carBrandId, 'form-accessary', 'select-catalog-car', 'catalog_car_id', 'catalog_car_id');
+        // let catalogCarId = $('#form-accessary #catalog_car_id').val();
+        loadCarByCatalog(null, 'form-accessary', 'select-car', 'car_id', 'car_id');
+    });
+
+    // Onload car by catalog_car_id
+    $('body').on('change', '#form-accessary #catalog_car_id', function () {
+        let catalogCarId = $('#form-accessary #catalog_car_id').val();
+        loadCarByCatalog(catalogCarId, 'form-accessary', 'select-car', 'car_id', 'car_id');
+    });
+
     // Save or update accessary
     $('body').on('click', '#btn_save_accessary', function () {
-        $("#loading-modal").modal({
-            backdrop: "static", //remove ability to close modal with click
-            keyboard: false, //remove option to close with keyboard
-            show: true //Display loader!
-        });
         let type = $('#form-accessary').attr('method');
         let url = $('#form-accessary').attr('action');
         let accessaryId = $('#form-accessary input[name="accessary_id"]').val();
@@ -90,6 +142,11 @@ $(document).ready(function () {
         var accessaryList = $('#form-accessary #accessary_link').tagsinput('items');
         for (var i = 0; i < accessaryList.length; i++) {
             formData.append('accessary_link[' + i + ']', accessaryList[i]);
+        }
+
+        var carUsed = $('#form-accessary #car_used').tagsinput('items');
+        for (var i = 0; i < carUsed.length; i++) {
+            formData.append('car_used[' + i + ']', carUsed[i]);
         }
 
         formData.append('photo_top_check', $("#form-accessary #photo_top_image_preview").attr("data-content"));
@@ -118,7 +175,6 @@ $(document).ready(function () {
                         $('#modal_add_update_accessary #message_error').html('');
                     });
                 } else if (!result.error) {
-                    $("#loading-modal").modal("hide");
                     // $('#modal_add_update_accessary').modal('hide');
                     setTimeout(function () {
                         if (accessaryId != null && accessaryId != '') {
@@ -240,9 +296,9 @@ $(document).ready(function () {
                         '                    <thead>' +
                         '                        <tr>' +
                         '                            <th class="text-center">#</th>' +
-                        '                            <th class="text-center">Tên hãng xe</th>' +
-                        '                            <th class="text-center">Tên dòng xe</th>' +
-                        '                            <th class="text-center">Tên xe</th>' +
+                        '                            <th class="text-center">Hãng xe</th>' +
+                        '                            <th class="text-center">Dòng xe</th>' +
+                        '                            <th class="text-center">Mẫu xe</th>' +
                         '                            <th class="text-center">Năm sản xuất</th>' +
                         '                        </tr>' +
                         '                    </thead>' +
@@ -250,8 +306,8 @@ $(document).ready(function () {
                     $.each(result.data, function (index, item) {
                         content += '<tr>';
                         content += '<td class="text-center">' + (index + 1) + '</td>'
-                        content += '<td>' + item.carBrand + '</td>'
-                        content += '<td>' + item.catalogName + '</td>'
+                        content += '<td>' + item.carBrandName + '</td>'
+                        content += '<td>' + item.catalogCarName + '</td>'
                         content += '<td>' + item.name + '</td>'
                         content += '<td>' + item.year + '</td>'
                         content += '</tr>';
@@ -263,8 +319,6 @@ $(document).ready(function () {
             }
         })
     });
-
-
 
 });
 

@@ -180,18 +180,18 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group row">
-                                <label for="accessary"
-                                       class="control-label col-md-2">{{trans('label.parts.accessary')}}</label>
-                                <div class="col-md-10">
-                                    <select id="accessary" style="width: 100%;" class="form-control" name="accessary[]"
-                                            multiple="multiple"></select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {{--<div class="row">--}}
+                        {{--<div class="col-md-12">--}}
+                            {{--<div class="form-group row">--}}
+                                {{--<label for="accessary"--}}
+                                       {{--class="control-label col-md-2">Danh sách {{trans('label.parts.accessary')}}</label>--}}
+                                {{--<div class="col-md-10">--}}
+                                    {{--<select id="accessary" style="width: 100%;" class="form-control" name="accessary[]"--}}
+                                            {{--multiple="multiple"></select>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group row">

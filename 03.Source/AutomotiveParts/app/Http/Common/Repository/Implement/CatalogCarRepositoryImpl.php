@@ -26,7 +26,7 @@ class CatalogCarRepositoryImpl extends GenericRepositoryImpl implements CatalogC
      * @param $status
      * @return mixed
      */
-    function getAllWithActive($status)
+    public function getAllWithActive($status)
     {
         return DB::table('tbl_catalog_car as cc')
             ->leftJoin('tbl_car_brand as cb', 'cc.car_brand_id', '=', 'cb.car_brand_id')
@@ -39,8 +39,19 @@ class CatalogCarRepositoryImpl extends GenericRepositoryImpl implements CatalogC
      * @param $ids
      * @return mixed
      */
-    function deleteMulti($ids)
+    public function deleteMulti($ids)
     {
         DB::table('tbl_catalog_car')->whereIn('catalog_car_id', $ids)->update(['status'=>GlobalEnum::STATUS_INACTIVE, 'updated_at'=>now()]);
+    }
+
+    /**
+     * @param $carBrandId
+     * @return mixed
+     */
+    public function getByCarBrand($carBrandId)
+    {
+        return DB::table('tbl_catalog_car')
+            ->where('car_brand_id', '=', $carBrandId)
+            ->get();
     }
 }

@@ -166,7 +166,7 @@
                             @if (count($listCarUse) > 0)
                                 <div class="col-md-12">
                                     <div class="col-md-12">
-                                        <h5>Danh sách xe sử dụng</h5>
+                                        <h5>Danh sách xe dùng chung</h5>
                                     </div>
                                     <div class="table-responsive">
                                         <table class="table table-bordered">

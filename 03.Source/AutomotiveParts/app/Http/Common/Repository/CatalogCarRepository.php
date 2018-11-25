@@ -20,4 +20,10 @@ interface CatalogCarRepository
      * @return mixed
      */
     function deleteMulti($ids);
+
+    /**
+     * @param $carBrandId
+     * @return mixed
+     */
+    function getByCarBrand($carBrandId);
 }

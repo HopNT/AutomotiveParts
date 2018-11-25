@@ -188,17 +188,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group row">
-                                <label for="parts" class="control-label col-md-2">{{trans('label.car.parts')}}</label>
-                                <div class="col-md-10">
-                                    <select class="form-control" id="parts" style="width: 100%" name="parts[]">
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {{--<div class="row">--}}
+                        {{--<div class="col-md-12">--}}
+                            {{--<div class="form-group row">--}}
+                                {{--<label for="parts" class="control-label col-md-2">{{trans('label.car.parts')}}</label>--}}
+                                {{--<div class="col-md-10">--}}
+                                    {{--<select class="form-control" id="parts" style="width: 100%" name="parts[]">--}}
+                                    {{--</select>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
                 </form>
             </div>
             <div class="modal-footer">

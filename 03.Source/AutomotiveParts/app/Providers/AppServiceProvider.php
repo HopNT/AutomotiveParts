@@ -4,12 +4,14 @@ namespace App\Providers;
 use App\Http\Common\Repository\AccessaryLinkRepository;
 use App\Http\Common\Repository\AccessaryRepository;
 use App\Http\Common\Repository\CarBrandRepository;
+use App\Http\Common\Repository\CarLinkRepository;
 use App\Http\Common\Repository\CarRepository;
 use App\Http\Common\Repository\CatalogCarRepository;
 use App\Http\Common\Repository\CatalogPartsRepository;
 use App\Http\Common\Repository\Implement\AccessaryLinkRepositoryImpl;
 use App\Http\Common\Repository\Implement\AccessaryRepositoryImpl;
 use App\Http\Common\Repository\Implement\CarBrandRepositoryImpl;
+use App\Http\Common\Repository\Implement\CarLinkRepositoryImpl;
 use App\Http\Common\Repository\Implement\CarRepositoryImpl;
 use App\Http\Common\Repository\Implement\CatalogCarRepositoryImpl;
 use App\Http\Common\Repository\Implement\CatalogPartsRepositoryImpl;
@@ -113,6 +115,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(
             QuotationRepository::class,
             QuotationRepositoryImpl::class
+        );
+
+        $this->app->singleton(
+            CarLinkRepository::class,
+            CarLinkRepositoryImpl::class
         );
     }
 }

@@ -77,7 +77,7 @@ class CarController extends BackendController
 
 
         // Get List CarBrand
-        $listCar = $this->carRepository->getAllWithActive(GlobalEnum::STATUS_ACTIVE);
+        $listCar = $this->carRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
         $view = view('admin.car_management.elements.list_data_car')
             ->with('listCar', $listCar)->render();
         return [
@@ -113,12 +113,36 @@ class CarController extends BackendController
         }
 
         // Get List Car
-        $listCar = $this->carRepository->getAllWithActive(GlobalEnum::STATUS_ACTIVE);
+        $listCar = $this->carRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
         $view = view('admin.car_management.elements.list_data_car')
             ->with('listCar', $listCar)->render();
         return [
             'error' => false,
             'html' => $view
+        ];
+    }
+
+    public function getByCatalog(Request $request) {
+        $id = $request->id;
+        return $this->carRepository->getByCatalog($id);
+    }
+
+    public function searchByText(Request $request) {
+        $results = array();
+        $text = $request->get('query');
+        $listCar = $this->carRepository->searchByText($text);
+        $index = 0;
+        if (!empty($listCar))
+        {
+            foreach ($listCar as $key => $car)
+            {
+                $results[$index]['id'] = $car->car_id;
+                $results[$index]['text'] = $car->name.' - '.$car->year;
+                $index++;
+            }
+        }
+        return [
+            'items' => $results
         ];
     }
 
