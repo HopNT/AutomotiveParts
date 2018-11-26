@@ -7,9 +7,11 @@
  */
 namespace App\Http\Common\Repository\Implement;
 
+use App\Http\Common\Entities\Accessary;
 use App\Http\Common\Entities\Car;
 use App\Http\Common\Enum\GlobalEnum;
 use App\Http\Common\Repository\CarRepository;
+use function foo\func;
 use Illuminate\Support\Facades\DB;
 
 class CarRepositoryImpl extends GenericRepositoryImpl implements CarRepository
@@ -53,13 +55,10 @@ class CarRepositoryImpl extends GenericRepositoryImpl implements CarRepository
     public function getByAccessary($code)
     {
         return DB::table('tbl_car as c')
-            ->leftJoin('tbl_car_parts as cp', 'c.car_id', '=', 'cp.car_id')
-            ->leftJoin('tbl_parts as p', 'cp.parts_id', '=', 'p.parts_id')
-            ->leftJoin('tbl_parts_accessary as pa', 'p.parts_id', '=', 'pa.parts_id')
-            ->leftJoin('tbl_accessary as a', 'pa.accessary_id', '=', 'a.accessary_id')
+            ->leftJoin('tbl_car_link as cl', 'c.car_id', '=', 'cl.car_id')
             ->leftJoin('tbl_nation as n', 'c.nation_id', '=', 'n.nation_id')
             ->leftJoin('tbl_year_manufacture as y', 'c.year_manufacture_id', '=', 'y.year_manufacture_id')
-            ->whereIn('a.code', $code)
+            ->whereIn('cl.accessary_id', $code)
             ->selectRaw('distinct c.*, y.year, n.name_vi')
             ->get();
     }

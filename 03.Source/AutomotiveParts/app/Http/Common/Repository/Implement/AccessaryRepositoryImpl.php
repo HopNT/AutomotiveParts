@@ -59,6 +59,7 @@ class AccessaryRepositoryImpl extends GenericRepositoryImpl implements Accessary
             ->leftJoin('tbl_trademark as tr', 'a.trademark_id', '=', 'tr.trademark_id')
             ->whereIn('a.code', $query)
             ->select('a.*', 'n.name_vi as nation_name', 'tr.name as trademark_name', 'tr.description as trademark_desc')
+            ->distinct()
             ->get();
     }
 
@@ -156,5 +157,12 @@ class AccessaryRepositoryImpl extends GenericRepositoryImpl implements Accessary
             ->distinct()
             ->get();
 
+    }
+
+    public function getAccessaryIdByCode($code) {
+        return DB::table('tbl_accessary')
+            ->whereIn('code', $code)
+            ->select('accessary_id')
+            ->get();
     }
 }

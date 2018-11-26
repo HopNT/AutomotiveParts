@@ -69,8 +69,14 @@ class SearchController extends Controller
                 $item->accessaryLinks = $list;
             }
 
+            $listId = $this->accessaryRepository->getAccessaryIdByCode($query);
+            $codearr = array();
+            foreach ($listId->toArray() as $item) {
+                array_push($codearr, $item->accessary_id);
+            }
+//            dd($codearr);
             // Get car
-            $listCarUse = $this->carRepository->getByAccessary($query);
+            $listCarUse = $this->carRepository->getByAccessary($codearr);
 
             return view('web.accessory.accessory-detail')
                 ->with('accessary', $accessary)
