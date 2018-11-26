@@ -52,6 +52,9 @@ class AccessaryRepositoryImpl extends GenericRepositoryImpl implements Accessary
     public function searchByCode($query)
     {
         return DB::table('tbl_accessary as a')
+            ->leftJoin('tbl_car_link as cl', 'a.accessary_id', '=', 'cl.accessary_id')
+            ->leftJoin('tbl_car as c', 'cl.car_id', '=', 'c.car_id')
+            ->leftJoin('tbl_year_manufacture as y', 'c.year_manufacture_id', '=', 'y.year_manufacture_id')
             ->leftJoin('tbl_nation as n', 'a.nation_id', '=', 'n.nation_id')
             ->leftJoin('tbl_trademark as tr', 'a.trademark_id', '=', 'tr.trademark_id')
             ->whereIn('a.code', $query)
@@ -108,10 +111,8 @@ class AccessaryRepositoryImpl extends GenericRepositoryImpl implements Accessary
             $condition = $condition.' y.code = '.$year;
         }
         return DB::table('tbl_accessary as a')
-            ->leftJoin('tbl_parts_accessary as pa', 'a.accessary_id', '=', 'pa.accessary_id')
-            ->leftJoin('tbl_parts as p', 'pa.parts_id', '=', 'p.parts_id')
-            ->leftJoin('tbl_car_parts as cp', 'p.parts_id', '=', 'cp.parts_id')
-            ->leftJoin('tbl_car as c', 'cp.car_id', '=', 'c.car_id')
+            ->leftJoin('tbl_car_link as cl', 'a.accessary_id', '=', 'cl.accessary_id')
+            ->leftJoin('tbl_car as c', 'cl.car_id', '=', 'c.car_id')
             ->leftJoin('tbl_year_manufacture as y', 'c.year_manufacture_id', '=', 'y.year_manufacture_id')
             ->leftJoin('tbl_nation as n', 'a.nation_id', '=', 'n.nation_id')
             ->leftJoin('tbl_trademark as tr', 'a.trademark_id', '=', 'tr.trademark_id')
