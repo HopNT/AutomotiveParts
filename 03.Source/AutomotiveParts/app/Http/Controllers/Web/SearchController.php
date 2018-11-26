@@ -74,7 +74,7 @@ class SearchController extends Controller
             foreach ($listId->toArray() as $item) {
                 array_push($codearr, $item->accessary_id);
             }
-//            dd($codearr);
+
             // Get car
             $listCarUse = $this->carRepository->getByAccessary($codearr);
 
