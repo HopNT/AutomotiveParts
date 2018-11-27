@@ -13,6 +13,20 @@ function loadTableQuotation() {
 $(document).ready(function () {
     loadTableQuotation();
 
+    // Onload catalog car by car_brand_id
+    $('body').on('change', '#form_quotation #car_brand_id', function () {
+        let carBrandId = $('#form_quotation #car_brand_id').val();
+        loadCatalogByCarBrand(carBrandId, 'form_quotation', 'select-catalog-car', 'catalog_car_id', 'catalog_car_id');
+        // let catalogCarId = $('#form-accessary #catalog_car_id').val();
+        loadCarByCatalog(null, 'form_quotation', 'select-car', 'car_id', 'car_id');
+    });
+
+    // Onload car by catalog_car_id
+    $('body').on('change', '#form_quotation #catalog_car_id', function () {
+        let catalogCarId = $('#form_quotation #catalog_car_id').val();
+        loadCarByCatalog(catalogCarId, 'form_quotation', 'select-car', 'car_id', 'car_id');
+    });
+
     var counter = 0;
     $("#formQuotation #addrow").on("click", function () {
         var newRow = $("<tr>");

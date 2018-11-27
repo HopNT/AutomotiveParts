@@ -110,8 +110,10 @@ return [
         'required' => 'Vui lòng nhập thông tin.',
         'dont_have_permission' => 'Bạn không có quyền thực hiện chức năng này!.',
         'created_at' => 'Ngày tạo',
+        'updated_at' => 'Ngày cập nhật',
         'approve_at' => 'Ngày phê duyệt',
-        'reject_at' => 'Ngày từ chối'
+        'reject_at' => 'Ngày từ chối',
+        'sum_amount' => 'Thành tiền'
     ],
     'button' => [
         'create' => 'Thêm mới',

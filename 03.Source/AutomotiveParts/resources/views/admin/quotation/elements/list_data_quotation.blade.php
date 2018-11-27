@@ -5,6 +5,7 @@
  * Date: 10/29/2018
  * Time: 22:29
  */
+
 use Illuminate\Support\Facades\Auth;
 
 $staff = Auth::guard('admin')->user();
@@ -19,9 +20,8 @@ $can_delete_quotation = $staff->can_view('quotation-delete');
             <div class="tile-body">
                 <div class="form-group">
                     @if($can_add_quotation && $staff->user_type == 1)
-                        {{--<button class="btn btn-primary" type="button" id="btn_add_new_quotation" href="{{ route('quotation-create') }}"><i--}}
-                                {{--class="fa fa-plus"></i>{{trans('label.button.create')}}</button>--}}
-                        <a href="{{route('quotation-create')}}" class="btn btn-primary"><i class="fa fa-plus"></i>&nbsp;{{trans('label.button.create')}}</a>
+                        <button onclick="window.location='{{route('quotation-create')}}'" class="btn btn-primary"><i
+                                class="fa fa-plus"></i>&nbsp;{{trans('label.button.create')}}</button>
                     @endif
                     @if($can_delete_quotation && $staff->user_type == 1)
                         <button class="btn btn-danger" type="button" id="btn_delete_multi_quotation"><i
@@ -49,6 +49,7 @@ $can_delete_quotation = $staff->can_view('quotation-delete');
                         @endif
                         <th class="text-center">{{trans('label.quotation.code')}}</th>
                         <th class="text-center">{{trans('label.common.created_at')}}</th>
+                        {{--<th class="text-center">{{trans('label.common.updated_at')}}</th>--}}
                     </tr>
                     </thead>
                     <tbody>
@@ -58,7 +59,9 @@ $can_delete_quotation = $staff->can_view('quotation-delete');
                                 <td class="text-center">
                                     <div class="animated-checkbox">
                                         <label>
-                                            <input type="checkbox" class="checkbox" data-id="{{$quotation->quotation_id}}"><span class="label-text"></span>
+                                            <input type="checkbox" class="checkbox"
+                                                   data-id="{{$quotation->quotation_id}}"><span
+                                                class="label-text"></span>
                                         </label>
                                     </div>
                                 </td>
@@ -71,6 +74,7 @@ $can_delete_quotation = $staff->can_view('quotation-delete');
                             @endif
                             <td>{{$quotation->code}}</td>
                             <td>{{date('d/m/Y H:i:s', strtotime($quotation->created_at))}}</td>
+                            {{--<td>{{date('d/m/Y H:i:s', strtotime($quotation->updated_at))}}</td>--}}
                         </tr>
                     @endforeach
                     </tbody>
