@@ -11,9 +11,9 @@ $can_view = $user->can_view($router_name);
 
 @section('content')
     @if($can_view)
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="bs-component" style="width: 100%">
+        {{--<div class="container">--}}
+            {{--<div class="row justify-content-center">--}}
+                {{--<div class="bs-component" style="width: 100%">--}}
                     <ul class="nav nav-tabs">
                         <li class="nav-item"><a class="nav-link active" data-toggle="tab"
                                                 href="#car_brand">{{trans('label.car.brand')}}</a></li>
@@ -33,9 +33,9 @@ $can_view = $user->can_view($router_name);
                             @include('admin.car_management.elements.list_data_car')
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
     @else
         {{trans('label.common.dont_have_permission')}}
     @endif
