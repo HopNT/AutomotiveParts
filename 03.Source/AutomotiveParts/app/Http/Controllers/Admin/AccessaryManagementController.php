@@ -501,4 +501,8 @@ class AccessaryManagementController extends BackendController
         ];
     }
 
+    public function downloadTemplate() {
+
+    }
+
 }

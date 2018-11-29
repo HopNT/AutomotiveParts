@@ -320,6 +320,34 @@ $(document).ready(function () {
         })
     });
 
+    // Import
+    $('body').on('click', '#btn_import', function () {
+        $('#modal_import_accessary').modal();
+    });
+
+    $('body').on('change', ':file', function() {
+        var input = $(this),
+            numFiles = input.get(0).files ? input.get(0).files.length : 1,
+            label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+        input.trigger('fileselect', [numFiles, label]);
+    });
+
+// We can watch for our custom `fileselect` event like this
+    $('body').ready( function() {
+        $(':file').on('fileselect', function (event, numFiles, label) {
+
+            var input = $(this).parents('.input-group').find(':text'),
+                log = numFiles > 1 ? numFiles + ' tệp tin được chọn' : label;
+
+            if (input.length) {
+                input.val(log);
+            } else {
+                if (log) alert(log);
+            }
+
+        });
+    });
+
 });
 
 function resetFormAccessary() {

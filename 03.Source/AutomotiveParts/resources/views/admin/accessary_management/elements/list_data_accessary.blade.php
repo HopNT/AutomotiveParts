@@ -23,6 +23,8 @@ $can_delete_accessary = $staff->can_view('accessary-delete');
                                 type="button" id="btn_add_new_accessary"><i
                                 class="fa fa-plus"></i>{{trans('label.button.create')}}</button>
                     @endif
+                    <a href="{{url('admin/template/template_import_accessary.xls')}}" class="btn btn-primary" type="button" id="btn_download_template"><i class="fa fa-download"></i>Tải file mẫu</a>
+                    <button class="btn btn-primary" type="button" id="btn_import"><i class="fa fa-file"></i>Import</button>
                     @if($can_delete_accessary)
                         <button class="btn btn-danger" type="button" id="btn_delete_multi_accessary"><i
                                 class="fa fa-trash"></i>{{trans('label.button.delete')}}</button>
@@ -109,3 +111,4 @@ $can_delete_accessary = $staff->can_view('accessary-delete');
 </div>
 @include('admin.accessary_management.elements.modal_add_update_accessary')
 @include('admin.accessary_management.elements.modal_view_used_car')
+@include('admin.accessary_management.elements.modal_import_accessary')
