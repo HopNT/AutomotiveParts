@@ -10,4 +10,6 @@ namespace App\Http\Common\Repository;
 interface TradeMarkRepository
 {
     function deleteMulti($ids);
+
+    function findByCode($code);
 }

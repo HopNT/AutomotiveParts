@@ -76,7 +76,7 @@ $(document).ready(function () {
                 } else if (result.system_error) {
                     $('#modal_add_update_car_brand #message_error').html(result.message_error);
                     $('#modal_add_update_car_brand #alert_error').slideDown();
-                    $("#modal_add_update_car_brand #alert_error").fadeTo(2000, 500).slideUp(500, function(){
+                    $("#modal_add_update_car_brand #alert_error").fadeTo(10000, 500).slideUp(500, function(){
                         $("#modal_add_update_car_brand #alert_error").slideUp(500);
                         $('#modal_add_update_car_brand #message_error').html('');
                     });
@@ -100,7 +100,7 @@ $(document).ready(function () {
             error: function (error) {
                 $('#modal_add_update_car_brand #message_error').html('Có lỗi xảy, vui lòng liên hệ với quản trị hệ thống! ' + error.responseJSON.message);
                 $('#modal_add_update_car_brand #alert_error').slideDown();
-                $("#modal_add_update_car_brand #alert_error").fadeTo(2000, 500).slideUp(500, function(){
+                $("#modal_add_update_car_brand #alert_error").fadeTo(10000, 500).slideUp(500, function(){
                     $("#modal_add_update_car_brand #alert_error").slideUp(500);
                     $('#modal_add_update_car_brand #message_error').html('');
                 });

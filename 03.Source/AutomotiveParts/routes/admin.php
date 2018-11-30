@@ -88,6 +88,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('accessary/delete', 'Admin\AccessaryManagementController@delete')->name('accessary-delete');
     Route::get('accessary/getCarUsed', 'Admin\AccessaryManagementController@getCarUsed')->name('car-used');
     Route::get('accessary/download', 'Admin\AccessaryManagementController@downloadTemplate')->name('accessary-template-download');
+    Route::post('accessary/import', 'Admin\AccessaryManagementController@import')->name('accessary-import');
 
     // Price accessary management
     Route::get('price-management', 'Admin\PriceManagementController@index')->name('price-management');

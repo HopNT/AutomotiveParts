@@ -35,6 +35,7 @@ $can_delete_car = $staff->can_view('car-delete');
                         @endif
                         <th class="text-center">{{trans('label.car_brand.name')}}</th>
                         <th class="text-center">{{trans('label.catalog_car.name')}}</th>
+                        <th class="text-center">{{trans('label.car.id')}}</th>
                         <th class="text-center">{{trans('label.car.name')}}</th>
                         <th class="text-center">{{trans('label.car.year')}}</th>
                         <th class="text-center">{{trans('label.car.num_of_doors')}}</th>
@@ -60,6 +61,7 @@ $can_delete_car = $staff->can_view('car-delete');
                             @endif
                             <td>{{$car->catalogCar->carBrand->name}}</td>
                             <td>{{$car->catalogCar->name}}</td>
+                            <td>{{$car->car_id}}</td>
                             <td>{{$car->name}}</td>
                             <td class="text-center">{{$car->yearManufacture->year}}</td>
                             <td class="text-right">{{$car->number_of_doors}}</td>

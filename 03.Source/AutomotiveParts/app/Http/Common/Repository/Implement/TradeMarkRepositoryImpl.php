@@ -17,13 +17,17 @@ class TradeMarkRepositoryImpl extends GenericRepositoryImpl implements TradeMark
     /**
      * @return mixed
      */
-    public function getModel()
-    {
+    public function getModel() {
         return TradeMark::class;
     }
 
-    function deleteMulti($ids)
-    {
+    public function deleteMulti($ids) {
         DB::table('tbl_trademark')->whereIn('trademark_id', $ids)->update(['status'=>GlobalEnum::STATUS_INACTIVE, 'updated_at'=>now()]);
+    }
+
+    public function findByCode($code) {
+        return DB::table('tbl_trademark')
+            ->where('code', '=', $code)
+            ->get();
     }
 }

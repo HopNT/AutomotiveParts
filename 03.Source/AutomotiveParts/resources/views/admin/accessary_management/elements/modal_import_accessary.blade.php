@@ -24,19 +24,23 @@
                     <strong id="message_error"></strong>
                 </div>
                 <form class="form-horizontal" method="POST" id="form_data"
-                      action="#" enctype="multipart/form-data">
+                      action="{{route('accessary-import')}}" enctype="multipart/form-data">
                     <div class="form-group">
                         <div class="input-group">
                             <input type="text" class="form-control" readonly>
                             <div class="input-group-append">
-                                <button class="btn btn-primary">
+                                <label class="btn btn-primary">
                                     <i class="fa fa-folder-open"></i>{{trans('label.form.browser')}}&hellip;
-                                    <input type="file" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" style="display: none;" multiple>
-                                </button>
+                                    <input id="file_upload" name="fileUploads[]" type="file" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" style="display: none;" multiple>
+                                </label>
+                                <button onclick="window.location='{{url('admin/template/template_import_accessary.xls')}}'"  class="btn btn-danger" type="button" id="btn_download_template"><i class="fa fa-download"></i>Tải file mẫu</button>
                             </div>
                         </div>
                     </div>
                 </form>
+            </div>
+            <div class="modal-footer">
+                <button id="btn_process_import" class="btn btn-primary"><i class="fa fa-save"></i>{{trans('label.button.approve')}}</button>
             </div>
         </div>
     </div>

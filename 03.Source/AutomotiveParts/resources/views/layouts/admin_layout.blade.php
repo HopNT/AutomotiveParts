@@ -10,6 +10,7 @@
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/main.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/tagsinput.css') }}">
+
     <!-- Font-icon css-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -78,8 +79,8 @@
 <script type="text/javascript" src="{{ asset('admin/js/plugins/sweetalert.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('admin/js/plugins/select2.full.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('admin/js/plugins/tagsinput.js') }}"></script>
-<script src="https://cdn.ckeditor.com/4.10.1/standard/ckeditor.js"></script>
-<script src="{{ asset('admin/js/main.js') }}"></script>
+<script type="text/javascript" src="//cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>
+<script type="text/javascript" src="{{ asset('admin/js/main.js') }}"></script>
 <script>
     var publicPath = '<?=url('/')?>';
 </script>

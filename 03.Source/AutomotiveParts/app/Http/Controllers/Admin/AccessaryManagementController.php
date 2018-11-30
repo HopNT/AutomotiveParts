@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Common\Entities\Accessary;
 use App\Http\Common\Enum\GlobalEnum;
+use App\Http\Common\Imports\AccessaryImport;
 use App\Http\Common\Repository\AccessaryLinkRepository;
 use App\Http\Common\Repository\AccessaryRepository;
 use App\Http\Common\Repository\CarBrandRepository;
@@ -501,8 +502,27 @@ class AccessaryManagementController extends BackendController
         ];
     }
 
-    public function downloadTemplate() {
+    public function import(Request $request) {
+        if (!$request->hasFile('files')) {
+            return [
+                'system_error' => 'Không tồn tại tệp tin!'
+            ];
+        }
 
+        $files = $request->files;
+        foreach ($files as $file) {
+            $array = (new AccessaryImport)->toArray($file[0])[0];
+            array_shift($array);
+            foreach ($array as $item) {
+                $trademark = $this->tradeMarkRepository->findByCode($item[1])->first();
+                $nation = $this->nationRepository->findByCode($item[2])->first();
+                $accessary = $this->accessaryRepository->persist([
+                    'car_id' => $item[0],
+                    'trademark_id' => $trademark ? $trademark->trademark_id : null,
+                    'nation_id' => $nation ? $nation->nation_id : null,
+                ]);
+            }
+        }
     }
 
 }

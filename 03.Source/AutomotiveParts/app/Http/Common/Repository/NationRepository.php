@@ -14,4 +14,10 @@ interface NationRepository extends GenericRepository
      * @return mixed
      */
     function deleteMulti($ids);
+
+    /**
+     * @param $code
+     * @return mixed
+     */
+    function findByCode($code);
 }

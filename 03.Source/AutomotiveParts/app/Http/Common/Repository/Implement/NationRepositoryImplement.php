@@ -26,8 +26,17 @@ class NationRepositoryImplement extends GenericRepositoryImpl implements NationR
      * @param $ids
      * @return mixed
      */
-    function deleteMulti($ids)
-    {
+    public function deleteMulti($ids) {
         DB::table('tbl_nation')->whereIn('nation_id', $ids)->update(['status'=>GlobalEnum::STATUS_INACTIVE, 'updated_at'=>now()]);
+    }
+
+    /**
+     * @param $code
+     * @return mixed
+     */
+    public function findByCode($code) {
+        return DB::table('tbl_nation')
+            ->where('code', '=', $code)
+            ->get();
     }
 }

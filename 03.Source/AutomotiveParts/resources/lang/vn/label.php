@@ -32,6 +32,7 @@ return [
     ],
     'car' => [
         'management' => 'Quản lý thông tin xe',
+        'id' => 'Mã xe',
         'brand' => 'Hãng xe',
         'catalog' => 'Dòng xe',
         'grade' => 'Mẫu xe',

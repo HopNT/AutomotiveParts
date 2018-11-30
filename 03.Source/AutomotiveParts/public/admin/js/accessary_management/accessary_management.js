@@ -1,28 +1,3 @@
-function loadTableAccessary() {
-    $('#tbl_accessary').DataTable({
-        columnDefs: [
-            {
-                targets: [0, 1, 3, 4, 5],
-                orderable: false
-            }
-        ],
-        order: [2, 'asc']
-    });
-}
-
-function loadTableCarUsed() {
-    $('#tbl_car_use').DataTable({
-        // columnDefs: [
-        //     {
-        //         targets: [0, 1, 3, 4, 5],
-        //         orderable: false
-        //     }
-        // ],
-        // order: [2, 'asc']
-        searching: false
-    });
-}
-
 $(document).ready(function () {
     loadTableAccessary();
 
@@ -170,7 +145,7 @@ $(document).ready(function () {
                 } else if (result.system_error) {
                     $('#modal_add_update_accessary #message_error').html(result.message_error);
                     $('#modal_add_update_accessary #alert_error').slideDown();
-                    $("#modal_add_update_accessary #alert_error").fadeTo(2000, 500).slideUp(500, function () {
+                    $("#modal_add_update_accessary #alert_error").fadeTo(10000, 500).slideUp(500, function () {
                         $("#modal_add_update_accessary #alert_error").slideUp(500);
                         $('#modal_add_update_accessary #message_error').html('');
                     });
@@ -191,7 +166,7 @@ $(document).ready(function () {
             error: function (error) {
                 $('#modal_add_update_accessary #message_error').html('Có lỗi xảy, vui lòng liên hệ với quản trị hệ thống! ' + error.responseJSON.message);
                 $('#modal_add_update_accessary #alert_error').slideDown();
-                $("#modal_add_update_accessary #alert_error").fadeTo(2000, 500).slideUp(500, function () {
+                $("#modal_add_update_accessary #alert_error").fadeTo(10000, 500).slideUp(500, function () {
                     $("#modal_add_update_accessary #alert_error").slideUp(500);
                     $('#modal_add_update_accessary #message_error').html('');
                 });
@@ -320,9 +295,41 @@ $(document).ready(function () {
         })
     });
 
-    // Import
+    $("#modal_import_accessary").on("hidden.bs.modal", function(){
+        $(this).find('form').trigger('reset');
+    });
+
+    // Open Import
     $('body').on('click', '#btn_import', function () {
         $('#modal_import_accessary').modal();
+    });
+
+    // Import
+    $('body').on('click', '#btn_process_import', function () {
+        let method = $('#form_data').attr('method');
+        let url = $('#form_data').attr('action');
+        let files = $('#form_data :file')[0].files;
+        var formData = new FormData();
+        for (let i = 0; i < files.length; i++) {
+            formData.append('files[' + i + ']', files[i]);
+        }
+        $.ajax({
+            type: method,
+            url: url,
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (result) {
+                if (result.system_error) {
+                    $('#modal_import_accessary #message_error').html(result.system_error);
+                    $('#modal_import_accessary #alert_error').slideDown();
+                    $("#modal_import_accessary #alert_error").fadeTo(10000, 500).slideUp(500, function () {
+                        $("#modal_import_accessary #alert_error").slideUp(500);
+                        $('#modal_import_accessary #message_error').html('');
+                    });
+                }
+            }
+        });
     });
 
     $('body').on('change', ':file', function() {
@@ -332,7 +339,7 @@ $(document).ready(function () {
         input.trigger('fileselect', [numFiles, label]);
     });
 
-// We can watch for our custom `fileselect` event like this
+    // We can watch for our custom `fileselect` event like this
     $('body').ready( function() {
         $(':file').on('fileselect', function (event, numFiles, label) {
 
@@ -350,42 +357,67 @@ $(document).ready(function () {
 
 });
 
-function resetFormAccessary() {
-    $('#form-accessary #accessary_id').val("");
-    $('#form-accessary #trademark_id').val("");
-    $('#form-accessary #nation_id').val("");
-    $('#form-accessary #type').val("");
-    $('#form-accessary #code').val("");
-    $('#form-accessary #name_vi').val("");
-    $('#form-accessary #name_en').val("");
-    $('#form-accessary #acronym_name').val("");
-    $('#form-accessary #unsigned_name').val("");
-    resetPhoto('form-accessary', 'photo_top');
-    resetPhoto('form-accessary', 'photo_bottom');
-    resetPhoto('form-accessary', 'photo_left');
-    resetPhoto('form-accessary', 'photo_right');
-    resetPhoto('form-accessary', 'photo_inner');
-    resetPhoto('form-accessary', 'photo_outer');
-    $('#form-accessary #accessary_link').html("");
-    $('#form-accessary #code_error').html("");
-    $('#form-accessary #name_vi_error').html("");
-    $('#form-accessary input[name="prioritize"]').prop('checked', false);
-    $('#form-accessary input[name="code"]').prop('disabled', false);
-    $('#form-accessary #status').css('display', 'none');
-    $('#form-accessary select[name="status"]').val("");
-    $('#form-accessary input[name="price"]').val("");
-    if (CKEDITOR.instances['description']) {
-        CKEDITOR.instances['description'].destroy();
-    }
+// function resetFormAccessary() {
+//     $('#form-accessary #accessary_id').val("");
+//     $('#form-accessary #trademark_id').val("");
+//     $('#form-accessary #nation_id').val("");
+//     $('#form-accessary #type').val("");
+//     $('#form-accessary #code').val("");
+//     $('#form-accessary #name_vi').val("");
+//     $('#form-accessary #name_en').val("");
+//     $('#form-accessary #acronym_name').val("");
+//     $('#form-accessary #unsigned_name').val("");
+//     resetPhoto('form-accessary', 'photo_top');
+//     resetPhoto('form-accessary', 'photo_bottom');
+//     resetPhoto('form-accessary', 'photo_left');
+//     resetPhoto('form-accessary', 'photo_right');
+//     resetPhoto('form-accessary', 'photo_inner');
+//     resetPhoto('form-accessary', 'photo_outer');
+//     $('#form-accessary #accessary_link').html("");
+//     $('#form-accessary #code_error').html("");
+//     $('#form-accessary #name_vi_error').html("");
+//     $('#form-accessary input[name="prioritize"]').prop('checked', false);
+//     $('#form-accessary input[name="code"]').prop('disabled', false);
+//     $('#form-accessary #status').css('display', 'none');
+//     $('#form-accessary select[name="status"]').val("");
+//     $('#form-accessary input[name="price"]').val("");
+//     if (CKEDITOR.instances['description']) {
+//         CKEDITOR.instances['description'].destroy();
+//     }
+//
+//     onloadPhoto('form-accessary', 'photo_top');
+//     onloadPhoto('form-accessary', 'photo_bottom');
+//     onloadPhoto('form-accessary', 'photo_left');
+//     onloadPhoto('form-accessary', 'photo_right');
+//     onloadPhoto('form-accessary', 'photo_inner');
+//     onloadPhoto('form-accessary', 'photo_outer');
+//
+//     CKEDITOR.replace('description');
+// }
 
-    onloadPhoto('form-accessary', 'photo_top');
-    onloadPhoto('form-accessary', 'photo_bottom');
-    onloadPhoto('form-accessary', 'photo_left');
-    onloadPhoto('form-accessary', 'photo_right');
-    onloadPhoto('form-accessary', 'photo_inner');
-    onloadPhoto('form-accessary', 'photo_outer');
+function loadTableAccessary() {
+    $('#tbl_accessary').DataTable({
+        columnDefs: [
+            {
+                targets: [0, 1, 3, 4, 5],
+                orderable: false
+            }
+        ],
+        order: [2, 'asc']
+    });
+}
 
-    CKEDITOR.replace('description');
+function loadTableCarUsed() {
+    $('#tbl_car_use').DataTable({
+        // columnDefs: [
+        //     {
+        //         targets: [0, 1, 3, 4, 5],
+        //         orderable: false
+        //     }
+        // ],
+        // order: [2, 'asc']
+        searching: false
+    });
 }
 
 function onloadPhoto(form, inputName) {
@@ -444,24 +476,24 @@ function onloadPhoto(form, inputName) {
     });
 }
 
-function resetPhoto(form, inputName) {
-    $('#' + form + ' #' + inputName + '_image_preview').attr("data-content", "").popover('hide');
-    $('#' + form + ' #' + inputName + '_image_preview_filename').val("");
-    $('#' + form + ' #' + inputName + '_image_preview_clear').hide();
-    $('#' + form + ' .image-preview-input input[name="' + inputName + '"]').val("");
-    $("#" + form + " #" + inputName + "_image_preview_input_title").text("Duyệt");
-    var closebtn = $('<button/>', {
-        type: "button",
-        text: 'x',
-        id: 'close_' + inputName + '_preview',
-        style: 'font-size: initial;',
-    });
-    closebtn.attr("class", "close pull-right");
-    $('#' + form + ' #' + inputName + '_image_preview').popover({
-        trigger: 'hover',
-        html: true,
-        title: "<strong>Xem trước</strong>" + $(closebtn)[0].outerHTML,
-        content: "Không có ảnh xem trước",
-        placement: 'bottom'
-    });
-}
+// function resetPhoto(form, inputName) {
+//     $('#' + form + ' #' + inputName + '_image_preview').attr("data-content", "").popover('hide');
+//     $('#' + form + ' #' + inputName + '_image_preview_filename').val("");
+//     $('#' + form + ' #' + inputName + '_image_preview_clear').hide();
+//     $('#' + form + ' .image-preview-input input[name="' + inputName + '"]').val("");
+//     $("#" + form + " #" + inputName + "_image_preview_input_title").text("Duyệt");
+//     var closebtn = $('<button/>', {
+//         type: "button",
+//         text: 'x',
+//         id: 'close_' + inputName + '_preview',
+//         style: 'font-size: initial;',
+//     });
+//     closebtn.attr("class", "close pull-right");
+//     $('#' + form + ' #' + inputName + '_image_preview').popover({
+//         trigger: 'hover',
+//         html: true,
+//         title: "<strong>Xem trước</strong>" + $(closebtn)[0].outerHTML,
+//         content: "Không có ảnh xem trước",
+//         placement: 'bottom'
+//     });
+// }
