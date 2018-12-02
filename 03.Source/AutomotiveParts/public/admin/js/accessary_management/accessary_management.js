@@ -327,6 +327,13 @@ $(document).ready(function () {
                         $("#modal_import_accessary #alert_error").slideUp(500);
                         $('#modal_import_accessary #message_error').html('');
                     });
+                } else {
+                    $('#modal_import_accessary').modal('hide');
+                    setTimeout(function () {
+                        showMessage('Import ' + result.count + ' dòng thành công', 'success');
+                        $('#accessary').html(result.html);
+                        loadTableAccessary();
+                    }, 1000);
                 }
             }
         });

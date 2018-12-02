@@ -12,4 +12,5 @@ interface CarLinkRepository {
 
     function deleteAll($accessaryId);
 
+    function findByIdValue($key, $value);
 }

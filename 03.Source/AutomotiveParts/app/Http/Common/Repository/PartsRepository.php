@@ -14,4 +14,6 @@ interface PartsRepository
     function searchByText($text);
 
     function deleteMulti($ids);
+
+    function getPartsIdByCode($code);
 }

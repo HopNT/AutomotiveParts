@@ -13,4 +13,5 @@ interface AccessaryLinkRepository {
 
     function getAccessaryLinks($accessaryId);
 
+    function findByIdValue($key, $value);
 }

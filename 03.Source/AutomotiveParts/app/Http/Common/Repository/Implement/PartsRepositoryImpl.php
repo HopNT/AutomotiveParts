@@ -47,4 +47,11 @@ class PartsRepositoryImpl extends GenericRepositoryImpl implements PartsReposito
     {
         DB::table('tbl_parts')->whereIn('parts_id', $ids)->update(['status'=>GlobalEnum::STATUS_INACTIVE, 'updated_at'=>now()]);
     }
+
+    public function getPartsIdByCode($code) {
+        return DB::table('tbl_parts')
+            ->whereIn('code', $code)
+            ->select('parts_id')
+            ->get();
+    }
 }

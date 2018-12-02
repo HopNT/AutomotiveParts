@@ -27,4 +27,10 @@ class CarLinkRepositoryImpl extends GenericRepositoryImpl implements CarLinkRepo
             ->delete();
     }
 
+    public function findByIdValue($key, $value) {
+        return DB::table('tbl_car_link')
+            ->where('accessary_id', '=', $key)
+            ->where('car_id', '=', $value)
+            ->get();
+    }
 }

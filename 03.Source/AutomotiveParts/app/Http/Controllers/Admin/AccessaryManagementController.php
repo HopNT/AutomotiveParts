@@ -115,13 +115,17 @@ class AccessaryManagementController extends BackendController
         $accessary = $this->accessaryRepository->find($request->id);
         foreach ($accessary->accessaryLinks as $key => $item) {
             $accessaryLink = $this->accessaryRepository->find($item->accessary_value);
-            $accessaryList[$key] = $accessaryLink;
+            if ($accessaryLink) {
+                $accessaryList[$key] = $accessaryLink;
+            }
         }
 
         $carUsed = array();
         foreach ($accessary->carLinks as $key => $item) {
             $temp = $this->carRepository->find($item->car_id);
-            $carUsed[$key] = $temp;
+            if ($temp) {
+                $carUsed[$key] = $temp;
+            }
         }
 
         $nationList = $this->nationRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
@@ -510,18 +514,134 @@ class AccessaryManagementController extends BackendController
         }
 
         $files = $request->files;
-        foreach ($files as $file) {
-            $array = (new AccessaryImport)->toArray($file[0])[0];
-            array_shift($array);
-            foreach ($array as $item) {
-                $trademark = $this->tradeMarkRepository->findByCode($item[1])->first();
-                $nation = $this->nationRepository->findByCode($item[2])->first();
-                $accessary = $this->accessaryRepository->persist([
-                    'car_id' => $item[0],
-                    'trademark_id' => $trademark ? $trademark->trademark_id : null,
-                    'nation_id' => $nation ? $nation->nation_id : null,
-                ]);
+        $count = 0;
+
+        try {
+            foreach ($files as $file) {
+                $array = (new AccessaryImport)->toArray($file[0])[0];
+                array_shift($array);
+                foreach ($array as $item) {
+                    $trademark = $this->tradeMarkRepository->findByCode($item[1])->first();
+                    $nation = $this->nationRepository->findByCode($item[2])->first();
+
+//                    $accessaryLink = array();
+                    $listAccessary = $item[11] ? explode(',', $item[11]) : null;
+                    if (!empty($listAccessary)) {
+                        $listAccessary = $this->accessaryRepository->getAccessaryIdByCode($listAccessary);
+//                        if (!empty($listAccessary->toArray())) {
+//                            foreach ($listAccessary as $link) {
+//                                array_push($accessaryLink, $link->accessary_id);
+//                            }
+//                        }
+                    }
+
+                    $listCar = $item[12] ? explode(',', $item[12]) : null;
+
+                    $partsAccessary = array();
+                    $listParts = $item[13] ? explode(',', $item[13]) : null;
+                    if (!empty($listParts)) {
+                        $listParts = $this->partsRepository->getPartsIdByCode($listParts);
+                        if (!empty($listParts)) {
+                            foreach ($listParts as $parts) {
+                                array_push($partsAccessary, $parts->parts_id);
+                            }
+                        }
+                    }
+
+                    $accessary = $this->accessaryRepository->findByCode($item[4])->first();
+                    if ($accessary) {
+                        $accessary = $this->accessaryRepository->merge($accessary->accessary_id, [
+                            'car_id' => $item[0],
+                            'trademark_id' => $trademark ? $trademark->trademark_id : null,
+                            'nation_id' => $nation ? $nation->nation_id : null,
+                            'type' => $item[3],
+                            'code' => $item[4],
+                            'name_en' => $item[5],
+                            'name_vi' => $item[6],
+                            'acronym_name' => $item[7],
+                            'unsigned_name' => $item[8],
+                            'price' => $item[9],
+                            'prioritize' => $item[10]
+                        ]);
+                    } else {
+                        $accessary = $this->accessaryRepository->persist([
+                            'car_id' => $item[0],
+                            'trademark_id' => $trademark ? $trademark->trademark_id : null,
+                            'nation_id' => $nation ? $nation->nation_id : null,
+                            'type' => $item[3],
+                            'code' => $item[4],
+                            'name_en' => $item[5],
+                            'name_vi' => $item[6],
+                            'acronym_name' => $item[7],
+                            'unsigned_name' => $item[8],
+                            'price' => $item[9],
+                            'prioritize' => $item[10],
+                            'status' => GlobalEnum::STATUS_ACTIVE
+                        ]);
+                    }
+
+                    if (!empty($listAccessary)) {
+                        foreach ($listAccessary as $link) {
+                            $check = $this->accessaryLinkRepository->findByIdValue($accessary->accessary_id, $link->accessary_id)->first();
+                            if (!$check) {
+                                $this->accessaryLinkRepository->persist([
+                                    'accessary_id' => $accessary->accessary_id,
+                                    'accessary_value' => $link->accessary_id
+                                ]);
+                            }
+                        }
+                    }
+
+                    if (!empty($listCar)) {
+                        foreach ($listCar as $carId) {
+                            $check = $this->carLinkRepository->findByIdValue($accessary->accessary_id, $carId)->first();
+                            if (!$check) {
+                                $this->carLinkRepository->persist([
+                                    'accessary_id' => $accessary->accessary_id,
+                                    'car_id' => $carId
+                                ]);
+                            }
+                        }
+                    }
+
+                    if (!empty($partsAccessary)) {
+                        $accessary->parts()->sync($partsAccessary);
+                    }
+
+                    $count++;
+                }
             }
+
+            // Get List CarBrand
+            $listAccessary = $this->accessaryRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
+            foreach ($listAccessary as $accessary) {
+                $car = $this->carRepository->find($accessary->car_id);
+                if (!empty($car)) {
+                    $catalogCar = $car->catalogCar;
+                    $carBrand = $car->catalogCar->carBrand;
+                    $accessary->carBrandName = $carBrand->name;
+                    $accessary->catalogCarName = $catalogCar->name;
+                    $accessary->carName = $car->name;
+                    $accessary->year = $car->yearManufacture->year;
+                } else {
+                    $accessary->carBrandName = "";
+                    $accessary->catalogCarName = "";
+                    $accessary->carName = "";
+                    $accessary->year = "";
+                }
+            }
+            $view = view('admin.accessary_management.elements.list_data_accessary')
+                ->with('listAccessary', $listAccessary)->render();
+            return [
+                'system_error' => '',
+                'html' => $view,
+                'count' => $count
+            ];
+
+        } catch (\Exception $e) {
+            return [
+                'system_error' => $e->getMessage()
+            ];
         }
     }
 

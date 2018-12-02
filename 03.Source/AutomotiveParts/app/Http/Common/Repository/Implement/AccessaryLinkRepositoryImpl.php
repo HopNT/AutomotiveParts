@@ -33,4 +33,11 @@ class AccessaryLinkRepositoryImpl extends GenericRepositoryImpl implements Acces
             ->where('a.accessary_id', '=', $accessaryId)
             ->get();
     }
+
+    public function findByIdValue($key, $value) {
+        return DB::table('tbl_accessary_link')
+            ->where('accessary_id', '=', $key)
+            ->where('accessary_value', '=', $value)
+            ->get();
+    }
 }
