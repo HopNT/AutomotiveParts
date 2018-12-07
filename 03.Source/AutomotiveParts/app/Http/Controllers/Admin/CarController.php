@@ -113,7 +113,7 @@ class CarController extends BackendController
         }
 
         // Get List Car
-        $listCar = $this->carRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
+        $listCar = $this->carRepository->getAll();
         $view = view('admin.car_management.elements.list_data_car')
             ->with('listCar', $listCar)->render();
         return [

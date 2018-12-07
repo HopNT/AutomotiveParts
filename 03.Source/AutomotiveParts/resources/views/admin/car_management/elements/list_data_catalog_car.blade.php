@@ -55,7 +55,7 @@ $can_delete_catalog_car = $staff->can_view('catalog-car-delete');
                             @else
                                 <td class="text-center">{{$key + 1}}</td>
                             @endif
-                            <td>{{$catalogCar->carBrandName}}</td>
+                            <td>{{$catalogCar->carBrand ? $catalogCar->carBrand->name : ''}}</td>
                             <td>{{$catalogCar->name}}</td>
                             <td>{{$catalogCar->status ? trans('label.common.status_active') : trans('label.common.status_inactive')}}</td>
                             <td class="text-center">

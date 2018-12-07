@@ -55,9 +55,9 @@ class CarManagementController extends BackendController
             array_push($listYear, $obj);
         }
 
-        $listCarBrand = $this->carBrandRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
-        $listCatalogCar = $this->catalogCarRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
-        $listCar = $this->carRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
+        $listCarBrand = $this->carBrandRepository->getAll();
+        $listCatalogCar = $this->catalogCarRepository->getAll();
+        $listCar = $this->carRepository->getAll();
         $listNation = $this->nationRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
         $listParts = $this->partsRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
         return view('admin.car_management.car_management')

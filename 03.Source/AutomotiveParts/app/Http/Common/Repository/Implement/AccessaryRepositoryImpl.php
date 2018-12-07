@@ -162,6 +162,7 @@ class AccessaryRepositoryImpl extends GenericRepositoryImpl implements Accessary
     public function getAccessaryIdByCode($code) {
         return DB::table('tbl_accessary')
             ->whereIn('code', $code)
+            ->where('status', '=', GlobalEnum::STATUS_ACTIVE)
             ->select('accessary_id')
             ->get();
     }

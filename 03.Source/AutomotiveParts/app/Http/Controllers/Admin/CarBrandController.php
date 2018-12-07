@@ -125,9 +125,9 @@ class CarBrandController extends BackendController
         }
 
         // Get List CarBrand
-        $listCarBrand = $this->carBrandRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
-        $listCatalogCar = $this->catalogCarRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
-        $listCar = $this->carRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
+        $listCarBrand = $this->carBrandRepository->getAll();
+        $listCatalogCar = $this->catalogCarRepository->getAll();
+        $listCar = $this->carRepository->getAll();
         $listNation = $this->nationRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
         $viewCarBrand = view('admin.car_management.elements.list_data_car_brand')
             ->with('listCarBrand', $listCarBrand)

@@ -44,4 +44,11 @@ interface CarRepository
      * @return mixed
      */
     function searchByText($text);
+
+    
+    /**
+     * @param $code
+     * @return mixed
+     */
+    function getCarIdByCode($code);
 }

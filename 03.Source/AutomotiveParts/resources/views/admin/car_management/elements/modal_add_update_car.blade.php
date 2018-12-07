@@ -130,14 +130,12 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label for="motion_system"
-                                       class="control-label col-md-4">{{trans('label.car.motion_system')}}</label>
+                                <label for="name"
+                                       class="control-label required col-md-4">{{trans('label.car.id')}}</label>
                                 <div class="col-md-8">
-                                    <select class="form-control" name="motion_system_id">
-                                        <option value="">
-                                            -- {{trans('label.common.choose')}} {{trans('label.car.motion_system')}} --
-                                        </option>
-                                    </select>
+                                    <input class="form-control" type="text" name="code" maxlength="255"
+                                           placeholder="{{trans('label.common.input')}} {{trans('label.car.id')}}">
+                                    <span class="text-danger" id="code_error"></span>
                                 </div>
                             </div>
                         </div>
@@ -156,6 +154,19 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
+                                <label for="motion_system"
+                                       class="control-label col-md-4">{{trans('label.car.motion_system')}}</label>
+                                <div class="col-md-8">
+                                    <select class="form-control" name="motion_system_id">
+                                        <option value="">
+                                            -- {{trans('label.common.choose')}} {{trans('label.car.motion_system')}} --
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
                                 <label for="number_of_doors"
                                        class="control-label col-md-4">{{trans('label.car.num_of_doors')}}</label>
                                 <div class="col-md-8">
@@ -164,10 +175,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="status" class="col-md-6">
+                    </div>
+                    <div class="row">
+                        <div id="status" class="col-md-12">
                             <div class="form-group row">
-                                <label class="control-label col-md-4">{{trans('label.common.status')}}</label>
-                                <div class="col-md-8">
+                                <label class="control-label col-md-2">{{trans('label.common.status')}}</label>
+                                <div class="col-md-10">
                                     <select class="form-control" name="status">
                                         <option value="0">{{trans('label.common.status_inactive')}}</option>
                                         <option value="1">{{trans('label.common.status_active')}}</option>

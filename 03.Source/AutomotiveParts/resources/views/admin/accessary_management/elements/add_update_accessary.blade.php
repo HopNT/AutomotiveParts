@@ -1,5 +1,5 @@
 <?php
-//    dd($list)
+//    dd($data->type)
 ?>
 @extends('layouts.admin_layout')
 @section('content')
@@ -199,9 +199,9 @@
                                                             {{trans('label.accessary.main')}}
                                                         </option>
                                                         <option value="0"
-                                                                @if($data->type != null && $data->type == 0) selected="selected" @endif>{{trans('label.accessary.oem')}}</option>
+                                                                @if($data->type !== null && $data->type === 0) selected="selected" @endif>{{trans('label.accessary.oem')}}</option>
                                                         <option value="1"
-                                                                @if($data->type != null && $data->type == 1) selected="selected" @endif>{{trans('label.accessary.options')}}</option>
+                                                                @if($data->type !== null && $data->type === 1) selected="selected" @endif>{{trans('label.accessary.options')}}</option>
                                                     @else
                                                         <option value="">
                                                             {{trans('label.accessary.main')}}

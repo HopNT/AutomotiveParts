@@ -59,11 +59,11 @@ $can_delete_car = $staff->can_view('car-delete');
                             @else
                                 <td class="text-center">{{$key + 1}}</td>
                             @endif
-                            <td>{{$car->catalogCar->carBrand->name}}</td>
-                            <td>{{$car->catalogCar->name}}</td>
-                            <td>{{$car->car_id}}</td>
+                            <td>{{$car->catalogCar->carBrand ? $car->catalogCar->carBrand->name : ''}}</td>
+                            <td>{{$car->catalogCar ? $car->catalogCar->name : ''}}</td>
+                            <td>{{$car->code}}</td>
                             <td>{{$car->name}}</td>
-                            <td class="text-center">{{$car->yearManufacture->year}}</td>
+                            <td class="text-center">{{$car->yearManufacture ? $car->yearManufacture->year : ''}}</td>
                             <td class="text-right">{{$car->number_of_doors}}</td>
                             <td>{{$car->status ? trans('label.common.status_active') : trans('label.common.status_inactive')}}</td>
                             <td class="text-center">

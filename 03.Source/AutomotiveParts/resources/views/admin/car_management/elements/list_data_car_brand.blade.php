@@ -57,7 +57,7 @@ $can_delete_car_brand = $staff->can_view('car-brand-delete');
                             @endif
                             <td class="text-center">{{$carBrand->code_brand}}</td>
                             <td>{{$carBrand->name}}</td>
-                            <td>{{$carBrand->name_vi}}</td>
+                            <td>{{$carBrand->nation ? $carBrand->nation->name_vi : ''}}</td>
                             <td>{{$carBrand->status === 1 ? trans('label.common.status_active') : trans('label.common.status_inactive')}}</td>
                             <td class="text-center">
                                 @if($can_edit_car_brand)

@@ -524,18 +524,15 @@ class AccessaryManagementController extends BackendController
                     $trademark = $this->tradeMarkRepository->findByCode($item[1])->first();
                     $nation = $this->nationRepository->findByCode($item[2])->first();
 
-//                    $accessaryLink = array();
                     $listAccessary = $item[11] ? explode(',', $item[11]) : null;
                     if (!empty($listAccessary)) {
                         $listAccessary = $this->accessaryRepository->getAccessaryIdByCode($listAccessary);
-//                        if (!empty($listAccessary->toArray())) {
-//                            foreach ($listAccessary as $link) {
-//                                array_push($accessaryLink, $link->accessary_id);
-//                            }
-//                        }
                     }
 
                     $listCar = $item[12] ? explode(',', $item[12]) : null;
+                    if (!empty($listCar)) {
+                        $listCar = $this->carRepository->getCarIdByCode($listCar);
+                    }
 
                     $partsAccessary = array();
                     $listParts = $item[13] ? explode(',', $item[13]) : null;
@@ -547,11 +544,11 @@ class AccessaryManagementController extends BackendController
                             }
                         }
                     }
-
+                    
                     $accessary = $this->accessaryRepository->findByCode($item[4])->first();
                     if ($accessary) {
                         $accessary = $this->accessaryRepository->merge($accessary->accessary_id, [
-                            'car_id' => $item[0],
+                            'car_id' => $item[0] ? $this->carRepository->getCarIdByCode([$item[0]])->first()->car_id : null,
                             'trademark_id' => $trademark ? $trademark->trademark_id : null,
                             'nation_id' => $nation ? $nation->nation_id : null,
                             'type' => $item[3],
@@ -565,7 +562,7 @@ class AccessaryManagementController extends BackendController
                         ]);
                     } else {
                         $accessary = $this->accessaryRepository->persist([
-                            'car_id' => $item[0],
+                            'car_id' => $item[0] ? $this->carRepository->getCarIdByCode([$item[0]])->first()->car_id : null,
                             'trademark_id' => $trademark ? $trademark->trademark_id : null,
                             'nation_id' => $nation ? $nation->nation_id : null,
                             'type' => $item[3],
@@ -593,12 +590,12 @@ class AccessaryManagementController extends BackendController
                     }
 
                     if (!empty($listCar)) {
-                        foreach ($listCar as $carId) {
-                            $check = $this->carLinkRepository->findByIdValue($accessary->accessary_id, $carId)->first();
+                        foreach ($listCar as $carUse) {
+                            $check = $this->carLinkRepository->findByIdValue($accessary->accessary_id, $carUse->car_id)->first();
                             if (!$check) {
                                 $this->carLinkRepository->persist([
                                     'accessary_id' => $accessary->accessary_id,
-                                    'car_id' => $carId
+                                    'car_id' => $carUse->car_id
                                 ]);
                             }
                         }

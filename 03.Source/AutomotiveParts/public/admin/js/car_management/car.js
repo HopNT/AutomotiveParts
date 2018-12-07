@@ -91,6 +91,7 @@ $(document).ready(function () {
             success: function (result) {
                 let car = result.data;
                 $('#form-car input[name="car_id"]').val(car['car_id']);
+                $('#form-car input[name="code"]').val(car['code']);
                 $('#form-car input[name="name"]').val(car['name']);
                 $('#form-car input[name="number_of_doors"]').val(car['number_of_doors']);
                 $('#form-car textarea[name="description"]').val(car['description']);
@@ -125,6 +126,7 @@ $(document).ready(function () {
     $('body').on('click', '#btn_save_car', function () {
         $('#modal_add_update_car #catalog_car_id_error').html("");
         $('#modal_add_update_car #name_error').html("");
+        $('#modal_add_update_car #code_error').html("");
         let type = $('#form-car').attr('method');
         let url = $('#form-car').attr('action');
         let carId = $('#form-car input[name="car_id"]').val();

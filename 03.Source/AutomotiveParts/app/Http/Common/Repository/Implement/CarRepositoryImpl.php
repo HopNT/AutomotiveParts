@@ -100,4 +100,16 @@ class CarRepositoryImpl extends GenericRepositoryImpl implements CarRepository
             ->select('c.*', 'y.year')
             ->get();
     }
+
+    /**
+     * @param $code
+     * @return mixed
+     */
+    public function getCarIdByCode($code) {
+        return DB::table('tbl_car')
+            ->whereIn('code', $code)
+            ->where('status', '=', GlobalEnum::STATUS_ACTIVE)
+            ->select('car_id')
+            ->get();
+    }
 }
