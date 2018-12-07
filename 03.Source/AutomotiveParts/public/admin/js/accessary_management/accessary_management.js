@@ -27,7 +27,7 @@ $(document).ready(function () {
             },
             cache: false
         },
-        placeholder: 'Nhập tên xe...',
+        placeholder: 'Nhập mã xe / tên xe...',
         allowClear: true,
         multiple: true
     });
