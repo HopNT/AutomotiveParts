@@ -43,6 +43,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('catalog-car/delete', 'Admin\CatalogCarController@deleteMulti')->name('catalog-car-delete');
     Route::get('catalog-car/getAll', 'Admin\CatalogCarController@getAll')->name('catalog-car-get-all');
     // Car
+    Route::get('car/create', 'Admin\CarController@create')->name('car-create');
     Route::post('car/save', 'Admin\CarController@save')->name('car-save');
     Route::get('car/getById', 'Admin\CarController@getById')->name('car-edit');
     Route::get('car/delete', 'Admin\CarController@delete')->name('car-delete');

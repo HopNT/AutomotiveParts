@@ -11,7 +11,8 @@ $can_delete_car = $staff->can_view('car-delete');
             <div class="tile-body">
                 <div class="form-group">
                     @if($can_add_car)
-                        <button class="btn btn-primary" type="button" id="btn_add_new_car"><i
+                        <button class="btn btn-primary" type="button" id="btn_add_new_car"
+                                onclick="window.location='{{route('car-create')}}'"><i
                                 class="fa fa-plus"></i>{{trans('label.button.create')}}</button>
                     @endif
                     @if($can_delete_car)
@@ -68,9 +69,9 @@ $can_delete_car = $staff->can_view('car-delete');
                             <td>{{$car->status ? trans('label.common.status_active') : trans('label.common.status_inactive')}}</td>
                             <td class="text-center">
                                 @if($can_edit_car)
-                                    <button id="btn_update_car"
+                                    <a id="btn_update_car"
                                             href="{{route('car-edit', ['id'=>$car->car_id])}}"
-                                            class="btn btn-info btn-sm fa fa-edit"></button>
+                                            class="btn btn-info btn-sm fa fa-edit"></a>
                                 @endif
                                 @if($can_delete_car)
                                     <button id="btn_delete_car" @if($car->status === 0) disabled @endif

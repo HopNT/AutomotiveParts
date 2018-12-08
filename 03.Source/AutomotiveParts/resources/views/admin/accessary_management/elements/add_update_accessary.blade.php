@@ -698,7 +698,7 @@
                 </div>
                 <div class="tile-footer">
                     <div class="form-group text-right">
-                        <button onclick="javascript:window.history.back();" type="button" class="btn btn-secondary"
+                        <button onclick="window.location='{{route('accessary-management')}}'" type="button" class="btn btn-secondary"
                                 id="btn_cancel_accessary"><i
                                 class="fa fa-close"></i>{{trans('label.button.cancel')}}</button>
                         <button type="button" class="btn btn-primary" id="btn_save_accessary"><i

@@ -186,6 +186,8 @@ return [
         'quotation-create' => 'Thêm mới báo giá',
         'accessary-create' => 'Thêm mới thông tin phụ tùng',
         'accessary-edit' => 'Cập nhật thông tin phụ tùng',
+        'car-create' => 'Thêm mới thông tin xe',
+        'car-edit' => 'Cập nhật thông tin xe',
 	'view_profile' => 'Trang thông tin cá nhân'
     ],
     'form' => [

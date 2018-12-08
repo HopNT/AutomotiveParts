@@ -24,103 +24,111 @@ $(document).ready(function () {
         }
     });
 
-    // Open modal add new car
-    $('body').on('click', '#btn_add_new_car', function () {
-        resetCarForm();
-        loadCarBrand('form-car', 'select-car-brand', 'car_brand_id', 'car_brand_id');
-        loadYearManufacture('form-car', 'select-year-manufacture', 'year_manufacture_id', 'year_manufacture_id');
-        loadNation('form-car', 'select-nation', 'nation_id', 'nation_id');
-        $('#form-car #parts').select2({
-            ajax: {
-                url: '/admin/parts/searchByText',
-                dataType: 'json',
-                data: function (params) {
-                    let query = {
-                        query: params.term
-                    }
-                    return query;
-                },
-                processResults: function (data) {
-                    return {
-                        results: data.items
-                    };
-                },
-                cache: false
-            },
-            placeholder: 'Nhập mã bộ phận/tên bộ phận...',
-            allowClear: true,
-            multiple: true
-        });
-        $('#modal_add_update_car #title-add').css('display', 'block');
-        $('#modal_add_update_car #title-update').css('display', 'none');
-        $('#modal_add_update_car').modal();
+    // Onload catalog car by car_brand_id
+    $('body').on('change', '#form-car #car_brand_id', function () {
+        let carBrandId = $('#form-car #car_brand_id').val();
+        loadCatalogByCarBrand(carBrandId, 'form-car', 'select-catalog-car', 'catalog_car_id', 'catalog_car_id');
+        // let catalogCarId = $('#form-accessary #catalog_car_id').val();
+        loadCarByCatalog(null, 'form-car', 'select-car', 'car_id', 'car_id');
     });
+
+    // Open modal add new car
+    // $('body').on('click', '#btn_add_new_car', function () {
+    //     resetCarForm();
+    //     loadCarBrand('form-car', 'select-car-brand', 'car_brand_id', 'car_brand_id');
+    //     loadYearManufacture('form-car', 'select-year-manufacture', 'year_manufacture_id', 'year_manufacture_id');
+    //     loadNation('form-car', 'select-nation', 'nation_id', 'nation_id');
+    //     $('#form-car #parts').select2({
+    //         ajax: {
+    //             url: '/admin/parts/searchByText',
+    //             dataType: 'json',
+    //             data: function (params) {
+    //                 let query = {
+    //                     query: params.term
+    //                 }
+    //                 return query;
+    //             },
+    //             processResults: function (data) {
+    //                 return {
+    //                     results: data.items
+    //                 };
+    //             },
+    //             cache: false
+    //         },
+    //         placeholder: 'Nhập mã bộ phận/tên bộ phận...',
+    //         allowClear: true,
+    //         multiple: true
+    //     });
+    //     $('#modal_add_update_car #title-add').css('display', 'block');
+    //     $('#modal_add_update_car #title-update').css('display', 'none');
+    //     $('#modal_add_update_car').modal();
+    // });
 
     // Open modal update car
-    $('body').on('click', '#btn_update_car', function () {
-        resetCarForm();
-        loadCarBrand('form-car', 'select-car-brand', 'car_brand_id', 'car_brand_id');
-        loadCatalogCar('form-car', 'select-catalog-car', 'catalog_car_id', 'catalog_car_id');
-        loadYearManufacture('form-car', 'select-year-manufacture', 'year_manufacture_id', 'year_manufacture_id');
-        loadNation('form-car', 'select-nation', 'nation_id', 'nation_id');
-        $('#form-car #parts').select2({
-            ajax: {
-                url: '/admin/parts/searchByText',
-                dataType: 'json',
-                data: function (params) {
-                    let query = {
-                        query: params.term
-                    }
-                    return query;
-                },
-                processResults: function (data) {
-                    return {
-                        results: data.items
-                    };
-                },
-                cache: false
-            },
-            placeholder: 'Nhập mã bộ phận/tên bộ phận...',
-            allowClear: true,
-            multiple: true
-        });
-        let url = $(this).attr('href');
-        $.ajax({
-            type: 'GET',
-            url: url,
-            success: function (result) {
-                let car = result.data;
-                $('#form-car input[name="car_id"]').val(car['car_id']);
-                $('#form-car input[name="code"]').val(car['code']);
-                $('#form-car input[name="name"]').val(car['name']);
-                $('#form-car input[name="number_of_doors"]').val(car['number_of_doors']);
-                $('#form-car textarea[name="description"]').val(car['description']);
-                $('#form-car #year_manufacture_id').val(car.year_manufacture_id);
-                $('#form-car #nation_id').val(car.nation_id);
-
-                let catalogCar = car['catalog_car'];
-                $("#form-car select[name='car_brand_id']").val(catalogCar['car_brand_id']);
-                $("#form-car select[name='catalog_car_id']").val(catalogCar.catalog_car_id);
-
-                let parts = car['parts'];
-                if (parts != undefined && parts.length > 0) {
-                    $.each(parts, function (index, item) {
-                        let option = "<option value='" + item.parts_id + "' selected='selected'>" + (item.code + " - " + item.name) + "</option>";
-                        $('#form-car #parts').append(option);
-                    });
-                    $('#form-car #parts').trigger('change');
-                }
-
-                if (car.status == 0) {
-                    $('#form-car #status').css('display', '');
-                    $('#form-car select[name="status"]').val(car.status);
-                }
-            }
-        });
-        $('#modal_add_update_car #title-add').css('display', 'none');
-        $('#modal_add_update_car #title-update').css('display', 'block');
-        $('#modal_add_update_car').modal();
-    });
+    // $('body').on('click', '#btn_update_car', function () {
+    //     resetCarForm();
+    //     loadCarBrand('form-car', 'select-car-brand', 'car_brand_id', 'car_brand_id');
+    //     loadCatalogCar('form-car', 'select-catalog-car', 'catalog_car_id', 'catalog_car_id');
+    //     loadYearManufacture('form-car', 'select-year-manufacture', 'year_manufacture_id', 'year_manufacture_id');
+    //     loadNation('form-car', 'select-nation', 'nation_id', 'nation_id');
+    //     $('#form-car #parts').select2({
+    //         ajax: {
+    //             url: '/admin/parts/searchByText',
+    //             dataType: 'json',
+    //             data: function (params) {
+    //                 let query = {
+    //                     query: params.term
+    //                 }
+    //                 return query;
+    //             },
+    //             processResults: function (data) {
+    //                 return {
+    //                     results: data.items
+    //                 };
+    //             },
+    //             cache: false
+    //         },
+    //         placeholder: 'Nhập mã bộ phận/tên bộ phận...',
+    //         allowClear: true,
+    //         multiple: true
+    //     });
+    //     let url = $(this).attr('href');
+    //     $.ajax({
+    //         type: 'GET',
+    //         url: url,
+    //         success: function (result) {
+    //             let car = result.data;
+    //             $('#form-car input[name="car_id"]').val(car['car_id']);
+    //             $('#form-car input[name="code"]').val(car['code']);
+    //             $('#form-car input[name="name"]').val(car['name']);
+    //             $('#form-car input[name="number_of_doors"]').val(car['number_of_doors']);
+    //             $('#form-car textarea[name="description"]').val(car['description']);
+    //             $('#form-car #year_manufacture_id').val(car.year_manufacture_id);
+    //             $('#form-car #nation_id').val(car.nation_id);
+    //
+    //             let catalogCar = car['catalog_car'];
+    //             $("#form-car select[name='car_brand_id']").val(catalogCar['car_brand_id']);
+    //             $("#form-car select[name='catalog_car_id']").val(catalogCar.catalog_car_id);
+    //
+    //             let parts = car['parts'];
+    //             if (parts != undefined && parts.length > 0) {
+    //                 $.each(parts, function (index, item) {
+    //                     let option = "<option value='" + item.parts_id + "' selected='selected'>" + (item.code + " - " + item.name) + "</option>";
+    //                     $('#form-car #parts').append(option);
+    //                 });
+    //                 $('#form-car #parts').trigger('change');
+    //             }
+    //
+    //             if (car.status == 0) {
+    //                 $('#form-car #status').css('display', '');
+    //                 $('#form-car select[name="status"]').val(car.status);
+    //             }
+    //         }
+    //     });
+    //     $('#modal_add_update_car #title-add').css('display', 'none');
+    //     $('#modal_add_update_car #title-update').css('display', 'block');
+    //     $('#modal_add_update_car').modal();
+    // });
 
     // Save or update car
     $('body').on('click', '#btn_save_car', function () {
@@ -140,31 +148,31 @@ $(document).ready(function () {
                         $("#form-car #" + key + "_error").html(value);
                     });
                 } else if (result.system_error) {
-                    $('#modal_add_update_car #message_error').html(result.message_error);
-                    $('#modal_add_update_car #alert_error').slideDown();
-                    $("#modal_add_update_car #alert_error").fadeTo(10000, 500).slideUp(500, function(){
-                        $("#modal_add_update_car #alert_error").slideUp(500);
-                        $('#modal_add_update_car #message_error').html('');
+                    $('#message_error').html(result.message_error);
+                    $('#alert_error').slideDown();
+                    $("#alert_error").fadeTo(10000, 500).slideUp(500, function(){
+                        $("#alert_error").slideUp(500);
+                        $('#message_error').html('');
                     });
                 } else if (!result.error) {
-                    $('#modal_add_update_car').modal('hide');
+                    // $('#modal_add_update_car').modal('hide');
                     setTimeout(function () {
                         if (carId != null && carId != '') {
                             showMessage('Cập nhật thành công', 'success');
                         } else {
                             showMessage('Thêm mới thành công', 'success');
                         }
-                        $('#car').html(result.html);
-                        loadTableCar();
+                        // $('#car').html(result.html);
+                        // loadTableCar();
                     }, 1000);
                 }
             },
             error: function (error) {
-                $('#modal_add_update_car #message_error').html('Có lỗi xảy, vui lòng liên hệ với quản trị hệ thống! ' + error.responseJSON.message);
-                $('#modal_add_update_car #alert_error').slideDown();
-                $("#modal_add_update_car #alert_error").fadeTo(10000, 500).slideUp(500, function(){
-                    $("#modal_add_update_car #alert_error").slideUp(500);
-                    $('#modal_add_update_car #message_error').html('');
+                $('#message_error').html('Có lỗi xảy, vui lòng liên hệ với quản trị hệ thống! ' + error.responseJSON.message);
+                $('#alert_error').slideDown();
+                $("#alert_error").fadeTo(10000, 500).slideUp(500, function(){
+                    $("#alert_error").slideUp(500);
+                    $('#message_error').html('');
                 });
             }
         })

@@ -85,7 +85,7 @@ $(document).ready(function () {
         }
     });
 
-    // Onload catalog car by car_brand_id
+    // Onload catalog car by btn_save_accessarycar_brand_id
     $('body').on('change', '#form-accessary #car_brand_id', function () {
         let carBrandId = $('#form-accessary #car_brand_id').val();
         loadCatalogByCarBrand(carBrandId, 'form-accessary', 'select-catalog-car', 'catalog_car_id', 'catalog_car_id');
