@@ -76,10 +76,11 @@ class AccessaryRepositoryImpl extends GenericRepositoryImpl implements Accessary
     public function loadByPartsId($arrayPartsId)
     {
         return DB::table('tbl_accessary as a')
-            ->leftJoin('tbl_parts_accessary as pa', 'a.accessary_id', '=', 'pa.accessary_id')
-            ->leftJoin('tbl_parts as p', 'pa.parts_id', '=', 'p.parts_id')
+            ->leftJoin('tbl_catalog_parts_accessary as cpa', 'a.accessary_id', '=', 'cpa.accessary_id')
+            ->leftJoin('tbl_catalog_parts as cp', 'cp.catalog_parts_id', '=', 'cpa.catalog_parts_id')
             ->where('a.status', '=', GlobalEnum::STATUS_ACTIVE)
-            ->where('p.status', '=', GlobalEnum::STATUS_ACTIVE)
+            ->where('cp.status', '=', GlobalEnum::STATUS_ACTIVE)
+            ->where('cp.catalog_parts_id', '=', $arrayPartsId)
             ->distinct()
             ->select('a.*')
             ->get();
@@ -111,17 +112,20 @@ class AccessaryRepositoryImpl extends GenericRepositoryImpl implements Accessary
             }
             $condition = $condition.' y.code = '.$year;
         }
+
         return DB::table('tbl_accessary as a')
             ->leftJoin('tbl_car_link as cl', 'a.accessary_id', '=', 'cl.accessary_id')
-            ->leftJoin('tbl_car as c', 'cl.car_id', '=', 'c.car_id')
+            ->leftJoin('tbl_car as c', function ($join) {
+                $join->on('c.car_id', '=', 'cl.car_id');
+                $join->orOn('c.car_id', '=', 'a.car_id');
+            })
             ->leftJoin('tbl_year_manufacture as y', 'c.year_manufacture_id', '=', 'y.year_manufacture_id')
-            ->leftJoin('tbl_nation as n', 'a.nation_id', '=', 'n.nation_id')
-            ->leftJoin('tbl_trademark as tr', 'a.trademark_id', '=', 'tr.trademark_id')
             ->whereRaw('1 = 1')
             ->whereRaw($condition)
-            ->select('a.*', 'n.name_vi as nation_name', 'tr.name as trademark_name', 'tr.description as trademark_desc')
+            ->select('a.*')
             ->distinct()
             ->get();
+
     }
 
     public function search($query, $carName, $year) {

@@ -40,9 +40,6 @@ class SearchController extends Controller
             return redirect('home');
         }
 
-//        $query = $request->q;
-//        $carName = $request->car_name;
-//        $year = $request->year;
         $query = array();
         if (strpos($request->q, ',') !== false) {
             $query = explode(',', $request->q);

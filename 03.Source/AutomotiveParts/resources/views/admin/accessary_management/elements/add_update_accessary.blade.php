@@ -36,9 +36,6 @@
                                                             @if($car && $car->catalogCar->carBrand->car_brand_id == $carBrand->car_brand_id) selected @endif>{{$carBrand->name}}</option>
                                                     @endforeach
                                                 </select>
-                                                {{--<div class="input-group-append">--}}
-                                                {{--<button id="btn_show_add_car_brand" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></button>--}}
-                                                {{--</div>--}}
                                             </div>
                                         </div>
                                     </div>
@@ -61,9 +58,6 @@
                                                             @endforeach
                                                         @endif
                                                     </select>
-                                                    {{--<div class="input-group-append">--}}
-                                                    {{--<button class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></button>--}}
-                                                    {{--</div>--}}
                                                 </div>
                                             </div>
                                         </div>
@@ -89,30 +83,10 @@
                                                             @endforeach
                                                         @endif
                                                     </select>
-                                                    {{--<div class="input-group-append">--}}
-                                                    {{--<button class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></button>--}}
-                                                    {{--</div>--}}
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    {{--<div class="col-md-6">--}}
-                                    {{--<div class="form-group row">--}}
-                                    {{--<label--}}
-                                    {{--class="control-label col-md-4 required">{{trans('label.car.parts')}}</label>--}}
-                                    {{--<div class="col-md-8">--}}
-                                    {{--<select name="parts_id" class="form-control">--}}
-                                    {{--<option value>--}}
-                                    {{---- {{trans('label.common.choose')}} {{trans('label.car.parts')}}--}}
-                                    {{------}}
-                                    {{--</option>--}}
-                                    {{--@foreach($partsList as $parts)--}}
-                                    {{--<option value="{{$parts->parts_id}}">{{$parts->name}}</option>--}}
-                                    {{--@endforeach--}}
-                                    {{--</select>--}}
-                                    {{--</div>--}}
-                                    {{--</div>--}}
-                                    {{--</div>--}}
                                 </div>
                             </div>
                         </fieldset>
@@ -120,27 +94,6 @@
                         <fieldset class="row">
                             <legend class="col-md-12">Thông tin phụ tùng</legend>
                             <div class="col-md-12">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group row">
-                                            <label for="parts"
-                                                   class="control-label col-md-2">{{trans('label.car.parts')}}</label>
-                                            <div class="input-group col-md-10">
-                                                <select multiple class="form-control" id="parts" name="parts[]">
-                                                    @if ($partsAccessary)
-                                                        @foreach($partsAccessary as $item)
-                                                            <option value="{{$item->parts_id}}"
-                                                                    selected>{{$item->name}}</option>
-                                                        @endforeach
-                                                    @endif
-                                                </select>
-                                                {{--<div class="input-group-append">--}}
-                                                {{--<button class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></button>--}}
-                                                {{--</div>--}}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group row">
@@ -328,9 +281,24 @@
                                                         @endforeach
                                                     @endif
                                                 </select>
-                                                {{--<div class="input-group-append">--}}
-                                                {{--<button class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></button>--}}
-                                                {{--</div>--}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label for="parts"
+                                                   class="control-label col-md-2">{{trans('label.car.parts')}}</label>
+                                            <div class="input-group col-md-10">
+                                                <select multiple class="form-control" id="parts" name="parts[]">
+                                                    @if ($partsAccessary)
+                                                        @foreach($partsAccessary as $item)
+                                                            <option value="{{$item->catalog_parts_id}}"
+                                                                    selected>{{$item->name}}</option>
+                                                        @endforeach
+                                                    @endif
+                                                </select>
                                             </div>
                                         </div>
                                     </div>

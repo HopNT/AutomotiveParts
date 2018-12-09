@@ -95,9 +95,6 @@ class CarRepositoryImpl extends GenericRepositoryImpl implements CarRepository
     {
         return DB::table('tbl_car as c')
             ->leftJoin('tbl_year_manufacture as y', 'c.year_manufacture_id', '=', 'y.year_manufacture_id')
-//            ->whereOr('c.code', 'LIKE', '%'.$text.'%')
-//            ->whereOr('c.name', 'LIKE', '%'.$text.'%')
-//            ->where('c.status', '=', GlobalEnum::STATUS_ACTIVE)
             ->whereRaw("c.status = ".GlobalEnum::STATUS_ACTIVE." AND (c.code LIKE ('%".$text."%') OR c.name LIKE ('%".$text."%'))")
             ->select('c.*', 'y.year')
             ->get();

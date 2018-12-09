@@ -35,10 +35,9 @@ class PartsController {
     public function loadListAccessory(Request $request) {
         $catalogPartsId = $request->catalog_parts_id;
         $catalogParts = $this->catalogPartsRepository->find($catalogPartsId);
-        $listParts = $catalogParts->parts;
         $listAccessaryPrioritize = array();
-        if ($listParts->count()) {
-            $listAccessaryPrioritize = $this->accessaryRepository->loadByPartsId($listParts->pluck('parts_id'));
+        if ($catalogPartsId) {
+            $listAccessaryPrioritize = $this->accessaryRepository->loadByPartsId($catalogPartsId);
         }
         return view('web.accessory.list-accessory')
             ->with('listAccessaryPrioritize', $listAccessaryPrioritize)

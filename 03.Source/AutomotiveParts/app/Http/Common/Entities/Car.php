@@ -26,8 +26,8 @@ class Car extends BaseModel {
         'name',
         'number_of_doors',
         'description',
-        'status',
-        'parts[]'
+        'status'
+//        'parts[]'
     ];
 
     public $rules = [
@@ -68,8 +68,8 @@ class Car extends BaseModel {
         return $this->belongsTo(MotionSystem::class, 'motion_system_id');
     }
 
-    public function parts() {
-        return $this->belongsToMany(Parts::class, 'tbl_car_parts', 'car_id', 'parts_id');
+    public function catalogParts() {
+        return $this->belongsToMany(Parts::class, 'tbl_car_catalog_parts', 'car_id', 'catalog_parts_id');
     }
 
 }

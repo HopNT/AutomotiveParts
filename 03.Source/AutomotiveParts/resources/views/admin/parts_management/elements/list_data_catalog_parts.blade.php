@@ -40,6 +40,7 @@ $can_delete_catalog_parts = $staff->can_view('catalog-parts-delete');
                         @else
                             <th class="text-center">{{trans('label.common.num_of_row')}}</th>
                         @endif
+                        <th class="text-center">{{trans('label.catalog_parts.code')}}</th>
                         <th class="text-center">{{trans('label.catalog_parts.name')}}</th>
                         <th class="text-center">{{trans('label.common.status')}}</th>
                         <th class="text-center">{{trans('label.common.action')}}</th>
@@ -60,6 +61,7 @@ $can_delete_catalog_parts = $staff->can_view('catalog-parts-delete');
                             @else
                                 <td class="text-center">{{$key + 1}}</td>
                             @endif
+                            <td>{{$catalogParts->code}}</td>
                             <td>{{$catalogParts->name}}</td>
                             <td>{{$catalogParts->status == 1 ? trans('label.common.status_active') : trans('label.common.status_inactive')}}</td>
                             <td class="text-center">

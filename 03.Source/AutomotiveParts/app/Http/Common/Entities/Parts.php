@@ -4,6 +4,7 @@
  * User: ManhNV
  * Date: 09/06/2018
  * Time: 09:33
+ * Don't use class since 12/09/2018
  */
 
 namespace App\Http\Common\Entities;

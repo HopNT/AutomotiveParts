@@ -53,6 +53,16 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label for="code"
+                               class="control-label required col-md-3">{{trans('label.catalog_parts.code')}}</label>
+                        <div class="col-md-9">
+                            <input class="form-control" type="text" maxlength="255"
+                                   placeholder="{{trans('label.common.input')}} {{trans('label.catalog_parts.code')}}"
+                                   name="code">
+                            <span class="text-danger" id="code_error"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label for="name"
                                class="control-label required col-md-3">{{trans('label.catalog_parts.name')}}</label>
                         <div class="col-md-9">

@@ -35,7 +35,7 @@ class CatalogPartsController extends BackendController
     public function searchByText(Request $request) {
         $results = array();
         $text = $request->get('query');
-        $listCatalogParts = $this->catalogPartsRepository->searchByText($text)->where('parent_id', null);
+        $listCatalogParts = $this->catalogPartsRepository->searchByText($text);
         $index = 0;
         if (!empty($listCatalogParts))
         {
@@ -58,14 +58,6 @@ class CatalogPartsController extends BackendController
         $catalogParts = $request->all();
         try
         {
-            $validator = Validator::make($request->all(), $valid->rules, [], $valid->attributes);
-            if ($validator->fails()) {
-                return [
-                    'error' => true,
-                    'errors' => $validator->errors()
-                ];
-            }
-
             if (isset($request->catalog_parts_id)) {
                 $exists = $this->catalogPartsRepository->find($request->catalog_parts_id);
                 if ($exists->status === 0 && $exists->status !== $request->status
@@ -104,6 +96,13 @@ class CatalogPartsController extends BackendController
 
                 $this->catalogPartsRepository->merge($request->catalog_parts_id, $catalogParts);
             } else {
+                $validator = Validator::make($request->all(), $valid->rules, [], $valid->attributes);
+                if ($validator->fails()) {
+                    return [
+                        'error' => true,
+                        'errors' => $validator->errors()
+                    ];
+                }
                 if ($request->hasFile('photo')) {
                     $pathPhoto = CommonUtils::uploadFile($request->photo, 'catalog_parts/'.$user->user_id, GlobalEnum::ICON);
                     $catalogParts = array_add($catalogParts, 'icon_name', $request->photo->getClientOriginalName());
@@ -123,15 +122,12 @@ class CatalogPartsController extends BackendController
 
         // Get List catalog parts
         $listCatalogParts = $this->catalogPartsRepository->getAll();
-        $listParts = $this->partsRepository->getAllByActive(GlobalEnum::STATUS_ACTIVE);
-        $viewCatalogParts = view('admin.parts_management.elements.list_data_catalog_parts')
+        $view = view('admin.parts_management.elements.list_data_catalog_parts')
             ->with('listCatalogParts', $listCatalogParts)->render();
-        $viewParts = view('admin.parts_management.elements.list_data_parts')
-            ->with('listParts', $listParts)->render();
+
         return [
             'error' => false,
-            'catalogParts' => $viewCatalogParts,
-            'parts' => $viewParts
+            'html' => $view
         ];
     }
 

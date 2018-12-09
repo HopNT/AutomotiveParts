@@ -17,6 +17,7 @@ use App\Http\Common\Repository\CarBrandRepository;
 use App\Http\Common\Repository\CarLinkRepository;
 use App\Http\Common\Repository\CarRepository;
 use App\Http\Common\Repository\CatalogCarRepository;
+use App\Http\Common\Repository\CatalogPartsRepository;
 use App\Http\Common\Repository\NationRepository;
 use App\Http\Common\Repository\PartsRepository;
 use App\Http\Common\Repository\TradeMarkRepository;
@@ -45,6 +46,8 @@ class AccessaryManagementController extends BackendController
 
     protected $carLinkRepository;
 
+    protected $catalogPartsRepository;
+
     /**
      * AccessaryManagementController constructor.
      * @param $accessaryRepository
@@ -53,7 +56,7 @@ class AccessaryManagementController extends BackendController
                                 NationRepository $nationRepository, TradeMarkRepository $tradeMarkRepository,
                                 CarBrandRepository $carBrandRepository, PartsRepository $partsRepository,
                                 CarRepository $carRepository, CatalogCarRepository $catalogCarRepository,
-                                CarLinkRepository $carLinkRepository)
+                                CarLinkRepository $carLinkRepository, CatalogPartsRepository $catalogPartsRepository)
     {
         $this->accessaryRepository = $accessaryRepository;
         $this->accessaryLinkRepository = $accessaryLinkRepository;
@@ -64,6 +67,7 @@ class AccessaryManagementController extends BackendController
         $this->carRepository = $carRepository;
         $this->catalogCarRepository = $catalogCarRepository;
         $this->carLinkRepository = $carLinkRepository;
+        $this->catalogPartsRepository = $catalogPartsRepository;
     }
 
     public function index()
@@ -132,7 +136,7 @@ class AccessaryManagementController extends BackendController
         $tradeMarkList = $this->tradeMarkRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
         $car = $this->carRepository->find($accessary->car_id);
         $carBrandList = $this->carBrandRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
-        $partsList = $this->partsRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
+        $partsList = $this->catalogPartsRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);
         $catalogCarList = null;
         $carList = null;
         if (!empty($car)) {
@@ -140,7 +144,7 @@ class AccessaryManagementController extends BackendController
             $carList = $this->carRepository->getByCatalog($car->catalogCar->catalog_car_id);
         }
 
-        $partsAccessary = $accessary->parts;
+        $partsAccessary = $accessary->catalogParts;
 
         $view = view('admin.accessary_management.elements.add_update_accessary')
             ->with('car', $car)
@@ -317,13 +321,22 @@ class AccessaryManagementController extends BackendController
                             'car_id' => $item
                         ];
                         $this->carLinkRepository->persist($carLink);
+                        $newCarUsed = $this->carRepository->find($item);
+                        if (!empty($request->parts)) {
+                            $newCarUsed->catalogParts()->sync($request->parts);
+                        }
                     }
                 }
 
                 if (!empty($request->parts)) {
-                    $accessary->parts()->sync($request->parts);
+                    $accessary->catalogParts()->sync($request->parts);
                 } else {
-                    $accessary->parts()->detach();
+                    $accessary->catalogParts()->detach();
+                }
+
+                $car = $this->carRepository->find($accessary['car_id']);
+                if ($car && !empty($request->parts)) {
+                    $car->catalogParts()->sync($request->parts);
                 }
 
             } else {
@@ -394,11 +407,20 @@ class AccessaryManagementController extends BackendController
                             'car_id' => $item
                         ];
                         $this->carLinkRepository->persist($carLink);
+                        $newCarUsed = $this->carRepository->find($item);
+                        if (!empty($request->parts)) {
+                            $newCarUsed->catalogParts()->sync($request->parts);
+                        }
                     }
                 }
 
                 if (!empty($request->parts)) {
-                    $accessary->parts()->attach($request->parts);
+                    $accessary->catalogParts()->attach($request->parts);
+                }
+
+                $car = $this->carRepository->find($accessary['car_id']);
+                if ($car && !empty($request->parts)) {
+                    $car->catalogParts()->sync($request->parts);
                 }
             }
         } catch (\Exception $e) {
@@ -537,18 +559,19 @@ class AccessaryManagementController extends BackendController
                     $partsAccessary = array();
                     $listParts = $item[13] ? explode(',', $item[13]) : null;
                     if (!empty($listParts)) {
-                        $listParts = $this->partsRepository->getPartsIdByCode($listParts);
+                        $listParts = $this->catalogPartsRepository->getCatalogPartsIdByCode($listParts);
                         if (!empty($listParts)) {
                             foreach ($listParts as $parts) {
-                                array_push($partsAccessary, $parts->parts_id);
+                                array_push($partsAccessary, $parts->catalog_parts_id);
                             }
                         }
                     }
                     
                     $accessary = $this->accessaryRepository->findByCode($item[4])->first();
+                    $car = $this->carRepository->getCarIdByCode([$item[0]])->first();
                     if ($accessary) {
                         $accessary = $this->accessaryRepository->merge($accessary->accessary_id, [
-                            'car_id' => $item[0] ? $this->carRepository->getCarIdByCode([$item[0]])->first()->car_id : null,
+                            'car_id' => $car ? $car->car_id : null,
                             'trademark_id' => $trademark ? $trademark->trademark_id : null,
                             'nation_id' => $nation ? $nation->nation_id : null,
                             'type' => $item[3],
@@ -562,7 +585,7 @@ class AccessaryManagementController extends BackendController
                         ]);
                     } else {
                         $accessary = $this->accessaryRepository->persist([
-                            'car_id' => $item[0] ? $this->carRepository->getCarIdByCode([$item[0]])->first()->car_id : null,
+                            'car_id' => $car ? $car->car_id : null,
                             'trademark_id' => $trademark ? $trademark->trademark_id : null,
                             'nation_id' => $nation ? $nation->nation_id : null,
                             'type' => $item[3],
@@ -591,6 +614,11 @@ class AccessaryManagementController extends BackendController
 
                     if (!empty($listCar)) {
                         foreach ($listCar as $carUse) {
+                            $check = $this->carRepository->find($carUse->car_id);
+                            if ($check && !empty($partsAccessary)) {
+                                $check->catalogParts()->sync($partsAccessary);
+                            }
+
                             $check = $this->carLinkRepository->findByIdValue($accessary->accessary_id, $carUse->car_id)->first();
                             if (!$check) {
                                 $this->carLinkRepository->persist([
@@ -602,7 +630,9 @@ class AccessaryManagementController extends BackendController
                     }
 
                     if (!empty($partsAccessary)) {
-                        $accessary->parts()->sync($partsAccessary);
+                        $accessary->catalogParts()->sync($partsAccessary);
+                        $car = $this->carRepository->find($accessary->car_id);
+                        $car->catalogParts()->sync($partsAccessary);
                     }
 
                     $count++;

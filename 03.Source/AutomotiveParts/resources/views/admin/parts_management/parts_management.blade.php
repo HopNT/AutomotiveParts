@@ -20,20 +20,23 @@ $can_view = $user->can_view($router_name);
         {{--<div class="container">--}}
             {{--<div class="row justify-content-center">--}}
                 {{--<div class="bs-component" style="width: 100%">--}}
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item"><a class="nav-link active" data-toggle="tab"
-                                                href="#catalog_parts">{{trans('label.parts.catalog')}}</a></li>
-                        <li class="nav-item"><a class="nav-link" data-toggle="tab"
-                                                href="#parts">{{trans('label.parts.title')}}</a></li>
-                    </ul>
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade active show" id="catalog_parts">
-                            @include('admin.parts_management.elements.list_data_catalog_parts')
-                        </div>
-                        <div class="tab-pane fade" id="parts">
-                            @include('admin.parts_management.elements.list_data_parts')
-                        </div>
-                    </div>
+                    {{--<ul class="nav nav-tabs">--}}
+                        {{--<li class="nav-item"><a class="nav-link active" data-toggle="tab"--}}
+                                                {{--href="#catalog_parts">{{trans('label.parts.catalog')}}</a></li>--}}
+                        {{--<li class="nav-item"><a class="nav-link" data-toggle="tab"--}}
+                                                {{--href="#parts">{{trans('label.parts.title')}}</a></li>--}}
+                    {{--</ul>--}}
+                    {{--<div class="tab-content" id="myTabContent">--}}
+                        {{--<div class="tab-pane fade active show" id="catalog_parts">--}}
+                            {{--@include('admin.parts_management.elements.list_data_catalog_parts')--}}
+                        {{--</div>--}}
+                        {{--<div class="tab-pane fade" id="parts">--}}
+                            {{--@include('admin.parts_management.elements.list_data_parts')--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+        <div id="catalog_parts">
+            @include('admin.parts_management.elements.list_data_catalog_parts')
+        </div>
                 {{--</div>--}}
             {{--</div>--}}
         {{--</div>--}}

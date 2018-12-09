@@ -24,6 +24,7 @@ function loadTableParts() {
 function resetCatalogPartsForm() {
     $('#form-catalog-parts input[name="catalog_parts_id"]').val("");
     $('#form-catalog-parts input[name="name"]').val("");
+    $('#form-catalog-parts #code_error').html("");
     $('#form-catalog-parts #name_error').html("");
     $('#form-catalog-parts textarea[name="description"]').val("");
     $('#form-catalog-parts #status').css('display', 'none');

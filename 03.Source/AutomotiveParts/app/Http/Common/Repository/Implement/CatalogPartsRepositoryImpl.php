@@ -39,8 +39,16 @@ class CatalogPartsRepositoryImpl extends GenericRepositoryImpl implements Catalo
 
     public function searchByText($text)
     {
+        $listParts = DB::table('tbl_catalog_parts')
+            ->whereRaw("status = ".GlobalEnum::STATUS_ACTIVE." AND parent_id IS NOT NULL AND (code LIKE ('%".$text."%') OR name LIKE ('%".$text."%'))")
+            ->get();
+        return $listParts;
+    }
+
+    public function getCatalogPartsIdByCode($code) {
         return DB::table('tbl_catalog_parts')
-            ->where('name', 'LIKE', '%'.$text.'%')
+            ->whereIn('code', $code)
+            ->select('catalog_parts_id')
             ->get();
     }
 }

@@ -81,6 +81,7 @@ $(document).ready(function () {
             success: function (result) {
                 let nation = result.data;
                 $("#form-catalog-parts input[name='catalog_parts_id']").val(nation['catalog_parts_id']);
+                $("#form-catalog-parts input[name='code']").val(nation['code']);
                 $("#form-catalog-parts input[name='name']").val(nation['name']);
                 $("#form-catalog-parts textarea[name='description']").val(nation['description']);
                 if (result.data.icon != undefined && result.data.icon != null && result.data.icon != '') {
@@ -145,10 +146,10 @@ $(document).ready(function () {
                         } else {
                             showMessage('Thêm mới thành công', 'success');
                         }
-                        $('#catalog_parts').html(result.catalogParts);
-                        $('#parts').html(result.parts);
+                        $('#catalog_parts').html(result.html);
+                        // $('#parts').html(result.parts);
                         loadTableCatalogParts();
-                        loadTableParts();
+                        // loadTableParts();
                     }, 1000);
                 }
             },

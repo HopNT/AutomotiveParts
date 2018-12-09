@@ -13,4 +13,6 @@ interface CatalogPartsRepository
     function deleteMulti($ids);
 
     function searchByText($text);
+
+    function getCatalogPartsIdByCode($code);
 }

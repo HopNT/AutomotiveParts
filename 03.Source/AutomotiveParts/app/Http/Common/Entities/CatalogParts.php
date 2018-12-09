@@ -14,20 +14,22 @@ class CatalogParts extends BaseModel {
     protected $primaryKey = 'catalog_parts_id';
 
     protected $fillable = [
-//        'catalog_parts_id',
         'icon',
         'icon_name',
         'parent_id',
+        'code',
         'name',
         'description',
         'status'
     ];
 
     public $rules = [
+        'code' => 'required|max:255',
         'name' => 'required|max:255'
     ];
 
     public $attributes = [
+        'code' => 'Mã nhóm bộ phận xe',
         'name' => 'Tên nhóm bộ phận xe'
     ];
 
@@ -41,6 +43,14 @@ class CatalogParts extends BaseModel {
 
     public function parts() {
         return $this->hasMany(Parts::class, 'catalog_parts_id');
+    }
+
+    public function accessarys() {
+        return $this->belongsToMany(Accessary::class, 'tbl_catalog_parts_accessary', 'catalog_parts_id', 'accessary_id');
+    }
+
+    public function cars() {
+        return $this->belongsToMany(Car::class, 'tbl_car_catalog_parts', 'catalog_parts_id', 'car_id');
     }
 
 }

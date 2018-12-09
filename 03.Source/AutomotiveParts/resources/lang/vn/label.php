@@ -55,6 +55,7 @@ return [
     ],
     'catalog_parts' => [
         'parent_id' => 'Nhóm cha',
+        'code' => 'Mã nhóm bộ phận xe',
         'name' => 'Tên nhóm bộ phận xe'
     ],
     'parts' => [

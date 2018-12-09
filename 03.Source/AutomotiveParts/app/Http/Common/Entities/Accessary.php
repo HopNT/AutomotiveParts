@@ -57,8 +57,8 @@ class Accessary extends BaseModel {
         return $this->belongsTo(CatalogAccessary::class, 'catalog_accessary_id');
     }
 
-    public function parts() {
-        return $this->belongsToMany(Parts::class, 'tbl_parts_accessary', 'accessary_id', 'parts_id');
+    public function catalogParts() {
+        return $this->belongsToMany(CatalogParts::class, 'tbl_catalog_parts_accessary', 'accessary_id', 'catalog_parts_id');
     }
 
     public function tradeMark() {

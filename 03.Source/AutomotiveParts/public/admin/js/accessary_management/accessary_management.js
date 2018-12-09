@@ -34,7 +34,7 @@ $(document).ready(function () {
 
     $('#form-accessary #parts').select2({
         ajax: {
-            url: '/admin/parts/searchByText',
+            url: '/admin/catalog-parts/searchByText',
             dataType: 'json',
             data: function (params) {
                 let query = {
@@ -49,7 +49,7 @@ $(document).ready(function () {
             },
             cache: false
         },
-        placeholder: 'Nhập tên bộ phận xe...',
+        placeholder: 'Nhập mã / tên bộ phận xe...',
         allowClear: true,
         multiple: true
     });
@@ -143,32 +143,29 @@ $(document).ready(function () {
                         $("#form-accessary #" + key + "_error").html(value);
                     });
                 } else if (result.system_error) {
-                    $('#modal_add_update_accessary #message_error').html(result.message_error);
-                    $('#modal_add_update_accessary #alert_error').slideDown();
-                    $("#modal_add_update_accessary #alert_error").fadeTo(10000, 500).slideUp(500, function () {
-                        $("#modal_add_update_accessary #alert_error").slideUp(500);
-                        $('#modal_add_update_accessary #message_error').html('');
+                    $('#message_error').html(result.message_error);
+                    $('#alert_error').slideDown();
+                    $("#alert_error").fadeTo(10000, 500).slideUp(500, function () {
+                        $("#alert_error").slideUp(500);
+                        $('#message_error').html('');
                     });
                 } else if (!result.error) {
-                    // $('#modal_add_update_accessary').modal('hide');
                     setTimeout(function () {
                         if (accessaryId != null && accessaryId != '') {
                             showMessage('Cập nhật thành công', 'success');
                         } else {
                             showMessage('Thêm mới thành công', 'success');
                         }
-                        // $('#accessary').html(result.html);
-                        // loadTableAccessary();
                         window.location.href = '/admin/accessary-management';
                     }, 1000);
                 }
             },
             error: function (error) {
-                $('#modal_add_update_accessary #message_error').html('Có lỗi xảy, vui lòng liên hệ với quản trị hệ thống! ' + error.responseJSON.message);
-                $('#modal_add_update_accessary #alert_error').slideDown();
-                $("#modal_add_update_accessary #alert_error").fadeTo(10000, 500).slideUp(500, function () {
-                    $("#modal_add_update_accessary #alert_error").slideUp(500);
-                    $('#modal_add_update_accessary #message_error').html('');
+                $('#message_error').html('Có lỗi xảy, vui lòng liên hệ với quản trị hệ thống! ' + error.responseJSON.message);
+                $('#alert_error').slideDown();
+                $("#alert_error").fadeTo(10000, 500).slideUp(500, function () {
+                    $("#alert_error").slideUp(500);
+                    $('#message_error').html('');
                 });
             }
         });
