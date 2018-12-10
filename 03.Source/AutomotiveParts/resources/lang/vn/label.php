@@ -28,7 +28,9 @@ return [
         'accessary_link' => 'Phụ tùng liên kết',
         'prioritize' => 'Ưu tiên',
         'price' => 'Giá bán',
-        'list_car' => 'Danh sách xe sử dụng'
+        'list_car' => 'Danh sách xe sử dụng',
+        'dvt' => 'DVT',
+        'quantity' => 'Số lượng hiện có'
     ],
     'car' => [
         'management' => 'Quản lý thông tin xe',

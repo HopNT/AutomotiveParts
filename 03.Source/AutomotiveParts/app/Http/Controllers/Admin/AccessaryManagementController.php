@@ -546,18 +546,18 @@ class AccessaryManagementController extends BackendController
                     $trademark = $this->tradeMarkRepository->findByCode($item[1])->first();
                     $nation = $this->nationRepository->findByCode($item[2])->first();
 
-                    $listAccessary = $item[11] ? explode(',', $item[11]) : null;
+                    $listAccessary = $item[13] ? explode(',', $item[13]) : null;
                     if (!empty($listAccessary)) {
                         $listAccessary = $this->accessaryRepository->getAccessaryIdByCode($listAccessary);
                     }
 
-                    $listCar = $item[12] ? explode(',', $item[12]) : null;
+                    $listCar = $item[14] ? explode(',', $item[14]) : null;
                     if (!empty($listCar)) {
                         $listCar = $this->carRepository->getCarIdByCode($listCar);
                     }
 
                     $partsAccessary = array();
-                    $listParts = $item[13] ? explode(',', $item[13]) : null;
+                    $listParts = $item[15] ? explode(',', $item[15]) : null;
                     if (!empty($listParts)) {
                         $listParts = $this->catalogPartsRepository->getCatalogPartsIdByCode($listParts);
                         if (!empty($listParts)) {
@@ -580,8 +580,10 @@ class AccessaryManagementController extends BackendController
                             'name_vi' => $item[6],
                             'acronym_name' => $item[7],
                             'unsigned_name' => $item[8],
-                            'price' => $item[9],
-                            'prioritize' => $item[10]
+                            'dvt' => $item[9],
+                            'quantity' => $item[10],
+                            'price' => $item[11],
+                            'prioritize' => $item[12]
                         ]);
                     } else {
                         $accessary = $this->accessaryRepository->persist([
@@ -594,8 +596,10 @@ class AccessaryManagementController extends BackendController
                             'name_vi' => $item[6],
                             'acronym_name' => $item[7],
                             'unsigned_name' => $item[8],
-                            'price' => $item[9],
-                            'prioritize' => $item[10],
+                            'dvt' => $item[9],
+                            'quantity' => $item[10],
+                            'price' => $item[11],
+                            'prioritize' => $item[12],
                             'status' => GlobalEnum::STATUS_ACTIVE
                         ]);
                     }

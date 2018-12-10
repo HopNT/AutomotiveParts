@@ -23,7 +23,8 @@ $can_delete_accessary = $staff->can_view('accessary-delete');
                                 type="button" id="btn_add_new_accessary"><i
                                 class="fa fa-plus"></i>{{trans('label.button.create')}}</button>
                     @endif
-                    <button class="btn btn-primary" type="button" id="btn_import"><i class="fa fa-file"></i>Import</button>
+                    <button class="btn btn-primary" type="button" id="btn_import"><i class="fa fa-file"></i>Import
+                    </button>
                     @if($can_delete_accessary)
                         <button class="btn btn-danger" type="button" id="btn_delete_multi_accessary"><i
                                 class="fa fa-trash"></i>{{trans('label.button.delete')}}</button>
@@ -45,12 +46,14 @@ $can_delete_accessary = $staff->can_view('accessary-delete');
                             <th class="text-center">{{trans('label.common.num_of_row')}}</th>
                         @endif
                         <th class="text-center">{{trans('label.car.brand')}}</th>
-                        <th class="text-center">{{trans('label.car.catalog')}}</th>
                         <th class="text-center">{{trans('label.car.grade')}}</th>
                         <th class="text-center">{{trans('label.car.year')}}</th>
                         <th class="text-center">{{trans('label.accessary.type')}}</th>
                         <th class="text-center">{{trans('label.accessary.code')}}</th>
                         <th class="text-center">{{trans('label.accessary.name')}}</th>
+                        <th class="text-center">{{trans('label.accessary.dvt')}}</th>
+                        <th class="text-center">{{trans('label.accessary.quantity')}}</th>
+                        <th class="text-center">{{trans('label.accessary.price')}}</th>
                         <th class="text-center">{{trans('label.common.status')}}</th>
                         <th class="text-center">{{trans('label.common.action')}}</th>
                     </tr>
@@ -73,7 +76,6 @@ $can_delete_accessary = $staff->can_view('accessary-delete');
                                 <td class="text-center">{{$key + 1}}</td>
                             @endif
                             <td>{{$accessary->carBrandName}}</td>
-                            <td>{{$accessary->catalogCarName}}</td>
                             <td>{{$accessary->carName}}</td>
                             <td>{{$accessary->year}}</td>
                             <td>
@@ -84,6 +86,9 @@ $can_delete_accessary = $staff->can_view('accessary-delete');
                             </td>
                             <td>{{$accessary->code}}</td>
                             <td>{{$accessary->name_vi}}</td>
+                            <td>{{$accessary->dvt}}</td>
+                            <td class="text-right">{{$accessary->quantity != null ? number_format($accessary->quantity) : ''}}</td>
+                            <td class="text-right">{{$accessary->price != null ? number_format($accessary->price).' VND' : ''}}</td>
                             <td>{{$accessary->status ? trans('label.common.status_active') : trans('label.common.status_inactive')}}</td>
                             <td class="text-center">
                                 <button id="btn_view_car"

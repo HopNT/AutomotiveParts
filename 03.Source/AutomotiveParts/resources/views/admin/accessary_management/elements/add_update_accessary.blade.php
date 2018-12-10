@@ -230,6 +230,29 @@
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="acronym_name"
+                                                   class="control-label col-md-4">{{trans('label.accessary.dvt')}}</label>
+                                            <div class="col-md-8">
+                                                <input class="form-control" name="dvt" id="dvt" value="@if($data){{ $data->dvt }}@endif"
+                                                       placeholder="{{trans('label.common.input')}} {{trans('label.accessary.dvt')}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="unsigned_name"
+                                                   class="control-label col-md-4">{{trans('label.accessary.quantity')}}</label>
+                                            <div class="col-md-8">
+                                                <input type="number" class="form-control" name="quantity" id="quantity"
+                                                       value="@if($data){{ $data->quantity }}@endif"
+                                                       placeholder="{{trans('label.common.input')}} {{trans('label.accessary.quantity')}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group row">
                                             <label for="price"
