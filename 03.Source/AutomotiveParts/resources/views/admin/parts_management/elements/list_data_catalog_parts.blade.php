@@ -16,14 +16,17 @@ $can_delete_catalog_parts = $staff->can_view('catalog-parts-delete');
         <div class="tile">
             <div class="tile-body">
                 <div class="form-group">
+                    <div class="btn-group">
                     @if($can_add_catalog_parts)
-                        <button class="btn btn-primary" type="button" id="btn_add_new_catalog_parts"><i
+                        <button style="margin-right: 2px;" class="btn btn-primary" type="button" id="btn_add_new_catalog_parts"><i
                                 class="fa fa-plus"></i>{{trans('label.button.create')}}</button>
                     @endif
+                    <div style="margin-right: 2px;" id="btn_export"></div>
                     @if($can_delete_catalog_parts)
                         <button class="btn btn-danger" type="button" id="btn_delete_multi_catalog_parts"><i
                                 class="fa fa-trash"></i>{{trans('label.button.delete')}}</button>
                     @endif
+                    </div>
                 </div>
                 <table class="table table-responsive-md table-hover table-bordered" style="width: 100%;"
                        id="tbl_catalog_parts">
@@ -54,8 +57,10 @@ $can_delete_catalog_parts = $staff->can_view('catalog-parts-delete');
                                 <td class="text-center">
                                     <div class="animated-checkbox">
                                         <label>
-                                            <input type="checkbox" class="checkbox" @if($catalogParts->status == 0) disabled @endif
-                                                   data-id="{{$catalogParts->catalog_parts_id}}"><span class="label-text"></span>
+                                            <input type="checkbox" class="checkbox"
+                                                   @if($catalogParts->status == 0) disabled @endif
+                                                   data-id="{{$catalogParts->catalog_parts_id}}"><span
+                                                class="label-text"></span>
                                         </label>
                                     </div>
                                 </td>
@@ -75,7 +80,8 @@ $can_delete_catalog_parts = $staff->can_view('catalog-parts-delete');
                                 @if($can_delete_catalog_parts)
                                     <button id="btn_delete_catalog_parts"
                                             href="{{route('catalog-parts-delete', ['ids[]' => $catalogParts->catalog_parts_id])}}"
-                                            class="btn btn-danger btn-sm fa fa-trash" @if($catalogParts->status == 0) disabled @endif></button>
+                                            class="btn btn-danger btn-sm fa fa-trash"
+                                            @if($catalogParts->status == 0) disabled @endif></button>
                                 @endif
                             </td>
                         </tr>

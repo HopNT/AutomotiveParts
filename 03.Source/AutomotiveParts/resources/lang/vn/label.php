@@ -127,6 +127,7 @@ return [
         'delete' => 'Xóa',
         'approve' => 'Duyệt',
         'reject' => 'Từ chối',
+        'export' => 'Kết xuất',
 	'change-pass' => 'Thay đổi mật khẩu'
     ],
     'account' => [

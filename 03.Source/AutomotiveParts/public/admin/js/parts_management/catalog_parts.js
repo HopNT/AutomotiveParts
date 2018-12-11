@@ -1,5 +1,21 @@
 $(document).ready(function () {
-    loadTableCatalogParts();
+    var tblCatalogParts = loadTableCatalogParts();
+
+    // Export data
+    new $.fn.dataTable.Buttons( tblCatalogParts, {
+        buttons: [
+            {
+                extend: 'excelHtml5',
+                className: 'btn btn-primary',
+                text: '<i class="fa fa-file-excel-o"></i>Kết xuất',
+                init: function(api, node, config) {
+                    $(node).removeClass('btn-secondary')
+                },
+                filename: 'Danh sách bộ phận xe'
+            }
+        ]
+    } );
+    tblCatalogParts.buttons().container().appendTo('#btn_export');
 
     // Check all row
     $('body').on('click', '#tbl_catalog_parts #check_all', function (e) {

@@ -1,11 +1,11 @@
 function loadTableCatalogParts() {
-    $('#tbl_catalog_parts').DataTable({
+    return $('#tbl_catalog_parts').DataTable({
         columnDefs: [
             {
-                targets: [0, 1, 2, 3],
+                targets: [0, 3, 4, 5],
                 orderable: false
             }
-        ],
+        ]
     });
 }
 
