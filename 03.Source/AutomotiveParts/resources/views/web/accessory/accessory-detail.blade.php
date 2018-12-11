@@ -15,39 +15,34 @@
                     <div class="row">
                         <div class="col-lg-5 col-md-6 col-xs-6">
                             <div class="image" id="lightgallery">
-                                <a href="{{asset($accessary[0]->photo_top)}}" title="{{$accessary[0]->photo_top_name}}">
-                                    <img src="{{asset($accessary[0]->photo_top)}}"
-                                         alt="{{$accessary[0]->photo_top_name}}"
+                                <a href="{{$accessary[0]->photo_top ? asset($accessary[0]->photo_top) : '../images/no_image.jpeg'}}" title="{{$accessary[0]->photo_top_name ? $accessary[0]->photo_top_name : ''}}">
+                                    <img src="{{$accessary[0]->photo_top ? asset($accessary[0]->photo_top) : '../images/no_image.jpeg'}}"
+                                         alt="{{$accessary[0]->photo_top_name ? $accessary[0]->photo_top_name : ''}}"
                                          class="thumbnail img-responxsive -ezoom-part img-box">
                                 </a>
-                                <a href="{{asset($accessary[0]->photo_bottom)}}"
-                                   title="{{$accessary[0]->photo_bottom_name}}">
-                                    <img src="{{asset($accessary[0]->photo_bottom)}}"
-                                         alt="Suzuki 083161008B NUT"
+                                <a href="{{$accessary[0]->photo_bottom ? asset($accessary[0]->photo_bottom) : '../images/no_image.jpeg'}}" title="{{$accessary[0]->photo_bottom_name ? $accessary[0]->photo_bottom_name : ''}}">
+                                    <img src="{{$accessary[0]->photo_bottom ? asset($accessary[0]->photo_bottom) : '../images/no_image.jpeg'}}"
+                                         alt="{{$accessary[0]->photo_bottom_name ? $accessary[0]->photo_bottom_name : ''}}"
                                          class="img-ui thumbnail img-responsive -ezoom-part img-box-child">
                                 </a>
-                                <a href="{{asset($accessary[0]->photo_right)}}"
-                                   title="{{asset($accessary[0]->photo_right_name)}}">
-                                    <img src="{{asset($accessary[0]->photo_right)}}"
-                                         alt="{{asset($accessary[0]->photo_right_name)}}"
+                                <a href="{{$accessary[0]->photo_right ? asset($accessary[0]->photo_right) : '../images/no_image.jpeg'}}" title="{{$accessary[0]->photo_right_name ? $accessary[0]->photo_right_name : ''}}">
+                                    <img src="{{$accessary[0]->photo_right ? asset($accessary[0]->photo_right) : '../images/no_image.jpeg'}}"
+                                         alt="{{$accessary[0]->photo_right_name ? $accessary[0]->photo_right_name : ''}}"
                                          class="img-ui thumbnail img-responsive -ezoom-part img-box-child">
                                 </a>
-                                <a href="{{asset($accessary[0]->photo_left)}}"
-                                   title="{{asset($accessary[0]->photo_left_name)}}">
-                                    <img src="{{asset($accessary[0]->photo_left)}}"
-                                         alt="{{asset($accessary[0]->photo_left_name)}}"
+                                <a href="{{$accessary[0]->photo_left ? asset($accessary[0]->photo_left) : '../images/no_image.jpeg'}}" title="{{$accessary[0]->photo_left_name ? $accessary[0]->photo_left_name : ''}}">
+                                    <img src="{{$accessary[0]->photo_left ? asset($accessary[0]->photo_left) : '../images/no_image.jpeg'}}"
+                                         alt="{{$accessary[0]->photo_left_name ? $accessary[0]->photo_left_name : ''}}"
                                          class="img-ui thumbnail img-responsive -ezoom-part img-box-child">
                                 </a>
-                                <a href="{{asset($accessary[0]->photo_inner)}}"
-                                   title="{{asset($accessary[0]->photo_inner_name)}}">
-                                    <img src="{{asset($accessary[0]->photo_inner)}}"
-                                         alt="{{asset($accessary[0]->photo_inner_name)}}"
+                                <a href="{{$accessary[0]->photo_inner ? asset($accessary[0]->photo_inner) : '../images/no_image.jpeg'}}" title="{{$accessary[0]->photo_inner_name ? $accessary[0]->photo_inner_name : ''}}">
+                                    <img src="{{$accessary[0]->photo_inner ? asset($accessary[0]->photo_inner) : '../images/no_image.jpeg'}}"
+                                         alt="{{$accessary[0]->photo_inner_name ? $accessary[0]->photo_inner_name : ''}}"
                                          class="img-ui thumbnail img-responsive -ezoom-part img-box-child">
                                 </a>
-                                <a href="{{asset($accessary[0]->photo_outer)}}"
-                                   title="{{asset($accessary[0]->photo_outer_name)}}">
-                                    <img src="{{asset($accessary[0]->photo_outer)}}"
-                                         alt="{{asset($accessary[0]->photo_outer_name)}}"
+                                <a href="{{$accessary[0]->photo_outer ? asset($accessary[0]->photo_outer) : '../images/no_image.jpeg'}}" title="{{$accessary[0]->photo_outer_name ? $accessary[0]->photo_outer_name : ''}}">
+                                    <img src="{{$accessary[0]->photo_outer ? asset($accessary[0]->photo_outer) : '../images/no_image.jpeg'}}"
+                                         alt="{{$accessary[0]->photo_outer_name ? $accessary[0]->photo_outer_name : ''}}"
                                          class="img-ui thumbnail img-responsive -ezoom-part img-box-child">
                                 </a>
                             </div>
@@ -56,11 +51,6 @@
                             <div style="padding-bottom: 0px" class="caption">
                                 <h4 class="part-col-list-h4">{{ $accessary[0]->name_vi ? $accessary[0]->name_vi : 'N/A' }}</h4>
                                 <h5>Mã sản phẩm: {{ $accessary[0]->code ? $accessary[0]->code : 'N/A' }}</h5>
-                                {{--<p class="mb-10px">--}}
-                                {{--Số lượng hiện có:--}}
-                                {{--<span--}}
-                                {{--class="label label-pill label-success">{{ $accessary[0]->quantity ? number_format($accessary[0]->quantity) : 'N/A' }}</span>--}}
-                                {{--</p>--}}
                                 <p class="mb-10px">
                                     Xuất xứ:
                                     <span
@@ -82,8 +72,6 @@
                         </div>
                         <div class="text-center col-lg-4 col-md-12 col-xs-12">
                             <div class="caption">
-                                {{--<div class="hidden-xs make-logo">--}}
-                                {{--<img class="make-logo-dim make-logo" src="{{asset('/images/suzuki.jpg')}}">                        </div>--}}
                                 <div class="price">
                                     <div class="sr-price"><span class="price-new">{{ $accessary[0]->price !== null ? number_format($accessary[0]->price) : 'N/A' }}
                                             <span data-toggle="tooltip"
@@ -111,7 +99,6 @@
             </div>
             <div class="col-md-12">
                 <div class="product-details top-tabs">
-                    <!-- <h3 class="title mb-20px">About Partsouq</h3> -->
                     <ul class="nav nav-tabs row detail-product" style="background-color: #fff">
                         <li class="col-sm-4"><a href="#tab1" data-toggle="tab" class="active show">CHI TIẾT SẢN PHẨM</a>
                         </li>

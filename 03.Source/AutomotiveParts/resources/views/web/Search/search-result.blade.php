@@ -25,9 +25,8 @@
                                                  src="{{ asset($item->photo_top) }}" alt="{{$item->photo_top_name}}"
                                                  class="thumbnail img-responsive -ezoom-part">
                                         @else
-                                            <img data-zoom-image="../web/assets/083161008B.jpg" style="width: 266px;"
-                                                 src="../web/assets/083161008B.jpg" alt="Suzuki 083161008B NUT"
-                                                 class="thumbnail img-responsive -ezoom-part">
+                                            <img data-zoom-image="../images/no_image.jpeg" style="width: 266px;"
+                                                 src="../images/no_image.jpeg" class="thumbnail img-responsive -ezoom-part">
                                         @endif
                                     </a>
                                     <ul class="img-ui list-unstyled list-inline">

@@ -8,25 +8,11 @@
                 <div class="item item-effect">
                     <!-- Item image -->
                     <a target="_blank" title="{{$accessaryPrioritize->name_vi}}" href="{{route('view-accessory-detail', ['accessary_id' => $accessaryPrioritize->accessary_id])}}">
-                        <div class="shop-logo"><img src="{{asset($accessaryPrioritize->photo_top)}}" alt="BMW online catalog" class="img-responsive"></div>
+                        <div class="shop-logo"><img src="{{$accessaryPrioritize->photo_top ? asset($accessaryPrioritize->photo_top) : '../images/no_image.jpeg'}}" alt="BMW online catalog" class="img-responsive"></div>
                         <div class="shop-title">
                             {{$accessaryPrioritize->name_vi}}
                         </div>
                         <div class="shop-title-2">
-                            {{--<table>--}}
-                                {{--<tr>--}}
-                                    {{--<td><div class="text-left col-md-12 col-sm-6">Model</div></td>--}}
-                                    {{--<td><div class="text-left col-md-12 col-sm-6">: {{$modelCar = \App\Http\Common\Entities\Car::find($accessaryPrioritize->car_id)->name}}</div></td>--}}
-                                {{--</tr>--}}
-                                {{--<tr>--}}
-                                    {{--<td><div class="text-left col-md-12 col-sm-6">Mã</div></td>--}}
-                                    {{--<td><div class="text-left col-md-12 col-sm-6">: {{$accessaryPrioritize->code}}</div></td>--}}
-                                {{--</tr>--}}
-                                {{--<tr>--}}
-                                    {{--<td><div class="text-left text-danger col-md-12 col-sm-6">Giá</div></td>--}}
-                                    {{--<td><div class="text-left text-danger col-md-12 col-sm-6">: {{ $accessaryPrioritize->price !== null  ? number_format($accessaryPrioritize->price).' VND' : 'N/A'}}</div></td>--}}
-                                {{--</tr>--}}
-                            {{--</table>--}}
                             <div class="col-md-12 col-sm-12">Model:
                                 {{$modelCar = \App\Http\Common\Entities\Car::find($accessaryPrioritize->car_id)->name}}
                             </div>
