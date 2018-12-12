@@ -69,12 +69,7 @@ class CarController extends BackendController
 
         try {
             if (isset($request->car_id)) {
-                $car = $this->carRepository->merge($request->car_id, $car);
-                if (!empty($parts)) {
-                    $car->parts()->sync($parts);
-                } else {
-                    $car->parts()->detach();
-                }
+                $this->carRepository->merge($request->car_id, $car);
             } else {
                 $validator = Validator::make($car, $valid->rules, [], $valid->attributes);
                 if ($validator->fails()) {
@@ -84,10 +79,7 @@ class CarController extends BackendController
                     ];
                 }
                 $car = array_add($car, 'status', GlobalEnum::STATUS_ACTIVE);
-                $car = $this->carRepository->persist($car);
-                if (!empty($parts)) {
-                    $car->parts()->attach($parts);
-                }
+                $this->carRepository->persist($car);
             }
         } catch (\Exception $e) {
             return [
@@ -115,9 +107,7 @@ class CarController extends BackendController
         $carId = $request->id;
         $car = $this->carRepository->find($carId);
         if (!empty($car)) {
-            $car->parts->find($carId);
             $car->catalogCar->carBrand;
-            $car->parts;
         }
 
         $listYear = $this->yearManufactureRepository->getAll()->where('status', '=', GlobalEnum::STATUS_ACTIVE);

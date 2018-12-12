@@ -24,7 +24,7 @@ class CatalogCar extends BaseModel {
 
     public $rules = [
         'car_brand_id' => 'required',
-        'name' => 'required|max:255'
+        'name' => 'required|max:255|unique:tbl_catalog_car'
     ];
 
     public $attributes = [

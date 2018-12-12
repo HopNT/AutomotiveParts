@@ -1,5 +1,5 @@
 <?php
-//    dd($data->type)
+
 ?>
 @extends('layouts.admin_layout')
 @section('content')
@@ -78,8 +78,7 @@
                                                         @if($car)
                                                             @foreach($carList as $carItem)
                                                                 <option value="{{ $carItem->car_id }}"
-                                                                        @if($car->car_id == $carItem->car_id) selected @endif>{{ $carItem->name }}
-                                                                    - {{ $carItem->year }}</option>
+                                                                        @if($car->car_id == $carItem->car_id) selected @endif>{{ $carItem->name }}{{ $carItem->year ? ' - '.$carItem->year : '' }}</option>
                                                             @endforeach
                                                         @endif
                                                     </select>
@@ -299,8 +298,7 @@
                                                     @if($carUsed)
                                                         @foreach($carUsed as $car)
                                                             <option value="{{ $car->car_id }}"
-                                                                    selected="selected">{{ $car->name }}
-                                                                - {{ $car->yearManufacture->year }}</option>
+                                                                    selected="selected">{{ $car->name }}{{ $car->yearManufacture ? ' - '.$car->yearManufacture->year : '' }}</option>
                                                         @endforeach
                                                     @endif
                                                 </select>
