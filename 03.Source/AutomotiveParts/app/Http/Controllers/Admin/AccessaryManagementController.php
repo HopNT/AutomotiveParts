@@ -656,7 +656,7 @@ class AccessaryManagementController extends BackendController
                     $accessary->carBrandName = $carBrand->name;
                     $accessary->catalogCarName = $catalogCar->name;
                     $accessary->carName = $car->name;
-                    $accessary->year = $car->yearManufacture->year;
+                    $accessary->year = $car->yearManufacture ? $car->yearManufacture->year : '';
                 } else {
                     $accessary->carBrandName = "";
                     $accessary->catalogCarName = "";
