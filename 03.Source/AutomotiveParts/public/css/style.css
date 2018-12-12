@@ -89,8 +89,8 @@ background-position: 0 0;
 }
 .intro-search-block .form-control {
     border: 0;
-    width: 90%;
-    border-radius: 15px 0 0 15px;
+    width: 50%;
+    border-radius: 0;
     float: left;
     border-right: 0 !important;
     box-shadow: none !important;

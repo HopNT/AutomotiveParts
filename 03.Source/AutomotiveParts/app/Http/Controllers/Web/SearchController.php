@@ -36,22 +36,19 @@ class SearchController extends Controller
 
     public function search(Request $request)
     {
-        if (empty($request->q)) {
+        if (empty($request->key_search) && empty($request->car_name)) {
             return redirect('home');
         }
-
-        $query = array();
-        if (strpos($request->q, ',') !== false) {
-            $query = explode(',', $request->q);
-        } else {
-            array_push($query, $request->q);
-        }
-
-        $accessary = $this->accessaryRepository->searchByCode($query);
+//        $query = array();
+//        if (strpos($request->q, ',') !== false) {
+//            $query = explode(',', $request->q);
+//        } else {
+//            array_push($query, $request->q);
+//        }
+        $accessary = $this->accessaryRepository->searchByKeywordAndCarname($request);
         if (count($accessary) > 1) {
-            $query = implode(', ', $query);
             return view('web.Search.search-result')
-                ->with('query', $query)
+                ->with('query', $request)
                 ->with('accessary', $accessary);
 
         } else {
@@ -65,7 +62,7 @@ class SearchController extends Controller
                 }
                 $item->accessaryLinks = $list;
             }
-
+            //chỗ này xử lý a chưa hiểu lắm, check lại giúp anh nhé
             $listId = $this->accessaryRepository->getAccessaryIdByCode($query);
             $codearr = array();
             foreach ($listId->toArray() as $item) {

@@ -36,4 +36,6 @@ interface AccessaryRepository
     function updateCar($carId);
 
     function deleteCatalogPartsAccessaary($accessaryId);
+
+    function searchByKeywordAndCarname($request);
 }

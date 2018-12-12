@@ -4,7 +4,16 @@
     <div class="row pt-20">
         <div class="col-md-12">
             <h3 class="mb-5px">
-                Kết quả tìm kiếm cho: {{ $query }}
+                <?php
+                    $text='';
+                    if(isset($query->key_search)){
+                        $text .= 'Key: ' . $query->key_search;
+                    }
+                    if(isset($query->car_name)){
+                        $text .= ($text ? ', ' : '') . 'Tên xe: ' . $query->car_name;
+                    }
+                ?>
+                Kết quả tìm kiếm cho: {{ $text}}
                 {{--<img src="{{asset('/images/marks.png')}}">--}}
             </h3>
         </div>

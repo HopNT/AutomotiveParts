@@ -63,6 +63,31 @@ class AccessaryRepositoryImpl extends GenericRepositoryImpl implements Accessary
             ->get();
     }
 
+    public function searchByKeywordAndCarname($request){
+        $keyword = isset($request->key_search) ? $request->key_search : '';
+        $car_name = isset($request->car_name) ? $request->car_name : '';
+        $data = DB::table('tbl_accessary as a')
+            ->leftJoin('tbl_car_link as cl', 'a.accessary_id', '=', 'cl.accessary_id')
+            ->leftJoin('tbl_car as c', 'cl.car_id', '=', 'c.car_id')
+            ->leftJoin('tbl_year_manufacture as y', 'c.year_manufacture_id', '=', 'y.year_manufacture_id')
+            ->leftJoin('tbl_nation as n', 'a.nation_id', '=', 'n.nation_id')
+            ->leftJoin('tbl_trademark as tr', 'a.trademark_id', '=', 'tr.trademark_id')
+            ->select('a.*', 'n.name_vi as nation_name', 'tr.name as trademark_name', 'tr.description as trademark_desc');
+            if($car_name){
+                $data->whereRaw('c.name like \'%' . $car_name . '%\'');
+            }
+            if($keyword){
+                $data->orWhere(function($data) use ($keyword){
+                    $data->whereRaw('a.name_vi like \'%' . $keyword . '%\'')
+                        ->orWhereRaw('a.acronym_name like \'%' . $keyword . '%\'')
+                        ->orWhereRaw('a.unsigned_name like \'&' . $keyword .'&\'')
+                        ->orWhereRaw('a.accessary_id like \'%' . $keyword .'%\'')
+                        ->orWhere('a.code','=', '\''.$keyword.'\'');
+                });
+            }
+        return $data->distinct()->get();
+    }
+
     public function searchById($accessaryId)
     {
         return DB::table('tbl_accessary as a')

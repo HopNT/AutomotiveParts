@@ -14,7 +14,10 @@
                         </div>
                         <div class="shop-title-2">
                             <div class="col-md-12 col-sm-12">Model:
-                                {{$modelCar = \App\Http\Common\Entities\Car::find($accessaryPrioritize->car_id)->name}}
+                                <?php
+                                    $modelCar = \App\Http\Common\Entities\Car::find($accessaryPrioritize->car_id);
+                                ?>
+                                {{$modelCar ? $modelCar->name : ''}}
                             </div>
                             <div class="col-md-12 col-sm-12">Mã: {{$accessaryPrioritize->code}}</div>
                             <div class="col-md-12 col-sm-12 top-sale-price">Giá: {{ $accessaryPrioritize->price !== null  ? number_format($accessaryPrioritize->price).' VND' : 'N/A'}}</div>

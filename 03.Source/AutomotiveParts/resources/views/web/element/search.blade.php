@@ -1,7 +1,6 @@
 <?php
-    $q = request()->q;
+    $key_search = request()->key_search;
     $car_name = request()->car_name;
-    $year = request()->year;
 ?>
 <div class="row">
     <div class="col-sm-12">
@@ -12,19 +11,15 @@
                     <div class="col-md-12">
                         <form action="{{route('search')}}" class="mb-10px clearfix">
                             <div class="white-container clearfix">
-                                <input name="q" id="parts-search-sm" type="text" onkeyup="javascript:addComma(this);" value="{{$q}}" spellcheck="false" autofocus="true" class="form-control input-search active" placeholder="Nhập mã phụ tùng">
-                                {{--<textarea name="q2" class="search-textarea" rows="4" spellcheck="false" id="parts-search" placeholder="Nhập danh sách mã phụ tùng"></textarea>--}}
-                                {{--<div class="search-trigger-container">--}}
-                                    {{--<button type="button" class="search-trigger" id="btn-toggle-search">--}}
-                                        {{--<i id="icon-toggle" data-original-title="Search by list of PartNumbers" data-trigger="hover " data-toggle="tooltip" data-placement="top" data-html="false" class="fa fa-bars" aria-hidden="true"></i>--}}
-                                    {{--</button>--}}
-                                {{--</div>--}}
+                                {{--<input name="q" id="parts-search-sm" type="text" onkeyup="javascript:addComma(this);" value="{{$q}}" spellcheck="false" autofocus="true" class="form-control input-search active" placeholder="Nhập mã phụ tùng">--}}
+                                <input name="key_search" id="parts-search-sm" type="text" value="{{$key_search}}" spellcheck="false" autofocus="true" class="form-control input-search active" placeholder="Nhập mã phụ tùng">
+                                <input name="car_name" id="parts-search-sm" type="text" value="{{$car_name}}" spellcheck="false" autofocus="true" class="form-control input-search active" placeholder="Nhập tên xe">
                             </div>
-                            <button class="btn btn-success btn-sm" type="submit"><i class="fa fa-search"></i></button>
+                            <button class="btn btn-success btn-sm" type="submit" style="font-size:16px">Tìm kiếm</button>
                         </form>
                         <div class="row mb-20px">
                             <div class="col-sm-8">
-                                <div class="example-numbers">Ví dụ: <a class="example-number" href="#">MB573783</a>, <a class="example-number" href="#">MB242119</a>, <a class="example-number" href="#">263304X000</a><span class="hidden-xs">, <a class="example-vin" href="#">W0L0ZCF6841143485</a>, <a class="example-frame" href="#">FD3-1200558</a></span></div>
+                                <div class="example-numbers">Ví dụ: <a class="example-number" href="javascript:void(0)">MB573783</a>, <a class="example-number" href="javascript:void(0)">MB242119</a>, <a class="example-number" href="javascript:void(0)">263304X000</a><span class="hidden-xs">, <a class="example-vin" href="javascript:void(0)">W0L0ZCF6841143485</a>, <a class="example-frame" href="javascript:void(0)">FD3-1200558</a></span></div>
                                 <!--example-numbers-->
                             </div>
                             <!--col-sm - 6-->
@@ -36,19 +31,19 @@
                             </div>
                             <!--col-sm-6-->
                         </div>
-                        <form action="{{route('search-car')}}" class="mb-10px clearfix">
-                            <div class="row" style="padding-bottom:20px;">
-                                <div class="col-md-5  mb-10px">
-                                    <input type="text" value="{{$car_name}}" spellcheck="false" autofocus="true" class="form-control" name="car_name" placeholder="Nhập tên xe" style="border-radius:20px;border: 1px solid #ced4da !important;width:100%;">
-                                </div>
-                                <div class="col-md-5  mb-10px">
-                                    <input type="text" value="{{$year}}" spellcheck="false" autofocus="true" class="form-control" name="year" placeholder="Nhập năm sản xuất" style="border-radius:20px;border: 1px solid #ced4da !important;width:100%;">
-                                </div>
-                                <div class="col-md-2 mb-10px">
-                                    <button class="btn btn-success" type="submit" style="width: 100%; border-radius:30px;font-size:16px;height:38px;">Tìm kiếm</button>
-                                </div>
-                            </div>
-                        </form>
+                        {{--<form action="{{route('search-car')}}" class="mb-10px clearfix">--}}
+                            {{--<div class="row" style="padding-bottom:20px;">--}}
+                                {{--<div class="col-md-5  mb-10px">--}}
+                                    {{--<input type="text" value="{{$car_name}}" spellcheck="false" autofocus="true" class="form-control" name="car_name" placeholder="Nhập tên xe" style="border-radius:20px;border: 1px solid #ced4da !important;width:100%;">--}}
+                                {{--</div>--}}
+                                {{--<div class="col-md-5  mb-10px">--}}
+                                    {{--<input type="text" value="{{$year}}" spellcheck="false" autofocus="true" class="form-control" name="year" placeholder="Nhập năm sản xuất" style="border-radius:20px;border: 1px solid #ced4da !important;width:100%;">--}}
+                                {{--</div>--}}
+                                {{--<div class="col-md-2 mb-10px">--}}
+                                    {{--<button class="btn btn-success" type="submit" style="width: 100%; border-radius:30px;font-size:16px;height:38px;">Tìm kiếm</button>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</form>--}}
                         <!--row-->
                     </div>
                     <!--col-sm-5-->
