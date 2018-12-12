@@ -20,4 +20,11 @@ interface CarBrandRepository
      * @return mixed
      */
     function deleteMulti($ids);
+
+
+    /**
+     * @param $nationId
+     * @return mixed
+     */
+    function updateNation($nationId);
 }

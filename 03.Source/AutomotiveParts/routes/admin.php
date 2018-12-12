@@ -58,6 +58,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('catalog-parts/delete', 'Admin\CatalogPartsController@delete')->name('catalog-parts-delete');
     Route::get('catalog-parts/getAll', 'Admin\CatalogPartsController@getAll')->name('catalog-parts-get-all');
     Route::get('catalog-parts/searchByText', 'Admin\CatalogPartsController@searchByText')->name('catalog-parts-search-by-text');
+    Route::get('catalog-parts/searchByTextParent', 'Admin\CatalogPartsController@searchByTextParent')->name('catalog-parts-search-by-text-parent');
     // Parts
     Route::get('parts/searchByText', 'Admin\PartsController@searchByText')->name('parts-search-by-text');
     Route::get('parts/getById', 'Admin\PartsController@getById')->name('parts-get-by-id');

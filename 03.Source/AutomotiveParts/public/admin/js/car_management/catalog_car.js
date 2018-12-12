@@ -179,8 +179,10 @@ $(document).ready(function () {
                             } else {
                                 swal("Xóa thành công!", "", "success");
                                 setTimeout(function () {
-                                    $('#catalog_car').html(rs.html);
+                                    $('#catalog_car').html(rs.catalogCar);
+                                    $('#car').html(rs.car);
                                     loadTableCatalogCar();
+                                    loadTableCar();
                                 }, 1000);
                             }
                         },

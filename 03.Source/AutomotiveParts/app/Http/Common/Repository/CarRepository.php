@@ -51,4 +51,16 @@ interface CarRepository
      * @return mixed
      */
     function getCarIdByCode($code);
+
+    /**
+     * @param $nationId
+     * @return mixed
+     */
+    function updateNation($nationId);
+
+    /**
+     * @param $carId
+     * @return mixed
+     */
+    function deleteCarCatalogParts($carId);
 }

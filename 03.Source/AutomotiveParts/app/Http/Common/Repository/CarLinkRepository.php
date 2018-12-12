@@ -13,4 +13,8 @@ interface CarLinkRepository {
     function deleteAll($accessaryId);
 
     function findByIdValue($key, $value);
+
+    function deleteByCarId($carId);
+
+    function deleteByAccessaryId($accessaryId);
 }

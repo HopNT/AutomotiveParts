@@ -46,7 +46,7 @@ class AccessaryRepositoryImpl extends GenericRepositoryImpl implements Accessary
     public function deleteMulti($ids) {
         DB::table('tbl_accessary')
             ->whereIn('accessary_id', $ids)
-            ->update(['status'=>GlobalEnum::STATUS_INACTIVE, 'updated_at'=>now()]);
+            ->delete();
     }
 
     public function searchByCode($query)
@@ -169,5 +169,23 @@ class AccessaryRepositoryImpl extends GenericRepositoryImpl implements Accessary
             ->where('status', '=', GlobalEnum::STATUS_ACTIVE)
             ->select('accessary_id')
             ->get();
+    }
+
+    public function updateNation($nationId) {
+        DB::table('tbl_accessary')->whereIn('nation_id', $nationId)->update(['nation_id' => NULL]);
+    }
+
+    public function updateTradeMark($tradeMarkId) {
+        DB::table('tbl_accessary')->whereIn('trademark_id', $tradeMarkId)->update(['trademark_id' => NULL]);
+    }
+
+    public function updateCar($carId) {
+        DB::table('tbl_accessary')->whereIn('car_id', $carId)->update(['car_id' => NULL]);
+    }
+
+    public function deleteCatalogPartsAccessaary($accessaryId) {
+        DB::table('tbl_catalog_parts_accessary')
+            ->whereIn('accessary_id', $accessaryId)
+            ->delete();
     }
 }

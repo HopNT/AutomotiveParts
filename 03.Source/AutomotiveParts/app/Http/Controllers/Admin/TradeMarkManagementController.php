@@ -9,6 +9,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Common\Entities\TradeMark;
 use App\Http\Common\Enum\GlobalEnum;
+use App\Http\Common\Repository\AccessaryRepository;
 use App\Http\Common\Repository\TradeMarkRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -17,13 +18,16 @@ class TradeMarkManagementController extends BackendController
 {
     protected $tradeMarkRepository;
 
+    protected $accessaryRepository;
+
     /**
      * TradeMarkManagementController constructor.
      * @param $tradeMarkRepository
      */
-    public function __construct(TradeMarkRepository $tradeMarkRepository)
+    public function __construct(TradeMarkRepository $tradeMarkRepository, AccessaryRepository $accessaryRepository)
     {
         $this->tradeMarkRepository = $tradeMarkRepository;
+        $this->accessaryRepository = $accessaryRepository;
     }
 
     public function index()
@@ -85,6 +89,7 @@ class TradeMarkManagementController extends BackendController
         try {
             $ids = $request->ids;
             $this->tradeMarkRepository->deleteMulti($ids);
+            $this->accessaryRepository->updateTradeMark($ids);
         }
         catch (\Exception $e)
         {

@@ -23,8 +23,7 @@ class CarBrandRepositoryImpl extends GenericRepositoryImpl implements CarBrandRe
     }
 
 
-    function getAllWitActive($status)
-    {
+    public function getAllWitActive($status) {
         return DB::table('tbl_car_brand as cb')
             ->leftJoin('tbl_nation as n', function ($join) {
                 $join->on('cb.nation_id', '=', 'n.nation_id');
@@ -38,8 +37,22 @@ class CarBrandRepositoryImpl extends GenericRepositoryImpl implements CarBrandRe
      * @param $ids
      * @return mixed
      */
-    function deleteMulti($ids)
-    {
-        DB::table('tbl_car_brand')->whereIn('car_brand_id', $ids)->update(['status'=>GlobalEnum::STATUS_INACTIVE, 'updated_at'=>now()]);
+    public function deleteMulti($ids) {
+        DB::table('tbl_car_brand')
+            ->whereIn('car_brand_id', $ids)
+            ->whereNotExists(function ($query) {
+                $query->select(DB::raw(1))
+                    ->from('tbl_catalog_car')
+                    ->whereRaw('tbl_catalog_car.car_brand_id = tbl_car_brand.car_brand_id');
+            })
+            ->delete();
+    }
+
+    /**
+     * @param $nationId
+     * @return mixed
+     */
+    public function updateNation($nationId) {
+        DB::table('tbl_car_brand')->whereIn('nation_id', $nationId)->update(['nation_id' => NULL]);
     }
 }

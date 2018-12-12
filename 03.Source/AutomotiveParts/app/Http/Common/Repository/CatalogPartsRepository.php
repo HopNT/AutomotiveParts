@@ -14,5 +14,11 @@ interface CatalogPartsRepository
 
     function searchByText($text);
 
+    function searchByTextParent($text);
+
     function getCatalogPartsIdByCode($code);
+
+    function deleteCarCatalogParts($catalogPartsId);
+
+    function deleteCatalogPartsAccessary($catalogPartsId);
 }

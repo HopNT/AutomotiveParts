@@ -33,4 +33,16 @@ class CarLinkRepositoryImpl extends GenericRepositoryImpl implements CarLinkRepo
             ->where('car_id', '=', $value)
             ->get();
     }
+
+    public function deleteByCarId($carId) {
+        DB::table('tbl_car_link')
+            ->whereIn('car_id', $carId)
+            ->delete();
+    }
+
+    public function deleteByAccessaryId($accessaryId) {
+        DB::table('tbl_car_link')
+            ->whereIn('accessary_id', $accessaryId)
+            ->delete();
+    }
 }

@@ -66,7 +66,7 @@ function loadCarByCatalog(catalogCarId, form, divSelectId, selectName, selectId)
             data: {'id': catalogCarId},
             success: function (result) {
                 $.each(result, function (i, data) {
-                    selectCar += '<option value="' + data.car_id + '">' + data.name + ' - ' + data.year + '</option>';
+                    selectCar += '<option value="' + data.car_id + '">' + data.name + (data.year != null ? ' - ' + data.year : '') + '</option>';
                 });
                 selectCar += '</select>';
                 $("#" + form + " #" + divSelectId).html(selectCar);

@@ -96,7 +96,7 @@
                                                     --
                                                 </option>
                                                 @foreach($listNation as $key => $nation)
-                                                    <option value="{{ $nation->nation_id }}" @if($data && $data->nation->nation_id == $nation->nation_id) selected @endif>
+                                                    <option value="{{ $nation->nation_id }}" @if($data && $data->nation && $data->nation->nation_id == $nation->nation_id) selected @endif>
                                                         {{ $nation->name_vi }}
                                                     </option>
                                                 @endforeach

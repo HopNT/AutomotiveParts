@@ -45,7 +45,7 @@ class CarRepositoryImpl extends GenericRepositoryImpl implements CarRepository
      */
     public function deleteMulti($ids)
     {
-        DB::table('tbl_car')->whereIn('car_id', $ids)->update(['status'=>GlobalEnum::STATUS_INACTIVE, 'updated_at'=>now()]);
+        DB::table('tbl_car')->whereIn('car_id', $ids)->delete();
     }
 
     /**
@@ -110,5 +110,23 @@ class CarRepositoryImpl extends GenericRepositoryImpl implements CarRepository
             ->where('status', '=', GlobalEnum::STATUS_ACTIVE)
             ->select('car_id')
             ->get();
+    }
+
+    /**
+     * @param $nationId
+     * @return mixed
+     */
+    public function updateNation($nationId) {
+        DB::table('tbl_car')->whereIn('nation_id', $nationId)->update(['nation_id' => NULL]);
+    }
+
+    /**
+     * @param $carId
+     * @return mixed
+     */
+    public function deleteCarCatalogParts($carId) {
+        DB::table('tbl_car_catalog_parts')
+            ->whereIn('car_id', $carId)
+            ->delete();
     }
 }

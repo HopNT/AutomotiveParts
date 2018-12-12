@@ -40,7 +40,7 @@ $(document).ready(function () {
         resetCatalogPartsForm();
         $('#form-catalog-parts select[name="parent_id"]').select2({
             ajax: {
-                url: '/admin/catalog-parts/searchByText',
+                url: '/admin/catalog-parts/searchByTextParent',
                 dataType: 'json',
                 data: function (params) {
                     let query = {
@@ -69,7 +69,7 @@ $(document).ready(function () {
         resetCatalogPartsForm();
         $('#form-catalog-parts select[name="parent_id"]').select2({
             ajax: {
-                url: '/admin/catalog-parts/searchByText',
+                url: '/admin/catalog-parts/searchByTextParent',
                 dataType: 'json',
                 data: function (params) {
                     let query = {

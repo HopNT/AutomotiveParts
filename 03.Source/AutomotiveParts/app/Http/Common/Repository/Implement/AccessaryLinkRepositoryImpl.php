@@ -40,4 +40,10 @@ class AccessaryLinkRepositoryImpl extends GenericRepositoryImpl implements Acces
             ->where('accessary_value', '=', $value)
             ->get();
     }
+
+    public function deleteByAccessaryId($accessaryId) {
+        DB::table('tbl_accessary_link')
+            ->whereIn('accessary_id', $accessaryId)
+            ->delete();
+    }
 }

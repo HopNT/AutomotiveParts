@@ -41,7 +41,14 @@ class CatalogCarRepositoryImpl extends GenericRepositoryImpl implements CatalogC
      */
     public function deleteMulti($ids)
     {
-        DB::table('tbl_catalog_car')->whereIn('catalog_car_id', $ids)->update(['status'=>GlobalEnum::STATUS_INACTIVE, 'updated_at'=>now()]);
+        DB::table('tbl_catalog_car')
+            ->whereIn('catalog_car_id', $ids)
+            ->whereNotExists(function ($query) {
+                $query->select(DB::raw(1))
+                    ->from('tbl_car')
+                    ->whereRaw('tbl_car.catalog_car_id = tbl_catalog_car.catalog_car_id');
+            })
+            ->delete();
     }
 
     /**

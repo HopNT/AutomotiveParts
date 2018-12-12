@@ -32,6 +32,25 @@ class CatalogPartsController extends BackendController
         $this->partsRepository = $partsRepository;
     }
 
+    public function searchByTextParent(Request $request) {
+        $results = array();
+        $text = $request->get('query');
+        $listCatalogParts = $this->catalogPartsRepository->searchByTextParent($text);
+        $index = 0;
+        if (!empty($listCatalogParts))
+        {
+            foreach ($listCatalogParts as $key => $catalogPart)
+            {
+                $results[$index]['id'] = $catalogPart->catalog_parts_id;
+                $results[$index]['text'] = $catalogPart->name;
+                $index++;
+            }
+        }
+        return [
+            'items' => $results
+        ];
+    }
+
     public function searchByText(Request $request) {
         $results = array();
         $text = $request->get('query');
@@ -149,6 +168,8 @@ class CatalogPartsController extends BackendController
         try {
             $ids = $request->ids;
             $this->catalogPartsRepository->deleteMulti($ids);
+            $this->catalogPartsRepository->deleteCarCatalogParts($ids);
+            $this->catalogPartsRepository->deleteCatalogPartsAccessary($ids);
         }
         catch (\Exception $e)
         {

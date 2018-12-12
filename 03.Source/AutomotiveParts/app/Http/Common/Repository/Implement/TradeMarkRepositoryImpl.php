@@ -22,7 +22,8 @@ class TradeMarkRepositoryImpl extends GenericRepositoryImpl implements TradeMark
     }
 
     public function deleteMulti($ids) {
-        DB::table('tbl_trademark')->whereIn('trademark_id', $ids)->update(['status'=>GlobalEnum::STATUS_INACTIVE, 'updated_at'=>now()]);
+//        DB::table('tbl_trademark')->whereIn('trademark_id', $ids)->update(['status'=>GlobalEnum::STATUS_INACTIVE, 'updated_at'=>now()]);
+        DB::table('tbl_trademark')->whereIn('trademark_id', $ids)->delete();
     }
 
     public function findByCode($code) {

@@ -28,4 +28,12 @@ interface AccessaryRepository
     function search($query, $carName, $year);
 
     function getAccessaryIdByCode($code);
+
+    function updateNation($nationId);
+
+    function updateTradeMark($tradeMarkId);
+
+    function updateCar($carId);
+
+    function deleteCatalogPartsAccessaary($accessaryId);
 }

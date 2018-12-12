@@ -445,6 +445,9 @@ class AccessaryManagementController extends BackendController
         try {
             $ids = $request->ids;
             $this->accessaryRepository->deleteMulti($ids);
+            $this->accessaryRepository->deleteCatalogPartsAccessaary($ids);
+            $this->accessaryLinkRepository->deleteByAccessaryId($ids);
+            $this->carLinkRepository->deleteByAccessaryId($ids);
         }
         catch (\Exception $e)
         {

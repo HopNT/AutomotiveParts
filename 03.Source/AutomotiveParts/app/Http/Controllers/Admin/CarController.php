@@ -10,7 +10,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Common\Entities\Car;
 use App\Http\Common\Enum\GlobalEnum;
+use App\Http\Common\Repository\AccessaryRepository;
 use App\Http\Common\Repository\CarBrandRepository;
+use App\Http\Common\Repository\CarLinkRepository;
 use App\Http\Common\Repository\CarRepository;
 use App\Http\Common\Repository\CatalogCarRepository;
 use App\Http\Common\Repository\NationRepository;
@@ -31,19 +33,28 @@ class CarController extends BackendController
 
     protected $yearManufactureRepository;
 
+    protected $accessaryRepository;
+
+    protected $carLinkRepository;
+
     /**
      * CarController constructor.
      * @param $carBrandRepository
      * @param $catalogCarRepository
      * @param $carRepository
      */
-    public function __construct(CarBrandRepository $carBrandRepository, CatalogCarRepository $catalogCarRepository, CarRepository $carRepository, NationRepository $nationRepository, YearManufactureRepository $yearManufactureRepository)
+    public function __construct(CarBrandRepository $carBrandRepository, CatalogCarRepository $catalogCarRepository,
+                                CarRepository $carRepository, NationRepository $nationRepository,
+                                YearManufactureRepository $yearManufactureRepository,
+                                AccessaryRepository $accessaryRepository, CarLinkRepository $carLinkRepository)
     {
         $this->carBrandRepository = $carBrandRepository;
         $this->catalogCarRepository = $catalogCarRepository;
         $this->carRepository = $carRepository;
         $this->nationRepository = $nationRepository;
         $this->yearManufactureRepository = $yearManufactureRepository;
+        $this->accessaryRepository = $accessaryRepository;
+        $this->carLinkRepository = $carLinkRepository;
     }
 
     public function create() {
@@ -135,6 +146,9 @@ class CarController extends BackendController
         try {
             $ids = $request->ids;
             $this->carRepository->deleteMulti($ids);
+            $this->carRepository->deleteCarCatalogParts($ids);
+            $this->accessaryRepository->updateCar($ids);
+            $this->carLinkRepository->deleteByCarId($ids);
         } catch (\Exception $e) {
             return [
                 'error' => true,
@@ -167,7 +181,7 @@ class CarController extends BackendController
             foreach ($listCar as $key => $car)
             {
                 $results[$index]['id'] = $car->car_id;
-                $results[$index]['text'] = $car->name.' - '.$car->year;
+                $results[$index]['text'] = $car->name.($car->year ? ' - '.$car->year : '');
                 $index++;
             }
         }

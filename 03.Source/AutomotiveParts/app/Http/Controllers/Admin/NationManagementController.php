@@ -9,6 +9,9 @@ namespace  App\Http\Controllers\Admin;
 
 use App\Http\Common\Entities\Nation;
 use App\Http\Common\Enum\GlobalEnum;
+use App\Http\Common\Repository\AccessaryRepository;
+use App\Http\Common\Repository\CarBrandRepository;
+use App\Http\Common\Repository\CarRepository;
 use App\Http\Common\Repository\NationRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -17,13 +20,22 @@ class NationManagementController extends BackendController{
 
     protected $nationRepository;
 
+    protected $carBrandRepository;
+
+    protected $carRepository;
+
+    protected $accessaryRepository;
+
     /**
      * NationManagementController constructor.
      * @param $nationRepository
      */
-    public function __construct(NationRepository $nationRepository)
+    public function __construct(NationRepository $nationRepository, CarBrandRepository $carBrandRepository, CarRepository $carRepository, AccessaryRepository $accessaryRepository)
     {
         $this->nationRepository = $nationRepository;
+        $this->carBrandRepository = $carBrandRepository;
+        $this->carRepository = $carRepository;
+        $this->accessaryRepository = $accessaryRepository;
     }
 
     public function index()
@@ -85,6 +97,9 @@ class NationManagementController extends BackendController{
         try {
             $ids = $request->ids;
             $this->nationRepository->deleteMulti($ids);
+            $this->carBrandRepository->updateNation($ids);
+            $this->carRepository->updateNation($ids);
+            $this->accessaryRepository->updateNation($ids);
         }
         catch (\Exception $e)
         {
