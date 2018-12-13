@@ -53,8 +53,7 @@
                                 <h5>Mã sản phẩm: {{ $accessary[0]->code ? $accessary[0]->code : 'N/A' }}</h5>
                                 <p class="mb-10px">
                                     Xuất xứ:
-                                    <span
-                                        class="label label-pill label-success">{{ $accessary[0]->nation_name ? $accessary[0]->nation_name : 'N/A' }}</span>
+                                    <span class="label label-pill label-success">{{ $accessary[0]->nation_name ? $accessary[0]->nation_name : 'N/A' }}</span>
                                 </p>
                                 <p class="mb-10px">
                                     Thương hiệu:
@@ -67,6 +66,13 @@
                                        data-original-title=""
                                        title="">{{ $accessary[0]->trademark_name ? $accessary[0]->trademark_name : 'N/A' }}
                                     </a>
+                                </p>
+                                <p class="mb-10px">
+                                    Model:
+                                    <?php
+                                        $modelCar = \App\Http\Common\Entities\Car::find($accessary[0]->car_id);
+                                    ?>
+                                    <span class="label label-pill label-success">{{$modelCar ? $modelCar->name : 'N/A'}}</span>
                                 </p>
                             </div>
                         </div>
