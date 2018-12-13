@@ -172,7 +172,7 @@ class AccessaryRepositoryImpl extends GenericRepositoryImpl implements Accessary
 
         return DB::table('tbl_accessary as a')
             ->leftJoin('tbl_car_link as cl', 'a.accessary_id', '=', 'cl.accessary_id')
-            ->leftJoin('tbl_car as c', 'cl.car_id', '=', 'c.car_id')
+            ->leftJoin('tbl_car as c', 'c.car_id', '=', 'a.car_id')
             ->leftJoin('tbl_nation as n', 'a.nation_id', '=', 'n.nation_id')
             ->leftJoin('tbl_trademark as tr', 'a.trademark_id', '=', 'tr.trademark_id')
             ->whereRaw('1 = 1')
