@@ -11,6 +11,7 @@ use App\Http\Common\Entities\Accessary;
 use App\Http\Common\Enum\GlobalEnum;
 use App\Http\Common\Repository\AccessaryRepository;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class AccessaryRepositoryImpl extends GenericRepositoryImpl implements AccessaryRepository
 {
@@ -160,7 +161,11 @@ class AccessaryRepositoryImpl extends GenericRepositoryImpl implements Accessary
         $condition = '';
 
         if ($keyword) {
-            $condition = $condition.' (a.code IN ('.$keyword.') OR a.name_en LIKE BINARY \'%' . $keyword . '%\' OR a.name_vi LIKE BINARY \'%' . $keyword . '%\' OR a.acronym_name LIKE BINARY \'%' . $keyword . '%\' OR a.unsigned_name LIKE  BINARY \'%' . $keyword . '%\') ';
+            if (Str::contains($keyword, ',')) {
+                $condition = $condition.' a.code IN ('.$keyword.') ';
+            } else {
+                $condition = $condition . ' (a.name_en LIKE BINARY \'%' . $keyword . '%\' OR a.name_vi LIKE BINARY \'%' . $keyword . '%\' OR a.acronym_name LIKE BINARY \'%' . $keyword . '%\' OR a.unsigned_name LIKE  BINARY \'%' . $keyword . '%\') ';
+            }
         }
 
         if ($car_name) {

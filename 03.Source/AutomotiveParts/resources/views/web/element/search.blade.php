@@ -11,7 +11,7 @@
                     <div class="col-md-12">
                         <form action="{{route('search')}}" class="mb-10px clearfix">
                             <div class="white-container clearfix">
-                                <input name="key_search" id="parts-search-sm" type="text" value="{{$key_search}}" spellcheck="false" autofocus="true" class="form-control input-search active" placeholder="Nhập mã phụ tùng / tên phụ tùng">
+                                <input name="key_search" id="parts-search-sm" type="text" value="{{key_search}}" spellcheck="false" autofocus="true" class="form-control input-search active" placeholder="Nhập mã phụ tùng / tên phụ tùng">
                                 <input name="car_name" id="parts-search-sm" type="text" value="{{$car_name}}" spellcheck="false" autofocus="true" class="form-control input-search active" placeholder="Nhập tên xe">
                             </div>
                             <button class="btn btn-success btn-sm" type="submit" style="font-size:16px">Tìm kiếm</button>
@@ -42,10 +42,19 @@
     </div>
     <!--col-sm-10-->
 </div>
-<script>
+<script src="{{asset('/js/jquery-3.2.1.min.js')}}"></script>
+<script type="text/javascript">
     function addComma(txt) {
         if (!isNaN(txt)) {
             txt.value = txt.value.replace(/\s/g, ",");
         }
     }
+    $('#parts-search-sm').on("paste", function(e){
+        // access the clipboard using the api
+        var pastedData = e.originalEvent.clipboardData.getData('text');
+        pastedData = pastedData.replace(/(?:\r\n|\r|\n)/g,', ');
+        $("#EA2").val('');
+        setTimeout(function(){$("#EA2").val(pastedData);},100);
+        $('#parts-search-sm').val(pastedData);
+    } );
 </script>
