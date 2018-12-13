@@ -7,7 +7,7 @@
                 <?php
                     $text='';
                     if(isset($query->key_search)){
-                        $text .= 'Key: ' . $query->key_search;
+                        $text .= $query->key_search;
                     }
                     if(isset($query->car_name)){
                         $text .= ($text ? ', ' : '') . 'Tên xe: ' . $query->car_name;
@@ -46,11 +46,6 @@
                                 <div style="padding-bottom: 0px" class="caption">
                                     <h4 class="part-col-list-h4"><a style="text-decoration: none" href="{{route('view-accessory-detail', ['accessary_id' => $item->accessary_id])}}">{{ $item->name_vi ? $item->name_vi : 'N/A' }}</a></h4>
                                     <h5><a style="text-decoration: none" href="{{route('view-accessory-detail', ['accessary_id' => $item->accessary_id])}}">Mã sản phẩm: {{ $item->code ? $item->code : 'N/A' }}</a></h5>
-                                    {{--<p class="mb-10px">--}}
-                                        {{--Số lượng hiện có:--}}
-                                        {{--<span--}}
-                                            {{--class="label label-pill label-success">{{ $item->quantity ? number_format($item->quantity) : 'N/A' }}</span>--}}
-                                    {{--</p>--}}
                                     <p class="mb-10px">
                                         Xuất xứ:
                                         <span

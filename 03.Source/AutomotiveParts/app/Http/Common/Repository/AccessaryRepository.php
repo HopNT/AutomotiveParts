@@ -25,7 +25,7 @@ interface AccessaryRepository
 
     function searchByCar($carName, $year);
 
-    function search($query, $carName, $year);
+    function search($request);
 
     function getAccessaryIdByCode($code);
 

@@ -81,8 +81,7 @@ class AccessaryRepositoryImpl extends GenericRepositoryImpl implements Accessary
                     $data->whereRaw('a.name_vi like \'%' . $keyword . '%\'')
                         ->orWhereRaw('a.acronym_name like \'%' . $keyword . '%\'')
                         ->orWhereRaw('a.unsigned_name like \'&' . $keyword .'&\'')
-                        ->orWhereRaw('a.accessary_id like \'%' . $keyword .'%\'')
-                        ->orWhere('a.code','=', '\''.$keyword.'\'');
+                        ->orWhereIn('a.code', '\''.$keyword.'\'');
                 });
             }
         return $data->distinct()->get();
@@ -153,31 +152,27 @@ class AccessaryRepositoryImpl extends GenericRepositoryImpl implements Accessary
 
     }
 
-    public function search($query, $carName, $year) {
+    public function search($request) {
+
+        $keyword = isset($request->key_search) ? $request->key_search : '';
+        $car_name = isset($request->car_name) ? $request->car_name : '';
+
         $condition = '';
 
-        if (!empty($query)) {
-            $condition = $condition.' a.code IN ('.$query.')';
+        if ($keyword) {
+            $condition = $condition.' (a.code IN ('.$keyword.') OR a.name_en LIKE BINARY \'%' . $keyword . '%\' OR a.name_vi LIKE BINARY \'%' . $keyword . '%\' OR a.acronym_name LIKE BINARY \'%' . $keyword . '%\' OR a.unsigned_name LIKE  BINARY \'%' . $keyword . '%\') ';
         }
 
-        if (!empty($carName)) {
+        if ($car_name) {
             if (!empty($condition)) {
                 $condition = $condition.' AND ';
             }
-            $condition = $condition.' c.name LIKE ("%'.$carName.'%")';
-        }
-
-        if (!empty($year)) {
-            if (!empty($condition)) {
-                $condition = $condition.' AND ';
-            }
-            $condition = $condition.' y.year = '.$year;
+            $condition = $condition.' c.name LIKE BINARY \'%' . $car_name . '%\' ';
         }
 
         return DB::table('tbl_accessary as a')
             ->leftJoin('tbl_car_link as cl', 'a.accessary_id', '=', 'cl.accessary_id')
             ->leftJoin('tbl_car as c', 'cl.car_id', '=', 'c.car_id')
-            ->leftJoin('tbl_year_manufacture as y', 'c.year_manufacture_id', '=', 'y.year_manufacture_id')
             ->leftJoin('tbl_nation as n', 'a.nation_id', '=', 'n.nation_id')
             ->leftJoin('tbl_trademark as tr', 'a.trademark_id', '=', 'tr.trademark_id')
             ->whereRaw('1 = 1')

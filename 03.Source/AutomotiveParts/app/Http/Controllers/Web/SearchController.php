@@ -39,18 +39,12 @@ class SearchController extends Controller
         if (empty($request->key_search) && empty($request->car_name)) {
             return redirect('home');
         }
-//        $query = array();
-//        if (strpos($request->q, ',') !== false) {
-//            $query = explode(',', $request->q);
-//        } else {
-//            array_push($query, $request->q);
-//        }
-        $accessary = $this->accessaryRepository->searchByKeywordAndCarname($request);
+
+        $accessary = $this->accessaryRepository->search($request);
         if (count($accessary) > 1) {
             return view('web.Search.search-result')
                 ->with('query', $request)
                 ->with('accessary', $accessary);
-
         } else {
             // Get accessary links
             foreach ($accessary as $key => $item) {
@@ -62,8 +56,7 @@ class SearchController extends Controller
                 }
                 $item->accessaryLinks = $list;
             }
-            //chỗ này xử lý a chưa hiểu lắm, check lại giúp anh nhé
-            $listId = $this->accessaryRepository->getAccessaryIdByCode($query);
+            $listId = $this->accessaryRepository->getAccessaryIdByCode(explode(',', $accessary->first()->code));
             $codearr = array();
             foreach ($listId->toArray() as $item) {
                 array_push($codearr, $item->accessary_id);
