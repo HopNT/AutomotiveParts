@@ -170,7 +170,7 @@ class AccessaryRepositoryImpl extends GenericRepositoryImpl implements Accessary
                 $arr_code = implode(',', $arr_code);
                 $condition = $condition.' a.code IN ('.$arr_code.') ';
             } else {
-                $condition = $condition . ' (LOWER(a.name_en) LIKE BINARY LOWER(\'%' . $keyword . '%\') OR LOWER(a.name_vi) LIKE BINARY LOWER(\'%' . $keyword . '%\') OR LOWER(a.acronym_name) LIKE BINARY LOWER(\'%' . $keyword . '%\') OR LOWER(a.unsigned_name) LIKE BINARY LOWER(\'%' . $keyword . '%\')) ';
+                $condition = $condition . ' a.code IN (\''.$keyword.'\') OR (LOWER(a.name_en) LIKE BINARY LOWER(\'%' . $keyword . '%\') OR LOWER(a.name_vi) LIKE BINARY LOWER(\'%' . $keyword . '%\') OR LOWER(a.acronym_name) LIKE BINARY LOWER(\'%' . $keyword . '%\') OR LOWER(a.unsigned_name) LIKE BINARY LOWER(\'%' . $keyword . '%\')) ';
             }
         }
 
