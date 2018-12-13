@@ -13,13 +13,15 @@
                         $text .= ($text ? ', ' : '') . 'Tên xe: ' . $query->car_name;
                     }
                 ?>
-                Kết quả tìm kiếm cho: {{ $text}}
+                    @if(!$accessary)
+                        Kết quả tìm kiếm cho: {{ $text}}
+                    @endif
                 {{--<img src="{{asset('/images/marks.png')}}">--}}
             </h3>
         </div>
         @if(!$accessary->count())
             <div class="col-md-12">
-                <h3 class="mb-5px text-center text-danger">Không tìm thấy kết quả!</h3>
+                <h3 class="text-center text-danger" style="margin-bottom: 50px">Không tìm thấy kết quả!</h3>
             </div>
         @else
             @foreach($accessary as $key => $item)

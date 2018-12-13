@@ -69,9 +69,9 @@ class SearchController extends Controller
                 ->with('accessary', $accessary)
                 ->with('listCarUse', $listCarUse);
         } else {
-            return view('web.accessory.accessory-detail')
-                ->with('accessary', $accessary)
-                ->with('listCarUse', []);
+            return view('web.Search.search-result')
+                ->with('query', $request)
+                ->with('accessary', $accessary);
         }
     }
 

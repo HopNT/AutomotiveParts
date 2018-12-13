@@ -155,16 +155,22 @@ class AccessaryRepositoryImpl extends GenericRepositoryImpl implements Accessary
 
     public function search($request) {
 
-        $keyword = isset($request->key_search) ? $request->key_search : '';
-        $car_name = isset($request->car_name) ? $request->car_name : '';
+        $keyword = isset($request->key_search) ? strtolower($request->key_search) : '';
+        $car_name = isset($request->car_name) ? strtolower($request->car_name) : '';
 
         $condition = '';
-
         if ($keyword) {
             if (Str::contains($keyword, ',')) {
-                $condition = $condition.' a.code IN ('.$keyword.') ';
+                $tmp = explode(',', $keyword);
+                $arr_code = [];
+                foreach($tmp as $code){
+                    $code = '\'' . trim($code) . '\'';
+                    $arr_code[] = $code;
+                }
+                $arr_code = implode(',', $arr_code);
+                $condition = $condition.' LOWER(a.code) IN ('.$arr_code.') ';
             } else {
-                $condition = $condition . ' (a.name_en LIKE BINARY \'%' . $keyword . '%\' OR a.name_vi LIKE BINARY \'%' . $keyword . '%\' OR a.acronym_name LIKE BINARY \'%' . $keyword . '%\' OR a.unsigned_name LIKE  BINARY \'%' . $keyword . '%\') ';
+                $condition = $condition . ' (LOWER(a.name_en) LIKE BINARY LOWER(\'%' . $keyword . '%\') OR LOWER(a.name_vi) LIKE BINARY LOWER(\'%' . $keyword . '%\') OR LOWER(a.acronym_name) LIKE BINARY LOWER(\'%' . $keyword . '%\') OR LOWER(a.unsigned_name) LIKE  BINARY LOWER(\'%' . $keyword . '%\')) ';
             }
         }
 
@@ -172,7 +178,7 @@ class AccessaryRepositoryImpl extends GenericRepositoryImpl implements Accessary
             if (!empty($condition)) {
                 $condition = $condition.' AND ';
             }
-            $condition = $condition.' c.name LIKE BINARY \'%' . $car_name . '%\' ';
+            $condition = $condition.' LOWER(c.name) LIKE BINARY \'%' . trim($car_name) . '%\' ';
         }
 
         return DB::table('tbl_accessary as a')
