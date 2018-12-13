@@ -45,7 +45,7 @@ class SearchController extends Controller
             return view('web.Search.search-result')
                 ->with('query', $request)
                 ->with('accessary', $accessary);
-        } else {
+        } else if (count($accessary) == 1) {
             // Get accessary links
             foreach ($accessary as $key => $item) {
                 $list = array();
@@ -68,6 +68,10 @@ class SearchController extends Controller
             return view('web.accessory.accessory-detail')
                 ->with('accessary', $accessary)
                 ->with('listCarUse', $listCarUse);
+        } else {
+            return view('web.accessory.accessory-detail')
+                ->with('accessary', $accessary)
+                ->with('listCarUse', []);
         }
     }
 
