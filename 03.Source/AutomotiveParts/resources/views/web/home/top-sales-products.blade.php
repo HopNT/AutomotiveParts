@@ -17,7 +17,7 @@
                                 <?php
                                     $modelCar = \App\Http\Common\Entities\Car::find($accessaryPrioritize->car_id);
                                 ?>
-                                {{$modelCar ? $modelCar->name : ''}}
+                                {{$modelCar ? $modelCar->name : 'N/A'}}
                             </div>
                             <div class="col-md-12 col-sm-12">Mã: {{$accessaryPrioritize->code}}</div>
                             <div class="col-md-12 col-sm-12 top-sale-price">Giá: {{ $accessaryPrioritize->price !== null  ? number_format($accessaryPrioritize->price).' VND' : 'N/A'}}</div>
