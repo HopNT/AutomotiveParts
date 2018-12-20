@@ -29,7 +29,7 @@
                         <div class="input-group">
                             <input type="text" class="form-control" readonly>
                             <div class="input-group-append">
-                                <label class="btn btn-primary">
+                                <label class="btn btn-primary" style="margin-bottom: 0;">
                                     <i class="fa fa-folder-open"></i>{{trans('label.form.browser')}}&hellip;
                                     <input id="file_upload" name="fileUploads[]" type="file" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" style="display: none;" multiple>
                                 </label>

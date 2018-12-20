@@ -13,6 +13,7 @@
         'temp-price-management'=>'fa fa-check',
         'accessary-management'=>'fa fa-cogs',
         'quotation-management'=>'fa fa-cogs',
+        'run-query'=>'fa fa-cogs',
     ];
     $user = \Illuminate\Support\Facades\Auth::guard('admin')->user();
 ?>

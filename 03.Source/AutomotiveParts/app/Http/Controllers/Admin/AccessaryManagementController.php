@@ -586,7 +586,8 @@ class AccessaryManagementController extends BackendController
                             'dvt' => $item[9],
                             'quantity' => $item[10],
                             'price' => $item[11],
-                            'prioritize' => $item[12]
+                            'prioritize' => $item[12],
+                            'prodivder_code' => $item[16],
                         ]);
                     } else {
                         $accessary = $this->accessaryRepository->persist([
@@ -603,6 +604,7 @@ class AccessaryManagementController extends BackendController
                             'quantity' => $item[10],
                             'price' => $item[11],
                             'prioritize' => $item[12],
+                            'prodivder_code' => $item[16],
                             'status' => GlobalEnum::STATUS_ACTIVE
                         ]);
                     }

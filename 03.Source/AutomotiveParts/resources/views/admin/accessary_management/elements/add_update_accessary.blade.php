@@ -252,17 +252,28 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <div class="form-group row">
                                             <label for="price"
-                                                   class="control-label required col-md-2">{{ trans('label.accessary.price') }}</label>
-                                            <div class="col-md-10 input-group">
+                                                   class="control-label required col-md-4">{{ trans('label.accessary.price') }}</label>
+                                            <div class="col-md-8 input-group">
                                                 <input class="form-control" type="text" name="price" maxlength="15"
                                                        placeholder="{{trans('label.common.input')}} {{trans('label.accessary.price')}}"
                                                        value="@if($data){{ $data->price }}@endif">
                                                 <div class="input-group-append">
                                                     <span class="input-group-text" id="basic-addon2">VND</span>
                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label for="prodivder_code"
+                                                   class="control-label required col-md-4">{{ trans('label.accessary.prodivder_code') }}</label>
+                                            <div class="col-md-8 input-group">
+                                                <input class="form-control" type="text" name="prodivder_code" maxlength="15"
+                                                       placeholder="{{trans('label.common.input')}} {{trans('label.accessary.prodivder_code')}}"
+                                                       value="@if($data){{ $data->prodivder_code }}@endif">
                                             </div>
                                         </div>
                                     </div>

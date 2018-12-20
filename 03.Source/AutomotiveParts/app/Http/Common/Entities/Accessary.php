@@ -42,17 +42,20 @@ class Accessary extends BaseModel {
         'dvt',
         'quantity',
         'price',
-        'status'
+        'status',
+        'prodivder_code'
     ];
 
     public $rules = [
         'code' => 'required|unique:tbl_accessary',
-        'name_vi' => 'required|max:100'
+        'name_vi' => 'required|max:100',
+        'prodivder_code' => 'required'
     ];
 
     public $attributes = [
         'code' => 'Mã phụ tùng',
-        'name_vi' => 'Tên tiếng Việt'
+        'name_vi' => 'Tên tiếng Việt',
+        'prodivder_code' => 'Mã chuẩn của Nhà cung cấp'
     ];
 
     public function catalogAccessary() {

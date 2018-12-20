@@ -30,7 +30,8 @@ return [
         'price' => 'Giá bán',
         'list_car' => 'Danh sách xe sử dụng',
         'dvt' => 'DVT',
-        'quantity' => 'Số lượng hiện có'
+        'quantity' => 'Số lượng hiện có',
+        'prodivder_code' => 'Mã chuẩn của NCC'
     ],
     'car' => [
         'management' => 'Quản lý thông tin xe',
@@ -192,7 +193,8 @@ return [
         'accessary-edit' => 'Cập nhật thông tin phụ tùng',
         'car-create' => 'Thêm mới thông tin xe',
         'car-edit' => 'Cập nhật thông tin xe',
-	'view_profile' => 'Trang thông tin cá nhân'
+	    'view_profile' => 'Trang thông tin cá nhân',
+        'run-query' => 'Thao tác với CSDL'
     ],
     'form' => [
         'create' => 'Thêm mới',

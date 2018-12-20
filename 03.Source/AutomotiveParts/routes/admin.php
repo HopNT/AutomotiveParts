@@ -125,4 +125,8 @@ Route::group(['prefix' => 'admin'], function () {
     // Quotation management
     Route::get('quotation-management', 'Admin\QuotationManagementController@index')->name('quotation-management');
     Route::get('quotation/create', 'Admin\QuotationManagementController@create')->name('quotation-create');
+
+    // Query management
+    Route::get('run-query','Admin\QueryManagementController@index')->name('run-query');
+    Route::post('run-query','Admin\QueryManagementController@runSQL')->name('run-sql');
 });
