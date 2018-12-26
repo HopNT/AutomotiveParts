@@ -38,6 +38,13 @@ $tabIndex = 0;
                                 </div>
                             </div>
                         </form>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <label class="alert-danger" id="error"></label>
+                                <label class="alert-success" id="message"></label>
+                                <div class="table-result" style="overflow: auto"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -47,5 +54,6 @@ $tabIndex = 0;
     @endif
 @endsection
 @section('javascript')
+    <script type="text/javascript" src="{{asset('admin/js/plugins/JSON-to-Table.min.1.0.0.js')}} "></script>
     <script type="text/javascript" src="{{asset('admin/js/query_management/query_management.js')}} "></script>
 @endsection
