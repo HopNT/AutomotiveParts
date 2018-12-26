@@ -20,13 +20,13 @@ $(document).ready(function () {
                         borderWidth: '1px',
                         borderStyle: 'solid',
                         borderColor: '#DDDDDD',
-                        fontFamily: 'Roboto,sans-serif',
+                        fontFamily: '"Roboto",sans-serif;',
 
                         // Table Header Style
                         thBg: '#F3F3F3',
                         thColor: '#0E0E0E',
                         thHeight: '30px',
-                        thFontFamily: '"Roboto,sans-serif',
+                        thFontFamily: '"Roboto",sans-serif;',
                         thFontSize: '14px',
                         thTextTransform: 'capitalize',
 
@@ -34,7 +34,7 @@ $(document).ready(function () {
                         trBg: '#fff',
                         trColor: '#0E0E0E',
                         trHeight: '25px',
-                        trFontFamily: '"Roboto,sans-serif',
+                        trFontFamily: '"Roboto",sans-serif;',
                         trFontSize: '13px',
 
                         // Table Body's Column Style
