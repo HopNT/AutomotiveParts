@@ -74,6 +74,10 @@
                                     ?>
                                     <span class="label label-pill label-success">{{$modelCar ? $modelCar->name : 'N/A'}}</span>
                                 </p>
+                                <p class="mb-10px">
+                                    Tồn kho:
+                                    <span class="label label-pill label-success">{{$accessary[0]->quantity ? $accessary[0]->quantity : 'N/A'}}</span>
+                                </p>
                             </div>
                         </div>
                         <div class="text-center col-lg-4 col-md-12 col-xs-12">
@@ -92,8 +96,7 @@
                                                                                                    id="product_id">
                                         <input size="3" class="form-control" type="text" value="1" name="amount"
                                                id="amount">&nbsp;
-                                        <button class="btn-small btn btn-success" id="yw2" type="submit" name="yt1"><i
-                                                class="fa fa-shopping-cart cart-black"></i>
+                                        <button class="btn-small btn btn-success" id="yw2" type="submit" name="yt1"><i class="fas fa-cart-plus"></i>
                                             <span class="text-uppercase dxs dxs3">Thêm giỏ hàng</span>
                                         </button>
                                     </form>

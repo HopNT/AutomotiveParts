@@ -189,7 +189,9 @@ class AccessaryRepositoryImpl extends GenericRepositoryImpl implements Accessary
             ->whereRaw('1 = 1')
             ->whereRaw($condition)
             ->select('a.*', 'n.name_vi as nation_name', 'tr.name as trademark_name', 'tr.description as trademark_desc')
+            ->orderBy('a.price','asc')
             ->distinct()
+            ->limit(50)
             ->get();
 
     }
