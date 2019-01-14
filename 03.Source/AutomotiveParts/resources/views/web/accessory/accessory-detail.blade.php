@@ -49,8 +49,17 @@
                         </div>
                         <div class="col-lg-3 col-md-6 col-xs-6">
                             <div style="padding-bottom: 0px" class="caption">
-                                <h4 class="part-col-list-h4">{{ $accessary[0]->name_vi ? $accessary[0]->name_vi : 'N/A' }}</h4>
-                                <h5>Mã sản phẩm: {{ $accessary[0]->code ? $accessary[0]->code : 'N/A' }}</h5>
+                                <h4 class="part-col-list-h4">
+                                    <a style="text-decoration: none" href="{{route('view-accessory-detail', ['accessary_id' => $accessary[0]->accessary_id])}}">
+                                        {{ $accessary[0]->name_vi ? $accessary[0]->name_vi : 'N/A' }}
+                                    </a>
+                                </h4>
+                                <h5>
+                                    <a style="text-decoration: none" href="{{route('view-accessory-detail', ['accessary_id' => $accessary[0]->accessary_id])}}">
+                                        Mã sản phẩm: {{ $accessary[0]->code ? $accessary[0]->code : 'N/A' }}
+                                    </a>
+
+                                </h5>
                                 <p class="mb-10px">
                                     Xuất xứ:
                                     <span class="label label-pill label-success">{{ $accessary[0]->nation_name ? $accessary[0]->nation_name : 'N/A' }}</span>

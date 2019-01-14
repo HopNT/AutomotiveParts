@@ -86,7 +86,7 @@
                                             <input size="3" class="form-control" type="text" value="1" name="amount"
                                                    id="amount">&nbsp;
                                             <button class="btn-small btn btn-success" id="yw2" type="submit" name="yt1">
-                                                <i class="fa fa-shopping-cart cart-black"></i>
+                                                <i class="fas fa-cart-plus"></i>
                                                 <span class="text-uppercase dxs dxs3">Thêm giỏ hàng</span>
                                             </button>
                                         </form>
